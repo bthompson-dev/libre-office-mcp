@@ -2,7 +2,6 @@
 
 A Model Context Protocol (MCP) server that enables Claude and other AI assistants to interact with LibreOffice documents directly.
 
-![LibreOffice MCP Server Banner](https://i.imgur.com/YD1jTMx.png)
 
 ## Overview
 
@@ -54,6 +53,13 @@ This MCP server provides a bridge between AI assistants like Claude and LibreOff
 
 2. **Set up Python environment**
    ```bash
+   UV Installation 
+
+   #For Windows  
+   powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+   #For MacOS/Linux 
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+
    # With uv (recommended)
    uv init
    uv venv
@@ -92,6 +98,20 @@ This MCP server provides a bridge between AI assistants like Claude and LibreOff
        }
      }
    }
+   ``` 
+   or 
+   ```json 
+   {
+     "mcpServers": {
+       "libreoffice-server": {
+          "command": "python",
+          "args": [
+            "C:\\path\\to\\the\\main.py"
+          ]
+        }
+      }
+   }
+   
    ```
 
    > ⚠️ **Note**: Replace `C:\\path\\to\\libreoffice-mcp-server` with the actual path to where you cloned the repository.
@@ -105,7 +125,7 @@ This MCP server provides a bridge between AI assistants like Claude and LibreOff
    - "List all the documents in my Documents folder"
    - "Open my report.odt file and add a table with 4 columns and 5 rows"
 
-![Claude LibreOffice Interaction](https://i.imgur.com/sZWf0Yn.png)
+![Claude LibreOffice Interaction](assets\image.png)
 
 ## How It Works
 

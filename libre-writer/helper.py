@@ -37,9 +37,9 @@ server_socket.listen(1)
 print("LibreOffice helper listening on port 8765")
 
 # Helper functions
-def ensure_directory_exists(filepath):
+def ensure_directory_exists(file_path):
     """Ensure the directory for a file exists, creating it if necessary."""
-    directory = os.path.dirname(filepath)
+    directory = os.path.dirname(file_path)
     if directory and not os.path.exists(directory):
         try:
             os.makedirs(directory, exist_ok=True)
@@ -49,21 +49,21 @@ def ensure_directory_exists(filepath):
             return False
     return True
 
-def normalize_path(filepath):
+def normalize_path(file_path):
     """Convert a relative path to an absolute path."""
-    if not filepath:
+    if not file_path:
         return None
     
     # Expand user directory if path starts with ~
-    if filepath.startswith('~'):
-        filepath = os.path.expanduser(filepath)
+    if file_path.startswith('~'):
+        file_path = os.path.expanduser(file_path)
         
     # Make absolute if relative
-    if not os.path.isabs(filepath):
-        filepath = os.path.abspath(filepath)
+    if not os.path.isabs(file_path):
+        file_path = os.path.abspath(file_path)
         
-    print(f"Normalized path: {filepath}")
-    return filepath
+    print(f"Normalized path: {file_path}")
+    return file_path
 
 def get_uno_desktop():
     """Get LibreOffice desktop object."""
@@ -508,53 +508,53 @@ def format_text(file_path, text_to_find, format_options):
                 doc.close(True)
                 return f"Text '{text_to_find}' not found in document"
             
-            # Create search descriptor
-            search_desc = text.createSearchDescriptor()
-            search_desc.SearchString = text_to_find
-            search_desc.SearchCaseSensitive = True
+            # Manual cursor approach - more reliable
+            cursor = text.createTextCursor()
+            cursor.gotoStart(False)
             
-            # Perform search
-            found = text.findFirst(search_desc)
-            count = 0
+            found_count = 0
+            search_pos = document_text.find(text_to_find)
             
-            while found:
-                count += 1
+            while search_pos >= 0:
+                found_count += 1
+                
+                # Navigate to the position
+                cursor.gotoStart(False)
+                cursor.goRight(search_pos, False)
+                cursor.goRight(len(text_to_find), True)  # Select the text
+                
                 # Apply formatting
                 if format_options.get("bold"):
-                    found.CharWeight = 150
+                    cursor.CharWeight = 150
                 
                 if format_options.get("italic"):
-                    found.CharPosture = uno.getConstantByName("com.sun.star.awt.FontSlant.ITALIC")
+                    cursor.CharPosture = 2
                 
                 if format_options.get("underline"):
-                    found.CharUnderline = 1
+                    cursor.CharUnderline = 1
                 
-                if "color" in format_options:
+                if format_options.get("color"):
                     try:
-                        # Convert hex color (e.g., "#FF0000") to integer
                         color = format_options["color"]
                         if isinstance(color, str) and color.startswith("#"):
                             color = int(color[1:], 16)
-                        found.CharColor = color
-                    except Exception as color_error:
-                        print(f"Error applying color: {color_error}")
+                        cursor.CharColor = color
+                    except Exception as e:
+                        print(f"Color error: {e}")
                 
-                if "font" in format_options:
-                    found.CharFontName = format_options["font"]
+                if format_options.get("font"):
+                    cursor.CharFontName = format_options["font"]
                 
-                if "size" in format_options:
-                    try:
-                        found.CharHeight = float(format_options["size"])
-                    except Exception as size_error:
-                        print(f"Error applying font size: {size_error}")
+                if format_options.get("size"):
+                    cursor.CharHeight = float(format_options["size"])
                 
                 # Find next occurrence
-                found = text.findNext(found, search_desc)
+                search_pos = document_text.find(text_to_find, search_pos + len(text_to_find))
             
             # Save document
             doc.store()
             doc.close(True)
-            return f"Formatted {count} occurrences of text in {file_path}"
+            return f"Formatted {found_count} occurrences of '{text_to_find}' in {file_path}"
         else:
             doc.close(True)
             return "Document does not support text formatting"
@@ -576,12 +576,12 @@ def search_replace_text(file_path, search_text, replace_text):
     try:
         if hasattr(doc, "getText"):
             text_obj = doc.getText()
+            document_text = text_obj.getString()
             
-            # Create search descriptor
-            search_desc = text_obj.createSearchDescriptor()
-            search_desc.SearchString = search_text
-            search_desc.SearchCaseSensitive = False
-            search_desc.SearchWords = False
+            # Check if text exists in document
+            if search_text not in document_text:
+                doc.close(True)
+                return f"Text '{search_text}' not found in document"
             
             # Create replace descriptor
             replace_desc = text_obj.createReplaceDescriptor()
@@ -605,6 +605,8 @@ def search_replace_text(file_path, search_text, replace_text):
             doc.close(True)
         except:
             pass
+        print(f"Error in search_replace_text: {str(e)}")
+        print(traceback.format_exc())
         return f"Failed to search and replace text: {str(e)}"
 
 def delete_text(file_path, text_to_delete):
@@ -753,160 +755,74 @@ def format_table(file_path, table_index, format_options):
         return f"Failed to format table: {str(e)}"
 
 def insert_image(file_path, image_path, width=None, height=None):
-    """Insert an image into a document with optional resizing."""
+    """Insert an image into a document using dispatch."""
     doc, message = open_document(file_path)
     if not doc:
         return message
     
-    # Normalize image path
-    image_path = normalize_path(image_path)
-    if not os.path.exists(image_path):
-        doc.close(True)
-        return f"Image not found: {image_path}"
-    
     try:
-        if hasattr(doc, "getText"):
-            # Method 1: Using direct insertion with bitmap
-            try:
-                # Get text and cursor
-                text = doc.getText()
-                cursor = text.createTextCursor()
-                cursor.gotoEnd(False)  # Move to end of document
-                
-                # Create the image URL
-                image_url = uno.systemPathToFileUrl(image_path)
-                
-                # Create bitmap object
-                bitmap = doc.createInstance("com.sun.star.text.TextGraphicObject")
-                bitmap.GraphicURL = image_url
-                
-                # Insert the image
-                text.insertTextContent(cursor, bitmap, False)
-                
-                # Save document
-                doc.store()
-                doc.close(True)
-                return f"Image added to {file_path}"
-            except Exception as method1_error:
-                print(f"Method 1 failed: {str(method1_error)}")
-                # Continue to Method 2 if Method 1 fails
-            
-            # Method 2: Using UNO dispatcher
-            try:
-                # Reopen document if needed
-                if not doc.isOpen:
-                    doc, message = open_document(file_path)
-                    if not doc:
-                        return message
-                
-                # Get dispatcher
-                frame = doc.CurrentController.Frame
-                dispatcher = frame.queryDispatch(
-                    uno.createUnoStruct("com.sun.star.util.URL", 
-                                       Complete="private:insert", 
-                                       Main="", 
-                                       Protocol="", 
-                                       Type=""), 
-                    "_self", 
-                    0
-                )
-                
-                if dispatcher:
-                    # Create properties for insertion
-                    props = [
-                        create_property_value("FileName", uno.systemPathToFileUrl(image_path)),
-                        create_property_value("FilterName", "")
-                    ]
-                    
-                    # Dispatch command
-                    dispatcher.dispatch(
-                        uno.createUnoStruct("com.sun.star.util.URL", 
-                                           Complete="private:insert", 
-                                           Main="graphic", 
-                                           Protocol="", 
-                                           Type=""), 
-                        tuple(props)
-                    )
-                    
-                    # Save document
-                    doc.store()
-                    doc.close(True)
-                    return f"Image added to {file_path} (using dispatcher method)"
-                else:
-                    # Try Method 3 if Method 2 fails
-                    raise Exception("Dispatcher not available")
-            except Exception as method2_error:
-                print(f"Method 2 failed: {str(method2_error)}")
-                # Continue to Method 3 if Method 2 fails
-            
-            # Method 3: Using direct file manipulation
-            try:
-                # Close the document
-                if doc.isOpen:
-                    doc.close(True)
-                
-                # Use a more direct approach: Open the file in binary mode
-                import tempfile
-                from PIL import Image as PILImage
-                
-                # Create a temporary file
-                with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as temp_img:
-                    temp_img_path = temp_img.name
-                
-                # Resize image if needed
-                if width is not None or height is not None:
-                    img = PILImage.open(image_path)
-                    original_width, original_height = img.size
-                    
-                    if width is not None and height is not None:
-                        new_size = (width, height)
-                    elif width is not None:
-                        # Calculate height to maintain aspect ratio
-                        ratio = float(width) / float(original_width)
-                        new_size = (width, int(original_height * ratio))
-                    else:
-                        # Calculate width to maintain aspect ratio
-                        ratio = float(height) / float(original_height)
-                        new_size = (int(original_width * ratio), height)
-                    
-                    img = img.resize(new_size, PILImage.LANCZOS)
-                    img.save(temp_img_path)
-                    processed_img_path = temp_img_path
-                else:
-                    # Just copy the original
-                    import shutil
-                    shutil.copy2(image_path, temp_img_path)
-                    processed_img_path = temp_img_path
-                
-                # Now insert using a different approach
-                doc, message = open_document(file_path)
-                if not doc:
-                    return message
-                
-                text = doc.getText()
-                cursor = text.createTextCursor()
-                cursor.gotoEnd(False)
-                
-                # Add a paragraph break before the image
-                text.insertControlCharacter(cursor, ControlCharacter.PARAGRAPH_BREAK, False)
-                
-                # Insert some text indicating an image
-                text.insertString(cursor, "[Image: " + os.path.basename(image_path) + "]", False)
-                
-                # Save document
-                doc.store()
-                doc.close(True)
-                
-                # Clean up
-                if os.path.exists(temp_img_path):
-                    os.unlink(temp_img_path)
-                
-                return f"Image reference added to {file_path} (using alternative method)"
-            except Exception as method3_error:
-                print(f"Method 3 failed: {str(method3_error)}")
+        # Normalize image path
+        image_path = normalize_path(image_path)
+        if not os.path.exists(image_path):
+            doc.close(True)
+            return f"Image not found: {image_path}"
         
+        # Get component context and necessary services
+        ctx = uno.getComponentContext()
+        smgr = ctx.ServiceManager
+        
+        # Create dispatch helper for UNO commands
+        dispatcher = smgr.createInstanceWithContext("com.sun.star.frame.DispatchHelper", ctx)
+        
+        # Get frame from document controller
+        frame = doc.getCurrentController().getFrame()
+        
+        # Create properties for InsertGraphic command
+        props = []
+        
+        # Add filename property - convert to URL format
+        filename_prop = PropertyValue()
+        filename_prop.Name = "FileName"
+        filename_prop.Value = uno.systemPathToFileUrl(image_path)
+        props.append(filename_prop)
+        
+        # Add AsLink property
+        aslink_prop = PropertyValue()
+        aslink_prop.Name = "AsLink"
+        aslink_prop.Value = False  # Set to True if you want to link instead of embed
+        props.append(aslink_prop)
+        
+        # Execute the InsertGraphic command
+        dispatcher.executeDispatch(frame, ".uno:InsertGraphic", "", 0, tuple(props))
+        
+        # Optional: Resize the image if width/height provided
+        if width is not None or height is not None:
+            # Try to get the inserted image as the current selection
+            current_selection = doc.getCurrentController().getSelection()
+            if current_selection and current_selection.getCount() > 0:
+                shape = current_selection.getByIndex(0)
+                
+                # Calculate new size preserving aspect ratio
+                if width is not None and height is not None:
+                    # Use both dimensions as provided
+                    size = Size(width, height)
+                    shape.setSize(size)
+                elif width is not None:
+                    # Maintain aspect ratio based on width
+                    ratio = shape.Size.Height / shape.Size.Width
+                    new_height = int(width * ratio)
+                    shape.setSize(Size(width, new_height))
+                elif height is not None:
+                    # Maintain aspect ratio based on height
+                    ratio = shape.Size.Width / shape.Size.Height
+                    new_width = int(height * ratio)
+                    shape.setSize(Size(new_width, height))
+        
+        # Save document
+        doc.store()
         doc.close(True)
-        return "Document does not support image insertion or all image insertion methods failed"
+        return f"Image inserted into {file_path}"
+        
     except Exception as e:
         try:
             doc.close(True)
@@ -1182,9 +1098,16 @@ def handle_command(command):
         # Text formatting
         elif action == "format_text":
             return format_text(
-                command.get("file_path", ""),
+                command.get("file_path", ""),  # Use file_path consistently (not filepath)
                 command.get("text_to_find", ""),
-                command.get("format_options", {})
+                {  # Single format_options dictionary
+                    "bold": command.get("bold", False),
+                    "italic": command.get("italic", False),
+                    "underline": command.get("underline", False),
+                    "color": command.get("color", None),
+                    "font": command.get("font", None),
+                    "size": command.get("size", None)
+                }
             )
         
         elif action == "search_replace_text":

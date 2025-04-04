@@ -7,9 +7,9 @@ import json
 import time
 
 # Helper function for directory management
-def ensure_directory_exists(filepath: str) -> None:
+def ensure_directory_exists(file_path: str) -> None:
     """Ensure the directory for a file exists, creating it if necessary."""
-    directory = os.path.dirname(filepath)
+    directory = os.path.dirname(file_path)
     if directory and not os.path.exists(directory):
         try:
             os.makedirs(directory, exist_ok=True)
@@ -19,21 +19,21 @@ def ensure_directory_exists(filepath: str) -> None:
             raise
 
 # Helper function to normalize file paths
-def normalize_path(filepath: str) -> str:
+def normalize_path(file_path: str) -> str:
     """Convert a relative path to an absolute path."""
-    if not filepath:
+    if not file_path:
         raise ValueError("Empty file path provided")
     
     # Expand user directory if path starts with ~
-    if filepath.startswith('~'):
-        filepath = os.path.expanduser(filepath)
+    if file_path.startswith('~'):
+        file_path = os.path.expanduser(file_path)
         
     # Make absolute if relative
-    if not os.path.isabs(filepath):
-        filepath = os.path.abspath(filepath)
+    if not os.path.isabs(file_path):
+        file_path = os.path.abspath(file_path)
         
-    print(f"Normalized path: {filepath}")
-    return filepath
+    print(f"Normalized path: {file_path}")
+    return file_path
 
 # Function to communicate with the LibreOffice helper
 def call_libreoffice_helper(command: dict) -> dict:
@@ -144,21 +144,21 @@ async def create_document(filename: str, doc_type: str = "text", title: str = No
         return f"Failed to create document: {str(e)}"
 
 @mcp.tool()
-async def open_text_document(filepath: str) -> str:
+async def open_text_document(file_path: str) -> str:
     """
     Open and extract text from a LibreOffice text document.
     
     Args:
-        filepath: Path to the document
+        file_path: Path to the document
     """
     try:
         # Normalize path
-        filepath = normalize_path(filepath)
+        file_path = normalize_path(file_path)
         
         # Send command to helper
         response = call_libreoffice_helper({
             "action": "open_text_document",
-            "file_path": filepath
+            "file_path": file_path
         })
         
         if response["status"] == "success":
@@ -170,21 +170,21 @@ async def open_text_document(filepath: str) -> str:
         return f"Failed to open document: {str(e)}"
 
 @mcp.tool()
-async def get_document_properties(filepath: str) -> str:
+async def get_document_properties(file_path: str) -> str:
     """
     Get document properties and statistics.
     
     Args:
-        filepath: Path to the document
+        file_path: Path to the document
     """
     try:
         # Normalize path
-        filepath = normalize_path(filepath)
+        file_path = normalize_path(file_path)
         
         # Send command to helper
         response = call_libreoffice_helper({
             "action": "get_document_properties",
-            "file_path": filepath
+            "file_path": file_path
         })
         
         if response["status"] == "success":
@@ -253,23 +253,23 @@ async def copy_document(source_path: str, target_path: str) -> str:
 # Content Creation Tools
 
 @mcp.tool()
-async def add_text(filepath: str, text: str, position: Optional[str] = "end") -> str:
+async def add_text(file_path: str, text: str, position: Optional[str] = "end") -> str:
     """
     Add text to a LibreOffice document.
     
     Args:
-        filepath: Path to the document
+        file_path: Path to the document
         text: Text to add
         position: Where to add text (start, end, or cursor)
     """
     try:
         # Normalize path
-        filepath = normalize_path(filepath)
+        file_path = normalize_path(file_path)
         
         # Send command to helper
         response = call_libreoffice_helper({
             "action": "add_text",
-            "file_path": filepath,
+            "file_path": file_path,
             "text": text,
             "position": position
         })
@@ -283,18 +283,18 @@ async def add_text(filepath: str, text: str, position: Optional[str] = "end") ->
         return f"Failed to add text: {str(e)}"
 
 @mcp.tool()
-async def add_heading(filepath: str, text: str, level: int = 1) -> str:
+async def add_heading(file_path: str, text: str, level: int = 1) -> str:
     """
     Add a heading to a document.
     
     Args:
-        filepath: Path to the document
+        file_path: Path to the document
         text: Heading text
         level: Heading level (1-6, where 1 is the highest level)
     """
     try:
         # Normalize path
-        filepath = normalize_path(filepath)
+        file_path = normalize_path(file_path)
         
         # Validate heading level
         if level < 1 or level > 6:
@@ -303,7 +303,7 @@ async def add_heading(filepath: str, text: str, level: int = 1) -> str:
         # Send command to helper
         response = call_libreoffice_helper({
             "action": "add_heading",
-            "file_path": filepath,
+            "file_path": file_path,
             "text": text,
             "level": level
         })
@@ -317,24 +317,24 @@ async def add_heading(filepath: str, text: str, level: int = 1) -> str:
         return f"Failed to add heading: {str(e)}"
 
 @mcp.tool()
-async def add_paragraph(filepath: str, text: str, style: Optional[str] = None, alignment: Optional[str] = None) -> str:
+async def add_paragraph(file_path: str, text: str, style: Optional[str] = None, alignment: Optional[str] = None) -> str:
     """
     Add a paragraph with optional styling.
     
     Args:
-        filepath: Path to the document
+        file_path: Path to the document
         text: Paragraph text
         style: Paragraph style name (if available in document)
         alignment: Text alignment (left, center, right, justify)
     """
     try:
         # Normalize path
-        filepath = normalize_path(filepath)
+        file_path = normalize_path(file_path)
         
         # Send command to helper
         response = call_libreoffice_helper({
             "action": "add_paragraph",
-            "file_path": filepath,
+            "file_path": file_path,
             "text": text,
             "style": style,
             "alignment": alignment
@@ -349,12 +349,12 @@ async def add_paragraph(filepath: str, text: str, style: Optional[str] = None, a
         return f"Failed to add paragraph: {str(e)}"
 
 @mcp.tool()
-async def add_table(filepath: str, rows: int, columns: int, data: Optional[List[List[str]]] = None, header_row: bool = False) -> str:
+async def add_table(file_path: str, rows: int, columns: int, data: Optional[List[List[str]]] = None, header_row: bool = False) -> str:
     """
     Add a table to a LibreOffice text document.
     
     Args:
-        filepath: Path to the document
+        file_path: Path to the document
         rows: Number of rows
         columns: Number of columns
         data: Optional 2D list of data to populate the table
@@ -362,12 +362,12 @@ async def add_table(filepath: str, rows: int, columns: int, data: Optional[List[
     """
     try:
         # Normalize path
-        filepath = normalize_path(filepath)
+        file_path = normalize_path(file_path)
         
         # Send command to helper
         response = call_libreoffice_helper({
             "action": "add_table",
-            "file_path": filepath,
+            "file_path": file_path,
             "rows": rows,
             "columns": columns,
             "data": data,
@@ -383,25 +383,25 @@ async def add_table(filepath: str, rows: int, columns: int, data: Optional[List[
         return f"Failed to add table: {str(e)}"
 
 @mcp.tool()
-async def insert_image(filepath: str, image_path: str, width: Optional[int] = None, height: Optional[int] = None) -> str:
+async def insert_image(file_path: str, image_path: str, width: Optional[int] = None, height: Optional[int] = None) -> str:
     """
     Insert an image into a LibreOffice document with optional resizing.
     
     Args:
-        filepath: Path to the target document
+        file_path: Path to the target document
         image_path: Path to the image file to insert
         width: Optional width in 100ths of mm (maintains aspect ratio if only width is specified)
         height: Optional height in 100ths of mm (maintains aspect ratio if only height is specified)
     """
     try:
         # Normalize paths
-        filepath = normalize_path(filepath)
+        file_path = normalize_path(file_path)
         image_path = normalize_path(image_path)
         
         # Send command to helper
         response = call_libreoffice_helper({
             "action": "insert_image",
-            "file_path": filepath,
+            "file_path": file_path,
             "image_path": image_path,
             "width": width,
             "height": height
@@ -416,21 +416,21 @@ async def insert_image(filepath: str, image_path: str, width: Optional[int] = No
         return f"Failed to insert image: {str(e)}"
 
 @mcp.tool()
-async def insert_page_break(filepath: str) -> str:
+async def insert_page_break(file_path: str) -> str:
     """
     Insert a page break in a document.
     
     Args:
-        filepath: Path to the document
+        file_path: Path to the document
     """
     try:
         # Normalize path
-        filepath = normalize_path(filepath)
+        file_path = normalize_path(file_path)
         
         # Send command to helper
         response = call_libreoffice_helper({
             "action": "insert_page_break",
-            "file_path": filepath
+            "file_path": file_path
         })
         
         if response["status"] == "success":
@@ -444,48 +444,25 @@ async def insert_page_break(filepath: str) -> str:
 # Text Formatting Tools
 
 @mcp.tool()
-async def format_text(filepath: str, text_to_find: str, bold: bool = False, italic: bool = False, 
-                      underline: bool = False, color: Optional[str] = None, 
-                      font: Optional[str] = None, size: Optional[float] = None) -> str:
-    """
-    Format specific text in a document.
-    
-    Args:
-        filepath: Path to the document
-        text_to_find: Text to search for and format
-        bold: Apply bold formatting
-        italic: Apply italic formatting
-        underline: Apply underline formatting
-        color: Text color (hex format, e.g., "#FF0000" for red)
-        font: Font name
-        size: Font size in points
-    """
+async def format_text(file_path: str, text_to_find: str, bold: bool = False, italic: bool = False,
+                     underline: bool = False, color: Optional[str] = None,
+                     font: Optional[str] = None, size: Optional[float] = None) -> str:
+    """Format specific text in a document."""
     try:
         # Normalize path
-        filepath = normalize_path(filepath)
+        file_path = normalize_path(file_path)
         
-        # Prepare format options
-        format_options = {
-            "bold": bold,
-            "italic": italic,
-            "underline": underline
-        }
-        
-        if color:
-            format_options["color"] = color
-        
-        if font:
-            format_options["font"] = font
-        
-        if size:
-            format_options["size"] = size
-        
-        # Send command to helper
+        # Send command to helper with all parameters using the correct names
         response = call_libreoffice_helper({
             "action": "format_text",
-            "file_path": filepath,
+            "file_path": file_path,  # Note: using file_path, not filepath
             "text_to_find": text_to_find,
-            "format_options": format_options
+            "bold": bold,
+            "italic": italic,
+            "underline": underline,
+            "color": color,
+            "font": font,
+            "size": size
         })
         
         if response["status"] == "success":
@@ -497,23 +474,23 @@ async def format_text(filepath: str, text_to_find: str, bold: bool = False, ital
         return f"Failed to format text: {str(e)}"
 
 @mcp.tool()
-async def search_replace_text(filepath: str, search_text: str, replace_text: str) -> str:
+async def search_replace_text(file_path: str, search_text: str, replace_text: str) -> str:
     """
     Search and replace text throughout the document.
     
     Args:
-        filepath: Path to the document
+        file_path: Path to the document
         search_text: Text to search for
         replace_text: Text to replace with
     """
     try:
         # Normalize path
-        filepath = normalize_path(filepath)
+        file_path = normalize_path(file_path)
         
         # Send command to helper
         response = call_libreoffice_helper({
             "action": "search_replace_text",
-            "file_path": filepath,
+            "file_path": file_path,
             "search_text": search_text,
             "replace_text": replace_text
         })
@@ -527,22 +504,22 @@ async def search_replace_text(filepath: str, search_text: str, replace_text: str
         return f"Failed to search and replace text: {str(e)}"
 
 @mcp.tool()
-async def delete_text(filepath: str, text_to_delete: str) -> str:
+async def delete_text(file_path: str, text_to_delete: str) -> str:
     """
     Delete specific text from the document.
     
     Args:
-        filepath: Path to the document
+        file_path: Path to the document
         text_to_delete: Text to search for and delete
     """
     try:
         # Normalize path
-        filepath = normalize_path(filepath)
+        file_path = normalize_path(file_path)
         
         # Send command to helper
         response = call_libreoffice_helper({
             "action": "delete_text",
-            "file_path": filepath,
+            "file_path": file_path,
             "text_to_delete": text_to_delete
         })
         
@@ -557,13 +534,13 @@ async def delete_text(filepath: str, text_to_delete: str) -> str:
 # Table Formatting Tools
 
 @mcp.tool()
-async def format_table(filepath: str, table_index: int = 0, border_width: Optional[int] = None, 
+async def format_table(file_path: str, table_index: int = 0, border_width: Optional[int] = None, 
                       background_color: Optional[str] = None, header_row: bool = False) -> str:
     """
     Format a table with borders, shading, etc.
     
     Args:
-        filepath: Path to the document
+        file_path: Path to the document
         table_index: Index of the table to format (0 = first table)
         border_width: Border width in points
         background_color: Background color (hex format, e.g., "#F0F0F0")
@@ -571,7 +548,7 @@ async def format_table(filepath: str, table_index: int = 0, border_width: Option
     """
     try:
         # Normalize path
-        filepath = normalize_path(filepath)
+        file_path = normalize_path(file_path)
         
         # Prepare format options
         format_options = {}
@@ -588,7 +565,7 @@ async def format_table(filepath: str, table_index: int = 0, border_width: Option
         # Send command to helper
         response = call_libreoffice_helper({
             "action": "format_table",
-            "file_path": filepath,
+            "file_path": file_path,
             "table_index": table_index,
             "format_options": format_options
         })
@@ -604,7 +581,7 @@ async def format_table(filepath: str, table_index: int = 0, border_width: Option
 # Advanced Document Manipulation Tools
 
 @mcp.tool()
-async def create_custom_style(filepath: str, style_name: str, font_name: Optional[str] = None, 
+async def create_custom_style(file_path: str, style_name: str, font_name: Optional[str] = None, 
                              font_size: Optional[float] = None, bold: bool = False, italic: bool = False,
                              underline: bool = False, color: Optional[str] = None, 
                              alignment: Optional[str] = None) -> str:
@@ -612,7 +589,7 @@ async def create_custom_style(filepath: str, style_name: str, font_name: Optiona
     Create a custom paragraph style.
     
     Args:
-        filepath: Path to the document
+        file_path: Path to the document
         style_name: Name for the style
         font_name: Font name
         font_size: Font size in points
@@ -624,7 +601,7 @@ async def create_custom_style(filepath: str, style_name: str, font_name: Optiona
     """
     try:
         # Normalize path
-        filepath = normalize_path(filepath)
+        file_path = normalize_path(file_path)
         
         # Prepare style properties
         style_properties = {}
@@ -653,7 +630,7 @@ async def create_custom_style(filepath: str, style_name: str, font_name: Optiona
         # Send command to helper
         response = call_libreoffice_helper({
             "action": "create_custom_style",
-            "file_path": filepath,
+            "file_path": file_path,
             "style_name": style_name,
             "style_properties": style_properties
         })
@@ -667,22 +644,22 @@ async def create_custom_style(filepath: str, style_name: str, font_name: Optiona
         return f"Failed to create custom style: {str(e)}"
 
 @mcp.tool()
-async def delete_paragraph(filepath: str, paragraph_index: int) -> str:
+async def delete_paragraph(file_path: str, paragraph_index: int) -> str:
     """
     Delete a paragraph at the given index.
     
     Args:
-        filepath: Path to the document
+        file_path: Path to the document
         paragraph_index: Index of the paragraph to delete (0 = first paragraph)
     """
     try:
         # Normalize path
-        filepath = normalize_path(filepath)
+        file_path = normalize_path(file_path)
         
         # Send command to helper
         response = call_libreoffice_helper({
             "action": "delete_paragraph",
-            "file_path": filepath,
+            "file_path": file_path,
             "paragraph_index": paragraph_index
         })
         
@@ -695,14 +672,14 @@ async def delete_paragraph(filepath: str, paragraph_index: int) -> str:
         return f"Failed to delete paragraph: {str(e)}"
 
 @mcp.tool()
-async def apply_document_style(filepath: str, font_name: Optional[str] = None, 
+async def apply_document_style(file_path: str, font_name: Optional[str] = None, 
                               font_size: Optional[float] = None, color: Optional[str] = None,
                               alignment: Optional[str] = None) -> str:
     """
     Apply consistent formatting throughout the document.
     
     Args:
-        filepath: Path to the document
+        file_path: Path to the document
         font_name: Default font name
         font_size: Default font size in points
         color: Default text color (hex format, e.g., "#000000")
@@ -710,7 +687,7 @@ async def apply_document_style(filepath: str, font_name: Optional[str] = None,
     """
     try:
         # Normalize path
-        filepath = normalize_path(filepath)
+        file_path = normalize_path(file_path)
         
         # Prepare default style
         default_style = {}
@@ -730,7 +707,7 @@ async def apply_document_style(filepath: str, font_name: Optional[str] = None,
         # Send command to helper
         response = call_libreoffice_helper({
             "action": "apply_document_style",
-            "file_path": filepath,
+            "file_path": file_path,
             "default_style": default_style
         })
         

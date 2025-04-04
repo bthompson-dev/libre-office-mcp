@@ -27,12 +27,10 @@ This MCP server provides a bridge between AI assistants like Claude and LibreOff
     - [x] Delete specific text
     - [x] Delete paragraphs
     - [x] Insert page breaks (partial implementation)
+    - [x] Insert images
+    - [x] Format specific text (bold, italic, color, size)
   
-  - **Coming Soon:**
-    - [ ] Insert images
-    - [ ] Format specific text (bold, italic, color, etc.)
-    - [ ] Create custom paragraph styles
-    - [ ] Apply document-wide styling
+    
 - [ ] **LibreCalc**
 - [ ] **LibreImpress**
 

@@ -6,11 +6,19 @@ import time
 import socket
 import traceback
 from datetime import datetime
+import logging
+
+log_path = os.path.join(os.path.dirname(__file__), "helper.log")
+logging.basicConfig(
+    filename=log_path,
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(message)s")
 
 print("Starting LibreOffice Helper Script...")
 
 try:
     print("Importing UNO...")
+    logging.info("Importing UNO...")
     import uno
     from com.sun.star.beans import PropertyValue
     from com.sun.star.text import ControlCharacter
@@ -23,9 +31,12 @@ try:
     from com.sun.star.text.ControlCharacter import PARAGRAPH_BREAK
     from com.sun.star.connection import NoConnectException
     print("UNO imported successfully!")
+    logging.info("UNO imported successfully!")
 except ImportError as e:
     print(f"UNO Import Error: {e}")
+    logging.error(f"UNO Import Error: {e}")
     print("This script must be run with LibreOffice's Python.")
+    logging.error("This script must be run with LibreOffice's Python.")
     sys.exit(1)
 
 # Create a server socket
@@ -35,6 +46,13 @@ server_socket.bind(('localhost', 8765))
 server_socket.listen(1)
 
 print("LibreOffice helper listening on port 8765")
+logging.info("LibreOffice helper listening on port 8765")
+
+print(f"Socket bound to localhost:8765")
+logging.info("Socket bound to localhost:8765")
+
+class HelperError(Exception):
+    pass
 
 # Helper functions
 def ensure_directory_exists(file_path):
@@ -95,17 +113,17 @@ def create_property_value(name, value):
 
 def create_document(doc_type, file_path, metadata=None):
     """Create a new LibreOffice document with optional metadata."""
-    print(f"Creating {doc_type} document at {file_path}")
+    logging.info(f"Creating {doc_type} document at {file_path}")
     
     # Normalize path and ensure directory exists
     file_path = normalize_path(file_path)
     if not ensure_directory_exists(file_path):
-        return f"Failed to create directory for {file_path}"
+        raise HelperError(f"Failed to create directory for {file_path}")
     
     # Get desktop
     desktop = get_uno_desktop()
     if not desktop:
-        return "Failed to connect to LibreOffice desktop"
+        raise HelperError("Failed to connect to LibreOffice desktop")
     
     # Map document types
     type_map = {
@@ -115,24 +133,26 @@ def create_document(doc_type, file_path, metadata=None):
     }
     
     if doc_type not in type_map:
-        return f"Invalid document type. Choose from: {list(type_map.keys())}"
+        raise HelperError(f"Invalid document type. Choose from: {list(type_map.keys())}")
     
     try:
         # Create document
         doc = desktop.loadComponentFromURL(type_map[doc_type], "_blank", 0, ())
         if not doc:
-            return f"Failed to create {doc_type} document"
+            raise HelperError(f"Failed to create {doc_type} document")
         
         # Add metadata if provided
         if metadata and hasattr(doc, "DocumentProperties"):
             doc_info = doc.DocumentProperties
+            logging.info(doc_info)
             for key, value in metadata.items():
+                logging.info(f"{key} {value} {type(value)}")
                 if hasattr(doc_info, key):
                     setattr(doc_info, key, value)
         
         # Save document
         file_url = uno.systemPathToFileUrl(file_path)
-        print(f"Saving to URL: {file_url}")
+        logging.info(f"Saving to URL: {file_url}")
         
         props = [create_property_value("Overwrite", True)]
         doc.storeToURL(file_url, tuple(props))
@@ -143,12 +163,12 @@ def create_document(doc_type, file_path, metadata=None):
         if os.path.exists(file_path):
             return f"Successfully created {doc_type} document at: {file_path}"
         else:
-            return f"Document creation attempted, but file not found at: {file_path}"
-            
+            raise HelperError(f"Document creation attempted, but file not found at: {file_path}")
+
     except Exception as e:
-        print(f"Error creating document: {str(e)}")
-        print(traceback.format_exc())
-        return f"Failed to create document: {str(e)}"
+        logging.error(f"Error creating document: {str(e)}")
+        logging.error(traceback.format_exc())
+        raise
 
 def open_document(file_path, read_only=False):
     """Open a LibreOffice document and return it."""
@@ -157,12 +177,12 @@ def open_document(file_path, read_only=False):
     # Normalize path
     file_path = normalize_path(file_path)
     if not os.path.exists(file_path):
-        return None, f"Document not found: {file_path}"
+        raise HelperError(f"Document not found: {file_path}")
     
     # Get desktop
     desktop = get_uno_desktop()
     if not desktop:
-        return None, "Failed to connect to LibreOffice desktop"
+        raise HelperError("Failed to connect to LibreOffice desktop")
     
     try:
         # Open document
@@ -175,19 +195,19 @@ def open_document(file_path, read_only=False):
         
         doc = desktop.loadComponentFromURL(file_url, "_blank", 0, tuple(props))
         if not doc:
-            return None, f"Failed to load document: {file_path}"
+            raise HelperError(f"Failed to load document: {file_path}")
             
         return doc, "Success"
     except Exception as e:
         print(f"Error opening document: {str(e)}")
         print(traceback.format_exc())
-        return None, f"Failed to open document: {str(e)}"
+        raise
 
 def extract_text(file_path):
     """Extract text from a document."""
     doc, message = open_document(file_path, read_only=True)
     if not doc:
-        return message
+        raise HelperError("Document not opened successfully")
     
     try:
         if hasattr(doc, "getText"):
@@ -196,19 +216,19 @@ def extract_text(file_path):
             return text_content
         else:
             doc.close(True)
-            return "Document does not support text extraction"
+            raise HelperError("Document does not support text extraction")
     except Exception as e:
         try:
             doc.close(True)
         except:
             pass
-        return f"Failed to extract text: {str(e)}"
+        raise
 
 def get_document_properties(file_path):
     """Extract document properties and statistics."""
     doc, message = open_document(file_path, read_only=True)
     if not doc:
-        return message
+        raise HelperError(message)
     
     try:
         props = {}
@@ -250,13 +270,13 @@ def get_document_properties(file_path):
             doc.close(True)
         except:
             pass
-        return f"Failed to get document properties: {str(e)}"
+        raise
 
 def list_documents(directory):
     """List all documents in a directory."""
     dir_path = normalize_path(directory)
     if not os.path.exists(dir_path) or not os.path.isdir(dir_path):
-        return f"Directory not found: {dir_path}"
+        raise HelperError(f"Directory not found: {dir_path}")
     
     try:
         docs = []
@@ -323,7 +343,7 @@ def list_documents(directory):
     except Exception as e:
         print(f"Error listing documents: {str(e)}")
         print(traceback.format_exc())
-        return f"Failed to list documents: {str(e)}"
+        raise
 
 def copy_document(source_path, target_path):
     """Create a copy of an existing document."""
@@ -331,46 +351,43 @@ def copy_document(source_path, target_path):
     target_path = normalize_path(target_path)
     
     if not os.path.exists(source_path):
-        return f"Source document not found: {source_path}"
+        raise HelperError(f"Source document not found: {source_path}")
     
     if not ensure_directory_exists(target_path):
-        return f"Failed to create directory for target: {target_path}"
+        raise HelperError(f"Failed to create directory for target: {target_path}")
     
-    try:
-        # First try to open and save through LibreOffice
-        doc, message = open_document(source_path, read_only=True)
-        if not doc:
-            return message
+    # First try to open and save through LibreOffice
+    doc, message = open_document(source_path, read_only=True)
+    if not doc:
+        raise HelperError(message)
         
-        try:
-            # Save to new location
-            target_url = uno.systemPathToFileUrl(target_path)
-            props = [create_property_value("Overwrite", True)]
-            doc.storeToURL(target_url, tuple(props))
-            doc.close(True)
+    try:
+        # Save to new location
+        target_url = uno.systemPathToFileUrl(target_path)
+        props = [create_property_value("Overwrite", True)]
+        doc.storeToURL(target_url, tuple(props))
+        doc.close(True)
             
-            if os.path.exists(target_path):
-                return f"Successfully copied document to: {target_path}"
-            else:
-                # If LibreOffice method failed, try direct file copy
-                import shutil
-                shutil.copy2(source_path, target_path)
-                return f"Successfully copied document to: {target_path}"
-        except Exception as e:
-            doc.close(True)
-            # Fall back to direct file copy
+        if os.path.exists(target_path):
+            return f"Successfully copied document to: {target_path}"
+        else:
+            # If LibreOffice method failed, try direct file copy
             import shutil
             shutil.copy2(source_path, target_path)
-            return f"Successfully copied document to: {target_path} (using fallback method)"
-            
+            return f"Successfully copied document to: {target_path}"
     except Exception as e:
-        return f"Failed to copy document: {str(e)}"
+        doc.close(True)
+        # Fall back to direct file copy
+        import shutil
+        shutil.copy2(source_path, target_path)
+        return f"Successfully copied document to: {target_path} (using fallback method)"
+            
 
 def add_text(file_path, text, position="end"):
     """Add text to a document."""
     doc, message = open_document(file_path)
     if not doc:
-        return message
+        raise HelperError(message)
     
     try:
         if hasattr(doc, "getText"):
@@ -390,19 +407,19 @@ def add_text(file_path, text, position="end"):
             return f"Text added to {file_path}"
         else:
             doc.close(True)
-            return "Document does not support text insertion"
+            raise HelperError("Document does not support text insertion")
     except Exception as e:
         try:
             doc.close(True)
         except:
             pass
-        return f"Failed to add text: {str(e)}"
+        raise
 
 def add_heading(file_path, text, level=1):
     """Add a heading to a document."""
     doc, message = open_document(file_path)
     if not doc:
-        return message
+        raise HelperError(message)
     
     try:
         if hasattr(doc, "getText"):
@@ -428,19 +445,19 @@ def add_heading(file_path, text, level=1):
             return f"Heading added to {file_path}"
         else:
             doc.close(True)
-            return "Document does not support headings"
+            raise HelperError("Document does not support headings")
     except Exception as e:
         try:
             doc.close(True)
         except:
             pass
-        return f"Failed to add heading: {str(e)}"
+        raise
 
 def add_paragraph(file_path, text, style=None, alignment=None):
     """Add a paragraph with optional styling."""
     doc, message = open_document(file_path)
     if not doc:
-        return message
+        raise HelperError(message)
     
     try:
         if hasattr(doc, "getText"):
@@ -462,7 +479,7 @@ def add_paragraph(file_path, text, style=None, alignment=None):
                 try:
                     cursor.ParaStyleName = style
                 except Exception as style_error:
-                    print(f"Error applying style: {style_error}")
+                    raise HelperError(f"Error applying style: {style_error}")
             
             # Apply alignment if specified
             alignment_map = {
@@ -484,19 +501,19 @@ def add_paragraph(file_path, text, style=None, alignment=None):
             return f"Paragraph added to {file_path}"
         else:
             doc.close(True)
-            return "Document does not support paragraphs"
+            raise HelperError("Document does not support paragraphs")
     except Exception as e:
         try:
             doc.close(True)
         except:
             pass
-        return f"Failed to add paragraph: {str(e)}"
+        raise
 
 def format_text(file_path, text_to_find, format_options):
     """Format specific text in a document."""
     doc, message = open_document(file_path)
     if not doc:
-        return message
+        raise HelperError(message)
     
     try:
         if hasattr(doc, "getText"):
@@ -540,7 +557,7 @@ def format_text(file_path, text_to_find, format_options):
                             color = int(color[1:], 16)
                         cursor.CharColor = color
                     except Exception as e:
-                        print(f"Color error: {e}")
+                        raise HelperError(f"Color error: {e}")
                 
                 if format_options.get("font"):
                     cursor.CharFontName = format_options["font"]
@@ -557,7 +574,7 @@ def format_text(file_path, text_to_find, format_options):
             return f"Formatted {found_count} occurrences of '{text_to_find}' in {file_path}"
         else:
             doc.close(True)
-            return "Document does not support text formatting"
+            raise HelperError("Document does not support text formatting")
     except Exception as e:
         try:
             doc.close(True)
@@ -565,7 +582,7 @@ def format_text(file_path, text_to_find, format_options):
             pass
         print(f"Error in format_text: {str(e)}")
         print(traceback.format_exc())
-        return f"Failed to format text: {str(e)}"
+        raise
 
 def search_replace_text(file_path, search_text, replace_text):
     """Search and replace text throughout the document."""
@@ -968,7 +985,7 @@ def apply_document_style(file_path, default_style):
     """Apply consistent formatting throughout the document."""
     doc, message = open_document(file_path)
     if not doc:
-        return message
+        raise Exception(message)
     
     try:
         if not hasattr(doc, "getText"):
@@ -1021,13 +1038,15 @@ def apply_document_style(file_path, default_style):
             doc.close(True)
         except:
             pass
-        return f"Failed to apply document style: {str(e)}"
+        raise Exception(f"Failed to apply document style: {str(e)}")
 
 # Main command handler
 def handle_command(command):
     """Process commands from the MCP server."""
     try:
+        logging.info("handle_command called")
         action = command.get("action", "")
+        logging.info(f"action: {action}")
         
         # Document creation and management
         if action == "create_document":
@@ -1160,15 +1179,20 @@ def handle_command(command):
     except Exception as e:
         print(f"Error handling command: {str(e)}")
         print(traceback.format_exc())
-        return f"Error processing command: {str(e)}"
+        raise
+
 
 # Main server loop
 print("Starting command processing loop...")
 try:
     while True:
         print("Waiting for connection...")
+        logging.info("Waiting for connection...")
+        logging.info(server_socket)
+
         client_socket, address = server_socket.accept()
         print(f"Connection from {address}")
+        logging.info(f"Connection from {address}")
         
         try:
             # Receive data with timeout
@@ -1181,6 +1205,7 @@ try:
                 continue
                 
             print(f"Received data: {data[:100]}...")
+            logging.info(f"Received data: {data[:100]}...")
             
             try:
                 command = json.loads(data)
@@ -1206,9 +1231,11 @@ try:
             # Send response
             client_socket.send(json.dumps(response).encode('utf-8'))
             print("Response sent")
+            logging.info("Response sent")
             
         except socket.timeout:
             print("Connection timed out")
+            logging.error("Connection timed out")
             response = {
                 "status": "error",
                 "message": "Connection timed out"
@@ -1219,7 +1246,9 @@ try:
                 pass
         except Exception as e:
             print(f"Error handling client: {str(e)}")
+            logging.error(f"Error handling client: {str(e)}")
             print(traceback.format_exc())
+            logging.error(traceback.format_exc())
             try:
                 response = {
                     "status": "error",
@@ -1236,7 +1265,9 @@ except KeyboardInterrupt:
     print("Helper server shutting down...")
 except Exception as e:
     print(f"Fatal error: {str(e)}")
+    logging.fatal(f"Fatal error: {str(e)}")
     print(traceback.format_exc())
+    logging.fatal(traceback.format_exc())
 finally:
     server_socket.close()
     print("Server socket closed")

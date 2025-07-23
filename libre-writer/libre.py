@@ -5,6 +5,14 @@ from typing import Optional, Any, List, Dict
 import socket
 import json
 import time
+import logging
+
+log_path = os.path.join(os.path.dirname(__file__), "libre.log")
+logging.basicConfig(
+    filename=log_path,
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(message)s"
+)
 
 # Helper function for directory management
 def ensure_directory_exists(file_path: str) -> None:
@@ -47,18 +55,26 @@ def call_libreoffice_helper(command: dict) -> dict:
         Dictionary with response from helper
     """
     try:
+        logging.info("call_libreoffice_helper function called")
+
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client_socket.settimeout(30)  # 30 second timeout
         client_socket.connect(('localhost', 8765))
         
+        logging.info(client_socket)
+
         # Send command
         request_data = json.dumps(command).encode('utf-8')
         client_socket.send(request_data)
+
+        logging.info(request_data)
         
         # Receive response
         response_data = client_socket.recv(16384).decode('utf-8')
         client_socket.close()
         
+        logging.info(response_data)
+
         if not response_data:
             return {"status": "error", "message": "Empty response from helper"}
             
@@ -92,19 +108,38 @@ def get_default_document_path(filename: str) -> str:
 # Document Management Tools
 
 @mcp.tool()
-async def create_document(filename: str, doc_type: str = "text", title: str = None, author: str = None, subject: str = None, keywords: str = None) -> str:
+async def create_blank_document(
+    filename: str,
+    title: str = "",
+    author: str = "",
+    subject: str = "",
+    keywords: str = "",
+) -> str:
     """
-    Create a new LibreOffice document.
-    
+    Create a new LibreOffice Writer document.
+
     Args:
         filename: Name of the document to create
-        doc_type: Type of document (text, calc, impress)
         title: Document title metadata
         author: Document author metadata
         subject: Document subject metadata
         keywords: Document keywords metadata (comma-separated)
     """
     try:
+        # Check for supported file extensions
+        supported_extensions = (
+            ".odt",
+            ".docx",
+            ".dotx",
+            ".xml",
+            ".doc",
+            ".dot",
+            ".rtf",
+            ".wpd",
+        )
+        if not filename.lower().endswith(supported_extensions):
+            filename += ".odt"
+
         # If filename doesn't include a path, add default path
         if os.path.basename(filename) == filename:
             save_path = get_default_document_path(filename)
@@ -114,7 +149,7 @@ async def create_document(filename: str, doc_type: str = "text", title: str = No
         # Normalize path
         save_path = normalize_path(save_path)
         print(f"Creating document at: {save_path}")
-        
+
         # Prepare metadata if provided
         metadata = {}
         if title:
@@ -124,23 +159,33 @@ async def create_document(filename: str, doc_type: str = "text", title: str = No
         if subject:
             metadata["Subject"] = subject
         if keywords:
+            # Split by comma and strip whitespace
+            keywords = [k.strip() for k in keywords.split(",")]
             metadata["Keywords"] = keywords
-        
+
+        logging.info(save_path)
+        logging.info(metadata)
+
         # Send command to helper
-        response = call_libreoffice_helper({
-            "action": "create_document",
-            "doc_type": doc_type,
-            "file_path": save_path,
-            "metadata": metadata
-        })
-        
+        response = call_libreoffice_helper(
+            {
+                "action": "create_document",
+                "doc_type": "text",
+                "file_path": save_path,
+                "metadata": metadata,
+            }
+        )
+
+        logging.info(response["status"])
+        logging.info(response["message"])
+
         if response["status"] == "success":
             return response["message"]
         else:
             return f"Error: {response['message']}"
-    
+
     except Exception as e:
-        print(f"Error in create_document: {str(e)}")
+        logging.error(f"Error in create_document: {str(e)}")
         return f"Failed to create document: {str(e)}"
 
 @mcp.tool()

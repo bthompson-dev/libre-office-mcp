@@ -64,6 +64,7 @@ def start_office():
         soffice_path = get_office_path()
         subprocess.Popen([
             soffice_path,
+            "-env:UserInstallation=file:///C:/Temp/LibreOfficeHeadlessProfile",
             "--headless",
             "--accept=socket,host=localhost,port=2002;urp;",
             "--norestore",
@@ -76,14 +77,17 @@ def start_office():
 
 def start_helper():
     """Start the Office helper script"""
-    print("Starting Office helper...", file=sys.stderr)
-    helper_script = os.path.join(os.path.dirname(__file__), 'helper.py')
-    python_path = get_python_path()
-    subprocess.Popen([
-        python_path,
-        helper_script
-    ])
-    time.sleep(3)
+    if not is_port_in_use(8765):
+        print("Starting Office helper...", file=sys.stderr)
+        helper_script = os.path.join(os.path.dirname(__file__), 'helper.py')
+        python_path = get_python_path()
+        subprocess.Popen([
+            python_path,
+            helper_script
+        ])
+        time.sleep(3)
+    else:
+        print("Helper script already running on port 8765", file=sys.stderr)
 
 def start_mcp_server():
     """Start the MCP server"""

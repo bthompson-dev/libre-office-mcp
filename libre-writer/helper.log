@@ -1,0 +1,877 @@
+2025-07-23 12:37:35,411 INFO LibreOffice helper listening on port 8765
+2025-07-23 12:40:21,000 INFO LibreOffice helper listening on port 8765
+2025-07-23 12:42:07,343 INFO LibreOffice helper listening on port 8765
+2025-07-23 12:45:09,939 INFO LibreOffice helper listening on port 8765
+2025-07-23 12:45:09,940 INFO Waiting for connection...
+2025-07-23 13:00:28,289 INFO LibreOffice helper listening on port 8765
+2025-07-23 13:00:28,289 INFO Waiting for connection...
+2025-07-23 13:04:55,382 INFO LibreOffice helper listening on port 8765
+2025-07-23 13:04:55,382 INFO Waiting for connection...
+2025-07-23 13:09:09,576 INFO LibreOffice helper listening on port 8765
+2025-07-23 13:09:09,576 INFO Socket bound to localhost:8765
+2025-07-23 13:09:09,576 INFO Testing LibreOffice connection...
+2025-07-23 13:12:06,276 INFO LibreOffice helper listening on port 8765
+2025-07-23 13:12:06,276 INFO Socket bound to localhost:8765
+2025-07-23 13:12:06,276 INFO Testing LibreOffice connection...
+2025-07-23 13:12:06,292 INFO LibreOffice connection successful
+2025-07-23 13:12:06,292 INFO Ready to accept connections...
+2025-07-23 13:12:06,292 INFO Waiting for connection...
+2025-07-23 13:16:47,639 INFO LibreOffice helper listening on port 8765
+2025-07-23 13:16:47,639 INFO Socket bound to localhost:8765
+2025-07-23 13:16:47,639 INFO Testing LibreOffice connection...
+2025-07-23 13:16:47,648 INFO LibreOffice connection successful
+2025-07-23 13:16:47,648 INFO Ready to accept connections...
+2025-07-23 13:16:47,648 INFO Waiting for connection...
+2025-07-23 13:19:48,887 INFO LibreOffice helper listening on port 8765
+2025-07-23 13:19:48,887 INFO Socket bound to localhost:8765
+2025-07-23 13:19:48,887 INFO Testing LibreOffice connection...
+2025-07-23 13:19:48,913 INFO LibreOffice connection successful
+2025-07-23 13:19:48,913 INFO Ready to accept connections...
+2025-07-23 13:19:48,913 INFO Waiting for connection...
+2025-07-23 13:19:48,913 INFO <socket.socket fd=444, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 13:22:46,057 INFO LibreOffice helper listening on port 8765
+2025-07-23 13:22:46,057 INFO Socket bound to localhost:8765
+2025-07-23 13:22:46,057 INFO Testing LibreOffice connection...
+2025-07-23 13:22:46,077 INFO LibreOffice connection successful
+2025-07-23 13:22:46,077 INFO Ready to accept connections...
+2025-07-23 13:22:46,077 INFO Waiting for connection...
+2025-07-23 13:22:46,087 INFO <socket.socket fd=896, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 13:29:17,806 INFO LibreOffice helper listening on port 8765
+2025-07-23 13:29:17,806 INFO Socket bound to localhost:8765
+2025-07-23 13:29:17,806 INFO Testing LibreOffice connection...
+2025-07-23 13:29:17,833 INFO LibreOffice connection successful
+2025-07-23 13:29:17,833 INFO Ready to accept connections...
+2025-07-23 13:29:17,833 INFO Waiting for connection...
+2025-07-23 13:29:17,833 INFO <socket.socket fd=796, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 13:34:48,700 INFO Importing UNO...
+2025-07-23 13:34:48,780 INFO UNO imported successfully!
+2025-07-23 13:34:48,780 INFO LibreOffice helper listening on port 8765
+2025-07-23 13:34:48,780 INFO Socket bound to localhost:8765
+2025-07-23 13:34:48,780 INFO Testing LibreOffice connection...
+2025-07-23 13:34:48,811 INFO LibreOffice connection successful
+2025-07-23 13:34:48,811 INFO Ready to accept connections...
+2025-07-23 13:34:48,824 INFO Waiting for connection...
+2025-07-23 13:34:48,824 INFO <socket.socket fd=752, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 13:37:29,650 INFO Importing UNO...
+2025-07-23 13:37:29,710 INFO UNO imported successfully!
+2025-07-23 13:37:29,713 INFO LibreOffice helper listening on port 8765
+2025-07-23 13:37:29,713 INFO Socket bound to localhost:8765
+2025-07-23 13:37:29,713 INFO Testing LibreOffice connection...
+2025-07-23 13:37:29,747 INFO LibreOffice connection successful
+2025-07-23 13:37:29,747 INFO Ready to accept connections...
+2025-07-23 13:37:29,747 INFO Waiting for connection...
+2025-07-23 13:37:29,747 INFO <socket.socket fd=812, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 13:39:20,901 INFO Importing UNO...
+2025-07-23 13:39:20,942 INFO UNO imported successfully!
+2025-07-23 13:39:20,942 INFO LibreOffice helper listening on port 8765
+2025-07-23 13:39:20,942 INFO Socket bound to localhost:8765
+2025-07-23 13:39:20,942 INFO Testing LibreOffice connection...
+2025-07-23 13:39:20,966 INFO LibreOffice connection successful
+2025-07-23 13:39:20,966 INFO Ready to accept connections...
+2025-07-23 13:39:20,966 INFO Waiting for connection...
+2025-07-23 13:39:20,966 INFO <socket.socket fd=836, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 14:53:16,966 INFO Importing UNO...
+2025-07-23 14:53:17,125 INFO UNO imported successfully!
+2025-07-23 14:53:17,133 INFO LibreOffice helper listening on port 8765
+2025-07-23 14:53:17,133 INFO Socket bound to localhost:8765
+2025-07-23 14:53:17,133 INFO Testing LibreOffice connection...
+2025-07-23 14:53:17,156 INFO LibreOffice connection successful
+2025-07-23 14:53:17,156 INFO Ready to accept connections...
+2025-07-23 14:53:17,156 INFO Waiting for connection...
+2025-07-23 14:53:17,156 INFO <socket.socket fd=832, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 14:53:20,668 INFO Connection from ('127.0.0.1', 64548)
+2025-07-23 14:53:20,684 INFO Received data: {"action": "ping"}...
+2025-07-23 14:53:20,684 INFO handle_command called
+2025-07-23 14:53:20,688 INFO Response sent
+2025-07-23 14:53:20,688 INFO Waiting for connection...
+2025-07-23 14:53:20,688 INFO <socket.socket fd=832, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 14:57:50,670 INFO Connection from ('127.0.0.1', 64567)
+2025-07-23 14:57:50,670 INFO Waiting for connection...
+2025-07-23 14:57:50,670 INFO <socket.socket fd=832, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 14:57:51,470 INFO Connection from ('127.0.0.1', 64568)
+2025-07-23 14:57:51,470 INFO Received data: {"action": "ping"}...
+2025-07-23 14:57:51,470 INFO handle_command called
+2025-07-23 14:57:51,470 INFO Response sent
+2025-07-23 14:57:51,470 INFO Waiting for connection...
+2025-07-23 14:57:51,470 INFO <socket.socket fd=832, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 14:58:28,105 INFO Connection from ('127.0.0.1', 64574)
+2025-07-23 14:58:28,105 INFO Received data: {"action": "ping"}...
+2025-07-23 14:58:28,105 INFO handle_command called
+2025-07-23 14:58:28,105 INFO Response sent
+2025-07-23 14:58:28,114 INFO Waiting for connection...
+2025-07-23 14:58:28,114 INFO <socket.socket fd=832, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:08:23,031 INFO Importing UNO...
+2025-07-23 15:08:23,450 INFO UNO imported successfully!
+2025-07-23 15:08:23,450 INFO LibreOffice helper listening on port 8765
+2025-07-23 15:08:23,450 INFO Socket bound to localhost:8765
+2025-07-23 15:08:23,450 INFO Testing LibreOffice connection...
+2025-07-23 15:08:23,470 INFO LibreOffice connection successful
+2025-07-23 15:08:23,470 INFO Ready to accept connections...
+2025-07-23 15:08:23,470 INFO Waiting for connection...
+2025-07-23 15:08:23,477 INFO <socket.socket fd=844, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:08:25,803 INFO Connection from ('127.0.0.1', 64667)
+2025-07-23 15:08:25,806 INFO Received data: {"action": "ping"}...
+2025-07-23 15:08:25,806 INFO handle_command called
+2025-07-23 15:08:25,806 INFO action: ping
+2025-07-23 15:08:25,806 INFO Response sent
+2025-07-23 15:08:25,806 INFO Waiting for connection...
+2025-07-23 15:08:25,806 INFO <socket.socket fd=844, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:09:10,027 INFO Connection from ('127.0.0.1', 64673)
+2025-07-23 15:09:10,027 INFO Received data: {"action": "ping"}...
+2025-07-23 15:09:10,027 INFO handle_command called
+2025-07-23 15:09:10,027 INFO action: ping
+2025-07-23 15:09:10,029 INFO Response sent
+2025-07-23 15:09:10,029 INFO Waiting for connection...
+2025-07-23 15:09:10,029 INFO <socket.socket fd=844, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:09:10,064 INFO Connection from ('127.0.0.1', 64674)
+2025-07-23 15:09:10,064 INFO Received data: {"action": "ping"}...
+2025-07-23 15:09:10,064 INFO handle_command called
+2025-07-23 15:09:10,064 INFO action: ping
+2025-07-23 15:09:10,064 INFO Response sent
+2025-07-23 15:09:10,065 INFO Waiting for connection...
+2025-07-23 15:09:10,065 INFO <socket.socket fd=844, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:09:10,086 INFO Connection from ('127.0.0.1', 64675)
+2025-07-23 15:09:10,105 INFO Received data: {"action": "ping"}...
+2025-07-23 15:09:10,105 INFO handle_command called
+2025-07-23 15:09:10,105 INFO action: ping
+2025-07-23 15:09:10,105 INFO Response sent
+2025-07-23 15:09:10,105 INFO Waiting for connection...
+2025-07-23 15:09:10,105 INFO <socket.socket fd=844, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:09:10,131 INFO Connection from ('127.0.0.1', 64676)
+2025-07-23 15:09:10,145 INFO Received data: {"action": "ping"}...
+2025-07-23 15:09:10,145 INFO handle_command called
+2025-07-23 15:09:10,145 INFO action: ping
+2025-07-23 15:09:10,145 INFO Response sent
+2025-07-23 15:09:10,145 INFO Waiting for connection...
+2025-07-23 15:09:10,145 INFO <socket.socket fd=844, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:17:58,391 INFO Importing UNO...
+2025-07-23 15:17:58,749 INFO UNO imported successfully!
+2025-07-23 15:17:58,753 INFO LibreOffice helper listening on port 8765
+2025-07-23 15:17:58,753 INFO Socket bound to localhost:8765
+2025-07-23 15:17:58,753 INFO Testing LibreOffice connection...
+2025-07-23 15:17:58,782 INFO LibreOffice connection successful
+2025-07-23 15:17:58,782 INFO Ready to accept connections...
+2025-07-23 15:17:58,782 INFO Waiting for connection...
+2025-07-23 15:17:58,782 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:18:01,147 INFO Connection from ('127.0.0.1', 64716)
+2025-07-23 15:18:01,147 INFO Received data: {"action": "ping"}...
+2025-07-23 15:18:01,147 INFO handle_command called
+2025-07-23 15:18:01,147 INFO action: ping
+2025-07-23 15:18:01,147 INFO Response sent
+2025-07-23 15:18:01,147 INFO Waiting for connection...
+2025-07-23 15:18:01,147 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:18:54,484 INFO Connection from ('127.0.0.1', 64720)
+2025-07-23 15:18:54,499 INFO Received data: {"action": "create_document", "doc_type": "text", "file_path": "C:\\Users\\ben_t\\Documents\\errors_...
+2025-07-23 15:18:54,499 INFO handle_command called
+2025-07-23 15:18:54,499 INFO action: create_document
+2025-07-23 15:18:54,499 INFO Creating text document at C:\Users\ben_t\Documents\errors_document.odt
+2025-07-23 15:19:05,652 ERROR Error creating document: issubclass() arg 1 must be a class
+2025-07-23 15:19:05,652 ERROR Traceback (most recent call last):
+  File "C:\Users\ben_t\source\repos\LibreOfficeAI\MCPServer\libre-office-mcp\libre-writer\helper.py", line 139, in create_document
+    logging.info("Doc: ", doc)
+  File "C:\Program Files\LibreOffice\program\python-core-3.10.18\lib\logging\__init__.py", line 2138, in info
+    root.info(msg, *args, **kwargs)
+  File "C:\Program Files\LibreOffice\program\python-core-3.10.18\lib\logging\__init__.py", line 1477, in info
+    self._log(INFO, msg, args, **kwargs)
+  File "C:\Program Files\LibreOffice\program\python-core-3.10.18\lib\logging\__init__.py", line 1622, in _log
+    record = self.makeRecord(self.name, level, fn, lno, msg, args,
+  File "C:\Program Files\LibreOffice\program\python-core-3.10.18\lib\logging\__init__.py", line 1591, in makeRecord
+    rv = _logRecordFactory(name, level, fn, lno, msg, args, exc_info, func,
+  File "C:\Program Files\LibreOffice\program\python-core-3.10.18\lib\logging\__init__.py", line 309, in __init__
+    if (args and len(args) == 1 and isinstance(args[0], collections.abc.Mapping)
+  File "C:\Program Files\LibreOffice\program\\python-core-3.10.18\lib\abc.py", line 119, in __instancecheck__
+    return _abc_instancecheck(cls, instance)
+  File "C:\Program Files\LibreOffice\program\\python-core-3.10.18\lib\abc.py", line 123, in __subclasscheck__
+    return _abc_subclasscheck(cls, subclass)
+TypeError: issubclass() arg 1 must be a class
+
+2025-07-23 15:19:05,652 INFO Response sent
+2025-07-23 15:19:05,652 INFO Waiting for connection...
+2025-07-23 15:19:05,652 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:22:21,334 INFO Importing UNO...
+2025-07-23 15:22:21,380 INFO UNO imported successfully!
+2025-07-23 15:22:21,383 INFO LibreOffice helper listening on port 8765
+2025-07-23 15:22:21,383 INFO Socket bound to localhost:8765
+2025-07-23 15:22:21,383 INFO Testing LibreOffice connection...
+2025-07-23 15:22:21,406 INFO LibreOffice connection successful
+2025-07-23 15:22:21,406 INFO Ready to accept connections...
+2025-07-23 15:22:21,406 INFO Waiting for connection...
+2025-07-23 15:22:21,406 INFO <socket.socket fd=800, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:22:24,998 INFO Connection from ('127.0.0.1', 64755)
+2025-07-23 15:22:24,998 INFO Received data: {"action": "ping"}...
+2025-07-23 15:22:24,998 INFO handle_command called
+2025-07-23 15:22:24,998 INFO action: ping
+2025-07-23 15:22:24,998 INFO Response sent
+2025-07-23 15:22:24,998 INFO Waiting for connection...
+2025-07-23 15:22:24,998 INFO <socket.socket fd=800, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:23:00,039 INFO Connection from ('127.0.0.1', 64759)
+2025-07-23 15:23:00,040 INFO Received data: {"action": "create_document", "doc_type": "text", "file_path": "C:\\Users\\ben_t\\Documents\\compute...
+2025-07-23 15:23:00,040 INFO handle_command called
+2025-07-23 15:23:00,040 INFO action: create_document
+2025-07-23 15:23:00,040 INFO Creating text document at C:\Users\ben_t\Documents\computer_bugs_guide.odt
+2025-07-23 15:23:00,416 INFO Doc: pyuno object (com.sun.star.lang.XComponent)0x155b987f3c8{implementationName=SwXTextDocument, supportedServices={com.sun.star.document.OfficeDocument,com.sun.star.text.GenericTextDocument,com.sun.star.text.TextDocument}, supportedInterfaces={com.sun.star.container.XChild,com.sun.star.document.XDocumentPropertiesSupplier,com.sun.star.document.XCmisDocument,com.sun.star.rdf.XDocumentMetadataAccess,com.sun.star.document.XDocumentRecovery2,com.sun.star.document.XUndoManagerSupplier,com.sun.star.document.XShapeEventBroadcaster,com.sun.star.document.XDocumentEventBroadcaster,com.sun.star.lang.XEventListener,com.sun.star.document.XEventsSupplier,com.sun.star.document.XEmbeddedScripts,com.sun.star.document.XScriptInvocationContext,com.sun.star.frame.XModel3,com.sun.star.util.XModifiable2,com.sun.star.view.XPrintable,com.sun.star.view.XPrintJobBroadcaster,com.sun.star.frame.XStorable2,com.sun.star.frame.XLoadable,com.sun.star.script.XStarBasicAccess,com.sun.star.document.XViewDataSupplier,com.sun.star.util.XCloseable,com.sun.star.datatransfer.XTransferable,com.sun.star.document.XDocumentSubStorageSupplier,com.sun.star.document.XStorageBasedDocument,com.sun.star.script.provider.XScriptProviderSupplier,com.sun.star.ui.XUIConfigurationManagerSupplier,com.sun.star.embed.XVisualObject,com.sun.star.lang.XUnoTunnel,com.sun.star.frame.XModule,com.sun.star.frame.XTitle,com.sun.star.frame.XTitleChangeBroadcaster,com.sun.star.frame.XUntitledNumbers,com.sun.star.lang.XTypeProvider,com.sun.star.uno.XWeak,com.sun.star.text.XTextDocument,com.sun.star.text.XLineNumberingProperties,com.sun.star.text.XChapterNumberingSupplier,com.sun.star.text.XNumberingRulesSupplier,com.sun.star.text.XFootnotesSupplier,com.sun.star.text.XEndnotesSupplier,com.sun.star.text.XContentControlsSupplier,com.sun.star.util.XReplaceable,com.sun.star.text.XPagePrintable,com.sun.star.text.XReferenceMarksSupplier,com.sun.star.text.XTextTablesSupplier,com.sun.star.text.XTextFramesSupplier,com.sun.star.text.XBookmarksSupplier,com.sun.star.text.XTextSectionsSupplier,com.sun.star.text.XTextGraphicObjectsSupplier,com.sun.star.text.XTextEmbeddedObjectsSupplier,com.sun.star.text.XTextFieldsSupplier,com.sun.star.style.XStyleFamiliesSupplier,com.sun.star.style.XAutoStylesSupplier,com.sun.star.lang.XServiceInfo,com.sun.star.drawing.XDrawPageSupplier,com.sun.star.drawing.XDrawPagesSupplier,com.sun.star.text.XDocumentIndexesSupplier,com.sun.star.beans.XPropertySet,com.sun.star.beans.XPropertyState,com.sun.star.document.XLinkTargetSupplier,com.sun.star.document.XRedlinesSupplier,com.sun.star.util.XRefreshable,com.sun.star.util.XLinkUpdate,com.sun.star.view.XRenderable,com.sun.star.xforms.XFormsSupplier,com.sun.star.text.XFlatParagraphIteratorProvider,com.sun.star.document.XDocumentLanguages,com.sun.star.util.XCloneable,com.sun.star.text.XPasteBroadcaster,com.sun.star.lang.XTypeProvider,com.sun.star.container.XChild,com.sun.star.document.XDocumentPropertiesSupplier,com.sun.star.document.XCmisDocument,com.sun.star.rdf.XDocumentMetadataAccess,com.sun.star.document.XDocumentRecovery2,com.sun.star.document.XUndoManagerSupplier,com.sun.star.document.XShapeEventBroadcaster,com.sun.star.document.XDocumentEventBroadcaster,com.sun.star.lang.XEventListener,com.sun.star.document.XEventsSupplier,com.sun.star.document.XEmbeddedScripts,com.sun.star.document.XScriptInvocationContext,com.sun.star.frame.XModel3,com.sun.star.util.XModifiable2,com.sun.star.view.XPrintable,com.sun.star.view.XPrintJobBroadcaster,com.sun.star.frame.XStorable2,com.sun.star.frame.XLoadable,com.sun.star.script.XStarBasicAccess,com.sun.star.document.XViewDataSupplier,com.sun.star.util.XCloseable,com.sun.star.datatransfer.XTransferable,com.sun.star.document.XDocumentSubStorageSupplier,com.sun.star.document.XStorageBasedDocument,com.sun.star.script.provider.XScriptProviderSupplier,com.sun.star.ui.XUIConfigurationManagerSupplier,com.sun.star.embed.XVisualObject,com.sun.star.lang.XUnoTunnel,com.sun.star.frame.XModule,com.sun.star.frame.XTitle,com.sun.star.frame.XTitleChangeBroadcaster,com.sun.star.frame.XUntitledNumbers,com.sun.star.lang.XTypeProvider,com.sun.star.uno.XWeak,com.sun.star.util.XNumberFormatsSupplier,com.sun.star.lang.XUnoTunnel,com.sun.star.lang.XTypeProvider,com.sun.star.uno.XWeak,com.sun.star.uno.XAggregation,com.sun.star.lang.XMultiServiceFactory,com.sun.star.tiledrendering.XTiledRenderable}}
+2025-07-23 15:23:02,154 ERROR Error creating document: conversion not possible!
+2025-07-23 15:23:02,154 ERROR Traceback (most recent call last):
+  File "C:\Users\ben_t\source\repos\LibreOfficeAI\MCPServer\libre-office-mcp\libre-writer\helper.py", line 148, in create_document
+    setattr(doc_info, key, value)
+com.sun.star.script.CannotConvertException: conversion not possible!
+
+2025-07-23 15:23:02,154 INFO Response sent
+2025-07-23 15:23:02,154 INFO Waiting for connection...
+2025-07-23 15:23:02,157 INFO <socket.socket fd=800, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:23:02,181 INFO Connection from ('127.0.0.1', 64761)
+2025-07-23 15:23:02,181 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\l...
+2025-07-23 15:23:02,181 INFO handle_command called
+2025-07-23 15:23:02,181 INFO action: add_heading
+2025-07-23 15:23:02,181 INFO Response sent
+2025-07-23 15:23:02,181 INFO Waiting for connection...
+2025-07-23 15:23:02,181 INFO <socket.socket fd=800, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:23:02,184 INFO Connection from ('127.0.0.1', 64762)
+2025-07-23 15:23:02,184 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\...
+2025-07-23 15:23:02,184 INFO handle_command called
+2025-07-23 15:23:02,184 INFO action: add_paragraph
+2025-07-23 15:23:02,184 INFO Response sent
+2025-07-23 15:23:02,184 INFO Waiting for connection...
+2025-07-23 15:23:02,184 INFO <socket.socket fd=800, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:23:02,199 INFO Connection from ('127.0.0.1', 64763)
+2025-07-23 15:23:02,199 INFO Received data: {"action": "apply_document_style", "file_path": "C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCP...
+2025-07-23 15:23:02,199 INFO handle_command called
+2025-07-23 15:23:02,199 INFO action: apply_document_style
+2025-07-23 15:23:02,199 INFO Response sent
+2025-07-23 15:23:02,199 INFO Waiting for connection...
+2025-07-23 15:23:02,199 INFO <socket.socket fd=800, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:23:02,220 INFO Connection from ('127.0.0.1', 64764)
+2025-07-23 15:23:02,220 INFO Received data: {"action": "add_table", "file_path": "C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\lib...
+2025-07-23 15:23:02,220 INFO handle_command called
+2025-07-23 15:23:02,221 INFO action: add_table
+2025-07-23 15:23:02,221 INFO Response sent
+2025-07-23 15:23:02,221 INFO Waiting for connection...
+2025-07-23 15:23:02,221 INFO <socket.socket fd=800, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:23:02,231 INFO Connection from ('127.0.0.1', 64765)
+2025-07-23 15:23:02,231 INFO Received data: {"action": "insert_image", "file_path": "C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\...
+2025-07-23 15:23:02,231 INFO handle_command called
+2025-07-23 15:23:02,231 INFO action: insert_image
+2025-07-23 15:23:02,247 INFO Response sent
+2025-07-23 15:23:02,247 INFO Waiting for connection...
+2025-07-23 15:23:02,247 INFO <socket.socket fd=800, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:30:18,464 INFO Importing UNO...
+2025-07-23 15:30:18,520 INFO UNO imported successfully!
+2025-07-23 15:30:18,523 INFO LibreOffice helper listening on port 8765
+2025-07-23 15:30:18,523 INFO Socket bound to localhost:8765
+2025-07-23 15:30:18,523 INFO Testing LibreOffice connection...
+2025-07-23 15:30:18,547 INFO LibreOffice connection successful
+2025-07-23 15:30:18,547 INFO Ready to accept connections...
+2025-07-23 15:30:18,547 INFO Waiting for connection...
+2025-07-23 15:30:18,547 INFO <socket.socket fd=388, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:30:21,927 INFO Connection from ('127.0.0.1', 64790)
+2025-07-23 15:30:21,940 INFO Received data: {"action": "ping"}...
+2025-07-23 15:30:21,940 INFO handle_command called
+2025-07-23 15:30:21,940 INFO action: ping
+2025-07-23 15:30:21,940 INFO Response sent
+2025-07-23 15:30:21,940 INFO Waiting for connection...
+2025-07-23 15:30:21,940 INFO <socket.socket fd=388, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:30:40,994 INFO Connection from ('127.0.0.1', 64795)
+2025-07-23 15:30:40,994 INFO Received data: {"action": "create_document", "doc_type": "text", "file_path": "C:\\Users\\ben_t\\Documents\\compute...
+2025-07-23 15:30:40,994 INFO handle_command called
+2025-07-23 15:30:40,994 INFO action: create_document
+2025-07-23 15:30:40,994 INFO Creating text document at C:\Users\ben_t\Documents\computer_bugs_document.odt
+2025-07-23 15:30:41,319 INFO Doc: pyuno object (com.sun.star.lang.XComponent)0x197e5589158{implementationName=SwXTextDocument, supportedServices={com.sun.star.document.OfficeDocument,com.sun.star.text.GenericTextDocument,com.sun.star.text.TextDocument}, supportedInterfaces={com.sun.star.container.XChild,com.sun.star.document.XDocumentPropertiesSupplier,com.sun.star.document.XCmisDocument,com.sun.star.rdf.XDocumentMetadataAccess,com.sun.star.document.XDocumentRecovery2,com.sun.star.document.XUndoManagerSupplier,com.sun.star.document.XShapeEventBroadcaster,com.sun.star.document.XDocumentEventBroadcaster,com.sun.star.lang.XEventListener,com.sun.star.document.XEventsSupplier,com.sun.star.document.XEmbeddedScripts,com.sun.star.document.XScriptInvocationContext,com.sun.star.frame.XModel3,com.sun.star.util.XModifiable2,com.sun.star.view.XPrintable,com.sun.star.view.XPrintJobBroadcaster,com.sun.star.frame.XStorable2,com.sun.star.frame.XLoadable,com.sun.star.script.XStarBasicAccess,com.sun.star.document.XViewDataSupplier,com.sun.star.util.XCloseable,com.sun.star.datatransfer.XTransferable,com.sun.star.document.XDocumentSubStorageSupplier,com.sun.star.document.XStorageBasedDocument,com.sun.star.script.provider.XScriptProviderSupplier,com.sun.star.ui.XUIConfigurationManagerSupplier,com.sun.star.embed.XVisualObject,com.sun.star.lang.XUnoTunnel,com.sun.star.frame.XModule,com.sun.star.frame.XTitle,com.sun.star.frame.XTitleChangeBroadcaster,com.sun.star.frame.XUntitledNumbers,com.sun.star.lang.XTypeProvider,com.sun.star.uno.XWeak,com.sun.star.text.XTextDocument,com.sun.star.text.XLineNumberingProperties,com.sun.star.text.XChapterNumberingSupplier,com.sun.star.text.XNumberingRulesSupplier,com.sun.star.text.XFootnotesSupplier,com.sun.star.text.XEndnotesSupplier,com.sun.star.text.XContentControlsSupplier,com.sun.star.util.XReplaceable,com.sun.star.text.XPagePrintable,com.sun.star.text.XReferenceMarksSupplier,com.sun.star.text.XTextTablesSupplier,com.sun.star.text.XTextFramesSupplier,com.sun.star.text.XBookmarksSupplier,com.sun.star.text.XTextSectionsSupplier,com.sun.star.text.XTextGraphicObjectsSupplier,com.sun.star.text.XTextEmbeddedObjectsSupplier,com.sun.star.text.XTextFieldsSupplier,com.sun.star.style.XStyleFamiliesSupplier,com.sun.star.style.XAutoStylesSupplier,com.sun.star.lang.XServiceInfo,com.sun.star.drawing.XDrawPageSupplier,com.sun.star.drawing.XDrawPagesSupplier,com.sun.star.text.XDocumentIndexesSupplier,com.sun.star.beans.XPropertySet,com.sun.star.beans.XPropertyState,com.sun.star.document.XLinkTargetSupplier,com.sun.star.document.XRedlinesSupplier,com.sun.star.util.XRefreshable,com.sun.star.util.XLinkUpdate,com.sun.star.view.XRenderable,com.sun.star.xforms.XFormsSupplier,com.sun.star.text.XFlatParagraphIteratorProvider,com.sun.star.document.XDocumentLanguages,com.sun.star.util.XCloneable,com.sun.star.text.XPasteBroadcaster,com.sun.star.lang.XTypeProvider,com.sun.star.container.XChild,com.sun.star.document.XDocumentPropertiesSupplier,com.sun.star.document.XCmisDocument,com.sun.star.rdf.XDocumentMetadataAccess,com.sun.star.document.XDocumentRecovery2,com.sun.star.document.XUndoManagerSupplier,com.sun.star.document.XShapeEventBroadcaster,com.sun.star.document.XDocumentEventBroadcaster,com.sun.star.lang.XEventListener,com.sun.star.document.XEventsSupplier,com.sun.star.document.XEmbeddedScripts,com.sun.star.document.XScriptInvocationContext,com.sun.star.frame.XModel3,com.sun.star.util.XModifiable2,com.sun.star.view.XPrintable,com.sun.star.view.XPrintJobBroadcaster,com.sun.star.frame.XStorable2,com.sun.star.frame.XLoadable,com.sun.star.script.XStarBasicAccess,com.sun.star.document.XViewDataSupplier,com.sun.star.util.XCloseable,com.sun.star.datatransfer.XTransferable,com.sun.star.document.XDocumentSubStorageSupplier,com.sun.star.document.XStorageBasedDocument,com.sun.star.script.provider.XScriptProviderSupplier,com.sun.star.ui.XUIConfigurationManagerSupplier,com.sun.star.embed.XVisualObject,com.sun.star.lang.XUnoTunnel,com.sun.star.frame.XModule,com.sun.star.frame.XTitle,com.sun.star.frame.XTitleChangeBroadcaster,com.sun.star.frame.XUntitledNumbers,com.sun.star.lang.XTypeProvider,com.sun.star.uno.XWeak,com.sun.star.util.XNumberFormatsSupplier,com.sun.star.lang.XUnoTunnel,com.sun.star.lang.XTypeProvider,com.sun.star.uno.XWeak,com.sun.star.uno.XAggregation,com.sun.star.lang.XMultiServiceFactory,com.sun.star.tiledrendering.XTiledRenderable}}
+2025-07-23 15:30:41,366 INFO pyuno object (com.sun.star.document.XDocumentProperties)0x197e54ef988{implementationName=SfxDocumentMetaData, supportedServices={com.sun.star.document.DocumentProperties}, supportedInterfaces={com.sun.star.uno.XWeak,com.sun.star.lang.XComponent,com.sun.star.lang.XTypeProvider,com.sun.star.lang.XServiceInfo,com.sun.star.document.XDocumentProperties2,com.sun.star.lang.XInitialization,com.sun.star.util.XCloneable,com.sun.star.util.XModifiable,com.sun.star.xml.sax.XSAXSerializable}}
+2025-07-23 15:30:41,366 INFO Title Understanding Computer Bugs
+2025-07-23 15:30:41,382 INFO Author User
+2025-07-23 15:30:41,382 INFO Subject Computer Science
+2025-07-23 15:30:41,553 INFO Keywords bugs, programming, errors
+2025-07-23 15:30:41,555 ERROR Error creating document: conversion not possible!
+2025-07-23 15:30:41,555 ERROR Traceback (most recent call last):
+  File "C:\Users\ben_t\source\repos\LibreOfficeAI\MCPServer\libre-office-mcp\libre-writer\helper.py", line 150, in create_document
+    setattr(doc_info, key, value)
+com.sun.star.script.CannotConvertException: conversion not possible!
+
+2025-07-23 15:30:41,555 INFO Response sent
+2025-07-23 15:30:41,555 INFO Waiting for connection...
+2025-07-23 15:30:41,555 INFO <socket.socket fd=388, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:35:19,270 INFO Importing UNO...
+2025-07-23 15:35:19,317 INFO UNO imported successfully!
+2025-07-23 15:35:19,317 INFO LibreOffice helper listening on port 8765
+2025-07-23 15:35:19,317 INFO Socket bound to localhost:8765
+2025-07-23 15:35:19,317 INFO Testing LibreOffice connection...
+2025-07-23 15:35:19,334 INFO LibreOffice connection successful
+2025-07-23 15:35:19,334 INFO Ready to accept connections...
+2025-07-23 15:35:19,334 INFO Waiting for connection...
+2025-07-23 15:35:19,334 INFO <socket.socket fd=496, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:35:22,730 INFO Connection from ('127.0.0.1', 64809)
+2025-07-23 15:35:22,730 INFO Received data: {"action": "ping"}...
+2025-07-23 15:35:22,730 INFO handle_command called
+2025-07-23 15:35:22,730 INFO action: ping
+2025-07-23 15:35:22,730 INFO Response sent
+2025-07-23 15:35:22,730 INFO Waiting for connection...
+2025-07-23 15:35:22,730 INFO <socket.socket fd=496, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:35:32,906 INFO Connection from ('127.0.0.1', 64813)
+2025-07-23 15:35:32,922 INFO Received data: {"action": "create_document", "doc_type": "text", "file_path": "C:\\Users\\ben_t\\Documents\\Program...
+2025-07-23 15:35:32,922 INFO handle_command called
+2025-07-23 15:35:32,922 INFO action: create_document
+2025-07-23 15:35:32,922 INFO Creating text document at C:\Users\ben_t\Documents\ProgrammingGuide.odt
+2025-07-23 15:35:33,225 INFO Doc: pyuno object (com.sun.star.lang.XComponent)0x2a079888cf8{implementationName=SwXTextDocument, supportedServices={com.sun.star.document.OfficeDocument,com.sun.star.text.GenericTextDocument,com.sun.star.text.TextDocument}, supportedInterfaces={com.sun.star.container.XChild,com.sun.star.document.XDocumentPropertiesSupplier,com.sun.star.document.XCmisDocument,com.sun.star.rdf.XDocumentMetadataAccess,com.sun.star.document.XDocumentRecovery2,com.sun.star.document.XUndoManagerSupplier,com.sun.star.document.XShapeEventBroadcaster,com.sun.star.document.XDocumentEventBroadcaster,com.sun.star.lang.XEventListener,com.sun.star.document.XEventsSupplier,com.sun.star.document.XEmbeddedScripts,com.sun.star.document.XScriptInvocationContext,com.sun.star.frame.XModel3,com.sun.star.util.XModifiable2,com.sun.star.view.XPrintable,com.sun.star.view.XPrintJobBroadcaster,com.sun.star.frame.XStorable2,com.sun.star.frame.XLoadable,com.sun.star.script.XStarBasicAccess,com.sun.star.document.XViewDataSupplier,com.sun.star.util.XCloseable,com.sun.star.datatransfer.XTransferable,com.sun.star.document.XDocumentSubStorageSupplier,com.sun.star.document.XStorageBasedDocument,com.sun.star.script.provider.XScriptProviderSupplier,com.sun.star.ui.XUIConfigurationManagerSupplier,com.sun.star.embed.XVisualObject,com.sun.star.lang.XUnoTunnel,com.sun.star.frame.XModule,com.sun.star.frame.XTitle,com.sun.star.frame.XTitleChangeBroadcaster,com.sun.star.frame.XUntitledNumbers,com.sun.star.lang.XTypeProvider,com.sun.star.uno.XWeak,com.sun.star.text.XTextDocument,com.sun.star.text.XLineNumberingProperties,com.sun.star.text.XChapterNumberingSupplier,com.sun.star.text.XNumberingRulesSupplier,com.sun.star.text.XFootnotesSupplier,com.sun.star.text.XEndnotesSupplier,com.sun.star.text.XContentControlsSupplier,com.sun.star.util.XReplaceable,com.sun.star.text.XPagePrintable,com.sun.star.text.XReferenceMarksSupplier,com.sun.star.text.XTextTablesSupplier,com.sun.star.text.XTextFramesSupplier,com.sun.star.text.XBookmarksSupplier,com.sun.star.text.XTextSectionsSupplier,com.sun.star.text.XTextGraphicObjectsSupplier,com.sun.star.text.XTextEmbeddedObjectsSupplier,com.sun.star.text.XTextFieldsSupplier,com.sun.star.style.XStyleFamiliesSupplier,com.sun.star.style.XAutoStylesSupplier,com.sun.star.lang.XServiceInfo,com.sun.star.drawing.XDrawPageSupplier,com.sun.star.drawing.XDrawPagesSupplier,com.sun.star.text.XDocumentIndexesSupplier,com.sun.star.beans.XPropertySet,com.sun.star.beans.XPropertyState,com.sun.star.document.XLinkTargetSupplier,com.sun.star.document.XRedlinesSupplier,com.sun.star.util.XRefreshable,com.sun.star.util.XLinkUpdate,com.sun.star.view.XRenderable,com.sun.star.xforms.XFormsSupplier,com.sun.star.text.XFlatParagraphIteratorProvider,com.sun.star.document.XDocumentLanguages,com.sun.star.util.XCloneable,com.sun.star.text.XPasteBroadcaster,com.sun.star.lang.XTypeProvider,com.sun.star.container.XChild,com.sun.star.document.XDocumentPropertiesSupplier,com.sun.star.document.XCmisDocument,com.sun.star.rdf.XDocumentMetadataAccess,com.sun.star.document.XDocumentRecovery2,com.sun.star.document.XUndoManagerSupplier,com.sun.star.document.XShapeEventBroadcaster,com.sun.star.document.XDocumentEventBroadcaster,com.sun.star.lang.XEventListener,com.sun.star.document.XEventsSupplier,com.sun.star.document.XEmbeddedScripts,com.sun.star.document.XScriptInvocationContext,com.sun.star.frame.XModel3,com.sun.star.util.XModifiable2,com.sun.star.view.XPrintable,com.sun.star.view.XPrintJobBroadcaster,com.sun.star.frame.XStorable2,com.sun.star.frame.XLoadable,com.sun.star.script.XStarBasicAccess,com.sun.star.document.XViewDataSupplier,com.sun.star.util.XCloseable,com.sun.star.datatransfer.XTransferable,com.sun.star.document.XDocumentSubStorageSupplier,com.sun.star.document.XStorageBasedDocument,com.sun.star.script.provider.XScriptProviderSupplier,com.sun.star.ui.XUIConfigurationManagerSupplier,com.sun.star.embed.XVisualObject,com.sun.star.lang.XUnoTunnel,com.sun.star.frame.XModule,com.sun.star.frame.XTitle,com.sun.star.frame.XTitleChangeBroadcaster,com.sun.star.frame.XUntitledNumbers,com.sun.star.lang.XTypeProvider,com.sun.star.uno.XWeak,com.sun.star.util.XNumberFormatsSupplier,com.sun.star.lang.XUnoTunnel,com.sun.star.lang.XTypeProvider,com.sun.star.uno.XWeak,com.sun.star.uno.XAggregation,com.sun.star.lang.XMultiServiceFactory,com.sun.star.tiledrendering.XTiledRenderable}}
+2025-07-23 15:35:33,298 INFO pyuno object (com.sun.star.document.XDocumentProperties)0x2a079561638{implementationName=SfxDocumentMetaData, supportedServices={com.sun.star.document.DocumentProperties}, supportedInterfaces={com.sun.star.uno.XWeak,com.sun.star.lang.XComponent,com.sun.star.lang.XTypeProvider,com.sun.star.lang.XServiceInfo,com.sun.star.document.XDocumentProperties2,com.sun.star.lang.XInitialization,com.sun.star.util.XCloneable,com.sun.star.util.XModifiable,com.sun.star.xml.sax.XSAXSerializable}}
+2025-07-23 15:35:33,299 INFO Title Introduction to Programming <class 'str'>
+2025-07-23 15:35:33,306 INFO Author TechWriter <class 'str'>
+2025-07-23 15:35:33,473 INFO Subject Programming Basics <class 'str'>
+2025-07-23 15:35:34,646 INFO Keywords programming, coding, tutorials <class 'str'>
+2025-07-23 15:35:34,646 ERROR Error creating document: conversion not possible!
+2025-07-23 15:35:34,662 ERROR Traceback (most recent call last):
+  File "C:\Users\ben_t\source\repos\LibreOfficeAI\MCPServer\libre-office-mcp\libre-writer\helper.py", line 150, in create_document
+    setattr(doc_info, key, value)
+com.sun.star.script.CannotConvertException: conversion not possible!
+
+2025-07-23 15:35:34,664 INFO Response sent
+2025-07-23 15:35:34,664 INFO Waiting for connection...
+2025-07-23 15:35:34,664 INFO <socket.socket fd=496, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:35:34,698 INFO Connection from ('127.0.0.1', 64815)
+2025-07-23 15:35:34,698 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\l...
+2025-07-23 15:35:34,698 INFO handle_command called
+2025-07-23 15:35:34,698 INFO action: add_heading
+2025-07-23 15:35:34,698 INFO Response sent
+2025-07-23 15:35:34,698 INFO Waiting for connection...
+2025-07-23 15:35:34,698 INFO <socket.socket fd=496, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:35:34,736 INFO Connection from ('127.0.0.1', 64816)
+2025-07-23 15:35:34,736 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\...
+2025-07-23 15:35:34,736 INFO handle_command called
+2025-07-23 15:35:34,736 INFO action: add_paragraph
+2025-07-23 15:35:34,736 INFO Response sent
+2025-07-23 15:35:34,736 INFO Waiting for connection...
+2025-07-23 15:35:34,736 INFO <socket.socket fd=496, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:35:34,765 INFO Connection from ('127.0.0.1', 64817)
+2025-07-23 15:35:34,765 INFO Received data: {"action": "add_table", "file_path": "C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\lib...
+2025-07-23 15:35:34,765 INFO handle_command called
+2025-07-23 15:35:34,765 INFO action: add_table
+2025-07-23 15:35:34,765 INFO Response sent
+2025-07-23 15:35:34,765 INFO Waiting for connection...
+2025-07-23 15:35:34,765 INFO <socket.socket fd=496, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:35:34,795 INFO Connection from ('127.0.0.1', 64818)
+2025-07-23 15:35:34,795 INFO Received data: {"action": "insert_image", "file_path": "C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\...
+2025-07-23 15:35:34,795 INFO handle_command called
+2025-07-23 15:35:34,795 INFO action: insert_image
+2025-07-23 15:35:34,795 INFO Response sent
+2025-07-23 15:35:34,795 INFO Waiting for connection...
+2025-07-23 15:35:34,795 INFO <socket.socket fd=496, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:41:35,060 INFO Importing UNO...
+2025-07-23 15:41:35,108 INFO UNO imported successfully!
+2025-07-23 15:41:35,108 INFO LibreOffice helper listening on port 8765
+2025-07-23 15:41:35,108 INFO Socket bound to localhost:8765
+2025-07-23 15:41:35,108 INFO Testing LibreOffice connection...
+2025-07-23 15:41:35,138 INFO LibreOffice connection successful
+2025-07-23 15:41:35,138 INFO Ready to accept connections...
+2025-07-23 15:41:35,138 INFO Waiting for connection...
+2025-07-23 15:41:35,138 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:41:38,726 INFO Connection from ('127.0.0.1', 64832)
+2025-07-23 15:41:38,726 INFO Received data: {"action": "ping"}...
+2025-07-23 15:41:38,726 INFO handle_command called
+2025-07-23 15:41:38,726 INFO action: ping
+2025-07-23 15:41:38,726 INFO Response sent
+2025-07-23 15:41:38,726 INFO Waiting for connection...
+2025-07-23 15:41:38,726 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:41:52,702 INFO Connection from ('127.0.0.1', 64836)
+2025-07-23 15:41:52,702 INFO Received data: {"action": "create_document", "doc_type": "text", "file_path": "C:\\Users\\ben_t\\Documents\\success...
+2025-07-23 15:41:52,702 INFO handle_command called
+2025-07-23 15:41:52,702 INFO action: create_document
+2025-07-23 15:41:52,702 INFO Creating text document at C:\Users\ben_t\Documents\success_document.odt
+2025-07-23 15:41:52,998 INFO Doc: pyuno object (com.sun.star.lang.XComponent)0x2b6a075dda8{implementationName=SwXTextDocument, supportedServices={com.sun.star.document.OfficeDocument,com.sun.star.text.GenericTextDocument,com.sun.star.text.TextDocument}, supportedInterfaces={com.sun.star.container.XChild,com.sun.star.document.XDocumentPropertiesSupplier,com.sun.star.document.XCmisDocument,com.sun.star.rdf.XDocumentMetadataAccess,com.sun.star.document.XDocumentRecovery2,com.sun.star.document.XUndoManagerSupplier,com.sun.star.document.XShapeEventBroadcaster,com.sun.star.document.XDocumentEventBroadcaster,com.sun.star.lang.XEventListener,com.sun.star.document.XEventsSupplier,com.sun.star.document.XEmbeddedScripts,com.sun.star.document.XScriptInvocationContext,com.sun.star.frame.XModel3,com.sun.star.util.XModifiable2,com.sun.star.view.XPrintable,com.sun.star.view.XPrintJobBroadcaster,com.sun.star.frame.XStorable2,com.sun.star.frame.XLoadable,com.sun.star.script.XStarBasicAccess,com.sun.star.document.XViewDataSupplier,com.sun.star.util.XCloseable,com.sun.star.datatransfer.XTransferable,com.sun.star.document.XDocumentSubStorageSupplier,com.sun.star.document.XStorageBasedDocument,com.sun.star.script.provider.XScriptProviderSupplier,com.sun.star.ui.XUIConfigurationManagerSupplier,com.sun.star.embed.XVisualObject,com.sun.star.lang.XUnoTunnel,com.sun.star.frame.XModule,com.sun.star.frame.XTitle,com.sun.star.frame.XTitleChangeBroadcaster,com.sun.star.frame.XUntitledNumbers,com.sun.star.lang.XTypeProvider,com.sun.star.uno.XWeak,com.sun.star.text.XTextDocument,com.sun.star.text.XLineNumberingProperties,com.sun.star.text.XChapterNumberingSupplier,com.sun.star.text.XNumberingRulesSupplier,com.sun.star.text.XFootnotesSupplier,com.sun.star.text.XEndnotesSupplier,com.sun.star.text.XContentControlsSupplier,com.sun.star.util.XReplaceable,com.sun.star.text.XPagePrintable,com.sun.star.text.XReferenceMarksSupplier,com.sun.star.text.XTextTablesSupplier,com.sun.star.text.XTextFramesSupplier,com.sun.star.text.XBookmarksSupplier,com.sun.star.text.XTextSectionsSupplier,com.sun.star.text.XTextGraphicObjectsSupplier,com.sun.star.text.XTextEmbeddedObjectsSupplier,com.sun.star.text.XTextFieldsSupplier,com.sun.star.style.XStyleFamiliesSupplier,com.sun.star.style.XAutoStylesSupplier,com.sun.star.lang.XServiceInfo,com.sun.star.drawing.XDrawPageSupplier,com.sun.star.drawing.XDrawPagesSupplier,com.sun.star.text.XDocumentIndexesSupplier,com.sun.star.beans.XPropertySet,com.sun.star.beans.XPropertyState,com.sun.star.document.XLinkTargetSupplier,com.sun.star.document.XRedlinesSupplier,com.sun.star.util.XRefreshable,com.sun.star.util.XLinkUpdate,com.sun.star.view.XRenderable,com.sun.star.xforms.XFormsSupplier,com.sun.star.text.XFlatParagraphIteratorProvider,com.sun.star.document.XDocumentLanguages,com.sun.star.util.XCloneable,com.sun.star.text.XPasteBroadcaster,com.sun.star.lang.XTypeProvider,com.sun.star.container.XChild,com.sun.star.document.XDocumentPropertiesSupplier,com.sun.star.document.XCmisDocument,com.sun.star.rdf.XDocumentMetadataAccess,com.sun.star.document.XDocumentRecovery2,com.sun.star.document.XUndoManagerSupplier,com.sun.star.document.XShapeEventBroadcaster,com.sun.star.document.XDocumentEventBroadcaster,com.sun.star.lang.XEventListener,com.sun.star.document.XEventsSupplier,com.sun.star.document.XEmbeddedScripts,com.sun.star.document.XScriptInvocationContext,com.sun.star.frame.XModel3,com.sun.star.util.XModifiable2,com.sun.star.view.XPrintable,com.sun.star.view.XPrintJobBroadcaster,com.sun.star.frame.XStorable2,com.sun.star.frame.XLoadable,com.sun.star.script.XStarBasicAccess,com.sun.star.document.XViewDataSupplier,com.sun.star.util.XCloseable,com.sun.star.datatransfer.XTransferable,com.sun.star.document.XDocumentSubStorageSupplier,com.sun.star.document.XStorageBasedDocument,com.sun.star.script.provider.XScriptProviderSupplier,com.sun.star.ui.XUIConfigurationManagerSupplier,com.sun.star.embed.XVisualObject,com.sun.star.lang.XUnoTunnel,com.sun.star.frame.XModule,com.sun.star.frame.XTitle,com.sun.star.frame.XTitleChangeBroadcaster,com.sun.star.frame.XUntitledNumbers,com.sun.star.lang.XTypeProvider,com.sun.star.uno.XWeak,com.sun.star.util.XNumberFormatsSupplier,com.sun.star.lang.XUnoTunnel,com.sun.star.lang.XTypeProvider,com.sun.star.uno.XWeak,com.sun.star.uno.XAggregation,com.sun.star.lang.XMultiServiceFactory,com.sun.star.tiledrendering.XTiledRenderable}}
+2025-07-23 15:41:53,068 INFO pyuno object (com.sun.star.document.XDocumentProperties)0x2b6a0165c68{implementationName=SfxDocumentMetaData, supportedServices={com.sun.star.document.DocumentProperties}, supportedInterfaces={com.sun.star.uno.XWeak,com.sun.star.lang.XComponent,com.sun.star.lang.XTypeProvider,com.sun.star.lang.XServiceInfo,com.sun.star.document.XDocumentProperties2,com.sun.star.lang.XInitialization,com.sun.star.util.XCloneable,com.sun.star.util.XModifiable,com.sun.star.xml.sax.XSAXSerializable}}
+2025-07-23 15:41:53,068 INFO Title The Path to Success <class 'str'>
+2025-07-23 15:41:53,078 INFO Author Jane Doe <class 'str'>
+2025-07-23 15:41:53,081 INFO Subject Strategies for Achieving Success <class 'str'>
+2025-07-23 15:41:53,086 INFO Keywords success, productivity, goals, motivation <class 'str'>
+2025-07-23 15:41:53,244 INFO Saving to URL: file:///C:/Users/ben_t/Documents/success_document.odt
+2025-07-23 15:41:56,917 INFO Response sent
+2025-07-23 15:41:56,917 INFO Waiting for connection...
+2025-07-23 15:41:56,917 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:41:56,947 INFO Connection from ('127.0.0.1', 64838)
+2025-07-23 15:41:56,947 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\l...
+2025-07-23 15:41:56,947 INFO handle_command called
+2025-07-23 15:41:56,947 INFO action: add_heading
+2025-07-23 15:41:56,947 INFO Response sent
+2025-07-23 15:41:56,947 INFO Waiting for connection...
+2025-07-23 15:41:56,947 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:41:56,981 INFO Connection from ('127.0.0.1', 64839)
+2025-07-23 15:41:56,981 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\...
+2025-07-23 15:41:56,981 INFO handle_command called
+2025-07-23 15:41:56,981 INFO action: add_paragraph
+2025-07-23 15:41:56,981 INFO Response sent
+2025-07-23 15:41:56,981 INFO Waiting for connection...
+2025-07-23 15:41:56,981 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:41:57,010 INFO Connection from ('127.0.0.1', 64840)
+2025-07-23 15:41:57,010 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\...
+2025-07-23 15:41:57,010 INFO handle_command called
+2025-07-23 15:41:57,010 INFO action: add_paragraph
+2025-07-23 15:41:57,010 INFO Response sent
+2025-07-23 15:41:57,010 INFO Waiting for connection...
+2025-07-23 15:41:57,010 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 15:41:57,044 INFO Connection from ('127.0.0.1', 64841)
+2025-07-23 15:41:57,044 INFO Received data: {"action": "apply_document_style", "file_path": "C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCP...
+2025-07-23 15:41:57,044 INFO handle_command called
+2025-07-23 15:41:57,044 INFO action: apply_document_style
+2025-07-23 15:41:57,044 INFO Response sent
+2025-07-23 15:41:57,044 INFO Waiting for connection...
+2025-07-23 15:41:57,044 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:02:08,049 INFO Connection from ('127.0.0.1', 64919)
+2025-07-23 16:02:08,049 INFO Waiting for connection...
+2025-07-23 16:02:08,049 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:02:09,144 INFO Connection from ('127.0.0.1', 64920)
+2025-07-23 16:02:09,144 INFO Received data: {"action": "ping"}...
+2025-07-23 16:02:09,144 INFO handle_command called
+2025-07-23 16:02:09,144 INFO action: ping
+2025-07-23 16:02:09,144 INFO Response sent
+2025-07-23 16:02:09,144 INFO Waiting for connection...
+2025-07-23 16:02:09,144 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:02:28,569 INFO Connection from ('127.0.0.1', 64926)
+2025-07-23 16:02:28,569 INFO Received data: {"action": "create_document", "doc_type": "text", "file_path": "C:\\Users\\ben_t\\Documents\\vampire...
+2025-07-23 16:02:28,569 INFO handle_command called
+2025-07-23 16:02:28,569 INFO action: create_document
+2025-07-23 16:02:28,569 INFO Creating text document at C:\Users\ben_t\Documents\vampires_document.odt
+2025-07-23 16:02:28,929 INFO Doc: pyuno object (com.sun.star.lang.XComponent)0x2b6a0165ae8{implementationName=SwXTextDocument, supportedServices={com.sun.star.document.OfficeDocument,com.sun.star.text.GenericTextDocument,com.sun.star.text.TextDocument}, supportedInterfaces={com.sun.star.container.XChild,com.sun.star.document.XDocumentPropertiesSupplier,com.sun.star.document.XCmisDocument,com.sun.star.rdf.XDocumentMetadataAccess,com.sun.star.document.XDocumentRecovery2,com.sun.star.document.XUndoManagerSupplier,com.sun.star.document.XShapeEventBroadcaster,com.sun.star.document.XDocumentEventBroadcaster,com.sun.star.lang.XEventListener,com.sun.star.document.XEventsSupplier,com.sun.star.document.XEmbeddedScripts,com.sun.star.document.XScriptInvocationContext,com.sun.star.frame.XModel3,com.sun.star.util.XModifiable2,com.sun.star.view.XPrintable,com.sun.star.view.XPrintJobBroadcaster,com.sun.star.frame.XStorable2,com.sun.star.frame.XLoadable,com.sun.star.script.XStarBasicAccess,com.sun.star.document.XViewDataSupplier,com.sun.star.util.XCloseable,com.sun.star.datatransfer.XTransferable,com.sun.star.document.XDocumentSubStorageSupplier,com.sun.star.document.XStorageBasedDocument,com.sun.star.script.provider.XScriptProviderSupplier,com.sun.star.ui.XUIConfigurationManagerSupplier,com.sun.star.embed.XVisualObject,com.sun.star.lang.XUnoTunnel,com.sun.star.frame.XModule,com.sun.star.frame.XTitle,com.sun.star.frame.XTitleChangeBroadcaster,com.sun.star.frame.XUntitledNumbers,com.sun.star.lang.XTypeProvider,com.sun.star.uno.XWeak,com.sun.star.text.XTextDocument,com.sun.star.text.XLineNumberingProperties,com.sun.star.text.XChapterNumberingSupplier,com.sun.star.text.XNumberingRulesSupplier,com.sun.star.text.XFootnotesSupplier,com.sun.star.text.XEndnotesSupplier,com.sun.star.text.XContentControlsSupplier,com.sun.star.util.XReplaceable,com.sun.star.text.XPagePrintable,com.sun.star.text.XReferenceMarksSupplier,com.sun.star.text.XTextTablesSupplier,com.sun.star.text.XTextFramesSupplier,com.sun.star.text.XBookmarksSupplier,com.sun.star.text.XTextSectionsSupplier,com.sun.star.text.XTextGraphicObjectsSupplier,com.sun.star.text.XTextEmbeddedObjectsSupplier,com.sun.star.text.XTextFieldsSupplier,com.sun.star.style.XStyleFamiliesSupplier,com.sun.star.style.XAutoStylesSupplier,com.sun.star.lang.XServiceInfo,com.sun.star.drawing.XDrawPageSupplier,com.sun.star.drawing.XDrawPagesSupplier,com.sun.star.text.XDocumentIndexesSupplier,com.sun.star.beans.XPropertySet,com.sun.star.beans.XPropertyState,com.sun.star.document.XLinkTargetSupplier,com.sun.star.document.XRedlinesSupplier,com.sun.star.util.XRefreshable,com.sun.star.util.XLinkUpdate,com.sun.star.view.XRenderable,com.sun.star.xforms.XFormsSupplier,com.sun.star.text.XFlatParagraphIteratorProvider,com.sun.star.document.XDocumentLanguages,com.sun.star.util.XCloneable,com.sun.star.text.XPasteBroadcaster,com.sun.star.lang.XTypeProvider,com.sun.star.container.XChild,com.sun.star.document.XDocumentPropertiesSupplier,com.sun.star.document.XCmisDocument,com.sun.star.rdf.XDocumentMetadataAccess,com.sun.star.document.XDocumentRecovery2,com.sun.star.document.XUndoManagerSupplier,com.sun.star.document.XShapeEventBroadcaster,com.sun.star.document.XDocumentEventBroadcaster,com.sun.star.lang.XEventListener,com.sun.star.document.XEventsSupplier,com.sun.star.document.XEmbeddedScripts,com.sun.star.document.XScriptInvocationContext,com.sun.star.frame.XModel3,com.sun.star.util.XModifiable2,com.sun.star.view.XPrintable,com.sun.star.view.XPrintJobBroadcaster,com.sun.star.frame.XStorable2,com.sun.star.frame.XLoadable,com.sun.star.script.XStarBasicAccess,com.sun.star.document.XViewDataSupplier,com.sun.star.util.XCloseable,com.sun.star.datatransfer.XTransferable,com.sun.star.document.XDocumentSubStorageSupplier,com.sun.star.document.XStorageBasedDocument,com.sun.star.script.provider.XScriptProviderSupplier,com.sun.star.ui.XUIConfigurationManagerSupplier,com.sun.star.embed.XVisualObject,com.sun.star.lang.XUnoTunnel,com.sun.star.frame.XModule,com.sun.star.frame.XTitle,com.sun.star.frame.XTitleChangeBroadcaster,com.sun.star.frame.XUntitledNumbers,com.sun.star.lang.XTypeProvider,com.sun.star.uno.XWeak,com.sun.star.util.XNumberFormatsSupplier,com.sun.star.lang.XUnoTunnel,com.sun.star.lang.XTypeProvider,com.sun.star.uno.XWeak,com.sun.star.uno.XAggregation,com.sun.star.lang.XMultiServiceFactory,com.sun.star.tiledrendering.XTiledRenderable}}
+2025-07-23 16:02:28,993 INFO pyuno object (com.sun.star.document.XDocumentProperties)0x2b6a01663a8{implementationName=SfxDocumentMetaData, supportedServices={com.sun.star.document.DocumentProperties}, supportedInterfaces={com.sun.star.uno.XWeak,com.sun.star.lang.XComponent,com.sun.star.lang.XTypeProvider,com.sun.star.lang.XServiceInfo,com.sun.star.document.XDocumentProperties2,com.sun.star.lang.XInitialization,com.sun.star.util.XCloneable,com.sun.star.util.XModifiable,com.sun.star.xml.sax.XSAXSerializable}}
+2025-07-23 16:02:28,993 INFO Title The Lore and Legend of Vampires <class 'str'>
+2025-07-23 16:02:28,993 INFO Author Mystery Author <class 'str'>
+2025-07-23 16:02:28,993 INFO Subject Mythology and Folklore <class 'str'>
+2025-07-23 16:02:29,007 INFO Keywords vampires, folklore, mythology, supernatural <class 'str'>
+2025-07-23 16:02:29,007 INFO Saving to URL: file:///C:/Users/ben_t/Documents/vampires_document.odt
+2025-07-23 16:02:30,277 INFO Response sent
+2025-07-23 16:02:30,277 INFO Waiting for connection...
+2025-07-23 16:02:30,277 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:04:26,674 INFO Connection from ('127.0.0.1', 64935)
+2025-07-23 16:04:26,689 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\Documents\\vampires_document.odt", "text":...
+2025-07-23 16:04:26,689 INFO handle_command called
+2025-07-23 16:04:26,689 INFO action: add_heading
+2025-07-23 16:04:27,615 INFO Response sent
+2025-07-23 16:04:27,616 INFO Waiting for connection...
+2025-07-23 16:04:27,616 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:04:27,649 INFO Connection from ('127.0.0.1', 64937)
+2025-07-23 16:04:27,675 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\Documents\\vampires_document.odt", "text...
+2025-07-23 16:04:27,675 INFO handle_command called
+2025-07-23 16:04:27,675 INFO action: add_paragraph
+2025-07-23 16:04:28,172 INFO Response sent
+2025-07-23 16:04:28,172 INFO Waiting for connection...
+2025-07-23 16:04:28,172 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:04:28,216 INFO Connection from ('127.0.0.1', 64939)
+2025-07-23 16:04:28,216 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\Documents\\vampires_document.odt", "text":...
+2025-07-23 16:04:28,216 INFO handle_command called
+2025-07-23 16:04:28,216 INFO action: add_heading
+2025-07-23 16:04:28,690 INFO Response sent
+2025-07-23 16:04:28,690 INFO Waiting for connection...
+2025-07-23 16:04:28,690 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:04:28,737 INFO Connection from ('127.0.0.1', 64941)
+2025-07-23 16:04:28,753 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\Documents\\vampires_document.odt", "text...
+2025-07-23 16:04:28,753 INFO handle_command called
+2025-07-23 16:04:28,753 INFO action: add_paragraph
+2025-07-23 16:04:29,268 INFO Response sent
+2025-07-23 16:04:29,268 INFO Waiting for connection...
+2025-07-23 16:04:29,268 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:04:29,316 INFO Connection from ('127.0.0.1', 64943)
+2025-07-23 16:04:29,318 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\Documents\\vampires_document.odt", "text":...
+2025-07-23 16:04:29,318 INFO handle_command called
+2025-07-23 16:04:29,318 INFO action: add_heading
+2025-07-23 16:04:30,206 INFO Response sent
+2025-07-23 16:04:30,206 INFO Waiting for connection...
+2025-07-23 16:04:30,206 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:04:30,239 INFO Connection from ('127.0.0.1', 64945)
+2025-07-23 16:04:30,254 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\Documents\\vampires_document.odt", "text...
+2025-07-23 16:04:30,255 INFO handle_command called
+2025-07-23 16:04:30,255 INFO action: add_paragraph
+2025-07-23 16:04:30,902 INFO Response sent
+2025-07-23 16:04:30,902 INFO Waiting for connection...
+2025-07-23 16:04:30,902 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:04:30,929 INFO Connection from ('127.0.0.1', 64947)
+2025-07-23 16:04:30,945 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\Documents\\vampires_document.odt", "text":...
+2025-07-23 16:04:30,945 INFO handle_command called
+2025-07-23 16:04:30,945 INFO action: add_heading
+2025-07-23 16:04:31,557 INFO Response sent
+2025-07-23 16:04:31,557 INFO Waiting for connection...
+2025-07-23 16:04:31,559 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:04:31,596 INFO Connection from ('127.0.0.1', 64949)
+2025-07-23 16:04:31,596 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\Documents\\vampires_document.odt", "text...
+2025-07-23 16:04:31,596 INFO handle_command called
+2025-07-23 16:04:31,596 INFO action: add_paragraph
+2025-07-23 16:04:32,320 INFO Response sent
+2025-07-23 16:04:32,320 INFO Waiting for connection...
+2025-07-23 16:04:32,320 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:04:32,357 INFO Connection from ('127.0.0.1', 64951)
+2025-07-23 16:04:32,357 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\Documents\\vamp3\\vampires_document.odt", ...
+2025-07-23 16:04:32,357 INFO handle_command called
+2025-07-23 16:04:32,357 INFO action: add_heading
+2025-07-23 16:04:32,357 INFO Response sent
+2025-07-23 16:04:32,357 INFO Waiting for connection...
+2025-07-23 16:04:32,357 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:04:32,400 INFO Connection from ('127.0.0.1', 64952)
+2025-07-23 16:04:32,416 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\Documents\\vampires_document.odt", "text...
+2025-07-23 16:04:32,416 INFO handle_command called
+2025-07-23 16:04:32,416 INFO action: add_paragraph
+2025-07-23 16:04:33,005 INFO Response sent
+2025-07-23 16:04:33,005 INFO Waiting for connection...
+2025-07-23 16:04:33,005 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:06:10,291 INFO Connection from ('127.0.0.1', 64963)
+2025-07-23 16:06:10,291 INFO Waiting for connection...
+2025-07-23 16:06:10,292 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:06:11,330 INFO Connection from ('127.0.0.1', 64964)
+2025-07-23 16:06:11,330 INFO Received data: {"action": "ping"}...
+2025-07-23 16:06:11,330 INFO handle_command called
+2025-07-23 16:06:11,330 INFO action: ping
+2025-07-23 16:06:11,330 INFO Response sent
+2025-07-23 16:06:11,330 INFO Waiting for connection...
+2025-07-23 16:06:11,330 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:06:29,334 INFO Connection from ('127.0.0.1', 64968)
+2025-07-23 16:06:29,354 INFO Received data: {"action": "create_document", "doc_type": "text", "file_path": "C:\\Users\\ben_t\\Documents\\ghosts_...
+2025-07-23 16:06:29,354 INFO handle_command called
+2025-07-23 16:06:29,354 INFO action: create_document
+2025-07-23 16:06:29,354 INFO Creating text document at C:\Users\ben_t\Documents\ghosts_document.odt
+2025-07-23 16:06:29,678 INFO Doc: pyuno object (com.sun.star.lang.XComponent)0x2b6a0453e38{implementationName=SwXTextDocument, supportedServices={com.sun.star.document.OfficeDocument,com.sun.star.text.GenericTextDocument,com.sun.star.text.TextDocument}, supportedInterfaces={com.sun.star.container.XChild,com.sun.star.document.XDocumentPropertiesSupplier,com.sun.star.document.XCmisDocument,com.sun.star.rdf.XDocumentMetadataAccess,com.sun.star.document.XDocumentRecovery2,com.sun.star.document.XUndoManagerSupplier,com.sun.star.document.XShapeEventBroadcaster,com.sun.star.document.XDocumentEventBroadcaster,com.sun.star.lang.XEventListener,com.sun.star.document.XEventsSupplier,com.sun.star.document.XEmbeddedScripts,com.sun.star.document.XScriptInvocationContext,com.sun.star.frame.XModel3,com.sun.star.util.XModifiable2,com.sun.star.view.XPrintable,com.sun.star.view.XPrintJobBroadcaster,com.sun.star.frame.XStorable2,com.sun.star.frame.XLoadable,com.sun.star.script.XStarBasicAccess,com.sun.star.document.XViewDataSupplier,com.sun.star.util.XCloseable,com.sun.star.datatransfer.XTransferable,com.sun.star.document.XDocumentSubStorageSupplier,com.sun.star.document.XStorageBasedDocument,com.sun.star.script.provider.XScriptProviderSupplier,com.sun.star.ui.XUIConfigurationManagerSupplier,com.sun.star.embed.XVisualObject,com.sun.star.lang.XUnoTunnel,com.sun.star.frame.XModule,com.sun.star.frame.XTitle,com.sun.star.frame.XTitleChangeBroadcaster,com.sun.star.frame.XUntitledNumbers,com.sun.star.lang.XTypeProvider,com.sun.star.uno.XWeak,com.sun.star.text.XTextDocument,com.sun.star.text.XLineNumberingProperties,com.sun.star.text.XChapterNumberingSupplier,com.sun.star.text.XNumberingRulesSupplier,com.sun.star.text.XFootnotesSupplier,com.sun.star.text.XEndnotesSupplier,com.sun.star.text.XContentControlsSupplier,com.sun.star.util.XReplaceable,com.sun.star.text.XPagePrintable,com.sun.star.text.XReferenceMarksSupplier,com.sun.star.text.XTextTablesSupplier,com.sun.star.text.XTextFramesSupplier,com.sun.star.text.XBookmarksSupplier,com.sun.star.text.XTextSectionsSupplier,com.sun.star.text.XTextGraphicObjectsSupplier,com.sun.star.text.XTextEmbeddedObjectsSupplier,com.sun.star.text.XTextFieldsSupplier,com.sun.star.style.XStyleFamiliesSupplier,com.sun.star.style.XAutoStylesSupplier,com.sun.star.lang.XServiceInfo,com.sun.star.drawing.XDrawPageSupplier,com.sun.star.drawing.XDrawPagesSupplier,com.sun.star.text.XDocumentIndexesSupplier,com.sun.star.beans.XPropertySet,com.sun.star.beans.XPropertyState,com.sun.star.document.XLinkTargetSupplier,com.sun.star.document.XRedlinesSupplier,com.sun.star.util.XRefreshable,com.sun.star.util.XLinkUpdate,com.sun.star.view.XRenderable,com.sun.star.xforms.XFormsSupplier,com.sun.star.text.XFlatParagraphIteratorProvider,com.sun.star.document.XDocumentLanguages,com.sun.star.util.XCloneable,com.sun.star.text.XPasteBroadcaster,com.sun.star.lang.XTypeProvider,com.sun.star.container.XChild,com.sun.star.document.XDocumentPropertiesSupplier,com.sun.star.document.XCmisDocument,com.sun.star.rdf.XDocumentMetadataAccess,com.sun.star.document.XDocumentRecovery2,com.sun.star.document.XUndoManagerSupplier,com.sun.star.document.XShapeEventBroadcaster,com.sun.star.document.XDocumentEventBroadcaster,com.sun.star.lang.XEventListener,com.sun.star.document.XEventsSupplier,com.sun.star.document.XEmbeddedScripts,com.sun.star.document.XScriptInvocationContext,com.sun.star.frame.XModel3,com.sun.star.util.XModifiable2,com.sun.star.view.XPrintable,com.sun.star.view.XPrintJobBroadcaster,com.sun.star.frame.XStorable2,com.sun.star.frame.XLoadable,com.sun.star.script.XStarBasicAccess,com.sun.star.document.XViewDataSupplier,com.sun.star.util.XCloseable,com.sun.star.datatransfer.XTransferable,com.sun.star.document.XDocumentSubStorageSupplier,com.sun.star.document.XStorageBasedDocument,com.sun.star.script.provider.XScriptProviderSupplier,com.sun.star.ui.XUIConfigurationManagerSupplier,com.sun.star.embed.XVisualObject,com.sun.star.lang.XUnoTunnel,com.sun.star.frame.XModule,com.sun.star.frame.XTitle,com.sun.star.frame.XTitleChangeBroadcaster,com.sun.star.frame.XUntitledNumbers,com.sun.star.lang.XTypeProvider,com.sun.star.uno.XWeak,com.sun.star.util.XNumberFormatsSupplier,com.sun.star.lang.XUnoTunnel,com.sun.star.lang.XTypeProvider,com.sun.star.uno.XWeak,com.sun.star.uno.XAggregation,com.sun.star.lang.XMultiServiceFactory,com.sun.star.tiledrendering.XTiledRenderable}}
+2025-07-23 16:06:29,680 INFO pyuno object (com.sun.star.document.XDocumentProperties)0x2b6a0454738{implementationName=SfxDocumentMetaData, supportedServices={com.sun.star.document.DocumentProperties}, supportedInterfaces={com.sun.star.uno.XWeak,com.sun.star.lang.XComponent,com.sun.star.lang.XTypeProvider,com.sun.star.lang.XServiceInfo,com.sun.star.document.XDocumentProperties2,com.sun.star.lang.XInitialization,com.sun.star.util.XCloneable,com.sun.star.util.XModifiable,com.sun.star.xml.sax.XSAXSerializable}}
+2025-07-23 16:06:29,680 INFO Title The Mystery of Ghosts <class 'str'>
+2025-07-23 16:06:29,773 INFO Author Ben T <class 'str'>
+2025-07-23 16:06:29,808 INFO Subject Paranormal Phenomena <class 'str'>
+2025-07-23 16:06:29,817 INFO Keywords ghosts, paranormal, spirits <class 'str'>
+2025-07-23 16:06:29,820 INFO Saving to URL: file:///C:/Users/ben_t/Documents/ghosts_document.odt
+2025-07-23 16:06:31,133 INFO Response sent
+2025-07-23 16:06:31,133 INFO Waiting for connection...
+2025-07-23 16:06:31,133 INFO <socket.socket fd=816, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:11:29,404 INFO Importing UNO...
+2025-07-23 16:11:29,520 INFO UNO imported successfully!
+2025-07-23 16:11:29,523 INFO LibreOffice helper listening on port 8765
+2025-07-23 16:11:29,523 INFO Socket bound to localhost:8765
+2025-07-23 16:11:29,523 INFO Testing LibreOffice connection...
+2025-07-23 16:11:29,561 INFO LibreOffice connection successful
+2025-07-23 16:11:29,561 INFO Ready to accept connections...
+2025-07-23 16:11:29,561 INFO Waiting for connection...
+2025-07-23 16:11:29,561 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:11:33,048 INFO Connection from ('127.0.0.1', 64975)
+2025-07-23 16:11:33,048 INFO Received data: {"action": "ping"}...
+2025-07-23 16:11:33,048 INFO handle_command called
+2025-07-23 16:11:33,048 INFO action: ping
+2025-07-23 16:11:33,048 INFO Response sent
+2025-07-23 16:11:33,048 INFO Waiting for connection...
+2025-07-23 16:11:33,053 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:11:58,797 INFO Connection from ('127.0.0.1', 64979)
+2025-07-23 16:11:58,797 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\Documents\\dogs_document.odt", "text": "Do...
+2025-07-23 16:11:58,797 INFO handle_command called
+2025-07-23 16:11:58,797 INFO action: add_heading
+2025-07-23 16:11:58,797 INFO Response sent
+2025-07-23 16:11:58,797 INFO Waiting for connection...
+2025-07-23 16:11:58,797 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:11:58,844 INFO Connection from ('127.0.0.1', 64980)
+2025-07-23 16:11:58,844 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\Documents\\dogs_document.odt", "text": "...
+2025-07-23 16:11:58,844 INFO handle_command called
+2025-07-23 16:11:58,844 INFO action: add_paragraph
+2025-07-23 16:11:58,844 INFO Response sent
+2025-07-23 16:11:58,845 INFO Waiting for connection...
+2025-07-23 16:11:58,845 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:11:58,868 INFO Connection from ('127.0.0.1', 64981)
+2025-07-23 16:11:58,868 INFO Received data: {"action": "insert_image", "file_path": "C:\\Users\\ben_t\\Documents\\dogs_document.odt", "image_pat...
+2025-07-23 16:11:58,868 INFO handle_command called
+2025-07-23 16:11:58,868 INFO action: insert_image
+2025-07-23 16:11:58,868 INFO Response sent
+2025-07-23 16:11:58,872 INFO Waiting for connection...
+2025-07-23 16:11:58,872 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:13:03,230 INFO Connection from ('127.0.0.1', 64989)
+2025-07-23 16:13:03,230 INFO Waiting for connection...
+2025-07-23 16:13:03,230 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:13:04,209 INFO Connection from ('127.0.0.1', 64990)
+2025-07-23 16:13:04,209 INFO Received data: {"action": "ping"}...
+2025-07-23 16:13:04,209 INFO handle_command called
+2025-07-23 16:13:04,209 INFO action: ping
+2025-07-23 16:13:04,209 INFO Response sent
+2025-07-23 16:13:04,209 INFO Waiting for connection...
+2025-07-23 16:13:04,209 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:13:24,455 INFO Connection from ('127.0.0.1', 64996)
+2025-07-23 16:13:24,475 INFO Received data: {"action": "create_document", "doc_type": "text", "file_path": "C:\\Users\\ben_t\\Documents\\dogs_do...
+2025-07-23 16:13:24,475 INFO handle_command called
+2025-07-23 16:13:24,475 INFO action: create_document
+2025-07-23 16:13:24,475 INFO Creating text document at C:\Users\ben_t\Documents\dogs_document.odt
+2025-07-23 16:13:24,936 INFO pyuno object (com.sun.star.document.XDocumentProperties)0x1b73d1b7a18{implementationName=SfxDocumentMetaData, supportedServices={com.sun.star.document.DocumentProperties}, supportedInterfaces={com.sun.star.uno.XWeak,com.sun.star.lang.XComponent,com.sun.star.lang.XTypeProvider,com.sun.star.lang.XServiceInfo,com.sun.star.document.XDocumentProperties2,com.sun.star.lang.XInitialization,com.sun.star.util.XCloneable,com.sun.star.util.XModifiable,com.sun.star.xml.sax.XSAXSerializable}}
+2025-07-23 16:13:24,954 INFO Title The Wonderful World of Dogs <class 'str'>
+2025-07-23 16:13:24,964 INFO Author Ben T <class 'str'>
+2025-07-23 16:13:24,969 INFO Subject Dogs <class 'str'>
+2025-07-23 16:13:24,969 INFO Keywords ['dogs', 'pets', 'animals'] <class 'list'>
+2025-07-23 16:13:24,969 INFO Saving to URL: file:///C:/Users/ben_t/Documents/dogs_document.odt
+2025-07-23 16:13:26,263 INFO Response sent
+2025-07-23 16:13:26,263 INFO Waiting for connection...
+2025-07-23 16:13:26,263 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:13:26,294 INFO Connection from ('127.0.0.1', 64998)
+2025-07-23 16:13:26,310 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\Documents\\dogs_document.odt", "text": "Th...
+2025-07-23 16:13:26,310 INFO handle_command called
+2025-07-23 16:13:26,310 INFO action: add_heading
+2025-07-23 16:13:26,811 INFO Response sent
+2025-07-23 16:13:26,814 INFO Waiting for connection...
+2025-07-23 16:13:26,814 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:13:26,843 INFO Connection from ('127.0.0.1', 65000)
+2025-07-23 16:13:26,859 INFO Received data: {"action": "create_custom_style", "file_path": "C:\\Users\\ben_t\\Documents\\dogs_document.odt", "st...
+2025-07-23 16:13:26,859 INFO handle_command called
+2025-07-23 16:13:26,859 INFO action: create_custom_style
+2025-07-23 16:13:27,376 INFO Response sent
+2025-07-23 16:13:27,376 INFO Waiting for connection...
+2025-07-23 16:13:27,376 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:13:27,404 INFO Connection from ('127.0.0.1', 65002)
+2025-07-23 16:13:27,404 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\Documents\\dogs_document.odt", "text": "...
+2025-07-23 16:13:27,404 INFO handle_command called
+2025-07-23 16:13:27,404 INFO action: add_paragraph
+2025-07-23 16:13:28,032 INFO Response sent
+2025-07-23 16:13:28,032 INFO Waiting for connection...
+2025-07-23 16:13:28,032 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:13:28,080 INFO Connection from ('127.0.0.1', 65004)
+2025-07-23 16:13:28,096 INFO Received data: {"action": "add_table", "file_path": "C:\\Users\\ben_t\\Documents\\dogs_document.odt", "rows": 5, "c...
+2025-07-23 16:13:28,096 INFO handle_command called
+2025-07-23 16:13:28,096 INFO action: add_table
+2025-07-23 16:13:29,247 INFO Response sent
+2025-07-23 16:13:29,251 INFO Waiting for connection...
+2025-07-23 16:13:29,251 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:13:29,280 INFO Connection from ('127.0.0.1', 65006)
+2025-07-23 16:13:29,294 INFO Received data: {"action": "insert_image", "file_path": "C:\\Users\\ben_t\\Documents\\dogs_document.odt", "image_pat...
+2025-07-23 16:13:29,294 INFO handle_command called
+2025-07-23 16:13:29,294 INFO action: insert_image
+2025-07-23 16:13:29,462 INFO Response sent
+2025-07-23 16:13:29,462 INFO Waiting for connection...
+2025-07-23 16:13:29,462 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:15:35,781 INFO Connection from ('127.0.0.1', 65020)
+2025-07-23 16:15:35,781 INFO Waiting for connection...
+2025-07-23 16:15:35,781 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:15:36,795 INFO Connection from ('127.0.0.1', 65021)
+2025-07-23 16:15:36,795 INFO Received data: {"action": "ping"}...
+2025-07-23 16:15:36,795 INFO handle_command called
+2025-07-23 16:15:36,795 INFO action: ping
+2025-07-23 16:15:36,795 INFO Response sent
+2025-07-23 16:15:36,795 INFO Waiting for connection...
+2025-07-23 16:15:36,795 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:17:08,107 INFO Connection from ('127.0.0.1', 65026)
+2025-07-23 16:17:08,107 INFO Received data: {"action": "create_document", "doc_type": "text", "file_path": "C:\\Users\\ben_t\\Documents\\A_to_Z_...
+2025-07-23 16:17:08,107 INFO handle_command called
+2025-07-23 16:17:08,107 INFO action: create_document
+2025-07-23 16:17:08,107 INFO Creating text document at C:\Users\ben_t\Documents\A_to_Z_of_Colours.odt
+2025-07-23 16:17:08,519 INFO pyuno object (com.sun.star.document.XDocumentProperties)0x1b73ccb66a8{implementationName=SfxDocumentMetaData, supportedServices={com.sun.star.document.DocumentProperties}, supportedInterfaces={com.sun.star.uno.XWeak,com.sun.star.lang.XComponent,com.sun.star.lang.XTypeProvider,com.sun.star.lang.XServiceInfo,com.sun.star.document.XDocumentProperties2,com.sun.star.lang.XInitialization,com.sun.star.util.XCloneable,com.sun.star.util.XModifiable,com.sun.star.xml.sax.XSAXSerializable}}
+2025-07-23 16:17:08,519 INFO Title A to Z of Colours <class 'str'>
+2025-07-23 16:17:08,535 INFO Author Ben Thompson <class 'str'>
+2025-07-23 16:17:08,551 INFO Subject Color Guide <class 'str'>
+2025-07-23 16:17:08,567 INFO Saving to URL: file:///C:/Users/ben_t/Documents/A_to_Z_of_Colours.odt
+2025-07-23 16:17:09,856 INFO Response sent
+2025-07-23 16:17:09,856 INFO Waiting for connection...
+2025-07-23 16:17:09,856 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:18:19,402 INFO Connection from ('127.0.0.1', 65039)
+2025-07-23 16:18:19,418 INFO Received data: {"action": "add_text", "file_path": "C:\\Users\\ben_t\\Documents\\A_to_Z_of_Colours.odt", "text": "A...
+2025-07-23 16:18:19,418 INFO handle_command called
+2025-07-23 16:18:19,418 INFO action: add_text
+2025-07-23 16:18:19,865 INFO Response sent
+2025-07-23 16:18:19,865 INFO Waiting for connection...
+2025-07-23 16:18:19,865 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:18:19,898 INFO Connection from ('127.0.0.1', 65041)
+2025-07-23 16:18:19,910 INFO Received data: {"action": "add_text", "file_path": "C:\\Users\\ben_t\\Documents\\A_to_Z_of_Colours.odt", "text": "B...
+2025-07-23 16:18:19,910 INFO handle_command called
+2025-07-23 16:18:19,910 INFO action: add_text
+2025-07-23 16:18:20,339 INFO Response sent
+2025-07-23 16:18:20,339 INFO Waiting for connection...
+2025-07-23 16:18:20,339 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:18:20,370 INFO Connection from ('127.0.0.1', 65043)
+2025-07-23 16:18:20,370 INFO Received data: {"action": "add_text", "file_path": "C:\\Users\\ben_t\\Documents\\A_to_Z_of_Colours.odt", "text": "C...
+2025-07-23 16:18:20,372 INFO handle_command called
+2025-07-23 16:18:20,372 INFO action: add_text
+2025-07-23 16:18:20,856 INFO Response sent
+2025-07-23 16:18:20,856 INFO Waiting for connection...
+2025-07-23 16:18:20,856 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:18:20,881 INFO Connection from ('127.0.0.1', 65045)
+2025-07-23 16:18:20,902 INFO Received data: {"action": "add_text", "file_path": "C:\\Users\\ben_t\\Documents\\A_to_Z_of_Colours.odt", "text": "D...
+2025-07-23 16:18:20,902 INFO handle_command called
+2025-07-23 16:18:20,902 INFO action: add_text
+2025-07-23 16:18:21,359 INFO Response sent
+2025-07-23 16:18:21,359 INFO Waiting for connection...
+2025-07-23 16:18:21,359 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:19:40,836 INFO Connection from ('127.0.0.1', 65056)
+2025-07-23 16:19:40,852 INFO Received data: {"action": "add_text", "file_path": "C:\\Users\\ben_t\\Documents\\A_to_Z_of_Colours.odt", "text": "E...
+2025-07-23 16:19:40,852 INFO handle_command called
+2025-07-23 16:19:40,852 INFO action: add_text
+2025-07-23 16:19:40,918 INFO Response sent
+2025-07-23 16:19:40,918 INFO Waiting for connection...
+2025-07-23 16:19:40,918 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:20:53,762 INFO Connection from ('127.0.0.1', 65070)
+2025-07-23 16:20:53,763 INFO Received data: {"action": "create_document", "doc_type": "text", "file_path": "C:\\Users\\ben_t\\Documents\\A_to_Z_...
+2025-07-23 16:20:53,764 INFO handle_command called
+2025-07-23 16:20:53,764 INFO action: create_document
+2025-07-23 16:20:53,764 INFO Creating text document at C:\Users\ben_t\Documents\A_to_Z_of_Colours.odt
+2025-07-23 16:20:54,174 INFO pyuno object (com.sun.star.document.XDocumentProperties)0x1b73ccb68e8{implementationName=SfxDocumentMetaData, supportedServices={com.sun.star.document.DocumentProperties}, supportedInterfaces={com.sun.star.uno.XWeak,com.sun.star.lang.XComponent,com.sun.star.lang.XTypeProvider,com.sun.star.lang.XServiceInfo,com.sun.star.document.XDocumentProperties2,com.sun.star.lang.XInitialization,com.sun.star.util.XCloneable,com.sun.star.util.XModifiable,com.sun.star.xml.sax.XSAXSerializable}}
+2025-07-23 16:20:54,188 INFO Title A to Z of Colours <class 'str'>
+2025-07-23 16:20:54,190 INFO Author Ben Thompson <class 'str'>
+2025-07-23 16:20:54,208 INFO Subject Color Guide <class 'str'>
+2025-07-23 16:20:54,212 INFO Saving to URL: file:///C:/Users/ben_t/Documents/A_to_Z_of_Colours.odt
+2025-07-23 16:20:55,457 INFO Response sent
+2025-07-23 16:20:55,460 INFO Waiting for connection...
+2025-07-23 16:20:55,460 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:23:37,081 INFO Connection from ('127.0.0.1', 65086)
+2025-07-23 16:23:37,081 INFO Waiting for connection...
+2025-07-23 16:23:37,081 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:23:38,080 INFO Connection from ('127.0.0.1', 65087)
+2025-07-23 16:23:38,080 INFO Received data: {"action": "ping"}...
+2025-07-23 16:23:38,080 INFO handle_command called
+2025-07-23 16:23:38,080 INFO action: ping
+2025-07-23 16:23:38,080 INFO Response sent
+2025-07-23 16:23:38,080 INFO Waiting for connection...
+2025-07-23 16:23:38,080 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:24:12,513 INFO Connection from ('127.0.0.1', 65091)
+2025-07-23 16:24:12,525 INFO Received data: {"action": "create_document", "doc_type": "text", "file_path": "C:\\Users\\ben_t\\Documents\\cows_do...
+2025-07-23 16:24:12,525 INFO handle_command called
+2025-07-23 16:24:12,525 INFO action: create_document
+2025-07-23 16:24:12,525 INFO Creating text document at C:\Users\ben_t\Documents\cows_document.odt
+2025-07-23 16:24:12,964 INFO pyuno object (com.sun.star.document.XDocumentProperties)0x1b73ccb68e8{implementationName=SfxDocumentMetaData, supportedServices={com.sun.star.document.DocumentProperties}, supportedInterfaces={com.sun.star.uno.XWeak,com.sun.star.lang.XComponent,com.sun.star.lang.XTypeProvider,com.sun.star.lang.XServiceInfo,com.sun.star.document.XDocumentProperties2,com.sun.star.lang.XInitialization,com.sun.star.util.XCloneable,com.sun.star.util.XModifiable,com.sun.star.xml.sax.XSAXSerializable}}
+2025-07-23 16:24:12,969 INFO Title Cows: The Gentle Giants of the Farm <class 'str'>
+2025-07-23 16:24:12,973 INFO Author Ben T <class 'str'>
+2025-07-23 16:24:12,973 INFO Subject Farm Animals <class 'str'>
+2025-07-23 16:24:12,973 INFO Keywords ['cows', 'farm animals', 'agriculture'] <class 'list'>
+2025-07-23 16:24:12,981 INFO Saving to URL: file:///C:/Users/ben_t/Documents/cows_document.odt
+2025-07-23 16:24:14,254 INFO Response sent
+2025-07-23 16:24:14,254 INFO Waiting for connection...
+2025-07-23 16:24:14,254 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:24:14,301 INFO Connection from ('127.0.0.1', 65093)
+2025-07-23 16:24:14,316 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\Documents\\cows_document.odt", "text": "In...
+2025-07-23 16:24:14,316 INFO handle_command called
+2025-07-23 16:24:14,316 INFO action: add_heading
+2025-07-23 16:24:14,814 INFO Response sent
+2025-07-23 16:24:14,815 INFO Waiting for connection...
+2025-07-23 16:24:14,815 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:24:14,854 INFO Connection from ('127.0.0.1', 65095)
+2025-07-23 16:24:14,872 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\Documents\\cows_document.odt", "text": "...
+2025-07-23 16:24:14,872 INFO handle_command called
+2025-07-23 16:24:14,872 INFO action: add_paragraph
+2025-07-23 16:24:15,383 INFO Response sent
+2025-07-23 16:24:15,383 INFO Waiting for connection...
+2025-07-23 16:24:15,383 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:24:15,405 INFO Connection from ('127.0.0.1', 65097)
+2025-07-23 16:24:15,405 INFO Received data: {"action": "add_table", "file_path": "C:\\Users\\ben_t\\Documents\\cows_document.odt", "rows": 3, "c...
+2025-07-23 16:24:15,405 INFO handle_command called
+2025-07-23 16:24:15,405 INFO action: add_table
+2025-07-23 16:24:16,011 INFO Response sent
+2025-07-23 16:24:16,011 INFO Waiting for connection...
+2025-07-23 16:24:16,011 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:24:16,105 INFO Connection from ('127.0.0.1', 65099)
+2025-07-23 16:24:16,105 INFO Received data: {"action": "apply_document_style", "file_path": "C:\\Users\\ben_t\\Documents\\cows_document.odt", "d...
+2025-07-23 16:24:16,105 INFO handle_command called
+2025-07-23 16:24:16,105 INFO action: apply_document_style
+2025-07-23 16:24:16,307 INFO Response sent
+2025-07-23 16:24:16,307 INFO Waiting for connection...
+2025-07-23 16:24:16,307 INFO <socket.socket fd=456, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:38:13,060 INFO Importing UNO...
+2025-07-23 16:38:13,142 INFO UNO imported successfully!
+2025-07-23 16:38:13,142 INFO LibreOffice helper listening on port 8765
+2025-07-23 16:38:13,142 INFO Socket bound to localhost:8765
+2025-07-23 16:38:13,142 INFO Testing LibreOffice connection...
+2025-07-23 16:38:13,179 INFO LibreOffice connection successful
+2025-07-23 16:38:13,179 INFO Ready to accept connections...
+2025-07-23 16:38:13,179 INFO Waiting for connection...
+2025-07-23 16:38:13,179 INFO <socket.socket fd=420, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:38:16,727 INFO Connection from ('127.0.0.1', 65130)
+2025-07-23 16:38:16,727 INFO Received data: {"action": "ping"}...
+2025-07-23 16:38:16,727 INFO handle_command called
+2025-07-23 16:38:16,727 INFO action: ping
+2025-07-23 16:38:16,727 INFO Response sent
+2025-07-23 16:38:16,727 INFO Waiting for connection...
+2025-07-23 16:38:16,727 INFO <socket.socket fd=420, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:38:52,685 INFO Connection from ('127.0.0.1', 65134)
+2025-07-23 16:38:52,702 INFO Received data: {"action": "list_documents", "directory": "C:\\Users\\ben_t\\Documents"}...
+2025-07-23 16:38:52,702 INFO handle_command called
+2025-07-23 16:38:52,702 INFO action: list_documents
+2025-07-23 16:38:52,718 INFO Response sent
+2025-07-23 16:38:52,718 INFO Waiting for connection...
+2025-07-23 16:38:52,718 INFO <socket.socket fd=420, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:40:48,850 INFO Connection from ('127.0.0.1', 65145)
+2025-07-23 16:40:48,850 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\Documents\\cows_document.odt", "text": "Co...
+2025-07-23 16:40:48,850 INFO handle_command called
+2025-07-23 16:40:48,850 INFO action: add_heading
+2025-07-23 16:40:49,449 INFO Response sent
+2025-07-23 16:40:49,449 INFO Waiting for connection...
+2025-07-23 16:40:49,449 INFO <socket.socket fd=420, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:40:49,479 INFO Connection from ('127.0.0.1', 65147)
+2025-07-23 16:40:49,479 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\Documents\\cows_document.odt", "text": "Bi...
+2025-07-23 16:40:49,479 INFO handle_command called
+2025-07-23 16:40:49,479 INFO action: add_heading
+2025-07-23 16:40:49,956 INFO Response sent
+2025-07-23 16:40:49,956 INFO Waiting for connection...
+2025-07-23 16:40:49,956 INFO <socket.socket fd=420, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:40:50,015 INFO Connection from ('127.0.0.1', 65149)
+2025-07-23 16:40:50,015 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\Documents\\cows_document.odt", "text": "Be...
+2025-07-23 16:40:50,016 INFO handle_command called
+2025-07-23 16:40:50,016 INFO action: add_heading
+2025-07-23 16:40:50,537 INFO Response sent
+2025-07-23 16:40:50,537 INFO Waiting for connection...
+2025-07-23 16:40:50,537 INFO <socket.socket fd=420, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:40:50,559 INFO Connection from ('127.0.0.1', 65151)
+2025-07-23 16:40:50,561 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\Documents\\cows_document.odt", "text": "Cu...
+2025-07-23 16:40:50,561 INFO handle_command called
+2025-07-23 16:40:50,561 INFO action: add_heading
+2025-07-23 16:40:50,995 INFO Response sent
+2025-07-23 16:40:50,995 INFO Waiting for connection...
+2025-07-23 16:40:50,995 INFO <socket.socket fd=420, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:40:51,035 INFO Connection from ('127.0.0.1', 65153)
+2025-07-23 16:40:51,035 INFO Received data: {"action": "apply_document_style", "file_path": "C:\\Users\\ben_t\\Documents\\cows_document.odt", "d...
+2025-07-23 16:40:51,035 INFO handle_command called
+2025-07-23 16:40:51,035 INFO action: apply_document_style
+2025-07-23 16:40:51,197 INFO Response sent
+2025-07-23 16:40:51,197 INFO Waiting for connection...
+2025-07-23 16:40:51,197 INFO <socket.socket fd=420, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:40:51,228 INFO Connection from ('127.0.0.1', 65155)
+2025-07-23 16:40:51,228 INFO Received data: {"action": "format_text", "file_path": "C:\\Users\\ben_t\\Documents\\cows_document.odt", "text_to_fi...
+2025-07-23 16:40:51,228 INFO handle_command called
+2025-07-23 16:40:51,228 INFO action: format_text
+2025-07-23 16:40:51,381 INFO Response sent
+2025-07-23 16:40:51,381 INFO Waiting for connection...
+2025-07-23 16:40:51,381 INFO <socket.socket fd=420, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 16:40:51,412 INFO Connection from ('127.0.0.1', 65157)
+2025-07-23 16:40:51,412 INFO Received data: {"action": "format_text", "file_path": "C:\\Users\\ben_t\\Documents\\cows_document.odt", "text_to_fi...
+2025-07-23 16:40:51,412 INFO handle_command called
+2025-07-23 16:40:51,412 INFO action: format_text
+2025-07-23 16:40:51,629 INFO Response sent
+2025-07-23 16:40:51,629 INFO Waiting for connection...
+2025-07-23 16:40:51,638 INFO <socket.socket fd=420, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 17:02:05,033 INFO Importing UNO...
+2025-07-23 17:02:05,115 INFO UNO imported successfully!
+2025-07-23 17:02:05,122 INFO LibreOffice helper listening on port 8765
+2025-07-23 17:02:05,122 INFO Socket bound to localhost:8765
+2025-07-23 17:02:05,122 INFO Waiting for connection...
+2025-07-23 17:02:05,122 INFO <socket.socket fd=832, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 17:02:08,832 INFO Connection from ('127.0.0.1', 65223)
+2025-07-23 17:02:08,832 INFO Received data: {"action": "ping"}...
+2025-07-23 17:02:08,832 INFO handle_command called
+2025-07-23 17:02:08,832 INFO action: ping
+2025-07-23 17:02:08,832 INFO Response sent
+2025-07-23 17:02:08,832 INFO Waiting for connection...
+2025-07-23 17:02:08,833 INFO <socket.socket fd=832, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 17:02:24,966 INFO Connection from ('127.0.0.1', 65230)
+2025-07-23 17:02:24,977 INFO Received data: {"action": "list_documents", "directory": "C:\\Users\\ben_t\\Documents"}...
+2025-07-23 17:02:24,977 INFO handle_command called
+2025-07-23 17:02:24,977 INFO action: list_documents
+2025-07-23 17:02:24,988 INFO Response sent
+2025-07-23 17:02:24,988 INFO Waiting for connection...
+2025-07-23 17:02:24,988 INFO <socket.socket fd=832, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 17:02:50,920 INFO Connection from ('127.0.0.1', 65234)
+2025-07-23 17:02:50,930 INFO Received data: {"action": "open_text_document", "file_path": "C:\\Users\\ben_t\\Documents\\cows_document.odt"}...
+2025-07-23 17:02:50,931 INFO handle_command called
+2025-07-23 17:02:50,931 INFO action: open_text_document
+2025-07-23 17:02:51,174 INFO Response sent
+2025-07-23 17:02:51,175 INFO Waiting for connection...
+2025-07-23 17:02:51,175 INFO <socket.socket fd=832, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 17:03:50,444 INFO Connection from ('127.0.0.1', 65239)
+2025-07-23 17:03:50,460 INFO Received data: {"action": "format_table", "file_path": "C:\\Users\\ben_t\\Documents\\cows_document.odt", "table_ind...
+2025-07-23 17:03:50,460 INFO handle_command called
+2025-07-23 17:03:50,460 INFO action: format_table
+2025-07-23 17:03:51,094 INFO Response sent
+2025-07-23 17:03:51,095 INFO Waiting for connection...
+2025-07-23 17:03:51,095 INFO <socket.socket fd=832, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 17:04:25,962 INFO Connection from ('127.0.0.1', 65241)
+2025-07-23 17:04:25,963 INFO Received data: {"action": "apply_document_style", "file_path": "C:\\Users\\ben_t\\Documents\\cows_document.odt", "d...
+2025-07-23 17:04:25,963 INFO handle_command called
+2025-07-23 17:04:25,963 INFO action: apply_document_style
+2025-07-23 17:04:26,160 INFO Response sent
+2025-07-23 17:04:26,161 INFO Waiting for connection...
+2025-07-23 17:04:26,161 INFO <socket.socket fd=832, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 17:10:07,050 INFO Connection from ('127.0.0.1', 65265)
+2025-07-23 17:10:07,050 INFO Waiting for connection...
+2025-07-23 17:10:07,050 INFO <socket.socket fd=832, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 17:10:08,022 INFO Connection from ('127.0.0.1', 65266)
+2025-07-23 17:10:08,022 INFO Received data: {"action": "ping"}...
+2025-07-23 17:10:08,022 INFO handle_command called
+2025-07-23 17:10:08,022 INFO action: ping
+2025-07-23 17:10:08,022 INFO Response sent
+2025-07-23 17:10:08,022 INFO Waiting for connection...
+2025-07-23 17:10:08,022 INFO <socket.socket fd=832, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>

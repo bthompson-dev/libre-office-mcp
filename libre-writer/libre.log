@@ -1,0 +1,827 @@
+{"jsonrpc":"2.0","id":1,"result":{"protocolVersion":"2024-11-05","capabilities":{"experimental":{},"prompts":{"listChanged":false},"resources":{"subscribe":false,"listChanged":false},"tools":{"listChanged":false}},"serverInfo":{"name":"libreoffice-server","version":"1.6.0"}}}
+{"jsonrpc":"2.0","id":1,"result":{"protocolVersion":"2024-11-05","capabilities":{"experimental":{},"prompts":{"listChanged":false},"resources":{"subscribe":false,"listChanged":false},"tools":{"listChanged":false}},"serverInfo":{"name":"libreoffice-server","version":"1.6.0"}}}
+2025-07-22 18:21:35,024 INFO Processing request of type ListToolsRequest
+2025-07-22 18:22:10,013 INFO Processing request of type CallToolRequest
+2025-07-22 18:26:48,011 INFO Processing request of type ListToolsRequest
+2025-07-22 18:27:17,187 INFO Processing request of type CallToolRequest
+2025-07-22 18:27:17,187 INFO C:\Users\ben_t\Documents\ghosts_document.odt
+2025-07-22 18:27:17,187 INFO {'Title': 'The World of Ghosts', 'Author': 'A. User', 'Subject': 'Ghost Phenomenon', 'Keywords': 'ghosts, paranormal, spirits'}
+2025-07-22 18:27:17,673 INFO Processing request of type CallToolRequest
+2025-07-22 18:27:17,697 INFO Processing request of type CallToolRequest
+2025-07-22 18:27:17,717 INFO Processing request of type CallToolRequest
+2025-07-22 18:27:17,734 INFO Processing request of type CallToolRequest
+2025-07-22 18:27:17,753 INFO Processing request of type CallToolRequest
+2025-07-22 18:27:17,771 INFO Processing request of type CallToolRequest
+2025-07-22 18:27:17,812 INFO Processing request of type CallToolRequest
+2025-07-22 18:27:17,831 INFO Processing request of type CallToolRequest
+2025-07-22 18:27:17,863 INFO Processing request of type CallToolRequest
+2025-07-22 23:01:15,222 INFO Processing request of type ListToolsRequest
+2025-07-22 23:03:11,553 INFO Processing request of type ListToolsRequest
+2025-07-23 10:07:05,357 INFO Processing request of type ListToolsRequest
+2025-07-23 10:08:33,314 INFO Processing request of type CallToolRequest
+2025-07-23 10:08:33,330 INFO C:\Users\ben_t\Documents\tennis_document.odt
+2025-07-23 10:08:33,330 INFO {'Title': 'The Game of Tennis', 'Author': 'Sports Enthusiast', 'Subject': 'Tennis History and Rules', 'Keywords': 'tennis,sports,history,rules'}
+2025-07-23 10:08:46,412 INFO Processing request of type CallToolRequest
+2025-07-23 10:08:46,444 INFO Processing request of type CallToolRequest
+2025-07-23 10:08:46,476 INFO Processing request of type CallToolRequest
+2025-07-23 10:08:46,513 INFO Processing request of type CallToolRequest
+2025-07-23 10:12:16,197 INFO Processing request of type ListToolsRequest
+2025-07-23 10:12:30,379 INFO Processing request of type CallToolRequest
+2025-07-23 10:12:30,379 INFO C:\Users\ben_t\Documents\tennis_document.odt
+2025-07-23 10:12:30,379 INFO {'Title': 'Tennis: A Comprehensive Guide', 'Author': 'Sports Enthusiast', 'Subject': 'Tennis', 'Keywords': 'tennis,sports,guide'}
+2025-07-23 10:12:31,969 INFO Processing request of type CallToolRequest
+2025-07-23 10:12:31,994 INFO Processing request of type CallToolRequest
+2025-07-23 10:12:32,010 INFO Processing request of type CallToolRequest
+2025-07-23 10:12:32,025 INFO Processing request of type CallToolRequest
+2025-07-23 10:12:32,041 INFO Processing request of type CallToolRequest
+2025-07-23 10:15:37,192 INFO Processing request of type ListToolsRequest
+2025-07-23 10:15:55,535 INFO Processing request of type CallToolRequest
+2025-07-23 10:15:55,535 INFO C:\Users\ben_t\Documents\tennis_document.odt
+2025-07-23 10:15:55,535 INFO {'Title': 'The Game of Tennis', 'Author': 'AI Assistant', 'Subject': 'Tennis Overview', 'Keywords': 'tennis, sports, history, rules'}
+2025-07-23 10:15:56,986 INFO success
+2025-07-23 10:15:57,039 INFO Processing request of type CallToolRequest
+2025-07-23 10:15:57,058 INFO Processing request of type CallToolRequest
+2025-07-23 10:15:57,071 INFO Processing request of type CallToolRequest
+2025-07-23 10:15:57,086 INFO Processing request of type CallToolRequest
+2025-07-23 10:15:57,118 INFO Processing request of type CallToolRequest
+2025-07-23 10:15:57,134 INFO Processing request of type CallToolRequest
+2025-07-23 10:15:57,150 INFO Processing request of type CallToolRequest
+2025-07-23 10:15:57,182 INFO Processing request of type CallToolRequest
+2025-07-23 10:15:57,198 INFO Processing request of type CallToolRequest
+2025-07-23 10:15:57,229 INFO Processing request of type CallToolRequest
+2025-07-23 10:17:16,535 INFO Processing request of type ListToolsRequest
+2025-07-23 10:17:38,103 INFO Processing request of type CallToolRequest
+2025-07-23 10:17:38,103 INFO C:\Users\ben_t\Documents\tennis_document.odt
+2025-07-23 10:17:38,103 INFO {'Title': 'The Game of Tennis', 'Author': 'AI Assistant', 'Subject': 'Tennis Overview', 'Keywords': 'tennis,sports,history,rules'}
+2025-07-23 10:17:39,561 INFO success
+2025-07-23 10:17:39,561 INFO Failed to create document: conversion not possible!
+2025-07-23 10:17:39,576 INFO Processing request of type CallToolRequest
+2025-07-23 10:17:39,592 INFO Processing request of type CallToolRequest
+2025-07-23 10:17:39,608 INFO Processing request of type CallToolRequest
+2025-07-23 10:17:39,624 INFO Processing request of type CallToolRequest
+2025-07-23 10:17:39,643 INFO Processing request of type CallToolRequest
+2025-07-23 10:17:39,643 INFO Processing request of type CallToolRequest
+2025-07-23 11:49:27,976 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 11:49:28,096 INFO Processing request of type ListToolsRequest
+2025-07-23 11:49:40,289 INFO Processing request of type CallToolRequest
+2025-07-23 11:49:40,289 INFO C:\Users\ben_t\Documents\tennis_document.odt
+2025-07-23 11:49:40,289 INFO {'Title': 'The Game of Tennis', 'Author': 'Sports Enthusiast', 'Subject': 'Tennis History and Rules', 'Keywords': 'tennis,sports,history,rules'}
+2025-07-23 11:49:42,699 INFO {"status": "success", "message": "Failed to create document: conversion not possible!"}
+2025-07-23 11:49:42,699 INFO success
+2025-07-23 11:49:42,699 INFO Failed to create document: conversion not possible!
+2025-07-23 11:49:42,731 INFO Processing request of type CallToolRequest
+2025-07-23 11:49:42,747 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\tennis_document.odt"}
+2025-07-23 11:49:42,765 INFO Processing request of type CallToolRequest
+2025-07-23 11:49:42,765 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\tennis_document.odt"}
+2025-07-23 11:49:42,780 INFO Processing request of type CallToolRequest
+2025-07-23 11:49:42,795 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\tennis_document.odt"}
+2025-07-23 11:49:42,795 INFO Processing request of type CallToolRequest
+2025-07-23 11:49:42,811 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\tennis_document.odt"}
+2025-07-23 11:49:42,818 INFO Processing request of type CallToolRequest
+2025-07-23 11:49:42,843 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\tennis_document.odt"}
+2025-07-23 12:22:00,165 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 12:22:00,253 INFO Processing request of type ListToolsRequest
+2025-07-23 12:22:15,723 INFO Processing request of type CallToolRequest
+2025-07-23 12:22:15,723 INFO C:\Users\ben_t\Documents\tennis_document.odt
+2025-07-23 12:22:15,730 INFO {'Title': 'Introduction to Tennis', 'Author': 'Automated Document Creator', 'Subject': 'Tennis Overview', 'Keywords': 'tennis,sports,history,rules'}
+2025-07-23 12:22:17,597 INFO {"status": "success", "message": "Failed to create document: conversion not possible!"}
+2025-07-23 12:22:17,597 INFO success
+2025-07-23 12:22:17,597 INFO Failed to create document: conversion not possible!
+2025-07-23 12:22:17,621 INFO Processing request of type CallToolRequest
+2025-07-23 12:22:17,627 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\tennis_document.odt"}
+2025-07-23 12:22:17,639 INFO Processing request of type CallToolRequest
+2025-07-23 12:22:17,648 INFO {"status": "success", "message": "Error processing command: [Errno 22] Invalid argument"}
+2025-07-23 12:22:17,668 INFO Processing request of type CallToolRequest
+2025-07-23 12:22:17,668 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\tennis_document.odt"}
+2025-07-23 12:22:17,689 INFO Processing request of type CallToolRequest
+2025-07-23 12:22:17,700 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\tennis_document.odt"}
+2025-07-23 12:22:17,705 INFO Processing request of type CallToolRequest
+2025-07-23 12:22:17,732 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\tennis_document.odt"}
+2025-07-23 12:22:17,747 INFO Processing request of type CallToolRequest
+2025-07-23 12:22:17,748 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\tennis_document.odt"}
+2025-07-23 12:22:17,763 INFO Processing request of type CallToolRequest
+2025-07-23 12:22:17,771 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\tennis_document.odt"}
+2025-07-23 12:27:35,541 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 12:27:35,604 INFO Processing request of type ListToolsRequest
+2025-07-23 12:27:51,898 INFO Processing request of type CallToolRequest
+2025-07-23 12:27:51,898 INFO C:\Users\ben_t\Documents\tennis_document.odt
+2025-07-23 12:27:51,898 INFO {'Title': 'Tennis Overview', 'Author': 'Sports Document Author', 'Subject': 'Tennis', 'Keywords': 'sports, tennis, history, rules'}
+2025-07-23 12:27:52,350 INFO {"status": "success", "message": "Failed to create document: conversion not possible!"}
+2025-07-23 12:27:52,350 INFO success
+2025-07-23 12:27:52,350 INFO Failed to create document: conversion not possible!
+2025-07-23 12:32:35,010 INFO b'{"action": "ping"}'
+2025-07-23 12:32:35,010 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 12:32:35,073 INFO Processing request of type ListToolsRequest
+2025-07-23 12:32:48,194 INFO Processing request of type CallToolRequest
+2025-07-23 12:32:48,194 INFO C:\Users\ben_t\Documents\tennis_document.odt
+2025-07-23 12:32:48,194 INFO {'Title': 'The Game of Tennis', 'Author': 'Sports Enthusiast', 'Subject': 'Tennis History and Rules', 'Keywords': 'tennis,sports,history,rule'}
+2025-07-23 12:32:48,207 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\tennis_document.odt", "metadata": {"Title": "The Game of Tennis", "Author": "Sports Enthusiast", "Subject": "Tennis History and Rules", "Keywords": "tennis,sports,history,rule"}}'
+2025-07-23 12:32:48,691 INFO {"status": "success", "message": "Failed to create document: conversion not possible!"}
+2025-07-23 12:32:48,691 INFO success
+2025-07-23 12:32:48,691 INFO Failed to create document: conversion not possible!
+2025-07-23 12:32:48,729 INFO Processing request of type CallToolRequest
+2025-07-23 12:32:48,729 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\tennis_document.odt", "text": "Introduction to Tennis", "level": 2}'
+2025-07-23 12:32:48,729 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\tennis_document.odt"}
+2025-07-23 12:32:48,751 INFO Processing request of type CallToolRequest
+2025-07-23 12:32:48,759 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\tennis_document.odt", "text": "Tennis is a racket sport played individually or in pairs. It involves striking a ball over a net using a racket, with the objective of making the ball land within the opponent\'s court.", "style": "Default Paragraph Style", "alignment": "justify"}'
+2025-07-23 12:32:48,761 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\tennis_document.odt"}
+2025-07-23 12:32:48,780 INFO Processing request of type CallToolRequest
+2025-07-23 12:32:48,780 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\tennis_document.odt", "text": "History of Tennis", "level": 2}'
+2025-07-23 12:32:48,780 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\tennis_document.odt"}
+2025-07-23 12:32:48,799 INFO Processing request of type CallToolRequest
+2025-07-23 12:32:48,809 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\tennis_document.odt", "text": "Tennis has ancient origins, with variations played in France and the UK. The modern game evolved in the 19th century, with the first official rules established in 1877 at Wimbledon.", "style": "Default Paragraph Style", "alignment": "justify"}'
+2025-07-23 12:32:48,811 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\tennis_document.odt"}
+2025-07-23 12:32:48,827 INFO Processing request of type CallToolRequest
+2025-07-23 12:32:48,827 INFO b'{"action": "add_table", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\tennis_document.odt", "rows": 3, "columns": 2, "data": [["Score", "Meaning"], ["Love", "No points"], ["15", "1 point"], ["30", "2 points"], ["Deuce", "3 points"]], "header_row": true}'
+2025-07-23 12:32:48,838 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\tennis_document.odt"}
+2025-07-23 12:32:48,860 INFO Processing request of type CallToolRequest
+2025-07-23 12:32:48,864 INFO b'{"action": "insert_image", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\tennis_document.odt", "image_path": "/path/to/tennis_court.jpg", "width": 400, "height": 300}'
+2025-07-23 12:32:48,864 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\tennis_document.odt"}
+2025-07-23 12:32:48,890 INFO Processing request of type CallToolRequest
+2025-07-23 12:32:48,906 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\tennis_document.odt", "text": "Conclusion", "level": 2}'
+2025-07-23 12:32:48,906 INFO {"status": "success", "message": "Error processing command: [Errno 22] Invalid argument"}
+2025-07-23 12:32:48,922 INFO Processing request of type CallToolRequest
+2025-07-23 12:32:48,933 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\tennis_document.odt", "text": "Tennis remains one of the most popular sports globally, with its blend of strategy, skill, and athleticism. Whether played recreationally or professionally, it continues to captivate millions.", "style": "Default Paragraph Style", "alignment": "justify"}'
+2025-07-23 12:32:48,933 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\tennis_document.odt"}
+2025-07-23 12:37:38,800 INFO b'{"action": "ping"}'
+2025-07-23 12:37:38,800 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 12:37:38,878 INFO Processing request of type ListToolsRequest
+2025-07-23 12:40:24,412 INFO b'{"action": "ping"}'
+2025-07-23 12:40:24,412 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 12:40:24,491 INFO Processing request of type ListToolsRequest
+2025-07-23 12:40:42,601 INFO Processing request of type CallToolRequest
+2025-07-23 12:40:42,601 INFO C:\Users\ben_t\Documents\libreoffice_guide.odt
+2025-07-23 12:40:42,601 INFO {'Title': 'LibreOffice User Guide', 'Author': 'AI Assistant', 'Subject': 'LibreOffice Documentation', 'Keywords': 'LibreOffice, office suite, open source'}
+2025-07-23 12:40:42,617 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\libreoffice_guide.odt", "metadata": {"Title": "LibreOffice User Guide", "Author": "AI Assistant", "Subject": "LibreOffice Documentation", "Keywords": "LibreOffice, office suite, open source"}}'
+2025-07-23 12:40:43,231 INFO {"status": "success", "message": "Failed to create document: conversion not possible!"}
+2025-07-23 12:40:43,231 INFO success
+2025-07-23 12:40:43,231 INFO Failed to create document: conversion not possible!
+2025-07-23 12:40:43,257 INFO Processing request of type CallToolRequest
+2025-07-23 12:40:43,273 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\libreoffice_guide.odt", "text": "LibreOffice User Guide", "level": 1}'
+2025-07-23 12:40:43,273 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\libreoffice_guide.odt"}
+2025-07-23 12:40:43,289 INFO Processing request of type CallToolRequest
+2025-07-23 12:40:43,296 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\libreoffice_guide.odt", "text": "LibreOffice is a free and open-source office suite that includes word processor, spreadsheet, presentation, and more. It\'s a powerful alternative to proprietary software.", "style": "Heading 2", "alignment": "left"}'
+2025-07-23 12:40:43,296 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\libreoffice_guide.odt"}
+2025-07-23 12:40:43,318 INFO Processing request of type CallToolRequest
+2025-07-23 12:40:43,320 INFO b'{"action": "add_table", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\libreoffice_guide.odt", "rows": 3, "columns": 2, "data": [["Feature", "Description"], ["Writer", "Word processor"], ["Calc", "Spreadsheet tool"]], "header_row": true}'
+2025-07-23 12:40:43,321 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\libreoffice_guide.odt"}
+2025-07-23 12:40:43,344 INFO Processing request of type CallToolRequest
+2025-07-23 12:40:43,344 INFO b'{"action": "insert_image", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\libreoffice_guide.odt", "image_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\images\\\\libreoffice.png", "width": 300, "height": 200}'
+2025-07-23 12:40:43,344 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\libreoffice_guide.odt"}
+2025-07-23 12:40:43,367 INFO Processing request of type CallToolRequest
+2025-07-23 12:40:43,369 INFO b'{"action": "insert_page_break", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\libreoffice_guide.odt"}'
+2025-07-23 12:40:43,369 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\libreoffice_guide.odt"}
+2025-07-23 12:40:43,387 INFO Processing request of type CallToolRequest
+2025-07-23 12:40:43,387 INFO b'{"action": "apply_document_style", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\libreoffice_guide.odt", "default_style": {"font_name": "Arial", "font_size": 12.0, "color": "#000000", "alignment": "left"}}'
+2025-07-23 12:40:43,387 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\libreoffice_guide.odt"}
+2025-07-23 12:42:10,955 INFO b'{"action": "ping"}'
+2025-07-23 12:42:10,955 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 12:42:11,071 INFO Processing request of type ListToolsRequest
+2025-07-23 12:43:13,026 INFO Processing request of type CallToolRequest
+2025-07-23 12:43:13,026 INFO C:\Users\ben_t\Documents\wolves_document.odt
+2025-07-23 12:43:13,026 INFO {'Title': "Wolves: Nature's Apex Predators", 'Author': 'Nature Documenter', 'Subject': 'Wildlife', 'Keywords': 'wolves, wildlife, animals'}
+2025-07-23 12:43:13,026 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\wolves_document.odt", "metadata": {"Title": "Wolves: Nature\'s Apex Predators", "Author": "Nature Documenter", "Subject": "Wildlife", "Keywords": "wolves, wildlife, animals"}}'
+2025-07-23 12:43:13,462 INFO {"status": "success", "message": "Failed to create document: conversion not possible!"}
+2025-07-23 12:43:13,462 INFO success
+2025-07-23 12:43:13,462 INFO Failed to create document: conversion not possible!
+2025-07-23 12:43:13,495 INFO Processing request of type CallToolRequest
+2025-07-23 12:43:13,495 INFO b'{"action": "apply_document_style", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\wolves_document.odt", "default_style": {"font_name": "Arial", "font_size": 12.0, "color": "#000000", "alignment": "left"}}'
+2025-07-23 12:43:13,499 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\wolves_document.odt"}
+2025-07-23 12:43:13,512 INFO Processing request of type CallToolRequest
+2025-07-23 12:43:13,512 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\wolves_document.odt", "text": "Introduction to Wolves", "level": 1}'
+2025-07-23 12:43:13,512 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\wolves_document.odt"}
+2025-07-23 12:43:13,541 INFO Processing request of type CallToolRequest
+2025-07-23 12:43:13,545 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\wolves_document.odt", "text": "Wolves are highly social and intelligent mammals known for their complex behaviors and ecological importance. They play a crucial role in maintaining balance within their ecosystems.", "style": "Heading 2", "alignment": "left"}'
+2025-07-23 12:43:13,546 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\wolves_document.odt"}
+2025-07-23 12:43:13,557 INFO Processing request of type CallToolRequest
+2025-07-23 12:43:13,557 INFO b'{"action": "add_table", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\wolves_document.odt", "rows": 3, "columns": 2, "data": [["Wolf Species", "Gray Wolf"], ["Habitat", "Forests, tundras, mountains"], ["Diet", "Large herbivores, scavenging"]], "header_row": true}'
+2025-07-23 12:43:13,557 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\wolves_document.odt"}
+2025-07-23 12:43:13,577 INFO Processing request of type CallToolRequest
+2025-07-23 12:43:13,577 INFO b'{"action": "insert_image", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\wolves_document.odt", "image_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\wolf_image.jpg", "width": 3000, "height": 2000}'
+2025-07-23 12:43:13,588 INFO {"status": "success", "message": "Error processing command: [Errno 22] Invalid argument"}
+2025-07-23 12:45:13,514 INFO b'{"action": "ping"}'
+2025-07-23 12:45:13,514 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 12:45:13,578 INFO Processing request of type ListToolsRequest
+2025-07-23 12:45:25,572 INFO Processing request of type CallToolRequest
+2025-07-23 12:45:25,572 INFO C:\Users\ben_t\Documents\fate_document.odt
+2025-07-23 12:45:25,572 INFO {'Title': 'The Concept of Fate', 'Author': 'Anonymous', 'Subject': 'Philosophy and Destiny', 'Keywords': 'fate, destiny, philosophy, free will'}
+2025-07-23 12:45:25,588 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\fate_document.odt", "metadata": {"Title": "The Concept of Fate", "Author": "Anonymous", "Subject": "Philosophy and Destiny", "Keywords": "fate, destiny, philosophy, free will"}}'
+2025-07-23 12:45:26,037 INFO {"status": "success", "message": "Failed to create document: conversion not possible!"}
+2025-07-23 12:45:26,037 INFO success
+2025-07-23 12:45:26,037 INFO Failed to create document: conversion not possible!
+2025-07-23 12:45:26,069 INFO Processing request of type CallToolRequest
+2025-07-23 12:45:26,070 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\fate_document.odt", "text": "The Concept of Fate", "level": 1}'
+2025-07-23 12:45:26,070 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\fate_document.odt"}
+2025-07-23 12:45:26,090 INFO Processing request of type CallToolRequest
+2025-07-23 12:45:26,092 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\fate_document.odt", "text": "Fate refers to the philosophical concept that events are predetermined and cannot be altered. It has been a central theme in literature, religion, and science throughout history.", "style": "Heading 2", "alignment": "left"}'
+2025-07-23 12:45:26,092 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\fate_document.odt"}
+2025-07-23 12:45:26,107 INFO Processing request of type CallToolRequest
+2025-07-23 12:45:26,132 INFO b'{"action": "add_table", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\fate_document.odt", "rows": 3, "columns": 2, "data": [["Determinism", "Events are caused by prior events"], ["Free Will", "Individuals have control over their actions"], ["Destiny", "A preordained path of events"]], "header_row": true}'
+2025-07-23 12:45:26,133 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\fate_document.odt"}
+2025-07-23 12:45:26,147 INFO Processing request of type CallToolRequest
+2025-07-23 12:45:26,154 INFO b'{"action": "insert_image", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\fate_document.odt", "image_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\fate_image.jpg", "width": 400, "height": 300}'
+2025-07-23 12:45:26,154 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\fate_document.odt"}
+2025-07-23 12:45:26,168 INFO Processing request of type CallToolRequest
+2025-07-23 12:45:26,195 INFO b'{"action": "apply_document_style", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\fate_document.odt", "default_style": {"font_name": "Arial", "font_size": 12.0, "color": "#000000", "alignment": "left"}}'
+2025-07-23 12:45:26,195 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\fate_document.odt"}
+2025-07-23 13:00:31,940 INFO b'{"action": "ping"}'
+2025-07-23 13:00:31,948 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 13:04:59,017 INFO b'{"action": "ping"}'
+2025-07-23 13:04:59,017 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 13:04:59,088 INFO Processing request of type ListToolsRequest
+2025-07-23 13:09:13,127 INFO b'{"action": "ping"}'
+2025-07-23 13:09:13,127 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 13:09:13,173 INFO Processing request of type ListToolsRequest
+2025-07-23 13:12:09,766 INFO b'{"action": "ping"}'
+2025-07-23 13:12:09,766 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 13:12:09,834 INFO Processing request of type ListToolsRequest
+2025-07-23 13:16:51,207 INFO <socket.socket fd=464, family=2, type=1, proto=0, laddr=('127.0.0.1', 62395), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:16:51,207 INFO b'{"action": "ping"}'
+2025-07-23 13:16:51,207 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 13:16:51,303 INFO Processing request of type ListToolsRequest
+2025-07-23 13:17:05,580 INFO Processing request of type CallToolRequest
+2025-07-23 13:17:05,580 INFO C:\Users\ben_t\Documents\rats_document.odt
+2025-07-23 13:17:05,580 INFO {'Title': 'Rats: Information and Insights', 'Author': 'AI Assistant', 'Subject': 'Rats', 'Keywords': 'rodents, behavior, ecology'}
+2025-07-23 13:17:05,593 INFO <socket.socket fd=476, family=2, type=1, proto=0, laddr=('127.0.0.1', 62399), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:17:05,593 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\rats_document.odt", "metadata": {"Title": "Rats: Information and Insights", "Author": "AI Assistant", "Subject": "Rats", "Keywords": "rodents, behavior, ecology"}}'
+2025-07-23 13:17:06,231 INFO {"status": "success", "message": "Failed to create document: conversion not possible!"}
+2025-07-23 13:17:06,231 INFO success
+2025-07-23 13:17:06,231 INFO Failed to create document: conversion not possible!
+2025-07-23 13:17:06,263 INFO Processing request of type CallToolRequest
+2025-07-23 13:17:06,274 INFO <socket.socket fd=532, family=2, type=1, proto=0, laddr=('127.0.0.1', 62401), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:17:06,274 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\rats_document.odt", "text": "Rats: Information and Insights", "level": 1}'
+2025-07-23 13:17:06,275 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\rats_document.odt"}
+2025-07-23 13:17:06,298 INFO Processing request of type CallToolRequest
+2025-07-23 13:17:06,299 INFO <socket.socket fd=684, family=2, type=1, proto=0, laddr=('127.0.0.1', 62402), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:17:06,299 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\rats_document.odt", "text": "Rats are common rodents found in various habitats worldwide. They are known for their adaptability, intelligence, and rapid reproduction rates.", "style": null, "alignment": "left"}'
+2025-07-23 13:17:06,299 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\rats_document.odt"}
+2025-07-23 13:17:06,314 INFO Processing request of type CallToolRequest
+2025-07-23 13:17:06,337 INFO <socket.socket fd=532, family=2, type=1, proto=0, laddr=('127.0.0.1', 62403), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:17:06,337 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\rats_document.odt", "text": "Rats typically measure 15-35 cm in length and have a lifespan of 1-3 years. They are omnivorous, consuming both plant and animal matter.", "style": null, "alignment": "left"}'
+2025-07-23 13:17:06,337 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\rats_document.odt"}
+2025-07-23 13:17:06,353 INFO Processing request of type CallToolRequest
+2025-07-23 13:17:06,369 INFO <socket.socket fd=828, family=2, type=1, proto=0, laddr=('127.0.0.1', 62404), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:17:06,369 INFO b'{"action": "add_table", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\rats_document.odt", "rows": 3, "columns": 2, "data": [["Common Rat", "Rattus norvegicus"], ["House Mouse", "Mus musculus"], ["Norway Rat", "Rattus rattus"]], "header_row": true}'
+2025-07-23 13:17:06,370 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\rats_document.odt"}
+2025-07-23 13:17:06,383 INFO Processing request of type CallToolRequest
+2025-07-23 13:17:06,383 INFO <socket.socket fd=436, family=2, type=1, proto=0, laddr=('127.0.0.1', 62405), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:17:06,383 INFO b'{"action": "insert_image", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\rats_document.odt", "image_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\rat_image.jpg", "width": 300, "height": 200}'
+2025-07-23 13:17:06,383 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\rats_document.odt"}
+2025-07-23 13:19:52,462 INFO <socket.socket fd=448, family=2, type=1, proto=0, laddr=('127.0.0.1', 62415), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:19:52,462 INFO b'{"action": "ping"}'
+2025-07-23 13:19:52,462 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 13:19:52,526 INFO Processing request of type ListToolsRequest
+2025-07-23 13:20:03,193 INFO Processing request of type CallToolRequest
+2025-07-23 13:20:03,197 INFO C:\Users\ben_t\Documents\server_guide.docx
+2025-07-23 13:20:03,197 INFO {'Title': 'Server Guide: Understanding and Managing Server Infrastructure', 'Author': 'IT Department', 'Keywords': 'servers, networking, IT infrastructure'}
+2025-07-23 13:20:03,197 INFO <socket.socket fd=1000, family=2, type=1, proto=0, laddr=('127.0.0.1', 62419), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:20:03,197 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\server_guide.docx", "metadata": {"Title": "Server Guide: Understanding and Managing Server Infrastructure", "Author": "IT Department", "Keywords": "servers, networking, IT infrastructure"}}'
+2025-07-23 13:20:03,197 INFO {"status": "error", "message": "Server error: [Errno 22] Invalid argument"}
+2025-07-23 13:20:03,197 INFO error
+2025-07-23 13:20:03,197 INFO Server error: [Errno 22] Invalid argument
+2025-07-23 13:22:49,706 INFO <socket.socket fd=908, family=2, type=1, proto=0, laddr=('127.0.0.1', 62426), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:22:49,706 INFO b'{"action": "ping"}'
+2025-07-23 13:22:49,721 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 13:22:49,787 INFO Processing request of type ListToolsRequest
+2025-07-23 13:23:03,062 INFO Processing request of type CallToolRequest
+2025-07-23 13:23:03,062 INFO C:\Users\ben_t\Documents\errors_document.odt
+2025-07-23 13:23:03,062 INFO {'Title': 'Errors Guide', 'Author': 'User', 'Subject': 'Error Handling', 'Keywords': 'errors, troubleshooting, guide'}
+2025-07-23 13:23:03,078 INFO <socket.socket fd=1004, family=2, type=1, proto=0, laddr=('127.0.0.1', 62430), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:23:03,078 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\errors_document.odt", "metadata": {"Title": "Errors Guide", "Author": "User", "Subject": "Error Handling", "Keywords": "errors, troubleshooting, guide"}}'
+2025-07-23 13:23:04,822 INFO {"status": "success", "message": "Failed to create document: conversion not possible!"}
+2025-07-23 13:23:04,822 INFO success
+2025-07-23 13:23:04,822 INFO Failed to create document: conversion not possible!
+2025-07-23 13:23:04,858 INFO Processing request of type CallToolRequest
+2025-07-23 13:23:04,885 INFO <socket.socket fd=972, family=2, type=1, proto=0, laddr=('127.0.0.1', 62433), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:23:04,885 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\errors_document.odt", "text": "Understanding and Handling Errors", "level": 1}'
+2025-07-23 13:23:04,885 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\errors_document.odt"}
+2025-07-23 13:23:04,910 INFO Processing request of type CallToolRequest
+2025-07-23 13:23:04,916 INFO <socket.socket fd=556, family=2, type=1, proto=0, laddr=('127.0.0.1', 62435), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:23:04,916 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\errors_document.odt", "text": "Errors are unexpected conditions that disrupt normal program flow. Proper error handling ensures robust software behavior.", "style": "Heading 2", "alignment": "center"}'
+2025-07-23 13:23:04,916 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\errors_document.odt"}
+2025-07-23 13:23:04,932 INFO Processing request of type CallToolRequest
+2025-07-23 13:23:04,932 INFO <socket.socket fd=972, family=2, type=1, proto=0, laddr=('127.0.0.1', 62436), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:23:04,932 INFO b'{"action": "add_table", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\errors_document.odt", "rows": 5, "columns": 2, "data": [["Syntax Error", "Error due to incorrect syntax"], ["Runtime Error", "Error occurring during execution"], ["Logic Error", "Error in program logic"], ["Null Reference", "Accessing non-existent object"], ["IO Error", "Issue with input/output operations"]], "header_row": true}'
+2025-07-23 13:23:04,932 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\errors_document.odt"}
+2025-07-23 13:23:04,963 INFO Processing request of type CallToolRequest
+2025-07-23 13:23:04,963 INFO <socket.socket fd=424, family=2, type=1, proto=0, laddr=('127.0.0.1', 62437), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:23:04,963 INFO b'{"action": "format_table", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\errors_document.odt", "table_index": 0, "format_options": {"border_width": 1, "background_color": "#F0F0F0", "header_row": true}}'
+2025-07-23 13:23:04,963 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\errors_document.odt"}
+2025-07-23 13:29:21,424 INFO <socket.socket fd=432, family=2, type=1, proto=0, laddr=('127.0.0.1', 62448), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:29:21,424 INFO b'{"action": "ping"}'
+2025-07-23 13:29:21,424 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 13:29:21,500 INFO Processing request of type ListToolsRequest
+2025-07-23 13:29:34,332 INFO Processing request of type CallToolRequest
+2025-07-23 13:29:34,332 INFO C:\Users\ben_t\Documents\errors_document.odt
+2025-07-23 13:29:34,332 INFO {'Title': 'Error Handling Guide', 'Author': 'Admin', 'Subject': 'Error Handling', 'Keywords': 'errors, troubleshooting, guide'}
+2025-07-23 13:29:34,332 INFO <socket.socket fd=916, family=2, type=1, proto=0, laddr=('127.0.0.1', 62452), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:29:34,332 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\errors_document.odt", "metadata": {"Title": "Error Handling Guide", "Author": "Admin", "Subject": "Error Handling", "Keywords": "errors, troubleshooting, guide"}}'
+2025-07-23 13:29:35,004 INFO {"status": "success", "message": "Failed to create document: conversion not possible!"}
+2025-07-23 13:29:35,004 INFO success
+2025-07-23 13:29:35,004 INFO Failed to create document: conversion not possible!
+2025-07-23 13:29:35,035 INFO Processing request of type CallToolRequest
+2025-07-23 13:29:35,035 INFO <socket.socket fd=800, family=2, type=1, proto=0, laddr=('127.0.0.1', 62454), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:29:35,035 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\errors_document.odt", "text": "Error Handling Guide", "level": 1}'
+2025-07-23 13:29:35,035 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\errors_document.odt"}
+2025-07-23 13:29:35,051 INFO Processing request of type CallToolRequest
+2025-07-23 13:29:35,051 INFO <socket.socket fd=704, family=2, type=1, proto=0, laddr=('127.0.0.1', 62455), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:29:35,051 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\errors_document.odt", "text": "This document outlines common error types, troubleshooting steps, and prevention strategies.", "style": "Heading 2", "alignment": "left"}'
+2025-07-23 13:29:35,056 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\errors_document.odt"}
+2025-07-23 13:29:35,069 INFO Processing request of type CallToolRequest
+2025-07-23 13:29:35,069 INFO <socket.socket fd=800, family=2, type=1, proto=0, laddr=('127.0.0.1', 62456), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:29:35,069 INFO b'{"action": "add_table", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\errors_document.odt", "rows": 5, "columns": 3, "data": [["Error Code", "Description", "Solution"], ["404", "File not found", "Check file path"], ["500", "Internal server error", "Review server logs"], ["403", "Forbidden", "Verify permissions"], ["400", "Bad request", "Validate input data"], ["503", "Service unavailable", "Check service status"]], "header_row": true}'
+2025-07-23 13:29:35,069 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\errors_document.odt"}
+2025-07-23 13:29:35,084 INFO Processing request of type CallToolRequest
+2025-07-23 13:29:35,109 INFO <socket.socket fd=908, family=2, type=1, proto=0, laddr=('127.0.0.1', 62457), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:29:35,109 INFO b'{"action": "insert_image", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\errors_document.odt", "image_path": "/icons/error_icon.png", "width": 200, "height": 200}'
+2025-07-23 13:29:35,109 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\errors_document.odt"}
+2025-07-23 13:29:35,133 INFO Processing request of type CallToolRequest
+2025-07-23 13:29:35,157 INFO <socket.socket fd=820, family=2, type=1, proto=0, laddr=('127.0.0.1', 62458), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:29:35,157 INFO b'{"action": "apply_document_style", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\errors_document.odt", "default_style": {"font_name": "Arial", "font_size": 12.0, "color": "#000000", "alignment": "left"}}'
+2025-07-23 13:29:35,157 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\errors_document.odt"}
+2025-07-23 13:34:52,119 INFO <socket.socket fd=516, family=2, type=1, proto=0, laddr=('127.0.0.1', 62480), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:34:52,120 INFO b'{"action": "ping"}'
+2025-07-23 13:34:52,120 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 13:34:52,174 INFO Processing request of type ListToolsRequest
+2025-07-23 13:37:33,208 INFO <socket.socket fd=412, family=2, type=1, proto=0, laddr=('127.0.0.1', 62488), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:37:33,208 INFO b'{"action": "ping"}'
+2025-07-23 13:37:33,281 INFO Processing request of type ListToolsRequest
+2025-07-23 13:39:24,519 INFO <socket.socket fd=892, family=2, type=1, proto=0, laddr=('127.0.0.1', 62494), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:39:24,519 INFO b'{"action": "ping"}'
+2025-07-23 13:39:24,608 INFO Processing request of type ListToolsRequest
+2025-07-23 13:39:51,754 INFO Processing request of type CallToolRequest
+2025-07-23 13:39:51,754 INFO C:\Users\ben_t\Documents\Futility_Document.odt
+2025-07-23 13:39:51,754 INFO {'Title': 'The Concept of Futility', 'Author': 'AI Assistant', 'Subject': 'Philosophy and Existentialism', 'Keywords': 'futility, existentialism, philosophy'}
+2025-07-23 13:39:51,758 INFO <socket.socket fd=456, family=2, type=1, proto=0, laddr=('127.0.0.1', 62498), raddr=('127.0.0.1', 8765)>
+2025-07-23 13:39:51,758 INFO b'{"action": "ping"}'
+2025-07-23 13:39:51,758 INFO error
+2025-07-23 13:39:51,758 INFO Error communicating with helper: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-23 14:53:20,684 INFO <socket.socket fd=904, family=2, type=1, proto=0, laddr=('127.0.0.1', 64548), raddr=('127.0.0.1', 8765)>
+2025-07-23 14:53:20,688 INFO b'{"action": "ping"}'
+2025-07-23 14:53:20,829 INFO Processing request of type ListToolsRequest
+2025-07-23 14:57:51,470 INFO <socket.socket fd=604, family=2, type=1, proto=0, laddr=('127.0.0.1', 64568), raddr=('127.0.0.1', 8765)>
+2025-07-23 14:57:51,470 INFO b'{"action": "ping"}'
+2025-07-23 14:57:51,538 INFO Processing request of type ListToolsRequest
+2025-07-23 14:58:28,105 INFO Processing request of type CallToolRequest
+2025-07-23 14:58:28,105 INFO C:\Users\ben_t\Documents\success_document.odt
+2025-07-23 14:58:28,105 INFO {'Title': 'The Path to Success', 'Author': 'Jane Doe', 'Subject': 'Strategies for Achieving Success', 'Keywords': 'success, productivity, goals, motivation'}
+2025-07-23 14:58:28,105 INFO <socket.socket fd=1012, family=2, type=1, proto=0, laddr=('127.0.0.1', 64574), raddr=('127.0.0.1', 8765)>
+2025-07-23 14:58:28,114 INFO b'{"action": "ping"}'
+2025-07-23 14:58:28,114 INFO error
+2025-07-23 14:58:28,114 INFO Error communicating with helper: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-23 15:08:25,803 INFO <socket.socket fd=352, family=2, type=1, proto=0, laddr=('127.0.0.1', 64667), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:08:25,806 INFO b'{"action": "ping"}'
+2025-07-23 15:08:25,901 INFO Processing request of type ListToolsRequest
+2025-07-23 15:09:10,025 INFO Processing request of type CallToolRequest
+2025-07-23 15:09:10,027 INFO C:\Users\ben_t\Documents\dogs_document.odt
+2025-07-23 15:09:10,027 INFO {'Title': "Dogs: Man's Best Friend", 'Author': 'Jane Doe', 'Subject': 'Dogs', 'Keywords': 'dogs, pets, animals, companionship'}
+2025-07-23 15:09:10,027 INFO <socket.socket fd=832, family=2, type=1, proto=0, laddr=('127.0.0.1', 64673), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:09:10,029 INFO b'{"action": "ping"}'
+2025-07-23 15:09:10,029 INFO error
+2025-07-23 15:09:10,029 INFO Error communicating with helper: [WinError 10054] An existing connection was forcibly closed by the remote host
+2025-07-23 15:09:10,062 INFO Processing request of type CallToolRequest
+2025-07-23 15:09:10,064 INFO <socket.socket fd=920, family=2, type=1, proto=0, laddr=('127.0.0.1', 64674), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:09:10,064 INFO b'{"action": "ping"}'
+2025-07-23 15:09:10,085 INFO Processing request of type CallToolRequest
+2025-07-23 15:09:10,105 INFO <socket.socket fd=480, family=2, type=1, proto=0, laddr=('127.0.0.1', 64675), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:09:10,105 INFO b'{"action": "ping"}'
+2025-07-23 15:09:10,131 INFO Processing request of type CallToolRequest
+2025-07-23 15:09:10,145 INFO <socket.socket fd=480, family=2, type=1, proto=0, laddr=('127.0.0.1', 64676), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:09:10,145 INFO b'{"action": "ping"}'
+2025-07-23 15:18:01,136 INFO call_libreoffice_helper function called
+2025-07-23 15:18:01,147 INFO <socket.socket fd=492, family=2, type=1, proto=0, laddr=('127.0.0.1', 64716), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:18:01,147 INFO b'{"action": "ping"}'
+2025-07-23 15:18:01,147 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 15:18:01,247 INFO Processing request of type ListToolsRequest
+2025-07-23 15:18:54,484 INFO Processing request of type CallToolRequest
+2025-07-23 15:18:54,484 INFO C:\Users\ben_t\Documents\errors_document.odt
+2025-07-23 15:18:54,484 INFO {'Title': 'Common Errors and How to Resolve Them', 'Author': 'Tech Support Team', 'Subject': 'Error Handling Guide', 'Keywords': 'errors, troubleshooting, common issues'}
+2025-07-23 15:18:54,484 INFO call_libreoffice_helper function called
+2025-07-23 15:18:54,499 INFO <socket.socket fd=564, family=2, type=1, proto=0, laddr=('127.0.0.1', 64720), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:18:54,499 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\errors_document.odt", "metadata": {"Title": "Common Errors and How to Resolve Them", "Author": "Tech Support Team", "Subject": "Error Handling Guide", "Keywords": "errors, troubleshooting, common issues"}}'
+2025-07-23 15:19:05,652 INFO {"status": "success", "message": "Failed to create document: issubclass() arg 1 must be a class"}
+2025-07-23 15:19:05,652 INFO success
+2025-07-23 15:19:05,652 INFO Failed to create document: issubclass() arg 1 must be a class
+2025-07-23 15:22:24,998 INFO call_libreoffice_helper function called
+2025-07-23 15:22:24,998 INFO <socket.socket fd=444, family=2, type=1, proto=0, laddr=('127.0.0.1', 64755), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:22:24,998 INFO b'{"action": "ping"}'
+2025-07-23 15:22:24,998 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 15:22:25,090 INFO Processing request of type ListToolsRequest
+2025-07-23 15:23:00,036 INFO Processing request of type CallToolRequest
+2025-07-23 15:23:00,036 INFO C:\Users\ben_t\Documents\computer_bugs_guide.odt
+2025-07-23 15:23:00,036 INFO {'Title': 'Understanding Computer Bugs', 'Author': 'TechWriter', 'Subject': 'Computer Science', 'Keywords': 'bugs, programming, errors, debugging'}
+2025-07-23 15:23:00,036 INFO call_libreoffice_helper function called
+2025-07-23 15:23:00,039 INFO <socket.socket fd=848, family=2, type=1, proto=0, laddr=('127.0.0.1', 64759), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:23:00,039 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\computer_bugs_guide.odt", "metadata": {"Title": "Understanding Computer Bugs", "Author": "TechWriter", "Subject": "Computer Science", "Keywords": "bugs, programming, errors, debugging"}}'
+2025-07-23 15:23:02,154 INFO {"status": "success", "message": "Failed to create document: conversion not possible!"}
+2025-07-23 15:23:02,157 INFO success
+2025-07-23 15:23:02,157 INFO Failed to create document: conversion not possible!
+2025-07-23 15:23:02,181 INFO Processing request of type CallToolRequest
+2025-07-23 15:23:02,181 INFO call_libreoffice_helper function called
+2025-07-23 15:23:02,181 INFO <socket.socket fd=960, family=2, type=1, proto=0, laddr=('127.0.0.1', 64761), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:23:02,181 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\computer_bugs_guide.odt", "text": "Understanding Computer Bugs", "level": 1}'
+2025-07-23 15:23:02,181 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\computer_bugs_guide.odt"}
+2025-07-23 15:23:02,184 INFO Processing request of type CallToolRequest
+2025-07-23 15:23:02,184 INFO call_libreoffice_helper function called
+2025-07-23 15:23:02,184 INFO <socket.socket fd=872, family=2, type=1, proto=0, laddr=('127.0.0.1', 64762), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:23:02,184 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\computer_bugs_guide.odt", "text": "This document explores common types of computer bugs, their causes, and debugging techniques. From syntax errors to logic flaws, we\'ll examine how these issues impact software reliability.", "style": "Default", "alignment": "left"}'
+2025-07-23 15:23:02,184 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\computer_bugs_guide.odt"}
+2025-07-23 15:23:02,199 INFO Processing request of type CallToolRequest
+2025-07-23 15:23:02,199 INFO call_libreoffice_helper function called
+2025-07-23 15:23:02,199 INFO <socket.socket fd=960, family=2, type=1, proto=0, laddr=('127.0.0.1', 64763), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:23:02,199 INFO b'{"action": "apply_document_style", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\computer_bugs_guide.odt", "default_style": {"font_name": "Arial", "font_size": 12.0, "color": "#000000", "alignment": "left"}}'
+2025-07-23 15:23:02,199 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\computer_bugs_guide.odt"}
+2025-07-23 15:23:02,220 INFO Processing request of type CallToolRequest
+2025-07-23 15:23:02,220 INFO call_libreoffice_helper function called
+2025-07-23 15:23:02,220 INFO <socket.socket fd=968, family=2, type=1, proto=0, laddr=('127.0.0.1', 64764), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:23:02,220 INFO b'{"action": "add_table", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\computer_bugs_guide.odt", "rows": 5, "columns": 3, "data": [["Bug Type", "Description", "Example"], ["Syntax Error", "Incorrect code structure", "Missing semicolon"], ["Logic Error", "Incorrect algorithm", "Infinite loop"], ["Runtime Error", "Unexpected crash", "Null pointer"], ["Resource Leak", "Memory not freed", "Open file handles"], ["Security Vulnerability", "Exploitable flaw", "Buffer overflow"]], "header_row": true}'
+2025-07-23 15:23:02,221 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\computer_bugs_guide.odt"}
+2025-07-23 15:23:02,231 INFO Processing request of type CallToolRequest
+2025-07-23 15:23:02,231 INFO Processing request of type CallToolRequest
+2025-07-23 15:23:02,231 INFO call_libreoffice_helper function called
+2025-07-23 15:23:02,231 INFO <socket.socket fd=900, family=2, type=1, proto=0, laddr=('127.0.0.1', 64765), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:23:02,231 INFO b'{"action": "insert_image", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\computer_bugs_guide.odt", "image_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\bug_icon.png", "width": 200, "height": 200}'
+2025-07-23 15:23:02,247 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\computer_bugs_guide.odt"}
+2025-07-23 15:30:21,924 INFO call_libreoffice_helper function called
+2025-07-23 15:30:21,940 INFO <socket.socket fd=396, family=2, type=1, proto=0, laddr=('127.0.0.1', 64790), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:30:21,940 INFO b'{"action": "ping"}'
+2025-07-23 15:30:21,940 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 15:30:21,988 INFO Processing request of type ListToolsRequest
+2025-07-23 15:30:40,978 INFO Processing request of type CallToolRequest
+2025-07-23 15:30:40,978 INFO C:\Users\ben_t\Documents\computer_bugs_document.odt
+2025-07-23 15:30:40,978 INFO {'Title': 'Understanding Computer Bugs', 'Author': 'User', 'Subject': 'Computer Science', 'Keywords': 'bugs, programming, errors'}
+2025-07-23 15:30:40,978 INFO call_libreoffice_helper function called
+2025-07-23 15:30:40,994 INFO <socket.socket fd=836, family=2, type=1, proto=0, laddr=('127.0.0.1', 64795), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:30:40,994 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\computer_bugs_document.odt", "metadata": {"Title": "Understanding Computer Bugs", "Author": "User", "Subject": "Computer Science", "Keywords": "bugs, programming, errors"}}'
+2025-07-23 15:30:41,555 INFO {"status": "success", "message": "Failed to create document: conversion not possible!"}
+2025-07-23 15:30:41,555 INFO success
+2025-07-23 15:30:41,555 INFO Failed to create document: conversion not possible!
+2025-07-23 15:35:22,725 INFO call_libreoffice_helper function called
+2025-07-23 15:35:22,730 INFO <socket.socket fd=468, family=2, type=1, proto=0, laddr=('127.0.0.1', 64809), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:35:22,730 INFO b'{"action": "ping"}'
+2025-07-23 15:35:22,730 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 15:35:22,804 INFO Processing request of type ListToolsRequest
+2025-07-23 15:35:32,906 INFO Processing request of type CallToolRequest
+2025-07-23 15:35:32,906 INFO C:\Users\ben_t\Documents\ProgrammingGuide.odt
+2025-07-23 15:35:32,906 INFO {'Title': 'Introduction to Programming', 'Author': 'TechWriter', 'Subject': 'Programming Basics', 'Keywords': 'programming, coding, tutorials'}
+2025-07-23 15:35:32,906 INFO call_libreoffice_helper function called
+2025-07-23 15:35:32,922 INFO <socket.socket fd=724, family=2, type=1, proto=0, laddr=('127.0.0.1', 64813), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:35:32,922 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\ProgrammingGuide.odt", "metadata": {"Title": "Introduction to Programming", "Author": "TechWriter", "Subject": "Programming Basics", "Keywords": "programming, coding, tutorials"}}'
+2025-07-23 15:35:34,664 INFO {"status": "success", "message": "Failed to create document: conversion not possible!"}
+2025-07-23 15:35:34,664 INFO success
+2025-07-23 15:35:34,664 INFO Failed to create document: conversion not possible!
+2025-07-23 15:35:34,698 INFO Processing request of type CallToolRequest
+2025-07-23 15:35:34,698 INFO call_libreoffice_helper function called
+2025-07-23 15:35:34,698 INFO <socket.socket fd=884, family=2, type=1, proto=0, laddr=('127.0.0.1', 64815), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:35:34,698 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\ProgrammingGuide.odt", "text": "What is Programming?", "level": 1}'
+2025-07-23 15:35:34,698 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\ProgrammingGuide.odt"}
+2025-07-23 15:35:34,736 INFO Processing request of type CallToolRequest
+2025-07-23 15:35:34,736 INFO call_libreoffice_helper function called
+2025-07-23 15:35:34,736 INFO <socket.socket fd=596, family=2, type=1, proto=0, laddr=('127.0.0.1', 64816), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:35:34,736 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\ProgrammingGuide.odt", "text": "Programming involves instructing computers to perform tasks through code. It\'s foundational in software development and automation.", "style": null, "alignment": "left"}'
+2025-07-23 15:35:34,736 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\ProgrammingGuide.odt"}
+2025-07-23 15:35:34,765 INFO Processing request of type CallToolRequest
+2025-07-23 15:35:34,765 INFO call_libreoffice_helper function called
+2025-07-23 15:35:34,765 INFO <socket.socket fd=376, family=2, type=1, proto=0, laddr=('127.0.0.1', 64817), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:35:34,765 INFO b'{"action": "add_table", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\ProgrammingGuide.odt", "rows": 3, "columns": 2, "data": [["Concept", "Description"], ["Algorithm", "Step-by-step instructions"], ["Syntax", "Rules for writing code"]], "header_row": true}'
+2025-07-23 15:35:34,765 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\ProgrammingGuide.odt"}
+2025-07-23 15:35:34,795 INFO Processing request of type CallToolRequest
+2025-07-23 15:35:34,795 INFO call_libreoffice_helper function called
+2025-07-23 15:35:34,795 INFO <socket.socket fd=636, family=2, type=1, proto=0, laddr=('127.0.0.1', 64818), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:35:34,795 INFO b'{"action": "insert_image", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\ProgrammingGuide.odt", "image_path": "/images/programming-icon.png", "width": 200, "height": 200}'
+2025-07-23 15:35:34,795 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\ProgrammingGuide.odt"}
+2025-07-23 15:41:09,697 INFO call_libreoffice_helper function called
+2025-07-23 15:41:38,710 INFO call_libreoffice_helper function called
+2025-07-23 15:41:38,726 INFO <socket.socket fd=896, family=2, type=1, proto=0, laddr=('127.0.0.1', 64832), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:41:38,726 INFO b'{"action": "ping"}'
+2025-07-23 15:41:38,726 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 15:41:38,803 INFO Processing request of type ListToolsRequest
+2025-07-23 15:41:52,702 INFO Processing request of type CallToolRequest
+2025-07-23 15:41:52,702 INFO C:\Users\ben_t\Documents\success_document.odt
+2025-07-23 15:41:52,702 INFO {'Title': 'The Path to Success', 'Author': 'Jane Doe', 'Subject': 'Strategies for Achieving Success', 'Keywords': 'success, productivity, goals, motivation'}
+2025-07-23 15:41:52,702 INFO call_libreoffice_helper function called
+2025-07-23 15:41:52,702 INFO <socket.socket fd=1004, family=2, type=1, proto=0, laddr=('127.0.0.1', 64836), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:41:52,702 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\success_document.odt", "metadata": {"Title": "The Path to Success", "Author": "Jane Doe", "Subject": "Strategies for Achieving Success", "Keywords": "success, productivity, goals, motivation"}}'
+2025-07-23 15:41:56,916 INFO {"status": "success", "message": "Successfully created text document at: C:\\Users\\ben_t\\Documents\\success_document.odt"}
+2025-07-23 15:41:56,917 INFO success
+2025-07-23 15:41:56,917 INFO Successfully created text document at: C:\Users\ben_t\Documents\success_document.odt
+2025-07-23 15:41:56,947 INFO Processing request of type CallToolRequest
+2025-07-23 15:41:56,947 INFO call_libreoffice_helper function called
+2025-07-23 15:41:56,947 INFO <socket.socket fd=984, family=2, type=1, proto=0, laddr=('127.0.0.1', 64838), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:41:56,947 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\success_document.odt", "text": "The Path to Success", "level": 1}'
+2025-07-23 15:41:56,947 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\success_document.odt"}
+2025-07-23 15:41:56,981 INFO Processing request of type CallToolRequest
+2025-07-23 15:41:56,981 INFO call_libreoffice_helper function called
+2025-07-23 15:41:56,981 INFO <socket.socket fd=892, family=2, type=1, proto=0, laddr=('127.0.0.1', 64839), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:41:56,981 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\success_document.odt", "text": "Success is the result of consistent effort, strategic planning, and resilience. This document explores key factors that contribute to achieving success in both personal and professional contexts.", "style": "Heading 2", "alignment": "left"}'
+2025-07-23 15:41:56,981 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\success_document.odt"}
+2025-07-23 15:41:57,010 INFO Processing request of type CallToolRequest
+2025-07-23 15:41:57,010 INFO call_libreoffice_helper function called
+2025-07-23 15:41:57,010 INFO <socket.socket fd=892, family=2, type=1, proto=0, laddr=('127.0.0.1', 64840), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:41:57,010 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\success_document.odt", "text": "1. Define Clear Goals: Establish specific, measurable, and time-bound objectives.\\n2. Develop a Plan: Break down goals into actionable steps.\\n3. Stay Persistent: Overcome obstacles through determination and adaptability.\\n4. Learn Continuously: Acquire new skills and knowledge to stay competitive.", "style": "Bullet", "alignment": "left"}'
+2025-07-23 15:41:57,010 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\success_document.odt"}
+2025-07-23 15:41:57,044 INFO Processing request of type CallToolRequest
+2025-07-23 15:41:57,044 INFO call_libreoffice_helper function called
+2025-07-23 15:41:57,044 INFO <socket.socket fd=1000, family=2, type=1, proto=0, laddr=('127.0.0.1', 64841), raddr=('127.0.0.1', 8765)>
+2025-07-23 15:41:57,044 INFO b'{"action": "apply_document_style", "file_path": "C:\\\\Users\\\\ben_t\\\\source\\\\repos\\\\LibreOfficeAI\\\\MCPServer\\\\libre-office-mcp\\\\libre-writer\\\\success_document.odt", "default_style": {"font_name": "Arial", "font_size": 12.0, "color": "#000000", "alignment": "left"}}'
+2025-07-23 15:41:57,044 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\libre-office-mcp\\libre-writer\\success_document.odt"}
+2025-07-23 16:02:09,135 INFO call_libreoffice_helper function called
+2025-07-23 16:02:09,144 INFO <socket.socket fd=948, family=2, type=1, proto=0, laddr=('127.0.0.1', 64920), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:02:09,144 INFO b'{"action": "ping"}'
+2025-07-23 16:02:09,144 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 16:02:09,231 INFO Processing request of type ListToolsRequest
+2025-07-23 16:02:28,565 INFO Processing request of type CallToolRequest
+2025-07-23 16:02:28,565 INFO C:\Users\ben_t\Documents\vampires_document.odt
+2025-07-23 16:02:28,565 INFO {'Title': 'The Lore and Legend of Vampires', 'Author': 'Mystery Author', 'Subject': 'Mythology and Folklore', 'Keywords': 'vampires, folklore, mythology, supernatural'}
+2025-07-23 16:02:28,565 INFO call_libreoffice_helper function called
+2025-07-23 16:02:28,569 INFO <socket.socket fd=920, family=2, type=1, proto=0, laddr=('127.0.0.1', 64926), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:02:28,569 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\vampires_document.odt", "metadata": {"Title": "The Lore and Legend of Vampires", "Author": "Mystery Author", "Subject": "Mythology and Folklore", "Keywords": "vampires, folklore, mythology, supernatural"}}'
+2025-07-23 16:02:30,277 INFO {"status": "success", "message": "Successfully created text document at: C:\\Users\\ben_t\\Documents\\vampires_document.odt"}
+2025-07-23 16:02:30,277 INFO success
+2025-07-23 16:02:30,277 INFO Successfully created text document at: C:\Users\ben_t\Documents\vampires_document.odt
+2025-07-23 16:04:26,662 INFO Processing request of type CallToolRequest
+2025-07-23 16:04:26,662 INFO call_libreoffice_helper function called
+2025-07-23 16:04:26,689 INFO <socket.socket fd=832, family=2, type=1, proto=0, laddr=('127.0.0.1', 64935), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:04:26,689 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\vampires_document.odt", "text": "1. Origins of Vampire Lore", "level": 1}'
+2025-07-23 16:04:27,615 INFO {"status": "success", "message": "Heading added to C:\\Users\\ben_t\\Documents\\vampires_document.odt"}
+2025-07-23 16:04:27,649 INFO Processing request of type CallToolRequest
+2025-07-23 16:04:27,649 INFO call_libreoffice_helper function called
+2025-07-23 16:04:27,675 INFO <socket.socket fd=800, family=2, type=1, proto=0, laddr=('127.0.0.1', 64937), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:04:27,675 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\vampires_document.odt", "text": "Vampire myths date back thousands of years, with roots in ancient Mesopotamian, Indian, and Chinese cultures. Early tales often revolved around reanimated corpses or blood-sucking spirits. The term \\"vampire\\" itself emerged in the 18th century in Eastern Europe, particularly in Serbia and Romania, where stories of the undead spread through oral traditions.", "style": null, "alignment": null}'
+2025-07-23 16:04:28,172 INFO {"status": "success", "message": "Paragraph added to C:\\Users\\ben_t\\Documents\\vampires_document.odt"}
+2025-07-23 16:04:28,204 INFO Processing request of type CallToolRequest
+2025-07-23 16:04:28,204 INFO call_libreoffice_helper function called
+2025-07-23 16:04:28,204 INFO <socket.socket fd=900, family=2, type=1, proto=0, laddr=('127.0.0.1', 64939), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:04:28,216 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\vampires_document.odt", "text": "2. Characteristics of Vampires", "level": 1}'
+2025-07-23 16:04:28,690 INFO {"status": "success", "message": "Heading added to C:\\Users\\ben_t\\Documents\\vampires_document.odt"}
+2025-07-23 16:04:28,737 INFO Processing request of type CallToolRequest
+2025-07-23 16:04:28,737 INFO call_libreoffice_helper function called
+2025-07-23 16:04:28,753 INFO <socket.socket fd=384, family=2, type=1, proto=0, laddr=('127.0.0.1', 64941), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:04:28,753 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\vampires_document.odt", "text": "Classic vampire traits include: \\\\* Immortality: Vampires are often depicted as ageless beings. \\\\* Blood Dependency: They require human blood to survive. \\\\* Allure and Predation: Vampires are typically seductive, luring victims to drain their life force. \\\\* Avoidance of Sunlight: Many myths describe them as vulnerable to sunlight or holy objects.", "style": null, "alignment": null}'
+2025-07-23 16:04:29,268 INFO {"status": "success", "message": "Paragraph added to C:\\Users\\ben_t\\Documents\\vampires_document.odt"}
+2025-07-23 16:04:29,315 INFO Processing request of type CallToolRequest
+2025-07-23 16:04:29,316 INFO call_libreoffice_helper function called
+2025-07-23 16:04:29,316 INFO <socket.socket fd=896, family=2, type=1, proto=0, laddr=('127.0.0.1', 64943), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:04:29,316 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\vampires_document.odt", "text": "3. Cultural Impact and Symbolism", "level": 1}'
+2025-07-23 16:04:30,206 INFO {"status": "success", "message": "Heading added to C:\\Users\\ben_t\\Documents\\vampires_document.odt"}
+2025-07-23 16:04:30,232 INFO Processing request of type CallToolRequest
+2025-07-23 16:04:30,238 INFO call_libreoffice_helper function called
+2025-07-23 16:04:30,254 INFO <socket.socket fd=892, family=2, type=1, proto=0, laddr=('127.0.0.1', 64945), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:04:30,254 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\vampires_document.odt", "text": "Vampires have symbolized forbidden desires, mortality, and the fear of the unknown. In literature, they often represent societal anxieties (e.g., sexuality, disease). Folklore frequently portrays them as cursed souls or moral warnings against greed and hubris.", "style": null, "alignment": null}'
+2025-07-23 16:04:30,902 INFO {"status": "success", "message": "Paragraph added to C:\\Users\\ben_t\\Documents\\vampires_document.odt"}
+2025-07-23 16:04:30,929 INFO Processing request of type CallToolRequest
+2025-07-23 16:04:30,929 INFO call_libreoffice_helper function called
+2025-07-23 16:04:30,945 INFO <socket.socket fd=896, family=2, type=1, proto=0, laddr=('127.0.0.1', 64947), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:04:30,945 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\vampires_document.odt", "text": "4. Modern Interpretations in Media", "level": 1}'
+2025-07-23 16:04:31,557 INFO {"status": "success", "message": "Heading added to C:\\Users\\ben_t\\Documents\\vampires_document.odt"}
+2025-07-23 16:04:31,596 INFO Processing request of type CallToolRequest
+2025-07-23 16:04:31,596 INFO call_libreoffice_helper function called
+2025-07-23 16:04:31,596 INFO <socket.socket fd=868, family=2, type=1, proto=0, laddr=('127.0.0.1', 64949), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:04:31,596 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\vampires_document.odt", "text": "Modern media has reimagined vampires as complex characters. Films like *Dracula* (1931) and *Twilight* (2008) blend horror with romance, while TV series like *True Blood* and *The Vampire Diaries* explore their humanity. Vampires now often embody themes of identity, power, and transformation.", "style": null, "alignment": null}'
+2025-07-23 16:04:32,320 INFO {"status": "success", "message": "Paragraph added to C:\\Users\\ben_t\\Documents\\vampires_document.odt"}
+2025-07-23 16:04:32,352 INFO Processing request of type CallToolRequest
+2025-07-23 16:04:32,352 INFO call_libreoffice_helper function called
+2025-07-23 16:04:32,352 INFO <socket.socket fd=800, family=2, type=1, proto=0, laddr=('127.0.0.1', 64951), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:04:32,357 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\vamp3\\\\vampires_document.odt", "text": "5. Conclusion", "level": 1}'
+2025-07-23 16:04:32,357 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\Documents\\vamp3\\vampires_document.odt"}
+2025-07-23 16:04:32,384 INFO Processing request of type CallToolRequest
+2025-07-23 16:04:32,384 INFO call_libreoffice_helper function called
+2025-07-23 16:04:32,415 INFO <socket.socket fd=868, family=2, type=1, proto=0, laddr=('127.0.0.1', 64952), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:04:32,416 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\vampires_document.odt", "text": "Vampires remain a timeless symbol of the supernatural, evolving with culture and media. Their legends continue to captivate, reflecting humanity\\u2019s fascination with life, death, and the unknown.", "style": null, "alignment": null}'
+2025-07-23 16:04:33,005 INFO {"status": "success", "message": "Paragraph added to C:\\Users\\ben_t\\Documents\\vampires_document.odt"}
+2025-07-23 16:06:11,330 INFO call_libreoffice_helper function called
+2025-07-23 16:06:11,330 INFO <socket.socket fd=500, family=2, type=1, proto=0, laddr=('127.0.0.1', 64964), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:06:11,330 INFO b'{"action": "ping"}'
+2025-07-23 16:06:11,330 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 16:06:11,416 INFO Processing request of type ListToolsRequest
+2025-07-23 16:06:29,333 INFO Processing request of type CallToolRequest
+2025-07-23 16:06:29,334 INFO C:\Users\ben_t\Documents\ghosts_document.odt
+2025-07-23 16:06:29,334 INFO {'Title': 'The Mystery of Ghosts', 'Author': 'Ben T', 'Subject': 'Paranormal Phenomena', 'Keywords': 'ghosts, paranormal, spirits'}
+2025-07-23 16:06:29,334 INFO call_libreoffice_helper function called
+2025-07-23 16:06:29,354 INFO <socket.socket fd=612, family=2, type=1, proto=0, laddr=('127.0.0.1', 64968), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:06:29,354 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\ghosts_document.odt", "metadata": {"Title": "The Mystery of Ghosts", "Author": "Ben T", "Subject": "Paranormal Phenomena", "Keywords": "ghosts, paranormal, spirits"}}'
+2025-07-23 16:06:31,133 INFO {"status": "success", "message": "Successfully created text document at: C:\\Users\\ben_t\\Documents\\ghosts_document.odt"}
+2025-07-23 16:06:31,133 INFO success
+2025-07-23 16:06:31,133 INFO Successfully created text document at: C:\Users\ben_t\Documents\ghosts_document.odt
+2025-07-23 16:11:33,043 INFO call_libreoffice_helper function called
+2025-07-23 16:11:33,048 INFO <socket.socket fd=936, family=2, type=1, proto=0, laddr=('127.0.0.1', 64975), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:11:33,048 INFO b'{"action": "ping"}'
+2025-07-23 16:11:33,048 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 16:11:33,142 INFO Processing request of type ListToolsRequest
+2025-07-23 16:11:58,788 INFO Processing request of type CallToolRequest
+2025-07-23 16:11:58,797 INFO call_libreoffice_helper function called
+2025-07-23 16:11:58,797 INFO <socket.socket fd=788, family=2, type=1, proto=0, laddr=('127.0.0.1', 64979), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:11:58,797 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\dogs_document.odt", "text": "Dogs", "level": 1}'
+2025-07-23 16:11:58,797 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\Documents\\dogs_document.odt"}
+2025-07-23 16:11:58,842 INFO Processing request of type CallToolRequest
+2025-07-23 16:11:58,842 INFO call_libreoffice_helper function called
+2025-07-23 16:11:58,843 INFO <socket.socket fd=452, family=2, type=1, proto=0, laddr=('127.0.0.1', 64980), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:11:58,844 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\dogs_document.odt", "text": "Dogs are domestic mammals that have been companions to humans for thousands of years. They are known for their loyalty, intelligence, and ability to adapt to various environments.", "style": null, "alignment": "left"}'
+2025-07-23 16:11:58,845 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\Documents\\dogs_document.odt"}
+2025-07-23 16:11:58,868 INFO Processing request of type CallToolRequest
+2025-07-23 16:11:58,868 INFO call_libreoffice_helper function called
+2025-07-23 16:11:58,868 INFO <socket.socket fd=452, family=2, type=1, proto=0, laddr=('127.0.0.1', 64981), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:11:58,868 INFO b'{"action": "insert_image", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\dogs_document.odt", "image_path": "C:\\\\Users\\\\ben_t\\\\Pictures\\\\dog_photo.jpg", "width": 5000, "height": 3000}'
+2025-07-23 16:11:58,872 INFO {"status": "success", "message": "Document not found: C:\\Users\\ben_t\\Documents\\dogs_document.odt"}
+2025-07-23 16:13:04,205 INFO call_libreoffice_helper function called
+2025-07-23 16:13:04,209 INFO <socket.socket fd=464, family=2, type=1, proto=0, laddr=('127.0.0.1', 64990), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:13:04,209 INFO b'{"action": "ping"}'
+2025-07-23 16:13:04,209 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 16:13:04,280 INFO Processing request of type ListToolsRequest
+2025-07-23 16:13:24,453 INFO Processing request of type CallToolRequest
+2025-07-23 16:13:24,454 INFO C:\Users\ben_t\Documents\dogs_document.odt
+2025-07-23 16:13:24,454 INFO {'Title': 'The Wonderful World of Dogs', 'Author': 'Ben T', 'Subject': 'Dogs', 'Keywords': ['dogs', 'pets', 'animals']}
+2025-07-23 16:13:24,454 INFO call_libreoffice_helper function called
+2025-07-23 16:13:24,474 INFO <socket.socket fd=692, family=2, type=1, proto=0, laddr=('127.0.0.1', 64996), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:13:24,475 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\dogs_document.odt", "metadata": {"Title": "The Wonderful World of Dogs", "Author": "Ben T", "Subject": "Dogs", "Keywords": ["dogs", "pets", "animals"]}}'
+2025-07-23 16:13:26,263 INFO {"status": "success", "message": "Successfully created text document at: C:\\Users\\ben_t\\Documents\\dogs_document.odt"}
+2025-07-23 16:13:26,263 INFO success
+2025-07-23 16:13:26,263 INFO Successfully created text document at: C:\Users\ben_t\Documents\dogs_document.odt
+2025-07-23 16:13:26,294 INFO Processing request of type CallToolRequest
+2025-07-23 16:13:26,294 INFO call_libreoffice_helper function called
+2025-07-23 16:13:26,310 INFO <socket.socket fd=652, family=2, type=1, proto=0, laddr=('127.0.0.1', 64998), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:13:26,310 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\dogs_document.odt", "text": "The Wonderful World of Dogs", "level": 1}'
+2025-07-23 16:13:26,814 INFO {"status": "success", "message": "Heading added to C:\\Users\\ben_t\\Documents\\dogs_document.odt"}
+2025-07-23 16:13:26,843 INFO Processing request of type CallToolRequest
+2025-07-23 16:13:26,843 INFO call_libreoffice_helper function called
+2025-07-23 16:13:26,859 INFO <socket.socket fd=652, family=2, type=1, proto=0, laddr=('127.0.0.1', 65000), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:13:26,859 INFO b'{"action": "create_custom_style", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\dogs_document.odt", "style_name": "Introduction", "style_properties": {"font_name": "Arial", "font_size": 14.0, "bold": true, "color": "#000000", "alignment": "left"}}'
+2025-07-23 16:13:27,376 INFO {"status": "success", "message": "Custom style 'Introduction' created/updated in C:\\Users\\ben_t\\Documents\\dogs_document.odt"}
+2025-07-23 16:13:27,401 INFO Processing request of type CallToolRequest
+2025-07-23 16:13:27,403 INFO call_libreoffice_helper function called
+2025-07-23 16:13:27,404 INFO <socket.socket fd=716, family=2, type=1, proto=0, laddr=('127.0.0.1', 65002), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:13:27,404 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\dogs_document.odt", "text": "Dogs have been humanity\'s loyal companions for thousands of years, offering unwavering love and protection. From ancient wolves to modern breeds, their evolution reflects our shared history.", "style": "Introduction", "alignment": "left"}'
+2025-07-23 16:13:28,032 INFO {"status": "success", "message": "Paragraph added to C:\\Users\\ben_t\\Documents\\dogs_document.odt"}
+2025-07-23 16:13:28,080 INFO Processing request of type CallToolRequest
+2025-07-23 16:13:28,080 INFO call_libreoffice_helper function called
+2025-07-23 16:13:28,096 INFO <socket.socket fd=428, family=2, type=1, proto=0, laddr=('127.0.0.1', 65004), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:13:28,096 INFO b'{"action": "add_table", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\dogs_document.odt", "rows": 5, "columns": 4, "data": [["Labrador Retriever", "Large", "Friendly", "High"], ["Poodle", "Medium", "Intelligent", "Moderate"], ["Bulldog", "Medium", "Gentle", "Low"], ["German Shepherd", "Large", "Confident", "High"], ["Chihuahua", "Small", "Energetic", "High"]], "header_row": true}'
+2025-07-23 16:13:29,247 INFO {"status": "success", "message": "Table added to C:\\Users\\ben_t\\Documents\\dogs_document.odt"}
+2025-07-23 16:13:29,280 INFO Processing request of type CallToolRequest
+2025-07-23 16:13:29,280 INFO call_libreoffice_helper function called
+2025-07-23 16:13:29,294 INFO <socket.socket fd=584, family=2, type=1, proto=0, laddr=('127.0.0.1', 65006), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:13:29,294 INFO b'{"action": "insert_image", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\dogs_document.odt", "image_path": "C:\\\\Users\\\\ben_t\\\\Pictures\\\\dog.jpg", "width": 5000, "height": 3000}'
+2025-07-23 16:13:29,462 INFO {"status": "success", "message": "Image not found: C:\\Users\\ben_t\\Pictures\\dog.jpg"}
+2025-07-23 16:15:36,781 INFO call_libreoffice_helper function called
+2025-07-23 16:15:36,795 INFO <socket.socket fd=876, family=2, type=1, proto=0, laddr=('127.0.0.1', 65021), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:15:36,795 INFO b'{"action": "ping"}'
+2025-07-23 16:15:36,795 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 16:15:36,878 INFO Processing request of type ListToolsRequest
+2025-07-23 16:17:08,107 INFO Processing request of type CallToolRequest
+2025-07-23 16:17:08,107 INFO C:\Users\ben_t\Documents\A_to_Z_of_Colours.odt
+2025-07-23 16:17:08,107 INFO {'Title': 'A to Z of Colours', 'Author': 'Ben Thompson', 'Subject': 'Color Guide'}
+2025-07-23 16:17:08,107 INFO call_libreoffice_helper function called
+2025-07-23 16:17:08,107 INFO <socket.socket fd=420, family=2, type=1, proto=0, laddr=('127.0.0.1', 65026), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:17:08,107 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\A_to_Z_of_Colours.odt", "metadata": {"Title": "A to Z of Colours", "Author": "Ben Thompson", "Subject": "Color Guide"}}'
+2025-07-23 16:17:09,856 INFO {"status": "success", "message": "Successfully created text document at: C:\\Users\\ben_t\\Documents\\A_to_Z_of_Colours.odt"}
+2025-07-23 16:17:09,856 INFO success
+2025-07-23 16:17:09,856 INFO Successfully created text document at: C:\Users\ben_t\Documents\A_to_Z_of_Colours.odt
+2025-07-23 16:18:19,398 INFO Processing request of type CallToolRequest
+2025-07-23 16:18:19,398 INFO call_libreoffice_helper function called
+2025-07-23 16:18:19,418 INFO <socket.socket fd=408, family=2, type=1, proto=0, laddr=('127.0.0.1', 65039), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:18:19,418 INFO b'{"action": "add_text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\A_to_Z_of_Colours.odt", "text": "A: Amber\\nA warm, golden color associated with sunlight and warmth.", "position": "end"}'
+2025-07-23 16:18:19,865 INFO {"status": "success", "message": "Text added to C:\\Users\\ben_t\\Documents\\A_to_Z_of_Colours.odt"}
+2025-07-23 16:18:19,894 INFO Processing request of type CallToolRequest
+2025-07-23 16:18:19,894 INFO call_libreoffice_helper function called
+2025-07-23 16:18:19,910 INFO <socket.socket fd=392, family=2, type=1, proto=0, laddr=('127.0.0.1', 65041), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:18:19,910 INFO b'{"action": "add_text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\A_to_Z_of_Colours.odt", "text": "B: Blue\\nA cool, calming color symbolizing trust and stability.", "position": "end"}'
+2025-07-23 16:18:20,339 INFO {"status": "success", "message": "Text added to C:\\Users\\ben_t\\Documents\\A_to_Z_of_Colours.odt"}
+2025-07-23 16:18:20,370 INFO Processing request of type CallToolRequest
+2025-07-23 16:18:20,370 INFO call_libreoffice_helper function called
+2025-07-23 16:18:20,370 INFO <socket.socket fd=420, family=2, type=1, proto=0, laddr=('127.0.0.1', 65043), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:18:20,370 INFO b'{"action": "add_text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\A_to_Z_of_Colours.odt", "text": "C: Crimson\\nA deep red hue linked to passion and energy.", "position": "end"}'
+2025-07-23 16:18:20,856 INFO {"status": "success", "message": "Text added to C:\\Users\\ben_t\\Documents\\A_to_Z_of_Colours.odt"}
+2025-07-23 16:18:20,881 INFO Processing request of type CallToolRequest
+2025-07-23 16:18:20,881 INFO call_libreoffice_helper function called
+2025-07-23 16:18:20,902 INFO <socket.socket fd=940, family=2, type=1, proto=0, laddr=('127.0.0.1', 65045), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:18:20,902 INFO b'{"action": "add_text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\A_to_Z_of_Colours.odt", "text": "D: Daffodil\\nA bright yellow color evoking spring and renewal.", "position": "end"}'
+2025-07-23 16:18:21,359 INFO {"status": "success", "message": "Text added to C:\\Users\\ben_t\\Documents\\A_to_Z_of_Colours.odt"}
+2025-07-23 16:19:40,836 INFO Processing request of type CallToolRequest
+2025-07-23 16:19:40,836 INFO call_libreoffice_helper function called
+2025-07-23 16:19:40,852 INFO <socket.socket fd=968, family=2, type=1, proto=0, laddr=('127.0.0.1', 65056), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:19:40,852 INFO b'{"action": "add_text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\A_to_Z_of_Colours.odt", "text": "E: Emerald\\nA deep green color associated with forests and nature.\\n\\nF: Fuchsia\\nA vibrant purple-red color often used in design and fashion.\\n\\nG: Gold\\nA warm, metallic color symbolizing wealth and achievement.\\n\\nH: Honey\\nA light amber color resembling the sweet substance from bees.\\n\\nI: Indigo\\nA deep, rich blue-purple color associated with mystery and spirituality.\\n\\nJ: Jade\\nA vibrant green color linked to growth, renewal, and prosperity.\\n\\nK: Khaki\\nA muted, earthy brownish-yellow color used in military uniforms.\\n\\nL: Lavender\\nA soft purple color resembling the flower of the same name.\\n\\nM: Magenta\\nA bright pinkish-red color used in art and technology.\\n\\nN: Navy\\nA dark blue color associated with professionalism and the sea.\\n\\nO: Orange\\nA vibrant color between red and yellow, symbolizing energy and creativity.\\n\\nP: Peach\\nA soft, pale yellowish-red color resembling the fruit.\\n\\nQ: Queen Blue\\nA deep, rich blue color associated with royalty and elegance.\\n\\nR: Ruby\\nA deep red color resembling the precious gemstone.\\n\\nS: Sapphire\\nA deep blue color symbolizing wisdom and clarity.\\n\\nT: Turquoise\\nA bright cyan color resembling the gemstone and the ocean.\\n\\nU: Ultramarine\\nA deep, intense blue color derived from lapis lazuli.\\n\\nV: Violet\\nA deep purple color associated with creativity and royalty.\\n\\nW: White\\nA neutral color representing purity, simplicity, and cleanliness.\\n\\nX: Xanadu\\nA pale greenish-blue color named after the fictional city in \\"The Alchemist\\".\\n\\nY: Yellow\\nA bright, cheerful color associated with happiness and warmth.\\n\\nZ: Zinc\\nA pale blue-gray color named after the metal, often used in industrial contexts.", "position": "end"}'
+2025-07-23 16:19:40,918 INFO {"status": "success", "message": "Failed to load document: C:\\Users\\ben_t\\Documents\\A_to_Z_of_Colours.odt"}
+2025-07-23 16:20:53,754 INFO Processing request of type CallToolRequest
+2025-07-23 16:20:53,754 INFO C:\Users\ben_t\Documents\A_to_Z_of_Colours.odt
+2025-07-23 16:20:53,754 INFO {'Title': 'A to Z of Colours', 'Author': 'Ben Thompson', 'Subject': 'Color Guide'}
+2025-07-23 16:20:53,754 INFO call_libreoffice_helper function called
+2025-07-23 16:20:53,762 INFO <socket.socket fd=872, family=2, type=1, proto=0, laddr=('127.0.0.1', 65070), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:20:53,762 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\A_to_Z_of_Colours.odt", "metadata": {"Title": "A to Z of Colours", "Author": "Ben Thompson", "Subject": "Color Guide"}}'
+2025-07-23 16:20:55,457 INFO {"status": "success", "message": "Successfully created text document at: C:\\Users\\ben_t\\Documents\\A_to_Z_of_Colours.odt"}
+2025-07-23 16:20:55,457 INFO success
+2025-07-23 16:20:55,457 INFO Successfully created text document at: C:\Users\ben_t\Documents\A_to_Z_of_Colours.odt
+2025-07-23 16:23:38,073 INFO call_libreoffice_helper function called
+2025-07-23 16:23:38,080 INFO <socket.socket fd=768, family=2, type=1, proto=0, laddr=('127.0.0.1', 65087), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:23:38,080 INFO b'{"action": "ping"}'
+2025-07-23 16:23:38,080 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 16:23:38,141 INFO Processing request of type ListToolsRequest
+2025-07-23 16:24:12,510 INFO Processing request of type CallToolRequest
+2025-07-23 16:24:12,513 INFO C:\Users\ben_t\Documents\cows_document.odt
+2025-07-23 16:24:12,513 INFO {'Title': 'Cows: The Gentle Giants of the Farm', 'Author': 'Ben T', 'Subject': 'Farm Animals', 'Keywords': ['cows', 'farm animals', 'agriculture']}
+2025-07-23 16:24:12,513 INFO call_libreoffice_helper function called
+2025-07-23 16:24:12,525 INFO <socket.socket fd=452, family=2, type=1, proto=0, laddr=('127.0.0.1', 65091), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:24:12,525 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\cows_document.odt", "metadata": {"Title": "Cows: The Gentle Giants of the Farm", "Author": "Ben T", "Subject": "Farm Animals", "Keywords": ["cows", "farm animals", "agriculture"]}}'
+2025-07-23 16:24:14,254 INFO {"status": "success", "message": "Successfully created text document at: C:\\Users\\ben_t\\Documents\\cows_document.odt"}
+2025-07-23 16:24:14,254 INFO success
+2025-07-23 16:24:14,254 INFO Successfully created text document at: C:\Users\ben_t\Documents\cows_document.odt
+2025-07-23 16:24:14,301 INFO Processing request of type CallToolRequest
+2025-07-23 16:24:14,301 INFO call_libreoffice_helper function called
+2025-07-23 16:24:14,316 INFO <socket.socket fd=668, family=2, type=1, proto=0, laddr=('127.0.0.1', 65093), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:24:14,316 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\cows_document.odt", "text": "Introduction to Cows", "level": 1}'
+2025-07-23 16:24:14,815 INFO {"status": "success", "message": "Heading added to C:\\Users\\ben_t\\Documents\\cows_document.odt"}
+2025-07-23 16:24:14,852 INFO Processing request of type CallToolRequest
+2025-07-23 16:24:14,852 INFO call_libreoffice_helper function called
+2025-07-23 16:24:14,872 INFO <socket.socket fd=864, family=2, type=1, proto=0, laddr=('127.0.0.1', 65095), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:24:14,872 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\cows_document.odt", "text": "Cows are domesticated mammals widely raised in agriculture for their milk, meat, and labor. They play a vital role in global food production and rural economies.", "style": null, "alignment": "left"}'
+2025-07-23 16:24:15,383 INFO {"status": "success", "message": "Paragraph added to C:\\Users\\ben_t\\Documents\\cows_document.odt"}
+2025-07-23 16:24:15,405 INFO Processing request of type CallToolRequest
+2025-07-23 16:24:15,405 INFO call_libreoffice_helper function called
+2025-07-23 16:24:15,405 INFO <socket.socket fd=468, family=2, type=1, proto=0, laddr=('127.0.0.1', 65097), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:24:15,405 INFO b'{"action": "add_table", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\cows_document.odt", "rows": 3, "columns": 2, "data": [["Breed", "Dairy Cow"], ["Lifespan", "15-20 years"], ["Diet", "Grass, hay, grains"]], "header_row": true}'
+2025-07-23 16:24:16,011 INFO {"status": "success", "message": "Table added to C:\\Users\\ben_t\\Documents\\cows_document.odt"}
+2025-07-23 16:24:16,058 INFO Processing request of type CallToolRequest
+2025-07-23 16:24:16,105 INFO Processing request of type CallToolRequest
+2025-07-23 16:24:16,105 INFO call_libreoffice_helper function called
+2025-07-23 16:24:16,105 INFO <socket.socket fd=860, family=2, type=1, proto=0, laddr=('127.0.0.1', 65099), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:24:16,105 INFO b'{"action": "apply_document_style", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\cows_document.odt", "default_style": {"font_name": "Arial", "font_size": 12.0, "color": "#000000", "alignment": "left"}}'
+2025-07-23 16:24:16,307 INFO {"status": "success", "message": "Failed to apply document style: CharHeight"}
+2025-07-23 16:38:16,718 INFO call_libreoffice_helper function called
+2025-07-23 16:38:16,727 INFO <socket.socket fd=448, family=2, type=1, proto=0, laddr=('127.0.0.1', 65130), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:38:16,727 INFO b'{"action": "ping"}'
+2025-07-23 16:38:16,727 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 16:38:16,820 INFO Processing request of type ListToolsRequest
+2025-07-23 16:38:52,680 INFO Processing request of type CallToolRequest
+2025-07-23 16:38:52,680 INFO call_libreoffice_helper function called
+2025-07-23 16:38:52,701 INFO <socket.socket fd=592, family=2, type=1, proto=0, laddr=('127.0.0.1', 65134), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:38:52,702 INFO b'{"action": "list_documents", "directory": "C:\\\\Users\\\\ben_t\\\\Documents"}'
+2025-07-23 16:38:52,718 INFO {"status": "success", "message": "Found 51 documents in C:\\Users\\ben_t\\Documents:\n\nName: A_to_Z_of_Colours.odt\nType: text (odt)\nSize: 8.5 KB\nModified: 2025-07-23 16:20:54\nPath: C:\\Users\\ben_t\\Documents\\A_to_Z_of_Colours.odt\n---\nName: Ben's lockdown quiz.docx\nType: text (docx)\nSize: 42.4 KB\nModified: 2020-05-24 02:02:11\nPath: C:\\Users\\ben_t\\Documents\\Ben's lockdown quiz.docx\n---\nName: Bridport Open Scoresheet.docx\nType: text (docx)\nSize: 629.1 KB\nModified: 2021-06-30 16:34:12\nPath: C:\\Users\\ben_t\\Documents\\Bridport Open Scoresheet.docx\n---\nName: Bridport Open.docx\nType: text (docx)\nSize: 315.6 KB\nModified: 2021-07-01 20:30:24\nPath: C:\\Users\\ben_t\\Documents\\Bridport Open.docx\n---\nName: Bridport Open.pdf\nType: pdf (pdf)\nSize: 267.5 KB\nModified: 2021-07-01 20:30:56\nPath: C:\\Users\\ben_t\\Documents\\Bridport Open.pdf\n---\nName: Carbon Offsetting.docx\nType: text (docx)\nSize: 1.1 MB\nModified: 2019-12-20 18:19:25\nPath: C:\\Users\\ben_t\\Documents\\Carbon Offsetting.docx\n---\nName: Celebs with Corona.pptx\nType: presentation (pptx)\nSize: 4.6 MB\nModified: 2020-04-05 02:36:31\nPath: C:\\Users\\ben_t\\Documents\\Celebs with Corona.pptx\n---\nName: Copy of Historic COVID-19 Dashboard Data-1.xlsx\nType: spreadsheet (xlsx)\nSize: 222.1 KB\nModified: 2022-01-26 20:43:53\nPath: C:\\Users\\ben_t\\Documents\\Copy of Historic COVID-19 Dashboard Data-1.xlsx\n---\nName: Coronavirus Quiz Questions.docx\nType: text (docx)\nSize: 15.7 KB\nModified: 2020-04-04 21:49:47\nPath: C:\\Users\\ben_t\\Documents\\Coronavirus Quiz Questions.docx\n---\nName: DO NOT DISTURB - dad.docx\nType: text (docx)\nSize: 691.6 KB\nModified: 2022-01-18 13:02:44\nPath: C:\\Users\\ben_t\\Documents\\DO NOT DISTURB - dad.docx\n---\nName: EE Timesheet.docx\nType: text (docx)\nSize: 12.0 KB\nModified: 2019-12-10 00:41:23\nPath: C:\\Users\\ben_t\\Documents\\EE Timesheet.docx\n---\nName: France_Overview.odt\nType: text (odt)\nSize: 8.5 KB\nModified: 2025-07-22 16:03:20\nPath: C:\\Users\\ben_t\\Documents\\France_Overview.odt\n---\nName: Jeremy bday song.docx\nType: text (docx)\nSize: 12.7 KB\nModified: 2021-07-22 12:09:51\nPath: C:\\Users\\ben_t\\Documents\\Jeremy bday song.docx\n---\nName: LOTR Quiz - Answers.docx\nType: text (docx)\nSize: 13.3 KB\nModified: 2021-12-31 12:37:54\nPath: C:\\Users\\ben_t\\Documents\\LOTR Quiz - Answers.docx\n---\nName: LOTR Quiz - Questions.docx\nType: text (docx)\nSize: 13.8 KB\nModified: 2021-12-31 12:37:30\nPath: C:\\Users\\ben_t\\Documents\\LOTR Quiz - Questions.docx\n---\nName: LifeGoals.odt\nType: text (odt)\nSize: 14.0 KB\nModified: 2025-06-11 14:19:30\nPath: C:\\Users\\ben_t\\Documents\\LifeGoals.odt\n---\nName: Llangrannog Open Scoresheet.docx\nType: text (docx)\nSize: 62.7 KB\nModified: 2023-08-21 13:54:59\nPath: C:\\Users\\ben_t\\Documents\\Llangrannog Open Scoresheet.docx\n---\nName: Llangrannog Open.docx\nType: text (docx)\nSize: 76.3 KB\nModified: 2023-08-07 18:36:06\nPath: C:\\Users\\ben_t\\Documents\\Llangrannog Open.docx\n---\nName: Llangrannog Open.pdf\nType: pdf (pdf)\nSize: 74.9 KB\nModified: 2023-08-07 18:38:10\nPath: C:\\Users\\ben_t\\Documents\\Llangrannog Open.pdf\n---\nName: Love Declaration.docx\nType: text (docx)\nSize: 8.4 KB\nModified: 2025-07-22 12:16:00\nPath: C:\\Users\\ben_t\\Documents\\Love Declaration.docx\n---\nName: Love Declaration.odt\nType: text (odt)\nSize: 8.4 KB\nModified: 2025-07-22 12:20:45\nPath: C:\\Users\\ben_t\\Documents\\Love Declaration.odt\n---\nName: Our real seats would have been better.docx\nType: text (docx)\nSize: 13.1 KB\nModified: 2014-06-30 10:28:10\nPath: C:\\Users\\ben_t\\Documents\\Our real seats would have been better.docx\n---\nName: Polly clues.docx\nType: text (docx)\nSize: 12.8 KB\nModified: 2021-12-24 15:59:22\nPath: C:\\Users\\ben_t\\Documents\\Polly clues.docx\n---\nName: Quotes from animated films.docx\nType: text (docx)\nSize: 13.7 KB\nModified: 2020-04-13 00:31:08\nPath: C:\\Users\\ben_t\\Documents\\Quotes from animated films.docx\n---\nName: Rosa timetable.docx\nType: text (docx)\nSize: 135.9 KB\nModified: 2019-03-10 15:46:20\nPath: C:\\Users\\ben_t\\Documents\\Rosa timetable.docx\n---\nName: Samara Media Word Template.docx\nType: text (docx)\nSize: 117.9 KB\nModified: 2025-02-10 21:07:48\nPath: C:\\Users\\ben_t\\Documents\\Samara Media Word Template.docx\n---\nName: Social mobility.docx\nType: text (docx)\nSize: 110.6 KB\nModified: 2015-06-18 23:30:32\nPath: C:\\Users\\ben_t\\Documents\\Social mobility.docx\n---\nName: Students.docx\nType: text (docx)\nSize: 18.6 KB\nModified: 2024-08-27 18:04:47\nPath: C:\\Users\\ben_t\\Documents\\Students.docx\n---\nName: Tenby Open Scoresheet.docx\nType: text (docx)\nSize: 93.7 KB\nModified: 2022-07-24 16:39:33\nPath: C:\\Users\\ben_t\\Documents\\Tenby Open Scoresheet.docx\n---\nName: Tenby Open.docx\nType: text (docx)\nSize: 93.7 KB\nModified: 2022-07-04 12:34:26\nPath: C:\\Users\\ben_t\\Documents\\Tenby Open.docx\n---\nName: Tenby Open.pdf\nType: pdf (pdf)\nSize: 195.8 KB\nModified: 2022-07-11 13:42:53\nPath: C:\\Users\\ben_t\\Documents\\Tenby Open.pdf\n---\nName: Tenby Options.xlsx\nType: spreadsheet (xlsx)\nSize: 17.8 KB\nModified: 2023-09-12 13:03:43\nPath: C:\\Users\\ben_t\\Documents\\Tenby Options.xlsx\n---\nName: Test.odt\nType: text (odt)\nSize: 8.3 KB\nModified: 2025-06-25 16:05:53\nPath: C:\\Users\\ben_t\\Documents\\Test.odt\n---\nName: best_toys_world.odt\nType: text (odt)\nSize: 39.6 KB\nModified: 2025-06-11 17:17:38\nPath: C:\\Users\\ben_t\\Documents\\best_toys_world.odt\n---\nName: blast-from-the-past.pdf\nType: pdf (pdf)\nSize: 979.6 KB\nModified: 2019-04-30 13:42:36\nPath: C:\\Users\\ben_t\\Documents\\blast-from-the-past.pdf\n---\nName: cows_document.odt\nType: text (odt)\nSize: 14.3 KB\nModified: 2025-07-23 16:24:15\nPath: C:\\Users\\ben_t\\Documents\\cows_document.odt\n---\nName: daily_goals.odt\nType: text (odt)\nSize: 19.9 KB\nModified: 2025-06-24 12:07:39\nPath: C:\\Users\\ben_t\\Documents\\daily_goals.odt\n---\nName: dickens reading002.pdf\nType: pdf (pdf)\nSize: 344.9 KB\nModified: 2016-12-30 00:33:47\nPath: C:\\Users\\ben_t\\Documents\\dickens reading002.pdf\n---\nName: dogs_document.odt\nType: text (odt)\nSize: 18.4 KB\nModified: 2025-07-23 16:13:29\nPath: C:\\Users\\ben_t\\Documents\\dogs_document.odt\n---\nName: ghosts_document.odt\nType: text (odt)\nSize: 8.5 KB\nModified: 2025-07-23 16:06:30\nPath: C:\\Users\\ben_t\\Documents\\ghosts_document.odt\n---\nName: haunted_house.docx\nType: text (docx)\nSize: 8.4 KB\nModified: 2025-07-22 16:42:38\nPath: C:\\Users\\ben_t\\Documents\\haunted_house.docx\n---\nName: jonathan year.docx\nType: text (docx)\nSize: 21.9 KB\nModified: 2022-12-28 21:06:45\nPath: C:\\Users\\ben_t\\Documents\\jonathan year.docx\n---\nName: letter to lappin.docx\nType: text (docx)\nSize: 19.9 KB\nModified: 2013-11-04 14:59:13\nPath: C:\\Users\\ben_t\\Documents\\letter to lappin.docx\n---\nName: success_document.odt\nType: text (odt)\nSize: 8.5 KB\nModified: 2025-07-23 15:41:54\nPath: C:\\Users\\ben_t\\Documents\\success_document.odt\n---\nName: underbelly application.docx\nType: text (docx)\nSize: 13.8 KB\nModified: 2014-05-04 12:03:33\nPath: C:\\Users\\ben_t\\Documents\\underbelly application.docx\n---\nName: vampires_document.odt\nType: text (odt)\nSize: 31.1 KB\nModified: 2025-07-23 16:04:32\nPath: C:\\Users\\ben_t\\Documents\\vampires_document.odt\n---\nName: vegetarian reading002.pdf\nType: pdf (pdf)\nSize: 565.8 KB\nModified: 2017-01-13 14:04:11\nPath: C:\\Users\\ben_t\\Documents\\vegetarian reading002.pdf\n---\nName: ~$Tenby Options.xlsx\nType: spreadsheet (xlsx)\nSize: 0.2 KB\nModified: 2023-08-07 14:04:38\nPath: C:\\Users\\ben_t\\Documents\\~$Tenby Options.xlsx\n---\nName: ~$angrannog Open Scoresheet.docx\nType: text (docx)\nSize: 0.2 KB\nModified: 2023-08-07 18:27:28\nPath: C:\\Users\\ben_t\\Documents\\~$angrannog Open Scoresheet.docx\n---\nName: ~$angrannog Open.docx\nType: text (docx)\nSize: 0.2 KB\nModified: 2023-08-07 17:44:37\nPath: C:\\Users\\ben_t\\Documents\\~$angrannog Open.docx\n---\nName: ~$nby Open Scoresheet.docx\nType: text (docx)\nSize: 0.2 KB\nModified: 2023-08-07 17:46:10\nPath: C:\\Users\\ben_t\\Documents\\~$nby Open Scoresheet.docx\n---\n"}
+2025-07-23 16:40:48,847 INFO Processing request of type CallToolRequest
+2025-07-23 16:40:48,847 INFO call_libreoffice_helper function called
+2025-07-23 16:40:48,850 INFO <socket.socket fd=924, family=2, type=1, proto=0, laddr=('127.0.0.1', 65145), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:40:48,850 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\cows_document.odt", "text": "Cows: Fascinating Facts", "level": 1}'
+2025-07-23 16:40:49,449 INFO {"status": "success", "message": "Heading added to C:\\Users\\ben_t\\Documents\\cows_document.odt"}
+2025-07-23 16:40:49,477 INFO Processing request of type CallToolRequest
+2025-07-23 16:40:49,478 INFO call_libreoffice_helper function called
+2025-07-23 16:40:49,478 INFO <socket.socket fd=628, family=2, type=1, proto=0, laddr=('127.0.0.1', 65147), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:40:49,479 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\cows_document.odt", "text": "Biology", "level": 2}'
+2025-07-23 16:40:49,956 INFO {"status": "success", "message": "Heading added to C:\\Users\\ben_t\\Documents\\cows_document.odt"}
+2025-07-23 16:40:50,011 INFO Processing request of type CallToolRequest
+2025-07-23 16:40:50,011 INFO call_libreoffice_helper function called
+2025-07-23 16:40:50,014 INFO <socket.socket fd=920, family=2, type=1, proto=0, laddr=('127.0.0.1', 65149), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:40:50,015 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\cows_document.odt", "text": "Behavior", "level": 2}'
+2025-07-23 16:40:50,537 INFO {"status": "success", "message": "Heading added to C:\\Users\\ben_t\\Documents\\cows_document.odt"}
+2025-07-23 16:40:50,559 INFO Processing request of type CallToolRequest
+2025-07-23 16:40:50,559 INFO call_libreoffice_helper function called
+2025-07-23 16:40:50,559 INFO <socket.socket fd=448, family=2, type=1, proto=0, laddr=('127.0.0.1', 65151), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:40:50,559 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\cows_document.odt", "text": "Cultural Significance", "level": 2}'
+2025-07-23 16:40:50,995 INFO {"status": "success", "message": "Heading added to C:\\Users\\ben_t\\Documents\\cows_document.odt"}
+2025-07-23 16:40:51,035 INFO Processing request of type CallToolRequest
+2025-07-23 16:40:51,035 INFO call_libreoffice_helper function called
+2025-07-23 16:40:51,035 INFO <socket.socket fd=448, family=2, type=1, proto=0, laddr=('127.0.0.1', 65153), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:40:51,035 INFO b'{"action": "apply_document_style", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\cows_document.odt", "default_style": {"font_name": "Arial", "font_size": 12.0, "color": "#000000", "alignment": "left"}}'
+2025-07-23 16:40:51,197 INFO {"status": "success", "message": "Error processing command: Failed to apply document style: CharHeight"}
+2025-07-23 16:40:51,228 INFO Processing request of type CallToolRequest
+2025-07-23 16:40:51,228 INFO call_libreoffice_helper function called
+2025-07-23 16:40:51,228 INFO <socket.socket fd=880, family=2, type=1, proto=0, laddr=('127.0.0.1', 65155), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:40:51,228 INFO b'{"action": "format_text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\cows_document.odt", "text_to_find": "domestication", "bold": true, "italic": false, "underline": false, "color": "#0000FF", "font": null, "size": null}'
+2025-07-23 16:40:51,381 INFO {"status": "success", "message": "Text 'domestication' not found in document"}
+2025-07-23 16:40:51,412 INFO Processing request of type CallToolRequest
+2025-07-23 16:40:51,412 INFO call_libreoffice_helper function called
+2025-07-23 16:40:51,412 INFO <socket.socket fd=880, family=2, type=1, proto=0, laddr=('127.0.0.1', 65157), raddr=('127.0.0.1', 8765)>
+2025-07-23 16:40:51,412 INFO b'{"action": "format_text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\cows_document.odt", "text_to_find": "herd behavior", "bold": true, "italic": false, "underline": false, "color": "#0000FF", "font": null, "size": null}'
+2025-07-23 16:40:51,629 INFO {"status": "success", "message": "Text 'herd behavior' not found in document"}
+2025-07-23 17:02:08,825 INFO call_libreoffice_helper function called
+2025-07-23 17:02:08,831 INFO <socket.socket fd=460, family=2, type=1, proto=0, laddr=('127.0.0.1', 65223), raddr=('127.0.0.1', 8765)>
+2025-07-23 17:02:08,832 INFO b'{"action": "ping"}'
+2025-07-23 17:02:08,832 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 17:02:08,910 INFO Processing request of type ListToolsRequest
+2025-07-23 17:02:24,963 INFO Processing request of type CallToolRequest
+2025-07-23 17:02:24,964 INFO call_libreoffice_helper function called
+2025-07-23 17:02:24,977 INFO <socket.socket fd=640, family=2, type=1, proto=0, laddr=('127.0.0.1', 65230), raddr=('127.0.0.1', 8765)>
+2025-07-23 17:02:24,977 INFO b'{"action": "list_documents", "directory": "C:\\\\Users\\\\ben_t\\\\Documents"}'
+2025-07-23 17:02:24,988 INFO {"status": "success", "message": "Found 51 documents in C:\\Users\\ben_t\\Documents:\n\nName: A_to_Z_of_Colours.odt\nType: text (odt)\nSize: 8.5 KB\nModified: 2025-07-23 16:20:54\nPath: C:\\Users\\ben_t\\Documents\\A_to_Z_of_Colours.odt\n---\nName: Ben's lockdown quiz.docx\nType: text (docx)\nSize: 42.4 KB\nModified: 2020-05-24 02:02:11\nPath: C:\\Users\\ben_t\\Documents\\Ben's lockdown quiz.docx\n---\nName: Bridport Open Scoresheet.docx\nType: text (docx)\nSize: 629.1 KB\nModified: 2021-06-30 16:34:12\nPath: C:\\Users\\ben_t\\Documents\\Bridport Open Scoresheet.docx\n---\nName: Bridport Open.docx\nType: text (docx)\nSize: 315.6 KB\nModified: 2021-07-01 20:30:24\nPath: C:\\Users\\ben_t\\Documents\\Bridport Open.docx\n---\nName: Bridport Open.pdf\nType: pdf (pdf)\nSize: 267.5 KB\nModified: 2021-07-01 20:30:56\nPath: C:\\Users\\ben_t\\Documents\\Bridport Open.pdf\n---\nName: Carbon Offsetting.docx\nType: text (docx)\nSize: 1.1 MB\nModified: 2019-12-20 18:19:25\nPath: C:\\Users\\ben_t\\Documents\\Carbon Offsetting.docx\n---\nName: Celebs with Corona.pptx\nType: presentation (pptx)\nSize: 4.6 MB\nModified: 2020-04-05 02:36:31\nPath: C:\\Users\\ben_t\\Documents\\Celebs with Corona.pptx\n---\nName: Copy of Historic COVID-19 Dashboard Data-1.xlsx\nType: spreadsheet (xlsx)\nSize: 222.1 KB\nModified: 2022-01-26 20:43:53\nPath: C:\\Users\\ben_t\\Documents\\Copy of Historic COVID-19 Dashboard Data-1.xlsx\n---\nName: Coronavirus Quiz Questions.docx\nType: text (docx)\nSize: 15.7 KB\nModified: 2020-04-04 21:49:47\nPath: C:\\Users\\ben_t\\Documents\\Coronavirus Quiz Questions.docx\n---\nName: DO NOT DISTURB - dad.docx\nType: text (docx)\nSize: 691.6 KB\nModified: 2022-01-18 13:02:44\nPath: C:\\Users\\ben_t\\Documents\\DO NOT DISTURB - dad.docx\n---\nName: EE Timesheet.docx\nType: text (docx)\nSize: 12.0 KB\nModified: 2019-12-10 00:41:23\nPath: C:\\Users\\ben_t\\Documents\\EE Timesheet.docx\n---\nName: France_Overview.odt\nType: text (odt)\nSize: 8.5 KB\nModified: 2025-07-22 16:03:20\nPath: C:\\Users\\ben_t\\Documents\\France_Overview.odt\n---\nName: Jeremy bday song.docx\nType: text (docx)\nSize: 12.7 KB\nModified: 2021-07-22 12:09:51\nPath: C:\\Users\\ben_t\\Documents\\Jeremy bday song.docx\n---\nName: LOTR Quiz - Answers.docx\nType: text (docx)\nSize: 13.3 KB\nModified: 2021-12-31 12:37:54\nPath: C:\\Users\\ben_t\\Documents\\LOTR Quiz - Answers.docx\n---\nName: LOTR Quiz - Questions.docx\nType: text (docx)\nSize: 13.8 KB\nModified: 2021-12-31 12:37:30\nPath: C:\\Users\\ben_t\\Documents\\LOTR Quiz - Questions.docx\n---\nName: LifeGoals.odt\nType: text (odt)\nSize: 14.0 KB\nModified: 2025-06-11 14:19:30\nPath: C:\\Users\\ben_t\\Documents\\LifeGoals.odt\n---\nName: Llangrannog Open Scoresheet.docx\nType: text (docx)\nSize: 62.7 KB\nModified: 2023-08-21 13:54:59\nPath: C:\\Users\\ben_t\\Documents\\Llangrannog Open Scoresheet.docx\n---\nName: Llangrannog Open.docx\nType: text (docx)\nSize: 76.3 KB\nModified: 2023-08-07 18:36:06\nPath: C:\\Users\\ben_t\\Documents\\Llangrannog Open.docx\n---\nName: Llangrannog Open.pdf\nType: pdf (pdf)\nSize: 74.9 KB\nModified: 2023-08-07 18:38:10\nPath: C:\\Users\\ben_t\\Documents\\Llangrannog Open.pdf\n---\nName: Love Declaration.docx\nType: text (docx)\nSize: 8.4 KB\nModified: 2025-07-22 12:16:00\nPath: C:\\Users\\ben_t\\Documents\\Love Declaration.docx\n---\nName: Love Declaration.odt\nType: text (odt)\nSize: 8.4 KB\nModified: 2025-07-22 12:20:45\nPath: C:\\Users\\ben_t\\Documents\\Love Declaration.odt\n---\nName: Our real seats would have been better.docx\nType: text (docx)\nSize: 13.1 KB\nModified: 2014-06-30 10:28:10\nPath: C:\\Users\\ben_t\\Documents\\Our real seats would have been better.docx\n---\nName: Polly clues.docx\nType: text (docx)\nSize: 12.8 KB\nModified: 2021-12-24 15:59:22\nPath: C:\\Users\\ben_t\\Documents\\Polly clues.docx\n---\nName: Quotes from animated films.docx\nType: text (docx)\nSize: 13.7 KB\nModified: 2020-04-13 00:31:08\nPath: C:\\Users\\ben_t\\Documents\\Quotes from animated films.docx\n---\nName: Rosa timetable.docx\nType: text (docx)\nSize: 135.9 KB\nModified: 2019-03-10 15:46:20\nPath: C:\\Users\\ben_t\\Documents\\Rosa timetable.docx\n---\nName: Samara Media Word Template.docx\nType: text (docx)\nSize: 117.9 KB\nModified: 2025-02-10 21:07:48\nPath: C:\\Users\\ben_t\\Documents\\Samara Media Word Template.docx\n---\nName: Social mobility.docx\nType: text (docx)\nSize: 110.6 KB\nModified: 2015-06-18 23:30:32\nPath: C:\\Users\\ben_t\\Documents\\Social mobility.docx\n---\nName: Students.docx\nType: text (docx)\nSize: 18.6 KB\nModified: 2024-08-27 18:04:47\nPath: C:\\Users\\ben_t\\Documents\\Students.docx\n---\nName: Tenby Open Scoresheet.docx\nType: text (docx)\nSize: 93.7 KB\nModified: 2022-07-24 16:39:33\nPath: C:\\Users\\ben_t\\Documents\\Tenby Open Scoresheet.docx\n---\nName: Tenby Open.docx\nType: text (docx)\nSize: 93.7 KB\nModified: 2022-07-04 12:34:26\nPath: C:\\Users\\ben_t\\Documents\\Tenby Open.docx\n---\nName: Tenby Open.pdf\nType: pdf (pdf)\nSize: 195.8 KB\nModified: 2022-07-11 13:42:53\nPath: C:\\Users\\ben_t\\Documents\\Tenby Open.pdf\n---\nName: Tenby Options.xlsx\nType: spreadsheet (xlsx)\nSize: 17.8 KB\nModified: 2023-09-12 13:03:43\nPath: C:\\Users\\ben_t\\Documents\\Tenby Options.xlsx\n---\nName: Test.odt\nType: text (odt)\nSize: 8.3 KB\nModified: 2025-06-25 16:05:53\nPath: C:\\Users\\ben_t\\Documents\\Test.odt\n---\nName: best_toys_world.odt\nType: text (odt)\nSize: 39.6 KB\nModified: 2025-06-11 17:17:38\nPath: C:\\Users\\ben_t\\Documents\\best_toys_world.odt\n---\nName: blast-from-the-past.pdf\nType: pdf (pdf)\nSize: 979.6 KB\nModified: 2019-04-30 13:42:36\nPath: C:\\Users\\ben_t\\Documents\\blast-from-the-past.pdf\n---\nName: cows_document.odt\nType: text (odt)\nSize: 16.2 KB\nModified: 2025-07-23 16:40:50\nPath: C:\\Users\\ben_t\\Documents\\cows_document.odt\n---\nName: daily_goals.odt\nType: text (odt)\nSize: 19.9 KB\nModified: 2025-06-24 12:07:39\nPath: C:\\Users\\ben_t\\Documents\\daily_goals.odt\n---\nName: dickens reading002.pdf\nType: pdf (pdf)\nSize: 344.9 KB\nModified: 2016-12-30 00:33:47\nPath: C:\\Users\\ben_t\\Documents\\dickens reading002.pdf\n---\nName: dogs_document.odt\nType: text (odt)\nSize: 18.4 KB\nModified: 2025-07-23 16:13:29\nPath: C:\\Users\\ben_t\\Documents\\dogs_document.odt\n---\nName: ghosts_document.odt\nType: text (odt)\nSize: 8.5 KB\nModified: 2025-07-23 16:06:30\nPath: C:\\Users\\ben_t\\Documents\\ghosts_document.odt\n---\nName: haunted_house.docx\nType: text (docx)\nSize: 8.4 KB\nModified: 2025-07-22 16:42:38\nPath: C:\\Users\\ben_t\\Documents\\haunted_house.docx\n---\nName: jonathan year.docx\nType: text (docx)\nSize: 21.9 KB\nModified: 2022-12-28 21:06:45\nPath: C:\\Users\\ben_t\\Documents\\jonathan year.docx\n---\nName: letter to lappin.docx\nType: text (docx)\nSize: 19.9 KB\nModified: 2013-11-04 14:59:13\nPath: C:\\Users\\ben_t\\Documents\\letter to lappin.docx\n---\nName: success_document.odt\nType: text (odt)\nSize: 8.5 KB\nModified: 2025-07-23 15:41:54\nPath: C:\\Users\\ben_t\\Documents\\success_document.odt\n---\nName: underbelly application.docx\nType: text (docx)\nSize: 13.8 KB\nModified: 2014-05-04 12:03:33\nPath: C:\\Users\\ben_t\\Documents\\underbelly application.docx\n---\nName: vampires_document.odt\nType: text (odt)\nSize: 31.1 KB\nModified: 2025-07-23 16:04:32\nPath: C:\\Users\\ben_t\\Documents\\vampires_document.odt\n---\nName: vegetarian reading002.pdf\nType: pdf (pdf)\nSize: 565.8 KB\nModified: 2017-01-13 14:04:11\nPath: C:\\Users\\ben_t\\Documents\\vegetarian reading002.pdf\n---\nName: ~$Tenby Options.xlsx\nType: spreadsheet (xlsx)\nSize: 0.2 KB\nModified: 2023-08-07 14:04:38\nPath: C:\\Users\\ben_t\\Documents\\~$Tenby Options.xlsx\n---\nName: ~$angrannog Open Scoresheet.docx\nType: text (docx)\nSize: 0.2 KB\nModified: 2023-08-07 18:27:28\nPath: C:\\Users\\ben_t\\Documents\\~$angrannog Open Scoresheet.docx\n---\nName: ~$angrannog Open.docx\nType: text (docx)\nSize: 0.2 KB\nModified: 2023-08-07 17:44:37\nPath: C:\\Users\\ben_t\\Documents\\~$angrannog Open.docx\n---\nName: ~$nby Open Scoresheet.docx\nType: text (docx)\nSize: 0.2 KB\nModified: 2023-08-07 17:46:10\nPath: C:\\Users\\ben_t\\Documents\\~$nby Open Scoresheet.docx\n---\n"}
+2025-07-23 17:02:50,917 INFO Processing request of type CallToolRequest
+2025-07-23 17:02:50,918 INFO call_libreoffice_helper function called
+2025-07-23 17:02:50,930 INFO <socket.socket fd=948, family=2, type=1, proto=0, laddr=('127.0.0.1', 65234), raddr=('127.0.0.1', 8765)>
+2025-07-23 17:02:50,930 INFO b'{"action": "open_text_document", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\cows_document.odt"}'
+2025-07-23 17:02:51,174 INFO {"status": "success", "message": "Introduction to Cows\r\nCows are domesticated mammals widely raised in agriculture for their milk, meat, and labor. They play a vital role in global food production and rural economies.\r\nBreed\r\nDairy Cow\r\nLifespan\r\n15-20 years\r\nDiet\r\nGrass, hay, grains\r\nCows: Fascinating Facts\r\nBiology\r\nBehavior\r\nCultural Significance\r\n"}
+2025-07-23 17:03:50,441 INFO Processing request of type CallToolRequest
+2025-07-23 17:03:50,442 INFO call_libreoffice_helper function called
+2025-07-23 17:03:50,459 INFO <socket.socket fd=620, family=2, type=1, proto=0, laddr=('127.0.0.1', 65239), raddr=('127.0.0.1', 8765)>
+2025-07-23 17:03:50,459 INFO b'{"action": "format_table", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\cows_document.odt", "table_index": 0, "format_options": {"border_width": 1, "background_color": "#FFFFFF", "header_row": true}}'
+2025-07-23 17:03:51,095 INFO {"status": "success", "message": "Table formatted in C:\\Users\\ben_t\\Documents\\cows_document.odt"}
+2025-07-23 17:04:25,959 INFO Processing request of type CallToolRequest
+2025-07-23 17:04:25,960 INFO call_libreoffice_helper function called
+2025-07-23 17:04:25,962 INFO <socket.socket fd=460, family=2, type=1, proto=0, laddr=('127.0.0.1', 65241), raddr=('127.0.0.1', 8765)>
+2025-07-23 17:04:25,962 INFO b'{"action": "apply_document_style", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\cows_document.odt", "default_style": {"font_name": "Arial", "font_size": 12.0, "color": "#000000", "alignment": "left"}}'
+2025-07-23 17:04:26,160 INFO {"status": "error", "message": "Error: Error processing command: Failed to apply document style: CharHeight"}
+2025-07-23 17:10:08,022 INFO call_libreoffice_helper function called
+2025-07-23 17:10:08,022 INFO <socket.socket fd=400, family=2, type=1, proto=0, laddr=('127.0.0.1', 65266), raddr=('127.0.0.1', 8765)>
+2025-07-23 17:10:08,022 INFO b'{"action": "ping"}'
+2025-07-23 17:10:08,022 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 17:10:08,142 INFO Processing request of type ListToolsRequest
+2025-07-23 17:12:38,030 INFO call_libreoffice_helper function called
+2025-07-23 17:12:38,036 INFO <socket.socket fd=788, family=2, type=1, proto=0, laddr=('127.0.0.1', 65277), raddr=('127.0.0.1', 8765)>
+2025-07-23 17:12:38,036 INFO b'{"action": "ping"}'
+2025-07-23 17:12:38,036 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-23 17:12:38,140 INFO Processing request of type ListToolsRequest

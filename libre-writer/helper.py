@@ -425,6 +425,10 @@ def add_heading(file_path, text, level=1):
         if hasattr(doc, "getText"):
             text_obj = doc.getText()
             cursor = text_obj.createTextCursor()
+
+            # Add paragraph break
+            text_obj.insertControlCharacter(text_obj.getEnd(), PARAGRAPH_BREAK, False)
+
             text_obj.insertString(text_obj.getEnd(), text, False)
             
             # Move cursor to the added text
@@ -588,7 +592,7 @@ def search_replace_text(file_path, search_text, replace_text):
     """Search and replace text throughout the document."""
     doc, message = open_document(file_path)
     if not doc:
-        return message
+        raise HelperError(message)
     
     try:
         if hasattr(doc, "getText"):
@@ -598,7 +602,7 @@ def search_replace_text(file_path, search_text, replace_text):
             # Check if text exists in document
             if search_text not in document_text:
                 doc.close(True)
-                return f"Text '{search_text}' not found in document"
+                raise HelperError(f"Text '{search_text}' not found in document")
             
             # Create replace descriptor
             replace_desc = text_obj.createReplaceDescriptor()
@@ -616,7 +620,7 @@ def search_replace_text(file_path, search_text, replace_text):
             return f"Replaced {count} occurrences of '{search_text}' with '{replace_text}' in {file_path}"
         else:
             doc.close(True)
-            return "Document does not support search and replace"
+            raise HelperError("Document does not support search and replace")
     except Exception as e:
         try:
             doc.close(True)
@@ -624,7 +628,7 @@ def search_replace_text(file_path, search_text, replace_text):
             pass
         print(f"Error in search_replace_text: {str(e)}")
         print(traceback.format_exc())
-        return f"Failed to search and replace text: {str(e)}"
+        raise
 
 def delete_text(file_path, text_to_delete):
     """Delete specific text from the document."""
@@ -634,7 +638,7 @@ def add_table(file_path, rows, columns, data=None, header_row=False):
     """Add a table to a document."""
     doc, message = open_document(file_path)
     if not doc:
-        return message
+        raise HelperError(message)
     
     try:
         if hasattr(doc, "getText"):
@@ -661,8 +665,7 @@ def add_table(file_path, rows, columns, data=None, header_row=False):
                             cell_text = cell.getText()
                             cell_text.setString(str(cell_value))
                 except Exception as table_error:
-                    print(f"Error populating table: {str(table_error)}")
-                    print(traceback.format_exc())
+                    raise HelperError(f"Error populating table: {str(table_error)}")
             
             # Format header row if requested
             if header_row and rows > 0:
@@ -676,7 +679,7 @@ def add_table(file_path, rows, columns, data=None, header_row=False):
                         cursor.gotoEnd(True)
                         cursor.CharWeight = 150  # Bold
                 except Exception as header_error:
-                    print(f"Error formatting header row: {header_error}")
+                    raise HelperError(f"Error formatting header row: {header_error}")
             
             # Save document
             doc.store()
@@ -684,31 +687,29 @@ def add_table(file_path, rows, columns, data=None, header_row=False):
             return f"Table added to {file_path}"
         else:
             doc.close(True)
-            return "Document does not support tables"
+            raise HelperError("Document does not support tables")
     except Exception as e:
         try:
             doc.close(True)
         except:
             pass
-        print(f"Error in add_table: {str(e)}")
-        print(traceback.format_exc())
-        return f"Failed to add table: {str(e)}"
+        raise
     
 def format_table(file_path, table_index, format_options):
     """Format a table with borders, shading, etc."""
     doc, message = open_document(file_path)
     if not doc:
-        return message
+        raise HelperError(message)
     
     try:
         if not hasattr(doc, "getTextTables"):
             doc.close(True)
-            return "Document does not support table formatting"
+            raise HelperError("Document does not support table formatting")
         
         tables = doc.getTextTables()
         if tables.getCount() <= table_index:
             doc.close(True)
-            return f"Table index {table_index} is out of range (document has {tables.getCount()} tables)"
+            raise HelperError(f"Table index {table_index} is out of range (document has {tables.getCount()} tables)")
         
         table = tables.getByIndex(table_index)
         
@@ -733,7 +734,7 @@ def format_table(file_path, table_index, format_options):
                 # Apply border to table
                 table.TableBorder2 = table_border
             except Exception as border_error:
-                print(f"Error applying table borders: {border_error}")
+                raise HelperError(f"Error applying table borders: {border_error}")
         
         if "background_color" in format_options:
             try:
@@ -742,7 +743,7 @@ def format_table(file_path, table_index, format_options):
                     color = int(color[1:], 16)
                 table.BackColor = color
             except Exception as color_error:
-                print(f"Error applying table background color: {color_error}")
+                raise HelperError(f"Error applying table background color: {color_error}")
         
         # Format specific rows if requested
         if "header_row" in format_options and format_options["header_row"]:
@@ -758,7 +759,7 @@ def format_table(file_path, table_index, format_options):
                     cursor.gotoEnd(True)
                     cursor.CharWeight = 150  # Bold
             except Exception as header_error:
-                print(f"Error formatting header row: {header_error}")
+                raise HelperError(f"Error formatting header row: {header_error}")
         
         # Save document
         doc.store()
@@ -769,20 +770,20 @@ def format_table(file_path, table_index, format_options):
             doc.close(True)
         except:
             pass
-        return f"Failed to format table: {str(e)}"
+        raise
 
 def insert_image(file_path, image_path, width=None, height=None):
     """Insert an image into a document using dispatch."""
     doc, message = open_document(file_path)
     if not doc:
-        return message
+        raise HelperError(message)
     
     try:
         # Normalize image path
         image_path = normalize_path(image_path)
         if not os.path.exists(image_path):
             doc.close(True)
-            return f"Image not found: {image_path}"
+            raise HelperError (f"Image not found: {image_path}")
         
         # Get component context and necessary services
         ctx = uno.getComponentContext()
@@ -845,15 +846,13 @@ def insert_image(file_path, image_path, width=None, height=None):
             doc.close(True)
         except:
             pass
-        print(f"Error in insert_image: {str(e)}")
-        print(traceback.format_exc())
-        return f"Failed to insert image: {str(e)}"
+        raise
 
 def insert_page_break(file_path):
     """Insert a page break at the current cursor position."""
     doc, message = open_document(file_path)
     if not doc:
-        return message
+        raise HelperError(message)
     
     try:
         if hasattr(doc, "getText"):
@@ -871,25 +870,25 @@ def insert_page_break(file_path):
             return f"Page break inserted in {file_path}"
         else:
             doc.close(True)
-            return "Document does not support page breaks"
+            raise HelperError("Document does not support page breaks")
     except Exception as e:
         try:
             doc.close(True)
         except:
             pass
-        return f"Failed to insert page break: {str(e)}"
+        raise
 
 def create_custom_style(file_path, style_name, style_properties):
     """Create a custom paragraph style."""
     doc, message = open_document(file_path)
     if not doc:
-        return message
+        raise HelperError(message)
     
     try:
         # Check if document supports styles
         if not hasattr(doc, "StyleFamilies"):
             doc.close(True)
-            return "Document does not support custom styles"
+            raise HelperError("Document does not support custom styles")
         
         # Get paragraph styles
         para_styles = doc.StyleFamilies.getByName("ParagraphStyles")
@@ -937,13 +936,13 @@ def create_custom_style(file_path, style_name, style_properties):
             doc.close(True)
         except:
             pass
-        return f"Failed to create custom style: {str(e)}"
+        raise
 
 def delete_paragraph(file_path, paragraph_index):
     """Delete a paragraph at the given index."""
     doc, message = open_document(file_path)
     if not doc:
-        return message
+        raise HelperError(message)
     
     try:
         if hasattr(doc, "getText"):
@@ -958,7 +957,7 @@ def delete_paragraph(file_path, paragraph_index):
             # Check if index is valid
             if paragraph_index < 0 or paragraph_index >= len(paragraphs):
                 doc.close(True)
-                return f"Paragraph index {paragraph_index} is out of range (document has {len(paragraphs)} paragraphs)"
+                raise HelperError(f"Paragraph index {paragraph_index} is out of range (document has {len(paragraphs)} paragraphs)")
             
             # Get paragraph cursor
             paragraph = paragraphs[paragraph_index]
@@ -973,31 +972,31 @@ def delete_paragraph(file_path, paragraph_index):
             return f"Paragraph at index {paragraph_index} deleted from {file_path}"
         else:
             doc.close(True)
-            return "Document does not support paragraph deletion"
+            raise HelperError("Document does not support paragraph deletion")
     except Exception as e:
         try:
             doc.close(True)
         except:
             pass
-        return f"Failed to delete paragraph: {str(e)}"
+        raise
 
-def apply_document_style(file_path, default_style):
+def apply_document_style(file_path, style):
     """Apply consistent formatting throughout the document."""
     doc, message = open_document(file_path)
     if not doc:
-        raise Exception(message)
+        raise HelperError(message)
     
     try:
         if not hasattr(doc, "getText"):
             doc.close(True)
-            return "Document does not support style application"
+            raise HelperError("Document does not support style application")
         
-        # Apply default font settings to document
-        if "font_name" in default_style:
-            doc.CharFontName = default_style["font_name"]
+        # # Apply default font settings to document
+        # if "font_name" in style:
+        #     doc.CharFontName = style["font_name"]
         
-        if "font_size" in default_style:
-            doc.CharHeight = float(default_style["font_size"])
+        # if "font_size" in style:
+        #     doc.CharHeight = float(style["font_size"])
         
         # Apply styles to all paragraphs
         text = doc.getText()
@@ -1006,39 +1005,39 @@ def apply_document_style(file_path, default_style):
         cursor.gotoEnd(True)
         
         # Apply character formatting
-        if "font_name" in default_style:
-            cursor.CharFontName = default_style["font_name"]
+        if "font_name" in style:
+            cursor.CharFontName = style["font_name"]
         
-        if "font_size" in default_style:
-            cursor.CharHeight = float(default_style["font_size"])
+        if "font_size" in style:
+            cursor.CharHeight = float(style["font_size"])
         
-        if "color" in default_style:
-            color = default_style["color"]
+        if "color" in style:
+            color = style["color"]
             if isinstance(color, str) and color.startswith("#"):
                 color = int(color[1:], 16)
             cursor.CharColor = color
         
         # Apply paragraph formatting
-        if "alignment" in default_style:
+        if "alignment" in style:
             alignment_map = {
                 "left": LEFT,
                 "center": CENTER,
                 "right": RIGHT,
                 "justify": BLOCK
             }
-            if default_style["alignment"].lower() in alignment_map:
-                cursor.ParaAdjust = alignment_map[default_style["alignment"].lower()]
+            if style["alignment"].lower() in alignment_map:
+                cursor.ParaAdjust = alignment_map[style["alignment"].lower()]
         
         # Save document
         doc.store()
         doc.close(True)
-        return f"Default style applied to document {file_path}"
+        return f"Style applied to document {file_path}"
     except Exception as e:
         try:
             doc.close(True)
         except:
             pass
-        raise Exception(f"Failed to apply document style: {str(e)}")
+        raise
 
 # Main command handler
 def handle_command(command):

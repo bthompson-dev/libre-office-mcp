@@ -875,3 +875,439 @@ com.sun.star.script.CannotConvertException: conversion not possible!
 2025-07-23 17:10:08,022 INFO Response sent
 2025-07-23 17:10:08,022 INFO Waiting for connection...
 2025-07-23 17:10:08,022 INFO <socket.socket fd=832, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 17:12:34,382 INFO Importing UNO...
+2025-07-23 17:12:34,446 INFO UNO imported successfully!
+2025-07-23 17:12:34,461 INFO LibreOffice helper listening on port 8765
+2025-07-23 17:12:34,461 INFO Socket bound to localhost:8765
+2025-07-23 17:12:34,461 INFO Waiting for connection...
+2025-07-23 17:12:34,461 INFO <socket.socket fd=792, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 17:12:38,036 INFO Connection from ('127.0.0.1', 65277)
+2025-07-23 17:12:38,036 INFO Received data: {"action": "ping"}...
+2025-07-23 17:12:38,036 INFO handle_command called
+2025-07-23 17:12:38,036 INFO action: ping
+2025-07-23 17:12:38,036 INFO Response sent
+2025-07-23 17:12:38,036 INFO Waiting for connection...
+2025-07-23 17:12:38,036 INFO <socket.socket fd=792, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 17:19:04,363 INFO Connection from ('127.0.0.1', 65314)
+2025-07-23 17:19:04,363 INFO Waiting for connection...
+2025-07-23 17:19:04,363 INFO <socket.socket fd=792, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 17:19:04,908 INFO Connection from ('127.0.0.1', 65315)
+2025-07-23 17:19:04,924 INFO Received data: {"action": "ping"}...
+2025-07-23 17:19:04,924 INFO handle_command called
+2025-07-23 17:19:04,924 INFO action: ping
+2025-07-23 17:19:04,924 INFO Response sent
+2025-07-23 17:19:04,924 INFO Waiting for connection...
+2025-07-23 17:19:04,924 INFO <socket.socket fd=792, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 17:20:47,182 INFO Connection from ('127.0.0.1', 65342)
+2025-07-23 17:20:47,182 INFO Waiting for connection...
+2025-07-23 17:20:47,182 INFO <socket.socket fd=792, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 17:20:47,743 INFO Connection from ('127.0.0.1', 65343)
+2025-07-23 17:20:47,743 INFO Received data: {"action": "ping"}...
+2025-07-23 17:20:47,743 INFO handle_command called
+2025-07-23 17:20:47,743 INFO action: ping
+2025-07-23 17:20:47,743 INFO Response sent
+2025-07-23 17:20:47,743 INFO Waiting for connection...
+2025-07-23 17:20:47,743 INFO <socket.socket fd=792, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 17:23:54,098 INFO Connection from ('127.0.0.1', 65362)
+2025-07-23 17:23:54,098 INFO Waiting for connection...
+2025-07-23 17:23:54,098 INFO <socket.socket fd=792, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-23 17:23:54,574 INFO Connection from ('127.0.0.1', 65363)
+2025-07-23 17:23:54,574 INFO Received data: {"action": "ping"}...
+2025-07-23 17:23:54,574 INFO handle_command called
+2025-07-23 17:23:54,574 INFO action: ping
+2025-07-23 17:23:54,574 INFO Response sent
+2025-07-23 17:23:54,574 INFO Waiting for connection...
+2025-07-23 17:23:54,574 INFO <socket.socket fd=792, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 10:54:14,153 INFO Importing UNO...
+2025-07-24 10:54:14,287 INFO UNO imported successfully!
+2025-07-24 10:54:14,291 INFO LibreOffice helper listening on port 8765
+2025-07-24 10:54:14,291 INFO Socket bound to localhost:8765
+2025-07-24 10:54:14,291 INFO Waiting for connection...
+2025-07-24 10:54:14,291 INFO <socket.socket fd=336, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 10:54:17,953 INFO Connection from ('127.0.0.1', 50854)
+2025-07-24 10:54:17,953 INFO Received data: {"action": "ping"}...
+2025-07-24 10:54:17,953 INFO handle_command called
+2025-07-24 10:54:17,953 INFO action: ping
+2025-07-24 10:54:17,953 INFO Response sent
+2025-07-24 10:54:17,953 INFO Waiting for connection...
+2025-07-24 10:54:17,953 INFO <socket.socket fd=336, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:14:17,858 INFO Importing UNO...
+2025-07-24 11:14:17,908 INFO UNO imported successfully!
+2025-07-24 11:14:17,918 INFO LibreOffice helper listening on port 8765
+2025-07-24 11:14:17,918 INFO Socket bound to localhost:8765
+2025-07-24 11:14:17,918 INFO Waiting for connection...
+2025-07-24 11:14:17,918 INFO <socket.socket fd=436, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:14:21,308 INFO Connection from ('127.0.0.1', 52580)
+2025-07-24 11:14:21,309 INFO Received data: {"action": "ping"}...
+2025-07-24 11:14:21,309 INFO handle_command called
+2025-07-24 11:14:21,309 INFO action: ping
+2025-07-24 11:14:21,309 INFO Response sent
+2025-07-24 11:14:21,309 INFO Waiting for connection...
+2025-07-24 11:14:21,309 INFO <socket.socket fd=436, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:17:18,151 INFO Connection from ('127.0.0.1', 52882)
+2025-07-24 11:17:18,151 INFO Waiting for connection...
+2025-07-24 11:17:18,151 INFO <socket.socket fd=436, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:17:18,862 INFO Connection from ('127.0.0.1', 52884)
+2025-07-24 11:17:18,878 INFO Received data: {"action": "ping"}...
+2025-07-24 11:17:18,878 INFO handle_command called
+2025-07-24 11:17:18,878 INFO action: ping
+2025-07-24 11:17:18,878 INFO Response sent
+2025-07-24 11:17:18,878 INFO Waiting for connection...
+2025-07-24 11:17:18,878 INFO <socket.socket fd=436, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:17:53,377 INFO Connection from ('127.0.0.1', 52942)
+2025-07-24 11:17:53,397 INFO Received data: {"action": "list_documents", "directory": "C:\\Users\\ben_t\\Documents"}...
+2025-07-24 11:17:53,397 INFO handle_command called
+2025-07-24 11:17:53,397 INFO action: list_documents
+2025-07-24 11:17:53,413 INFO Response sent
+2025-07-24 11:17:53,413 INFO Waiting for connection...
+2025-07-24 11:17:53,413 INFO <socket.socket fd=436, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:18:52,944 INFO Connection from ('127.0.0.1', 53033)
+2025-07-24 11:18:52,959 INFO Received data: {"action": "open_text_document", "file_path": "C:\\Users\\ben_t\\Documents\\cows_info.odt"}...
+2025-07-24 11:18:52,959 INFO handle_command called
+2025-07-24 11:18:52,959 INFO action: open_text_document
+2025-07-24 11:18:52,962 INFO Response sent
+2025-07-24 11:18:52,962 INFO Waiting for connection...
+2025-07-24 11:18:52,962 INFO <socket.socket fd=436, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:18:52,987 INFO Connection from ('127.0.0.1', 53034)
+2025-07-24 11:18:52,987 INFO Received data: {"action": "apply_document_style", "file_path": "C:\\Users\\ben_t\\Documents\\cows_info.odt", "defau...
+2025-07-24 11:18:52,987 INFO handle_command called
+2025-07-24 11:18:52,987 INFO action: apply_document_style
+2025-07-24 11:18:52,987 INFO Response sent
+2025-07-24 11:18:52,987 INFO Waiting for connection...
+2025-07-24 11:18:52,987 INFO <socket.socket fd=436, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:19:32,287 INFO Connection from ('127.0.0.1', 53106)
+2025-07-24 11:19:32,287 INFO Received data: {"action": "create_document", "doc_type": "text", "file_path": "C:\\Users\\ben_t\\Documents\\cows_in...
+2025-07-24 11:19:32,287 INFO handle_command called
+2025-07-24 11:19:32,287 INFO action: create_document
+2025-07-24 11:19:32,287 INFO Creating text document at C:\Users\ben_t\Documents\cows_info.odt
+2025-07-24 11:19:41,662 INFO pyuno object (com.sun.star.document.XDocumentProperties)0x1db50be0768{implementationName=SfxDocumentMetaData, supportedServices={com.sun.star.document.DocumentProperties}, supportedInterfaces={com.sun.star.uno.XWeak,com.sun.star.lang.XComponent,com.sun.star.lang.XTypeProvider,com.sun.star.lang.XServiceInfo,com.sun.star.document.XDocumentProperties2,com.sun.star.lang.XInitialization,com.sun.star.util.XCloneable,com.sun.star.util.XModifiable,com.sun.star.xml.sax.XSAXSerializable}}
+2025-07-24 11:19:41,667 INFO Title Cows Information <class 'str'>
+2025-07-24 11:19:41,707 INFO Author Ben T <class 'str'>
+2025-07-24 11:19:41,747 INFO Subject Cows Information <class 'str'>
+2025-07-24 11:19:41,770 INFO Keywords ['animals', 'farming', 'livestock'] <class 'list'>
+2025-07-24 11:19:41,787 INFO Saving to URL: file:///C:/Users/ben_t/Documents/cows_info.odt
+2025-07-24 11:19:43,343 INFO Response sent
+2025-07-24 11:19:43,343 INFO Waiting for connection...
+2025-07-24 11:19:43,343 INFO <socket.socket fd=436, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:19:43,367 INFO Connection from ('127.0.0.1', 53115)
+2025-07-24 11:19:43,367 INFO Received data: {"action": "apply_document_style", "file_path": "C:\\Users\\ben_t\\Documents\\cows_info.odt", "defau...
+2025-07-24 11:19:43,367 INFO handle_command called
+2025-07-24 11:19:43,367 INFO action: apply_document_style
+2025-07-24 11:19:43,577 INFO Response sent
+2025-07-24 11:19:43,577 INFO Waiting for connection...
+2025-07-24 11:19:43,584 INFO <socket.socket fd=436, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:42:50,647 INFO Connection from ('127.0.0.1', 54022)
+2025-07-24 11:42:50,650 INFO Waiting for connection...
+2025-07-24 11:42:50,650 INFO <socket.socket fd=436, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:42:51,498 INFO Connection from ('127.0.0.1', 54023)
+2025-07-24 11:42:51,498 INFO Received data: {"action": "ping"}...
+2025-07-24 11:42:51,498 INFO handle_command called
+2025-07-24 11:42:51,498 INFO action: ping
+2025-07-24 11:42:51,498 INFO Response sent
+2025-07-24 11:42:51,498 INFO Waiting for connection...
+2025-07-24 11:42:51,498 INFO <socket.socket fd=436, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:45:03,315 INFO Connection from ('127.0.0.1', 54051)
+2025-07-24 11:45:03,315 INFO Waiting for connection...
+2025-07-24 11:45:03,315 INFO <socket.socket fd=436, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:45:03,954 INFO Connection from ('127.0.0.1', 54052)
+2025-07-24 11:45:03,954 INFO Received data: {"action": "ping"}...
+2025-07-24 11:45:03,954 INFO handle_command called
+2025-07-24 11:45:03,954 INFO action: ping
+2025-07-24 11:45:03,954 INFO Response sent
+2025-07-24 11:45:03,954 INFO Waiting for connection...
+2025-07-24 11:45:03,954 INFO <socket.socket fd=436, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:45:30,483 INFO Importing UNO...
+2025-07-24 11:45:30,543 INFO UNO imported successfully!
+2025-07-24 11:45:30,543 INFO LibreOffice helper listening on port 8765
+2025-07-24 11:45:30,543 INFO Socket bound to localhost:8765
+2025-07-24 11:45:30,543 INFO Waiting for connection...
+2025-07-24 11:45:30,543 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:45:34,227 INFO Connection from ('127.0.0.1', 54058)
+2025-07-24 11:45:34,227 INFO Received data: {"action": "ping"}...
+2025-07-24 11:45:34,227 INFO handle_command called
+2025-07-24 11:45:34,227 INFO action: ping
+2025-07-24 11:45:34,227 INFO Response sent
+2025-07-24 11:45:34,227 INFO Waiting for connection...
+2025-07-24 11:45:34,227 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:45:54,663 INFO Connection from ('127.0.0.1', 54062)
+2025-07-24 11:45:54,677 INFO Received data: {"action": "list_documents", "directory": "C:\\Users\\ben_t\\Documents"}...
+2025-07-24 11:45:54,677 INFO handle_command called
+2025-07-24 11:45:54,677 INFO action: list_documents
+2025-07-24 11:45:54,683 INFO Response sent
+2025-07-24 11:45:54,683 INFO Waiting for connection...
+2025-07-24 11:45:54,683 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:46:28,023 INFO Connection from ('127.0.0.1', 54064)
+2025-07-24 11:46:28,035 INFO Received data: {"action": "apply_document_style", "file_path": "C:\\Users\\ben_t\\Documents\\cows_info.odt", "style...
+2025-07-24 11:46:28,035 INFO handle_command called
+2025-07-24 11:46:28,035 INFO action: apply_document_style
+2025-07-24 11:46:28,473 INFO Response sent
+2025-07-24 11:46:28,473 INFO Waiting for connection...
+2025-07-24 11:46:28,473 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:46:46,964 INFO Connection from ('127.0.0.1', 54067)
+2025-07-24 11:46:46,980 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\Documents\\cows_info.odt", "text": "Cows: ...
+2025-07-24 11:46:46,980 INFO handle_command called
+2025-07-24 11:46:46,980 INFO action: add_heading
+2025-07-24 11:46:47,855 INFO Response sent
+2025-07-24 11:46:47,855 INFO Waiting for connection...
+2025-07-24 11:46:47,855 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:47:13,483 INFO Connection from ('127.0.0.1', 54072)
+2025-07-24 11:47:13,499 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\Documents\\cows_info.odt", "text": "1. C...
+2025-07-24 11:47:13,499 INFO handle_command called
+2025-07-24 11:47:13,499 INFO action: add_paragraph
+2025-07-24 11:47:13,903 INFO Response sent
+2025-07-24 11:47:13,903 INFO Waiting for connection...
+2025-07-24 11:47:13,903 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:47:13,933 INFO Connection from ('127.0.0.1', 54074)
+2025-07-24 11:47:13,933 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\Documents\\cows_info.odt", "text": "2. T...
+2025-07-24 11:47:13,933 INFO handle_command called
+2025-07-24 11:47:13,933 INFO action: add_paragraph
+2025-07-24 11:47:14,316 INFO Response sent
+2025-07-24 11:47:14,316 INFO Waiting for connection...
+2025-07-24 11:47:14,316 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:47:14,343 INFO Connection from ('127.0.0.1', 54076)
+2025-07-24 11:47:14,363 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\Documents\\cows_info.odt", "text": "3. D...
+2025-07-24 11:47:14,363 INFO handle_command called
+2025-07-24 11:47:14,363 INFO action: add_paragraph
+2025-07-24 11:47:14,795 INFO Response sent
+2025-07-24 11:47:14,795 INFO Waiting for connection...
+2025-07-24 11:47:14,795 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 11:51:51,680 INFO Connection from ('127.0.0.1', 54118)
+2025-07-24 11:51:51,695 INFO Received data: {"action": "list_documents", "directory": "C:\\Users\\ben_t\\Documents"}...
+2025-07-24 11:51:51,695 INFO handle_command called
+2025-07-24 11:51:51,695 INFO action: list_documents
+2025-07-24 11:51:51,711 INFO Response sent
+2025-07-24 11:51:51,711 INFO Waiting for connection...
+2025-07-24 11:51:51,712 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:00:29,203 INFO Connection from ('127.0.0.1', 54179)
+2025-07-24 12:00:29,206 INFO Waiting for connection...
+2025-07-24 12:00:29,206 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:00:30,000 INFO Connection from ('127.0.0.1', 54180)
+2025-07-24 12:00:30,000 INFO Received data: {"action": "ping"}...
+2025-07-24 12:00:30,000 INFO handle_command called
+2025-07-24 12:00:30,000 INFO action: ping
+2025-07-24 12:00:30,000 INFO Response sent
+2025-07-24 12:00:30,000 INFO Waiting for connection...
+2025-07-24 12:00:30,000 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:01:05,469 INFO Connection from ('127.0.0.1', 54185)
+2025-07-24 12:01:05,469 INFO Received data: {"action": "open_text_document", "file_path": "C:\\Users\\ben_t\\Documents\\letter to lappin.txt"}...
+2025-07-24 12:01:05,469 INFO handle_command called
+2025-07-24 12:01:05,469 INFO action: open_text_document
+2025-07-24 12:01:05,472 INFO Response sent
+2025-07-24 12:01:05,472 INFO Waiting for connection...
+2025-07-24 12:01:05,472 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:03:11,365 INFO Connection from ('127.0.0.1', 54198)
+2025-07-24 12:03:11,365 INFO Waiting for connection...
+2025-07-24 12:03:11,365 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:03:12,284 INFO Connection from ('127.0.0.1', 54199)
+2025-07-24 12:03:12,284 INFO Received data: {"action": "ping"}...
+2025-07-24 12:03:12,284 INFO handle_command called
+2025-07-24 12:03:12,284 INFO action: ping
+2025-07-24 12:03:12,284 INFO Response sent
+2025-07-24 12:03:12,284 INFO Waiting for connection...
+2025-07-24 12:03:12,284 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:03:35,003 INFO Connection from ('127.0.0.1', 54203)
+2025-07-24 12:03:35,003 INFO Received data: {"action": "list_documents", "directory": "C:\\Users\\ben_t\\Documents"}...
+2025-07-24 12:03:35,003 INFO handle_command called
+2025-07-24 12:03:35,003 INFO action: list_documents
+2025-07-24 12:03:35,009 INFO Response sent
+2025-07-24 12:03:35,009 INFO Waiting for connection...
+2025-07-24 12:03:35,009 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:04:46,119 INFO Connection from ('127.0.0.1', 54210)
+2025-07-24 12:04:46,119 INFO Received data: {"action": "open_text_document", "file_path": "C:\\Users\\ben_t\\Documents\\letter to lappin.docx"}...
+2025-07-24 12:04:46,119 INFO handle_command called
+2025-07-24 12:04:46,119 INFO action: open_text_document
+2025-07-24 12:04:46,648 INFO Response sent
+2025-07-24 12:04:46,648 INFO Waiting for connection...
+2025-07-24 12:04:46,648 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:07:24,062 INFO Connection from ('127.0.0.1', 54225)
+2025-07-24 12:07:24,078 INFO Received data: {"action": "get_document_properties", "file_path": "C:\\Users\\ben_t\\Documents\\letter to lappin.do...
+2025-07-24 12:07:24,078 INFO handle_command called
+2025-07-24 12:07:24,078 INFO action: get_document_properties
+2025-07-24 12:07:24,580 INFO Response sent
+2025-07-24 12:07:24,580 INFO Waiting for connection...
+2025-07-24 12:07:24,580 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:15:25,236 INFO Connection from ('127.0.0.1', 54291)
+2025-07-24 12:15:25,236 INFO Received data: {"action": "copy_document", "source_path": "C:\\Users\\ben_t\\Documents\\cows_info", "target_path": ...
+2025-07-24 12:15:25,236 INFO handle_command called
+2025-07-24 12:15:25,236 INFO action: copy_document
+2025-07-24 12:15:25,236 INFO Response sent
+2025-07-24 12:15:25,239 INFO Waiting for connection...
+2025-07-24 12:15:25,239 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:24:16,614 INFO Connection from ('127.0.0.1', 54351)
+2025-07-24 12:24:16,616 INFO Waiting for connection...
+2025-07-24 12:24:16,616 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:24:17,333 INFO Connection from ('127.0.0.1', 54352)
+2025-07-24 12:24:17,356 INFO Received data: {"action": "ping"}...
+2025-07-24 12:24:17,356 INFO handle_command called
+2025-07-24 12:24:17,356 INFO action: ping
+2025-07-24 12:24:17,356 INFO Response sent
+2025-07-24 12:24:17,356 INFO Waiting for connection...
+2025-07-24 12:24:17,356 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:24:51,205 INFO Connection from ('127.0.0.1', 54358)
+2025-07-24 12:24:51,205 INFO Received data: {"action": "copy_document", "source_path": "C:\\Users\\ben_t\\Documents\\cows_info", "target_path": ...
+2025-07-24 12:24:51,205 INFO handle_command called
+2025-07-24 12:24:51,205 INFO action: copy_document
+2025-07-24 12:24:51,205 INFO Response sent
+2025-07-24 12:24:51,205 INFO Waiting for connection...
+2025-07-24 12:24:51,205 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:26:16,489 INFO Connection from ('127.0.0.1', 54368)
+2025-07-24 12:26:16,489 INFO Waiting for connection...
+2025-07-24 12:26:16,489 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:26:17,252 INFO Connection from ('127.0.0.1', 54369)
+2025-07-24 12:26:17,252 INFO Received data: {"action": "ping"}...
+2025-07-24 12:26:17,252 INFO handle_command called
+2025-07-24 12:26:17,252 INFO action: ping
+2025-07-24 12:26:17,252 INFO Response sent
+2025-07-24 12:26:17,252 INFO Waiting for connection...
+2025-07-24 12:26:17,252 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:26:32,352 INFO Connection from ('127.0.0.1', 54374)
+2025-07-24 12:26:32,367 INFO Received data: {"action": "list_documents", "directory": "C:\\Users\\ben_t\\Documents"}...
+2025-07-24 12:26:32,367 INFO handle_command called
+2025-07-24 12:26:32,367 INFO action: list_documents
+2025-07-24 12:26:32,372 INFO Response sent
+2025-07-24 12:26:32,372 INFO Waiting for connection...
+2025-07-24 12:26:32,372 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:29:01,222 INFO Connection from ('127.0.0.1', 54383)
+2025-07-24 12:29:01,246 INFO Received data: {"action": "copy_document", "source_path": "C:\\Users\\ben_t\\Documents\\cows_info.odt", "target_pat...
+2025-07-24 12:29:01,246 INFO handle_command called
+2025-07-24 12:29:01,246 INFO action: copy_document
+2025-07-24 12:29:01,652 INFO Response sent
+2025-07-24 12:29:01,652 INFO Waiting for connection...
+2025-07-24 12:29:01,656 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:33:17,626 INFO Connection from ('127.0.0.1', 54418)
+2025-07-24 12:33:17,626 INFO Waiting for connection...
+2025-07-24 12:33:17,626 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:33:18,411 INFO Connection from ('127.0.0.1', 54419)
+2025-07-24 12:33:18,411 INFO Received data: {"action": "ping"}...
+2025-07-24 12:33:18,411 INFO handle_command called
+2025-07-24 12:33:18,411 INFO action: ping
+2025-07-24 12:33:18,411 INFO Response sent
+2025-07-24 12:33:18,411 INFO Waiting for connection...
+2025-07-24 12:33:18,411 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:33:56,628 INFO Connection from ('127.0.0.1', 54430)
+2025-07-24 12:33:56,628 INFO Received data: {"action": "list_documents", "directory": "C:\\Users\\ben_t\\Documents"}...
+2025-07-24 12:33:56,628 INFO handle_command called
+2025-07-24 12:33:56,628 INFO action: list_documents
+2025-07-24 12:33:56,631 INFO Response sent
+2025-07-24 12:33:56,631 INFO Waiting for connection...
+2025-07-24 12:33:56,631 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:42:57,978 INFO Connection from ('127.0.0.1', 54505)
+2025-07-24 12:42:57,978 INFO Received data: {"action": "list_documents", "directory": "C:\\Users\\ben_t\\Documents"}...
+2025-07-24 12:42:57,978 INFO handle_command called
+2025-07-24 12:42:57,978 INFO action: list_documents
+2025-07-24 12:42:57,994 INFO Response sent
+2025-07-24 12:42:57,994 INFO Waiting for connection...
+2025-07-24 12:42:57,994 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:45:31,997 INFO Connection from ('127.0.0.1', 54524)
+2025-07-24 12:45:32,013 INFO Received data: {"action": "add_text", "file_path": "C:\\Users\\ben_t\\Documents\\cows_info.odt", "text": "I love co...
+2025-07-24 12:45:32,013 INFO handle_command called
+2025-07-24 12:45:32,013 INFO action: add_text
+2025-07-24 12:45:32,443 INFO Response sent
+2025-07-24 12:45:32,443 INFO Waiting for connection...
+2025-07-24 12:45:32,443 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:49:37,871 INFO Connection from ('127.0.0.1', 54561)
+2025-07-24 12:49:37,871 INFO Waiting for connection...
+2025-07-24 12:49:37,871 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:49:38,506 INFO Connection from ('127.0.0.1', 54562)
+2025-07-24 12:49:38,506 INFO Received data: {"action": "ping"}...
+2025-07-24 12:49:38,506 INFO handle_command called
+2025-07-24 12:49:38,506 INFO action: ping
+2025-07-24 12:49:38,506 INFO Response sent
+2025-07-24 12:49:38,506 INFO Waiting for connection...
+2025-07-24 12:49:38,506 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:50:21,649 INFO Connection from ('127.0.0.1', 54572)
+2025-07-24 12:50:21,649 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\source\\repos\\LibreOfficeAI\\MCPServer\\l...
+2025-07-24 12:50:21,649 INFO handle_command called
+2025-07-24 12:50:21,649 INFO action: add_heading
+2025-07-24 12:50:21,649 INFO Response sent
+2025-07-24 12:50:21,649 INFO Waiting for connection...
+2025-07-24 12:50:21,649 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:51:24,344 INFO Connection from ('127.0.0.1', 54577)
+2025-07-24 12:51:24,344 INFO Received data: {"action": "list_documents", "directory": "C:\\Users\\ben_t\\Documents"}...
+2025-07-24 12:51:24,344 INFO handle_command called
+2025-07-24 12:51:24,344 INFO action: list_documents
+2025-07-24 12:51:24,344 INFO Response sent
+2025-07-24 12:51:24,344 INFO Waiting for connection...
+2025-07-24 12:51:24,344 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:52:28,723 INFO Connection from ('127.0.0.1', 54581)
+2025-07-24 12:52:28,740 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\Documents\\cows_info.odt", "text": "Cows a...
+2025-07-24 12:52:28,740 INFO handle_command called
+2025-07-24 12:52:28,740 INFO action: add_heading
+2025-07-24 12:52:29,203 INFO Response sent
+2025-07-24 12:52:29,203 INFO Waiting for connection...
+2025-07-24 12:52:29,203 INFO <socket.socket fd=804, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:56:14,401 INFO Importing UNO...
+2025-07-24 12:56:14,451 INFO UNO imported successfully!
+2025-07-24 12:56:14,456 INFO LibreOffice helper listening on port 8765
+2025-07-24 12:56:14,456 INFO Socket bound to localhost:8765
+2025-07-24 12:56:14,456 INFO Waiting for connection...
+2025-07-24 12:56:14,456 INFO <socket.socket fd=844, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:56:18,080 INFO Connection from ('127.0.0.1', 54624)
+2025-07-24 12:56:18,080 INFO Received data: {"action": "ping"}...
+2025-07-24 12:56:18,080 INFO handle_command called
+2025-07-24 12:56:18,080 INFO action: ping
+2025-07-24 12:56:18,080 INFO Response sent
+2025-07-24 12:56:18,080 INFO Waiting for connection...
+2025-07-24 12:56:18,080 INFO <socket.socket fd=844, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:56:40,536 INFO Connection from ('127.0.0.1', 54629)
+2025-07-24 12:56:40,536 INFO Received data: {"action": "list_documents", "directory": "C:\\Users\\ben_t\\Documents"}...
+2025-07-24 12:56:40,536 INFO handle_command called
+2025-07-24 12:56:40,536 INFO action: list_documents
+2025-07-24 12:56:40,548 INFO Response sent
+2025-07-24 12:56:40,548 INFO Waiting for connection...
+2025-07-24 12:56:40,548 INFO <socket.socket fd=844, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:57:21,584 INFO Connection from ('127.0.0.1', 54631)
+2025-07-24 12:57:21,584 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\Documents\\cows_info.odt", "text": "Vegani...
+2025-07-24 12:57:21,584 INFO handle_command called
+2025-07-24 12:57:21,584 INFO action: add_heading
+2025-07-24 12:57:22,068 INFO Response sent
+2025-07-24 12:57:22,068 INFO Waiting for connection...
+2025-07-24 12:57:22,068 INFO <socket.socket fd=844, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 12:59:50,469 INFO Connection from ('127.0.0.1', 54651)
+2025-07-24 12:59:50,482 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\Documents\\cows_info.odt", "text": "Vega...
+2025-07-24 12:59:50,482 INFO handle_command called
+2025-07-24 12:59:50,482 INFO action: add_paragraph
+2025-07-24 12:59:50,575 INFO Response sent
+2025-07-24 12:59:50,577 INFO Waiting for connection...
+2025-07-24 12:59:50,577 INFO <socket.socket fd=844, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 13:01:17,566 INFO Connection from ('127.0.0.1', 54669)
+2025-07-24 13:01:17,566 INFO Waiting for connection...
+2025-07-24 13:01:17,567 INFO <socket.socket fd=844, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 13:01:18,225 INFO Connection from ('127.0.0.1', 54670)
+2025-07-24 13:01:18,225 INFO Received data: {"action": "ping"}...
+2025-07-24 13:01:18,225 INFO handle_command called
+2025-07-24 13:01:18,225 INFO action: ping
+2025-07-24 13:01:18,225 INFO Response sent
+2025-07-24 13:01:18,225 INFO Waiting for connection...
+2025-07-24 13:01:18,225 INFO <socket.socket fd=844, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 13:01:52,948 INFO Connection from ('127.0.0.1', 54675)
+2025-07-24 13:01:52,963 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\Documents\\cows_info.odt", "text": "Vega...
+2025-07-24 13:01:52,963 INFO handle_command called
+2025-07-24 13:01:52,964 INFO action: add_paragraph
+2025-07-24 13:01:53,404 INFO Response sent
+2025-07-24 13:01:53,404 INFO Waiting for connection...
+2025-07-24 13:01:53,404 INFO <socket.socket fd=844, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 13:02:48,264 INFO Connection from ('127.0.0.1', 54688)
+2025-07-24 13:02:48,279 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\Documents\\cows_info.odt", "text": "Some...
+2025-07-24 13:02:48,279 INFO handle_command called
+2025-07-24 13:02:48,279 INFO action: add_paragraph
+2025-07-24 13:02:48,364 INFO Response sent
+2025-07-24 13:02:48,364 INFO Waiting for connection...
+2025-07-24 13:02:48,364 INFO <socket.socket fd=844, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 13:03:26,154 INFO Connection from ('127.0.0.1', 54701)
+2025-07-24 13:03:26,160 INFO Waiting for connection...
+2025-07-24 13:03:26,160 INFO <socket.socket fd=844, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 13:03:26,819 INFO Connection from ('127.0.0.1', 54702)
+2025-07-24 13:03:26,819 INFO Received data: {"action": "ping"}...
+2025-07-24 13:03:26,819 INFO handle_command called
+2025-07-24 13:03:26,819 INFO action: ping
+2025-07-24 13:03:26,819 INFO Response sent
+2025-07-24 13:03:26,819 INFO Waiting for connection...
+2025-07-24 13:03:26,819 INFO <socket.socket fd=844, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-24 13:04:30,424 INFO Connection from ('127.0.0.1', 54708)
+2025-07-24 13:04:30,424 INFO Received data: {"action": "list_documents", "directory": "C:\\Users\\ben_t\\Documents"}...
+2025-07-24 13:04:30,424 INFO handle_command called
+2025-07-24 13:04:30,424 INFO action: list_documents
+2025-07-24 13:04:30,436 INFO Response sent
+2025-07-24 13:04:30,436 INFO Waiting for connection...
+2025-07-24 13:04:30,436 INFO <socket.socket fd=844, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>

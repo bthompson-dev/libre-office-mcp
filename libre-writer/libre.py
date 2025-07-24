@@ -189,9 +189,9 @@ async def create_blank_document(
         return f"Failed to create document: {str(e)}"
 
 @mcp.tool()
-async def open_text_document(file_path: str) -> str:
+async def read_text_document(file_path: str) -> str:
     """
-    Open and extract text from a LibreOffice text document.
+    Open and read a text document.
     
     Args:
         file_path: Path to the document
@@ -217,7 +217,7 @@ async def open_text_document(file_path: str) -> str:
 @mcp.tool()
 async def get_document_properties(file_path: str) -> str:
     """
-    Get document properties and statistics.
+    Get document properties and statistics, including author, description, keywords, word count, etc.
     
     Args:
         file_path: Path to the document
@@ -725,35 +725,35 @@ async def apply_document_style(file_path: str, font_name: Optional[str] = None,
     
     Args:
         file_path: Path to the document
-        font_name: Default font name
-        font_size: Default font size in points
-        color: Default text color (hex format, e.g., "#000000")
-        alignment: Default alignment (left, center, right, justify)
+        font_name: Font name
+        font_size: Font size in points
+        color: Text color (hex format, e.g., "#000000")
+        alignment: Alignment (left, center, right, justify)
     """
     try:
         # Normalize path
         file_path = normalize_path(file_path)
         
-        # Prepare default style
-        default_style = {}
+        # Prepare style
+        style = {}
         
         if font_name:
-            default_style["font_name"] = font_name
+            style["font_name"] = font_name
         
-        if font_size is not None:
-            default_style["font_size"] = font_size
+        if font_size:
+            style["font_size"] = font_size
         
         if color:
-            default_style["color"] = color
+            style["color"] = color
         
         if alignment:
-            default_style["alignment"] = alignment
+            style["alignment"] = alignment
         
         # Send command to helper
         response = call_libreoffice_helper({
             "action": "apply_document_style",
             "file_path": file_path,
-            "default_style": default_style
+            "style": style
         })
         
         if response["status"] == "success":

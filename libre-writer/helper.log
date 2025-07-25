@@ -1740,3 +1740,269 @@ com.sun.star.script.CannotConvertException: conversion not possible!
 2025-07-25 16:41:31,755 INFO Response sent
 2025-07-25 16:41:31,755 INFO Waiting for connection...
 2025-07-25 16:41:31,755 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 16:59:01,247 INFO Connection from ('127.0.0.1', 57249)
+2025-07-25 16:59:01,247 INFO Waiting for connection...
+2025-07-25 16:59:01,247 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 16:59:01,735 INFO Connection from ('127.0.0.1', 57250)
+2025-07-25 16:59:01,735 INFO Received data: {"action": "ping"}...
+2025-07-25 16:59:01,735 INFO handle_command called
+2025-07-25 16:59:01,735 INFO action: ping
+2025-07-25 16:59:01,735 INFO Response sent
+2025-07-25 16:59:01,735 INFO Waiting for connection...
+2025-07-25 16:59:01,735 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 16:59:23,565 INFO Connection from ('127.0.0.1', 57254)
+2025-07-25 16:59:23,565 INFO Received data: {"action": "copy_document", "source_path": "C:\\Users\\ben_t\\Documents\\dogs_document.odt", "target...
+2025-07-25 16:59:23,565 INFO handle_command called
+2025-07-25 16:59:23,565 INFO action: copy_document
+2025-07-25 16:59:24,215 INFO Response sent
+2025-07-25 16:59:24,215 INFO Waiting for connection...
+2025-07-25 16:59:24,215 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:04:10,307 INFO Connection from ('127.0.0.1', 57282)
+2025-07-25 17:04:10,307 INFO Waiting for connection...
+2025-07-25 17:04:10,307 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:04:10,825 INFO Connection from ('127.0.0.1', 57283)
+2025-07-25 17:04:10,825 INFO Received data: {"action": "ping"}...
+2025-07-25 17:04:10,825 INFO handle_command called
+2025-07-25 17:04:10,825 INFO action: ping
+2025-07-25 17:04:10,825 INFO Response sent
+2025-07-25 17:04:10,825 INFO Waiting for connection...
+2025-07-25 17:04:10,825 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:10:11,446 INFO Connection from ('127.0.0.1', 57317)
+2025-07-25 17:10:11,446 INFO Waiting for connection...
+2025-07-25 17:10:11,446 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:10:11,982 INFO Connection from ('127.0.0.1', 57318)
+2025-07-25 17:10:11,982 INFO Received data: {"action": "ping"}...
+2025-07-25 17:10:11,982 INFO handle_command called
+2025-07-25 17:10:11,982 INFO action: ping
+2025-07-25 17:10:11,982 INFO Response sent
+2025-07-25 17:10:11,982 INFO Waiting for connection...
+2025-07-25 17:10:11,982 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:12:00,962 INFO Connection from ('127.0.0.1', 57336)
+2025-07-25 17:12:00,973 INFO Received data: {"action": "copy_document", "source_path": "C:\\Users\\ben_t\\Documents\\dogs_document.odt", "target...
+2025-07-25 17:12:00,973 INFO handle_command called
+2025-07-25 17:12:00,973 INFO action: copy_document
+2025-07-25 17:12:01,392 INFO Response sent
+2025-07-25 17:12:01,392 INFO Waiting for connection...
+2025-07-25 17:12:01,392 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:19:08,331 INFO Connection from ('127.0.0.1', 57365)
+2025-07-25 17:19:08,331 INFO Waiting for connection...
+2025-07-25 17:19:08,331 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:19:08,866 INFO Connection from ('127.0.0.1', 57366)
+2025-07-25 17:19:08,882 INFO Received data: {"action": "ping"}...
+2025-07-25 17:19:08,882 INFO handle_command called
+2025-07-25 17:19:08,882 INFO action: ping
+2025-07-25 17:19:08,882 INFO Response sent
+2025-07-25 17:19:08,882 INFO Waiting for connection...
+2025-07-25 17:19:08,882 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:19:33,610 INFO Connection from ('127.0.0.1', 57374)
+2025-07-25 17:19:33,621 INFO Received data: {"action": "copy_document", "source_path": "C:\\Users\\ben_t\\Documents\\dogs_document.odt", "target...
+2025-07-25 17:19:33,621 INFO handle_command called
+2025-07-25 17:19:33,621 INFO action: copy_document
+2025-07-25 17:19:34,020 INFO Response sent
+2025-07-25 17:19:34,020 INFO Waiting for connection...
+2025-07-25 17:19:34,020 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:21:46,799 INFO Connection from ('127.0.0.1', 57391)
+2025-07-25 17:21:46,799 INFO Waiting for connection...
+2025-07-25 17:21:46,799 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:21:47,310 INFO Connection from ('127.0.0.1', 57392)
+2025-07-25 17:21:47,310 INFO Received data: {"action": "ping"}...
+2025-07-25 17:21:47,310 INFO handle_command called
+2025-07-25 17:21:47,310 INFO action: ping
+2025-07-25 17:21:47,310 INFO Response sent
+2025-07-25 17:21:47,310 INFO Waiting for connection...
+2025-07-25 17:21:47,310 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:21:56,319 INFO Connection from ('127.0.0.1', 57399)
+2025-07-25 17:21:56,319 INFO Waiting for connection...
+2025-07-25 17:21:56,319 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:21:56,911 INFO Connection from ('127.0.0.1', 57400)
+2025-07-25 17:21:56,911 INFO Received data: {"action": "ping"}...
+2025-07-25 17:21:56,911 INFO handle_command called
+2025-07-25 17:21:56,911 INFO action: ping
+2025-07-25 17:21:56,911 INFO Response sent
+2025-07-25 17:21:56,911 INFO Waiting for connection...
+2025-07-25 17:21:56,911 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:22:08,819 INFO Connection from ('127.0.0.1', 57407)
+2025-07-25 17:22:08,845 INFO Received data: {"action": "copy_document", "source_path": "C:\\Users\\ben_t\\Documents\\dogs_document.odt", "target...
+2025-07-25 17:22:08,845 INFO handle_command called
+2025-07-25 17:22:08,845 INFO action: copy_document
+2025-07-25 17:22:08,869 INFO Response sent
+2025-07-25 17:22:08,869 INFO Waiting for connection...
+2025-07-25 17:22:08,869 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:22:31,279 INFO Connection from ('127.0.0.1', 57409)
+2025-07-25 17:22:31,279 INFO Waiting for connection...
+2025-07-25 17:22:31,279 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:22:31,811 INFO Connection from ('127.0.0.1', 57410)
+2025-07-25 17:22:31,811 INFO Received data: {"action": "ping"}...
+2025-07-25 17:22:31,811 INFO handle_command called
+2025-07-25 17:22:31,811 INFO action: ping
+2025-07-25 17:22:31,811 INFO Response sent
+2025-07-25 17:22:31,811 INFO Waiting for connection...
+2025-07-25 17:22:31,811 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:22:51,061 INFO Connection from ('127.0.0.1', 57417)
+2025-07-25 17:22:51,076 INFO Received data: {"action": "open_text_document", "file_path": "C:\\Users\\ben_t\\Documents\\dogs_document.odt"}...
+2025-07-25 17:22:51,076 INFO handle_command called
+2025-07-25 17:22:51,076 INFO action: open_text_document
+2025-07-25 17:22:51,220 INFO Response sent
+2025-07-25 17:22:51,220 INFO Waiting for connection...
+2025-07-25 17:22:51,220 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:28:35,552 INFO Connection from ('127.0.0.1', 57459)
+2025-07-25 17:28:35,553 INFO Waiting for connection...
+2025-07-25 17:28:35,553 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:28:36,070 INFO Connection from ('127.0.0.1', 57460)
+2025-07-25 17:28:36,070 INFO Received data: {"action": "ping"}...
+2025-07-25 17:28:36,070 INFO handle_command called
+2025-07-25 17:28:36,070 INFO action: ping
+2025-07-25 17:28:36,070 INFO Response sent
+2025-07-25 17:28:36,070 INFO Waiting for connection...
+2025-07-25 17:28:36,070 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:28:54,341 INFO Connection from ('127.0.0.1', 57467)
+2025-07-25 17:28:54,355 INFO Received data: {"action": "open_text_document", "file_path": "C:\\Users\\ben_t\\Documents\\dogs_document.odt"}...
+2025-07-25 17:28:54,355 INFO handle_command called
+2025-07-25 17:28:54,355 INFO action: open_text_document
+2025-07-25 17:28:54,502 INFO Response sent
+2025-07-25 17:28:54,502 INFO Waiting for connection...
+2025-07-25 17:28:54,502 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:42:25,409 INFO Connection from ('127.0.0.1', 57532)
+2025-07-25 17:42:25,411 INFO Waiting for connection...
+2025-07-25 17:42:25,411 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:42:25,968 INFO Connection from ('127.0.0.1', 57533)
+2025-07-25 17:42:25,983 INFO Received data: {"action": "ping"}...
+2025-07-25 17:42:25,983 INFO handle_command called
+2025-07-25 17:42:25,983 INFO action: ping
+2025-07-25 17:42:25,983 INFO Response sent
+2025-07-25 17:42:25,983 INFO Waiting for connection...
+2025-07-25 17:42:25,983 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:42:53,763 INFO Connection from ('127.0.0.1', 57541)
+2025-07-25 17:42:53,786 INFO Received data: {"action": "open_text_document", "file_path": "C:\\Users\\ben_t\\Documents\\vampires_document.odt"}...
+2025-07-25 17:42:53,786 INFO handle_command called
+2025-07-25 17:42:53,786 INFO action: open_text_document
+2025-07-25 17:42:53,930 INFO Response sent
+2025-07-25 17:42:53,930 INFO Waiting for connection...
+2025-07-25 17:42:53,930 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:43:13,534 INFO Connection from ('127.0.0.1', 57553)
+2025-07-25 17:43:13,548 INFO Received data: {"action": "copy_document", "source_path": "C:\\Users\\ben_t\\Documents\\vampires_document.odt", "ta...
+2025-07-25 17:43:13,548 INFO handle_command called
+2025-07-25 17:43:13,548 INFO action: copy_document
+2025-07-25 17:43:13,944 INFO Response sent
+2025-07-25 17:43:13,944 INFO Waiting for connection...
+2025-07-25 17:43:13,944 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:48:48,663 INFO Connection from ('127.0.0.1', 57577)
+2025-07-25 17:48:48,663 INFO Waiting for connection...
+2025-07-25 17:48:48,663 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:48:49,219 INFO Connection from ('127.0.0.1', 57578)
+2025-07-25 17:48:49,229 INFO Received data: {"action": "ping"}...
+2025-07-25 17:48:49,229 INFO handle_command called
+2025-07-25 17:48:49,229 INFO action: ping
+2025-07-25 17:48:49,229 INFO Response sent
+2025-07-25 17:48:49,229 INFO Waiting for connection...
+2025-07-25 17:48:49,229 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:49:06,007 INFO Connection from ('127.0.0.1', 57585)
+2025-07-25 17:49:06,023 INFO Received data: {"action": "open_text_document", "file_path": "C:\\Users\\ben_t\\Documents\\vampires_document.odt"}...
+2025-07-25 17:49:06,023 INFO handle_command called
+2025-07-25 17:49:06,023 INFO action: open_text_document
+2025-07-25 17:49:06,174 INFO Response sent
+2025-07-25 17:49:06,174 INFO Waiting for connection...
+2025-07-25 17:49:06,174 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 17:49:26,291 INFO Connection from ('127.0.0.1', 57589)
+2025-07-25 17:49:26,302 INFO Received data: {"action": "copy_document", "source_path": "C:\\Users\\ben_t\\Documents\\vampires_document.odt", "ta...
+2025-07-25 17:49:26,302 INFO handle_command called
+2025-07-25 17:49:26,302 INFO action: copy_document
+2025-07-25 17:49:26,671 INFO Response sent
+2025-07-25 17:49:26,671 INFO Waiting for connection...
+2025-07-25 17:49:26,671 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 18:15:58,678 INFO Connection from ('127.0.0.1', 57676)
+2025-07-25 18:15:58,678 INFO Waiting for connection...
+2025-07-25 18:15:58,678 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 18:15:59,206 INFO Connection from ('127.0.0.1', 57677)
+2025-07-25 18:15:59,222 INFO Received data: {"action": "ping"}...
+2025-07-25 18:15:59,222 INFO handle_command called
+2025-07-25 18:15:59,222 INFO action: ping
+2025-07-25 18:15:59,222 INFO Response sent
+2025-07-25 18:15:59,222 INFO Waiting for connection...
+2025-07-25 18:15:59,222 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 18:16:20,781 INFO Connection from ('127.0.0.1', 57684)
+2025-07-25 18:16:20,781 INFO Received data: {"action": "create_document", "doc_type": "text", "file_path": "C:\\Users\\ben_t\\Documents\\werewol...
+2025-07-25 18:16:20,781 INFO handle_command called
+2025-07-25 18:16:20,781 INFO action: create_document
+2025-07-25 18:16:20,781 INFO Creating text document at C:\Users\ben_t\Documents\werewolves_document.odt
+2025-07-25 18:16:21,327 INFO pyuno object (com.sun.star.document.XDocumentProperties)0x21bf31af398{implementationName=SfxDocumentMetaData, supportedServices={com.sun.star.document.DocumentProperties}, supportedInterfaces={com.sun.star.uno.XWeak,com.sun.star.lang.XComponent,com.sun.star.lang.XTypeProvider,com.sun.star.lang.XServiceInfo,com.sun.star.document.XDocumentProperties2,com.sun.star.lang.XInitialization,com.sun.star.util.XCloneable,com.sun.star.util.XModifiable,com.sun.star.xml.sax.XSAXSerializable}}
+2025-07-25 18:16:21,327 INFO Title Werewolves <class 'str'>
+2025-07-25 18:16:21,367 INFO Subject Mythology, Folklore, Lore <class 'str'>
+2025-07-25 18:16:21,557 INFO Keywords ['werewolves', 'mythology', 'folklore', 'lycanthropy'] <class 'list'>
+2025-07-25 18:16:21,677 INFO Saving to URL: file:///C:/Users/ben_t/Documents/werewolves_document.odt
+2025-07-25 18:16:23,033 INFO Response sent
+2025-07-25 18:16:23,033 INFO Waiting for connection...
+2025-07-25 18:16:23,033 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 18:18:50,727 INFO Connection from ('127.0.0.1', 57697)
+2025-07-25 18:18:50,727 INFO Waiting for connection...
+2025-07-25 18:18:50,727 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 18:18:51,240 INFO Connection from ('127.0.0.1', 57698)
+2025-07-25 18:18:51,257 INFO Received data: {"action": "ping"}...
+2025-07-25 18:18:51,257 INFO handle_command called
+2025-07-25 18:18:51,257 INFO action: ping
+2025-07-25 18:18:51,257 INFO Response sent
+2025-07-25 18:18:51,257 INFO Waiting for connection...
+2025-07-25 18:18:51,257 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 18:19:19,166 INFO Connection from ('127.0.0.1', 57705)
+2025-07-25 18:19:19,181 INFO Received data: {"action": "create_document", "doc_type": "text", "file_path": "C:\\Users\\ben_t\\Documents\\frogs_d...
+2025-07-25 18:19:19,181 INFO handle_command called
+2025-07-25 18:19:19,181 INFO action: create_document
+2025-07-25 18:19:19,181 INFO Creating text document at C:\Users\ben_t\Documents\frogs_document.odt
+2025-07-25 18:19:19,523 INFO pyuno object (com.sun.star.document.XDocumentProperties)0x21bf31b0b18{implementationName=SfxDocumentMetaData, supportedServices={com.sun.star.document.DocumentProperties}, supportedInterfaces={com.sun.star.uno.XWeak,com.sun.star.lang.XComponent,com.sun.star.lang.XTypeProvider,com.sun.star.lang.XServiceInfo,com.sun.star.document.XDocumentProperties2,com.sun.star.lang.XInitialization,com.sun.star.util.XCloneable,com.sun.star.util.XModifiable,com.sun.star.xml.sax.XSAXSerializable}}
+2025-07-25 18:19:19,531 INFO Title Frogs: A Comprehensive Guide <class 'str'>
+2025-07-25 18:19:19,587 INFO Author Ben T <class 'str'>
+2025-07-25 18:19:19,620 INFO Subject Frogs <class 'str'>
+2025-07-25 18:19:19,620 INFO Keywords ['amphibians', 'frogs', 'nature'] <class 'list'>
+2025-07-25 18:19:19,630 INFO Saving to URL: file:///C:/Users/ben_t/Documents/frogs_document.odt
+2025-07-25 18:19:20,865 INFO Response sent
+2025-07-25 18:19:20,865 INFO Waiting for connection...
+2025-07-25 18:19:20,865 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 18:19:20,891 INFO Connection from ('127.0.0.1', 57707)
+2025-07-25 18:19:20,891 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\Documents\\frogs_document.odt", "text": "F...
+2025-07-25 18:19:20,891 INFO handle_command called
+2025-07-25 18:19:20,891 INFO action: add_heading
+2025-07-25 18:19:21,286 INFO Response sent
+2025-07-25 18:19:21,286 INFO Waiting for connection...
+2025-07-25 18:19:21,286 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 18:19:21,302 INFO Connection from ('127.0.0.1', 57709)
+2025-07-25 18:19:21,302 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\Documents\\frogs_document.odt", "text": ...
+2025-07-25 18:19:21,302 INFO handle_command called
+2025-07-25 18:19:21,302 INFO action: add_paragraph
+2025-07-25 18:19:21,740 INFO Response sent
+2025-07-25 18:19:21,744 INFO Waiting for connection...
+2025-07-25 18:19:21,744 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 18:19:21,750 INFO Connection from ('127.0.0.1', 57711)
+2025-07-25 18:19:21,761 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\Documents\\frogs_document.odt", "text": ...
+2025-07-25 18:19:21,761 INFO handle_command called
+2025-07-25 18:19:21,761 INFO action: add_paragraph
+2025-07-25 18:19:22,251 INFO Response sent
+2025-07-25 18:19:22,251 INFO Waiting for connection...
+2025-07-25 18:19:22,251 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 18:19:46,681 INFO Connection from ('127.0.0.1', 57713)
+2025-07-25 18:19:46,694 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\Documents\\frogs_document.odt", "text": "F...
+2025-07-25 18:19:46,694 INFO handle_command called
+2025-07-25 18:19:46,694 INFO action: add_heading
+2025-07-25 18:19:47,111 INFO Response sent
+2025-07-25 18:19:47,111 INFO Waiting for connection...
+2025-07-25 18:19:47,111 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 18:19:47,131 INFO Connection from ('127.0.0.1', 57715)
+2025-07-25 18:19:47,155 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\Documents\\frogs_document.odt", "text": ...
+2025-07-25 18:19:47,155 INFO handle_command called
+2025-07-25 18:19:47,155 INFO action: add_paragraph
+2025-07-25 18:19:47,301 INFO Response sent
+2025-07-25 18:19:47,301 INFO Waiting for connection...
+2025-07-25 18:19:47,301 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 18:19:47,325 INFO Connection from ('127.0.0.1', 57717)
+2025-07-25 18:19:47,325 INFO Received data: {"action": "add_heading", "file_path": "C:\\Users\\ben_t\\Documents\\frogs_document.odt", "text": "H...
+2025-07-25 18:19:47,325 INFO handle_command called
+2025-07-25 18:19:47,325 INFO action: add_heading
+2025-07-25 18:19:47,753 INFO Response sent
+2025-07-25 18:19:47,753 INFO Waiting for connection...
+2025-07-25 18:19:47,757 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>
+2025-07-25 18:19:47,771 INFO Connection from ('127.0.0.1', 57719)
+2025-07-25 18:19:47,790 INFO Received data: {"action": "add_paragraph", "file_path": "C:\\Users\\ben_t\\Documents\\frogs_document.odt", "text": ...
+2025-07-25 18:19:47,790 INFO handle_command called
+2025-07-25 18:19:47,790 INFO action: add_paragraph
+2025-07-25 18:19:47,933 INFO Response sent
+2025-07-25 18:19:47,933 INFO Waiting for connection...
+2025-07-25 18:19:47,933 INFO <socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>

@@ -1327,3 +1327,166 @@
 2025-07-25 16:41:31,620 INFO <socket.socket fd=1000, family=2, type=1, proto=0, laddr=('127.0.0.1', 57162), raddr=('127.0.0.1', 8765)>
 2025-07-25 16:41:31,620 INFO b'{"action": "open_text_document", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\cows_info.odt"}'
 2025-07-25 16:41:31,755 INFO {"status": "success", "message": "Cows: Information and Overview\r\n1. Cows are mammals with four stomach chambers.\r\n2. They are social animals that live in herds.\r\n3. Dairy cows are raised for milk production.\r\nI love cowsCows are great\r\n\r\nVeganism is the best choice\r\nVeganism is a lifestyle that avoids the use of animal products, including meat, dairy, and eggs. In the context of cows, veganism promotes the idea of not consuming cow's milk, cheese, or other dairy products, and also avoids using leather or other animal-derived materials. This choice is often driven by ethical, environmental, or health considerations.\r\nCats are fascinating creatures known for their agility, independence, and curious nature. With their sleek bodies, sharp claws, and expressive eyes, they have captivated humans for centuries. Whether lounging in sunbeams or darting across rooftops, cats exude a unique blend of grace and mystery.\r\nFarms play a vital role in raising cows, providing them with food, shelter, and care. They are essential for dairy and beef production, supporting both rural economies and food supply chains.\r\nCows can also be wonderful friends to humans. Their gentle nature, calm demeanor, and ability to form bonds make them loyal companions for farmers and animal lovers alike. Spending time with cows has been shown to reduce stress and promote emotional well-being, making them more than just livestock\u2014they are cherished members of many communities.\r\nToilets: A section on toilets would go here. [Details about toilets could be added here, but the user hasn't specified what to include.]"}
+2025-07-25 16:59:01,732 INFO call_libreoffice_helper function called
+2025-07-25 16:59:01,735 INFO <socket.socket fd=396, family=2, type=1, proto=0, laddr=('127.0.0.1', 57250), raddr=('127.0.0.1', 8765)>
+2025-07-25 16:59:01,735 INFO b'{"action": "ping"}'
+2025-07-25 16:59:01,735 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-25 16:59:01,779 INFO Processing request of type ListToolsRequest
+2025-07-25 16:59:23,565 INFO Processing request of type CallToolRequest
+2025-07-25 16:59:23,565 INFO call_libreoffice_helper function called
+2025-07-25 16:59:23,565 INFO <socket.socket fd=796, family=2, type=1, proto=0, laddr=('127.0.0.1', 57254), raddr=('127.0.0.1', 8765)>
+2025-07-25 16:59:23,565 INFO b'{"action": "copy_document", "source_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\dogs_document.odt", "target_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\dogs_document_copy.odt"}'
+2025-07-25 16:59:24,215 INFO {"status": "success", "message": "Successfully copied document to: C:\\Users\\ben_t\\Documents\\dogs_document_copy.odt"}
+2025-07-25 17:04:10,823 INFO call_libreoffice_helper function called
+2025-07-25 17:04:10,825 INFO <socket.socket fd=380, family=2, type=1, proto=0, laddr=('127.0.0.1', 57283), raddr=('127.0.0.1', 8765)>
+2025-07-25 17:04:10,825 INFO b'{"action": "ping"}'
+2025-07-25 17:04:10,825 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-25 17:04:10,873 INFO Processing request of type ListToolsRequest
+2025-07-25 17:10:11,975 INFO call_libreoffice_helper function called
+2025-07-25 17:10:11,982 INFO <socket.socket fd=416, family=2, type=1, proto=0, laddr=('127.0.0.1', 57318), raddr=('127.0.0.1', 8765)>
+2025-07-25 17:10:11,982 INFO b'{"action": "ping"}'
+2025-07-25 17:10:11,982 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-25 17:10:12,027 INFO Processing request of type ListToolsRequest
+2025-07-25 17:12:00,962 INFO Processing request of type CallToolRequest
+2025-07-25 17:12:00,962 INFO call_libreoffice_helper function called
+2025-07-25 17:12:00,973 INFO <socket.socket fd=908, family=2, type=1, proto=0, laddr=('127.0.0.1', 57336), raddr=('127.0.0.1', 8765)>
+2025-07-25 17:12:00,973 INFO b'{"action": "copy_document", "source_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\dogs_document.odt", "target_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\dogs_document_copy.odt"}'
+2025-07-25 17:12:01,392 INFO {"status": "success", "message": "Successfully copied document to: C:\\Users\\ben_t\\Documents\\dogs_document_copy.odt"}
+2025-07-25 17:19:08,860 INFO call_libreoffice_helper function called
+2025-07-25 17:19:08,882 INFO <socket.socket fd=428, family=2, type=1, proto=0, laddr=('127.0.0.1', 57366), raddr=('127.0.0.1', 8765)>
+2025-07-25 17:19:08,882 INFO b'{"action": "ping"}'
+2025-07-25 17:19:08,882 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-25 17:19:08,930 INFO Processing request of type ListToolsRequest
+2025-07-25 17:19:33,610 INFO Processing request of type CallToolRequest
+2025-07-25 17:19:33,610 INFO call_libreoffice_helper function called
+2025-07-25 17:19:33,621 INFO <socket.socket fd=732, family=2, type=1, proto=0, laddr=('127.0.0.1', 57374), raddr=('127.0.0.1', 8765)>
+2025-07-25 17:19:33,621 INFO b'{"action": "copy_document", "source_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\dogs_document.odt", "target_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\dogs_document_copy.odt"}'
+2025-07-25 17:19:34,020 INFO {"status": "success", "message": "Successfully copied document to: C:\\Users\\ben_t\\Documents\\dogs_document_copy.odt"}
+2025-07-25 17:21:47,309 INFO call_libreoffice_helper function called
+2025-07-25 17:21:47,310 INFO <socket.socket fd=384, family=2, type=1, proto=0, laddr=('127.0.0.1', 57392), raddr=('127.0.0.1', 8765)>
+2025-07-25 17:21:47,310 INFO b'{"action": "ping"}'
+2025-07-25 17:21:47,310 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-25 17:21:47,359 INFO Processing request of type ListToolsRequest
+2025-07-25 17:21:56,911 INFO call_libreoffice_helper function called
+2025-07-25 17:21:56,911 INFO <socket.socket fd=948, family=2, type=1, proto=0, laddr=('127.0.0.1', 57400), raddr=('127.0.0.1', 8765)>
+2025-07-25 17:21:56,911 INFO b'{"action": "ping"}'
+2025-07-25 17:21:56,911 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-25 17:21:56,953 INFO Processing request of type ListToolsRequest
+2025-07-25 17:22:08,813 INFO Processing request of type CallToolRequest
+2025-07-25 17:22:08,819 INFO call_libreoffice_helper function called
+2025-07-25 17:22:08,845 INFO <socket.socket fd=668, family=2, type=1, proto=0, laddr=('127.0.0.1', 57407), raddr=('127.0.0.1', 8765)>
+2025-07-25 17:22:08,845 INFO b'{"action": "copy_document", "source_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\dogs_document.odt", "target_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\dogs_document_copy.odt"}'
+2025-07-25 17:22:08,869 INFO {"status": "error", "message": "Error: [Errno 22] Invalid argument"}
+2025-07-25 17:22:31,809 INFO call_libreoffice_helper function called
+2025-07-25 17:22:31,811 INFO <socket.socket fd=416, family=2, type=1, proto=0, laddr=('127.0.0.1', 57410), raddr=('127.0.0.1', 8765)>
+2025-07-25 17:22:31,811 INFO b'{"action": "ping"}'
+2025-07-25 17:22:31,811 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-25 17:22:31,859 INFO Processing request of type ListToolsRequest
+2025-07-25 17:22:51,061 INFO Processing request of type CallToolRequest
+2025-07-25 17:22:51,061 INFO call_libreoffice_helper function called
+2025-07-25 17:22:51,076 INFO <socket.socket fd=924, family=2, type=1, proto=0, laddr=('127.0.0.1', 57417), raddr=('127.0.0.1', 8765)>
+2025-07-25 17:22:51,076 INFO b'{"action": "open_text_document", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\dogs_document.odt"}'
+2025-07-25 17:22:51,220 INFO {"status": "success", "message": "The Wonderful World of Dogs\r\nDogs have been humanity's loyal companions for thousands of years, offering unwavering love and protection. From ancient wolves to modern breeds, their evolution reflects our shared history.\r\nLabrador Retriever\r\nLarge\r\nFriendly\r\nHigh\r\nPoodle\r\nMedium\r\nIntelligent\r\nModerate\r\nBulldog\r\nMedium\r\nGentle\r\nLow\r\nGerman Shepherd\r\nLarge\r\nConfident\r\nHigh\r\nChihuahua\r\nSmall\r\nEnergetic\r\nHigh\r\n"}
+2025-07-25 17:28:36,065 INFO call_libreoffice_helper function called
+2025-07-25 17:28:36,070 INFO <socket.socket fd=172, family=2, type=1, proto=0, laddr=('127.0.0.1', 57460), raddr=('127.0.0.1', 8765)>
+2025-07-25 17:28:36,070 INFO b'{"action": "ping"}'
+2025-07-25 17:28:36,070 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-25 17:28:36,111 INFO Processing request of type ListToolsRequest
+2025-07-25 17:28:54,341 INFO Processing request of type CallToolRequest
+2025-07-25 17:28:54,341 INFO call_libreoffice_helper function called
+2025-07-25 17:28:54,355 INFO <socket.socket fd=928, family=2, type=1, proto=0, laddr=('127.0.0.1', 57467), raddr=('127.0.0.1', 8765)>
+2025-07-25 17:28:54,355 INFO b'{"action": "open_text_document", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\dogs_document.odt"}'
+2025-07-25 17:28:54,502 INFO {"status": "success", "message": "The Wonderful World of Dogs\r\nDogs have been humanity's loyal companions for thousands of years, offering unwavering love and protection. From ancient wolves to modern breeds, their evolution reflects our shared history.\r\nLabrador Retriever\r\nLarge\r\nFriendly\r\nHigh\r\nPoodle\r\nMedium\r\nIntelligent\r\nModerate\r\nBulldog\r\nMedium\r\nGentle\r\nLow\r\nGerman Shepherd\r\nLarge\r\nConfident\r\nHigh\r\nChihuahua\r\nSmall\r\nEnergetic\r\nHigh\r\n"}
+2025-07-25 17:42:25,966 INFO call_libreoffice_helper function called
+2025-07-25 17:42:25,983 INFO <socket.socket fd=432, family=2, type=1, proto=0, laddr=('127.0.0.1', 57533), raddr=('127.0.0.1', 8765)>
+2025-07-25 17:42:25,983 INFO b'{"action": "ping"}'
+2025-07-25 17:42:25,983 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-25 17:42:26,027 INFO Processing request of type ListToolsRequest
+2025-07-25 17:42:53,763 INFO Processing request of type CallToolRequest
+2025-07-25 17:42:53,763 INFO call_libreoffice_helper function called
+2025-07-25 17:42:53,786 INFO <socket.socket fd=796, family=2, type=1, proto=0, laddr=('127.0.0.1', 57541), raddr=('127.0.0.1', 8765)>
+2025-07-25 17:42:53,786 INFO b'{"action": "open_text_document", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\vampires_document.odt"}'
+2025-07-25 17:42:53,930 INFO {"status": "success", "message": "1. Origins of Vampire Lore\r\nVampire myths date back thousands of years, with roots in ancient Mesopotamian, Indian, and Chinese cultures. Early tales often revolved around reanimated corpses or blood-sucking spirits. The term \"vampire\" itself emerged in the 18th century in Eastern Europe, particularly in Serbia and Romania, where stories of the undead spread through oral traditions.\r\n2. Characteristics of Vampires\r\nClassic vampire traits include: \\* Immortality: Vampires are often depicted as ageless beings. \\* Blood Dependency: They require human blood to survive. \\* Allure and Predation: Vampires are typically seductive, luring victims to drain their life force. \\* Avoidance of Sunlight: Many myths describe them as vulnerable to sunlight or holy objects.\r\n3. Cultural Impact and Symbolism\r\nVampires have symbolized forbidden desires, mortality, and the fear of the unknown. In literature, they often represent societal anxieties (e.g., sexuality, disease). Folklore frequently portrays them as cursed souls or moral warnings against greed and hubris.\r\n4. Modern Interpretations in Media\r\nModern media has reimagined vampires as complex characters. Films like *Dracula* (1931) and *Twilight* (2008) blend horror with romance, while TV series like *True Blood* and *The Vampire Diaries* explore their humanity. Vampires now often embody themes of identity, power, and transformation.\r\nVampires remain a timeless symbol of the supernatural, evolving with culture and media. Their legends continue to captivate, reflecting humanity\u2019s fascination with life, death, and the unknown.\r\n"}
+2025-07-25 17:43:13,532 INFO Processing request of type CallToolRequest
+2025-07-25 17:43:13,532 INFO call_libreoffice_helper function called
+2025-07-25 17:43:13,548 INFO <socket.socket fd=896, family=2, type=1, proto=0, laddr=('127.0.0.1', 57553), raddr=('127.0.0.1', 8765)>
+2025-07-25 17:43:13,548 INFO b'{"action": "copy_document", "source_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\vampires_document.odt", "target_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\vampires_document_copy.odt"}'
+2025-07-25 17:43:13,944 INFO {"status": "success", "message": "Successfully copied document to: C:\\Users\\ben_t\\Documents\\vampires_document_copy.odt"}
+2025-07-25 17:48:49,214 INFO call_libreoffice_helper function called
+2025-07-25 17:48:49,229 INFO <socket.socket fd=412, family=2, type=1, proto=0, laddr=('127.0.0.1', 57578), raddr=('127.0.0.1', 8765)>
+2025-07-25 17:48:49,229 INFO b'{"action": "ping"}'
+2025-07-25 17:48:49,229 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-25 17:48:49,269 INFO Processing request of type ListToolsRequest
+2025-07-25 17:49:06,007 INFO Processing request of type CallToolRequest
+2025-07-25 17:49:06,007 INFO call_libreoffice_helper function called
+2025-07-25 17:49:06,023 INFO <socket.socket fd=844, family=2, type=1, proto=0, laddr=('127.0.0.1', 57585), raddr=('127.0.0.1', 8765)>
+2025-07-25 17:49:06,023 INFO b'{"action": "open_text_document", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\vampires_document.odt"}'
+2025-07-25 17:49:06,174 INFO {"status": "success", "message": "1. Origins of Vampire Lore\r\nVampire myths date back thousands of years, with roots in ancient Mesopotamian, Indian, and Chinese cultures. Early tales often revolved around reanimated corpses or blood-sucking spirits. The term \"vampire\" itself emerged in the 18th century in Eastern Europe, particularly in Serbia and Romania, where stories of the undead spread through oral traditions.\r\n2. Characteristics of Vampires\r\nClassic vampire traits include: \\* Immortality: Vampires are often depicted as ageless beings. \\* Blood Dependency: They require human blood to survive. \\* Allure and Predation: Vampires are typically seductive, luring victims to drain their life force. \\* Avoidance of Sunlight: Many myths describe them as vulnerable to sunlight or holy objects.\r\n3. Cultural Impact and Symbolism\r\nVampires have symbolized forbidden desires, mortality, and the fear of the unknown. In literature, they often represent societal anxieties (e.g., sexuality, disease). Folklore frequently portrays them as cursed souls or moral warnings against greed and hubris.\r\n4. Modern Interpretations in Media\r\nModern media has reimagined vampires as complex characters. Films like *Dracula* (1931) and *Twilight* (2008) blend horror with romance, while TV series like *True Blood* and *The Vampire Diaries* explore their humanity. Vampires now often embody themes of identity, power, and transformation.\r\nVampires remain a timeless symbol of the supernatural, evolving with culture and media. Their legends continue to captivate, reflecting humanity\u2019s fascination with life, death, and the unknown.\r\n"}
+2025-07-25 17:49:26,291 INFO Processing request of type CallToolRequest
+2025-07-25 17:49:26,291 INFO call_libreoffice_helper function called
+2025-07-25 17:49:26,302 INFO <socket.socket fd=676, family=2, type=1, proto=0, laddr=('127.0.0.1', 57589), raddr=('127.0.0.1', 8765)>
+2025-07-25 17:49:26,302 INFO b'{"action": "copy_document", "source_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\vampires_document.odt", "target_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\vampires_document_copy.odt"}'
+2025-07-25 17:49:26,671 INFO {"status": "success", "message": "Successfully copied document to: C:\\Users\\ben_t\\Documents\\vampires_document_copy.odt"}
+2025-07-25 18:15:59,206 INFO call_libreoffice_helper function called
+2025-07-25 18:15:59,222 INFO <socket.socket fd=412, family=2, type=1, proto=0, laddr=('127.0.0.1', 57677), raddr=('127.0.0.1', 8765)>
+2025-07-25 18:15:59,222 INFO b'{"action": "ping"}'
+2025-07-25 18:15:59,222 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-25 18:15:59,256 INFO Processing request of type ListToolsRequest
+2025-07-25 18:16:20,781 INFO Processing request of type CallToolRequest
+2025-07-25 18:16:20,781 INFO C:\Users\ben_t\Documents\werewolves_document.odt
+2025-07-25 18:16:20,781 INFO {'Title': 'Werewolves', 'Subject': 'Mythology, Folklore, Lore', 'Keywords': ['werewolves', 'mythology', 'folklore', 'lycanthropy']}
+2025-07-25 18:16:20,781 INFO call_libreoffice_helper function called
+2025-07-25 18:16:20,781 INFO <socket.socket fd=520, family=2, type=1, proto=0, laddr=('127.0.0.1', 57684), raddr=('127.0.0.1', 8765)>
+2025-07-25 18:16:20,781 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\werewolves_document.odt", "metadata": {"Title": "Werewolves", "Subject": "Mythology, Folklore, Lore", "Keywords": ["werewolves", "mythology", "folklore", "lycanthropy"]}}'
+2025-07-25 18:16:23,033 INFO {"status": "success", "message": "Successfully created text document at: C:\\Users\\ben_t\\Documents\\werewolves_document.odt"}
+2025-07-25 18:16:23,033 INFO success
+2025-07-25 18:16:23,033 INFO Successfully created text document at: C:\Users\ben_t\Documents\werewolves_document.odt
+2025-07-25 18:18:51,236 INFO call_libreoffice_helper function called
+2025-07-25 18:18:51,257 INFO <socket.socket fd=444, family=2, type=1, proto=0, laddr=('127.0.0.1', 57698), raddr=('127.0.0.1', 8765)>
+2025-07-25 18:18:51,257 INFO b'{"action": "ping"}'
+2025-07-25 18:18:51,257 INFO {"status": "success", "message": "LibreOffice helper is running"}
+2025-07-25 18:18:51,300 INFO Processing request of type ListToolsRequest
+2025-07-25 18:19:19,166 INFO Processing request of type CallToolRequest
+2025-07-25 18:19:19,166 INFO C:\Users\ben_t\Documents\frogs_document.odt
+2025-07-25 18:19:19,166 INFO {'Title': 'Frogs: A Comprehensive Guide', 'Author': 'Ben T', 'Subject': 'Frogs', 'Keywords': ['amphibians', 'frogs', 'nature']}
+2025-07-25 18:19:19,166 INFO call_libreoffice_helper function called
+2025-07-25 18:19:19,181 INFO <socket.socket fd=804, family=2, type=1, proto=0, laddr=('127.0.0.1', 57705), raddr=('127.0.0.1', 8765)>
+2025-07-25 18:19:19,181 INFO b'{"action": "create_document", "doc_type": "text", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\frogs_document.odt", "metadata": {"Title": "Frogs: A Comprehensive Guide", "Author": "Ben T", "Subject": "Frogs", "Keywords": ["amphibians", "frogs", "nature"]}}'
+2025-07-25 18:19:20,865 INFO {"status": "success", "message": "Successfully created text document at: C:\\Users\\ben_t\\Documents\\frogs_document.odt"}
+2025-07-25 18:19:20,865 INFO success
+2025-07-25 18:19:20,865 INFO Successfully created text document at: C:\Users\ben_t\Documents\frogs_document.odt
+2025-07-25 18:19:20,891 INFO Processing request of type CallToolRequest
+2025-07-25 18:19:20,891 INFO call_libreoffice_helper function called
+2025-07-25 18:19:20,891 INFO <socket.socket fd=872, family=2, type=1, proto=0, laddr=('127.0.0.1', 57707), raddr=('127.0.0.1', 8765)>
+2025-07-25 18:19:20,891 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\frogs_document.odt", "text": "Frogs: A Comprehensive Guide", "level": 1}'
+2025-07-25 18:19:21,286 INFO {"status": "success", "message": "Heading added to C:\\Users\\ben_t\\Documents\\frogs_document.odt"}
+2025-07-25 18:19:21,302 INFO Processing request of type CallToolRequest
+2025-07-25 18:19:21,302 INFO call_libreoffice_helper function called
+2025-07-25 18:19:21,302 INFO <socket.socket fd=496, family=2, type=1, proto=0, laddr=('127.0.0.1', 57709), raddr=('127.0.0.1', 8765)>
+2025-07-25 18:19:21,302 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\frogs_document.odt", "text": "Frogs are amphibious vertebrates belonging to the order Anura. They are characterized by their long limbs, moist skin, and ability to jump. Frogs play a vital role in ecosystems as both predators and prey.", "style": "Heading 2", "alignment": "left"}'
+2025-07-25 18:19:21,744 INFO {"status": "success", "message": "Paragraph added to C:\\Users\\ben_t\\Documents\\frogs_document.odt"}
+2025-07-25 18:19:21,750 INFO Processing request of type CallToolRequest
+2025-07-25 18:19:21,750 INFO call_libreoffice_helper function called
+2025-07-25 18:19:21,761 INFO <socket.socket fd=496, family=2, type=1, proto=0, laddr=('127.0.0.1', 57711), raddr=('127.0.0.1', 8765)>
+2025-07-25 18:19:21,761 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\frogs_document.odt", "text": "This document explores frog anatomy, habitats, life cycles, and conservation status. It also includes information about popular frog species and their ecological significance.", "style": "Heading 2", "alignment": "left"}'
+2025-07-25 18:19:22,251 INFO {"status": "success", "message": "Paragraph added to C:\\Users\\ben_t\\Documents\\frogs_document.odt"}
+2025-07-25 18:19:46,681 INFO Processing request of type CallToolRequest
+2025-07-25 18:19:46,681 INFO call_libreoffice_helper function called
+2025-07-25 18:19:46,694 INFO <socket.socket fd=496, family=2, type=1, proto=0, laddr=('127.0.0.1', 57713), raddr=('127.0.0.1', 8765)>
+2025-07-25 18:19:46,694 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\frogs_document.odt", "text": "Frog Anatomy", "level": 2}'
+2025-07-25 18:19:47,111 INFO {"status": "success", "message": "Heading added to C:\\Users\\ben_t\\Documents\\frogs_document.odt"}
+2025-07-25 18:19:47,131 INFO Processing request of type CallToolRequest
+2025-07-25 18:19:47,131 INFO call_libreoffice_helper function called
+2025-07-25 18:19:47,155 INFO <socket.socket fd=776, family=2, type=1, proto=0, laddr=('127.0.0.1', 57715), raddr=('127.0.0.1', 8765)>
+2025-07-25 18:19:47,155 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\frogs_document.odt", "text": "Frogs have a unique anatomy adapted for both aquatic and terrestrial life. Their heart has three chambers, allowing for efficient oxygenation of blood. They possess moist, permeable skin that aids in respiration and hydration. Long, powerful limbs enable jumping, while webbed toes help with swimming. The tongue is highly mobile, allowing them to capture prey quickly.", "style": "Body Text", "alignment": "left"}'
+2025-07-25 18:19:47,301 INFO {"status": "error", "message": "Error: [Errno 22] Invalid argument"}
+2025-07-25 18:19:47,325 INFO Processing request of type CallToolRequest
+2025-07-25 18:19:47,325 INFO call_libreoffice_helper function called
+2025-07-25 18:19:47,325 INFO <socket.socket fd=896, family=2, type=1, proto=0, laddr=('127.0.0.1', 57717), raddr=('127.0.0.1', 8765)>
+2025-07-25 18:19:47,325 INFO b'{"action": "add_heading", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\frogs_document.odt", "text": "Habitats and Behavior", "level": 2}'
+2025-07-25 18:19:47,753 INFO {"status": "success", "message": "Heading added to C:\\Users\\ben_t\\Documents\\frogs_document.odt"}
+2025-07-25 18:19:47,761 INFO Processing request of type CallToolRequest
+2025-07-25 18:19:47,761 INFO call_libreoffice_helper function called
+2025-07-25 18:19:47,790 INFO <socket.socket fd=776, family=2, type=1, proto=0, laddr=('127.0.0.1', 57719), raddr=('127.0.0.1', 8765)>
+2025-07-25 18:19:47,790 INFO b'{"action": "add_paragraph", "file_path": "C:\\\\Users\\\\ben_t\\\\Documents\\\\frogs_document.odt", "text": "Frogs inhabit a wide range of environments, from tropical rainforests to arid deserts. Most species require water for breeding, laying eggs in ponds or temporary pools. They are nocturnal hunters, using their keen hearing and night vision to locate prey. Some species have adapted to live entirely on land, while others are fully aquatic. Temperature regulation is crucial, as their body temperature depends on environmental conditions.", "style": "Body Text", "alignment": "left"}'
+2025-07-25 18:19:47,933 INFO {"status": "error", "message": "Error: Error applying style: "}

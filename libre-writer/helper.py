@@ -26,6 +26,7 @@ try:
     from com.sun.star.awt import Size
     from com.sun.star.lang import Locale
     from com.sun.star.style.ParagraphAdjust import CENTER, LEFT, RIGHT, BLOCK
+    from com.sun.star.style.BreakType import PAGE_BEFORE
     from com.sun.star.table import BorderLine2, TableBorder2
     from com.sun.star.table.BorderLineStyle import SOLID
     from com.sun.star.text.ControlCharacter import PARAGRAPH_BREAK
@@ -605,14 +606,14 @@ def search_replace_text(file_path, search_text, replace_text):
                 raise HelperError(f"Text '{search_text}' not found in document")
             
             # Create replace descriptor
-            replace_desc = text_obj.createReplaceDescriptor()
+            replace_desc = doc.createReplaceDescriptor()
             replace_desc.SearchString = search_text
             replace_desc.ReplaceString = replace_text
             replace_desc.SearchCaseSensitive = False
             replace_desc.SearchWords = False
             
             # Perform replacement
-            count = text_obj.replaceAll(replace_desc)
+            count = doc.replaceAll(replace_desc)
             
             # Save document
             doc.store()
@@ -861,7 +862,7 @@ def insert_image(file_path, image_path, width=None, height=None):
         raise
 
 def insert_page_break(file_path):
-    """Insert a page break at the current cursor position."""
+    """Insert a page break at the end of the document."""
     doc, message = open_document(file_path)
     if not doc:
         raise HelperError(message)
@@ -874,7 +875,7 @@ def insert_page_break(file_path):
             text_obj.insertControlCharacter(text_obj.getEnd(), ControlCharacter.PARAGRAPH_BREAK, False)
             cursor = text_obj.createTextCursor()
             cursor.gotoEnd(False)
-            cursor.BreakType = uno.getConstantByName("com.sun.star.style.BreakType.PAGE_BEFORE")
+            cursor.BreakType = PAGE_BEFORE
             
             # Save document
             doc.store()
@@ -1003,19 +1004,12 @@ def apply_document_style(file_path, style):
             doc.close(True)
             raise HelperError("Document does not support style application")
         
-        # # Apply default font settings to document
-        # if "font_name" in style:
-        #     doc.CharFontName = style["font_name"]
-        
-        # if "font_size" in style:
-        #     doc.CharHeight = float(style["font_size"])
-        
         # Apply styles to all paragraphs
         text = doc.getText()
         cursor = text.createTextCursor()
         cursor.gotoStart(False)
         cursor.gotoEnd(True)
-        
+
         # Apply character formatting
         if "font_name" in style:
             cursor.CharFontName = style["font_name"]
@@ -1178,7 +1172,7 @@ def handle_command(command):
         elif action == "apply_document_style":
             return apply_document_style(
                 command.get("file_path", ""),
-                command.get("default_style", {})
+                command.get("style", {})
             )
         
         elif action == "ping":

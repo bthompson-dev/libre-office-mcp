@@ -463,7 +463,7 @@ async def insert_image(file_path: str, image_path: str, width: Optional[int] = N
 @mcp.tool()
 async def insert_page_break(file_path: str) -> str:
     """
-    Insert a page break in a document.
+    Insert a page break at the end of a document.
     
     Args:
         file_path: Path to the document

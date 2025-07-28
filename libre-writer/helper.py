@@ -746,18 +746,30 @@ def format_table(file_path, table_index, format_options):
                 raise HelperError(f"Error applying table background color: {color_error}")
         
         # Format specific rows if requested
-        if "header_row" in format_options and format_options["header_row"]:
+        if "header_row" in format_options:
             try:
-                row = table.getRows().getByIndex(0)
-                row.BackColor = 13421772  # Light gray
+                if format_options["header_row"]:
+                    row = table.getRows().getByIndex(0)
+                    row.BackColor = 13421772  # Light gray
                 
-                # Format header cells
-                for col_idx in range(table.getColumns().getCount()):
-                    cell = table.getCellByPosition(col_idx, 0)
-                    cursor = cell.getText().createTextCursor()
-                    cursor.gotoStart(False)
-                    cursor.gotoEnd(True)
-                    cursor.CharWeight = 150  # Bold
+                    # Format header cells
+                    for col_idx in range(table.getColumns().getCount()):
+                        cell = table.getCellByPosition(col_idx, 0)
+                        cursor = cell.getText().createTextCursor()
+                        cursor.gotoStart(False)
+                        cursor.gotoEnd(True)
+                        cursor.CharWeight = 150  # Bold
+                else:
+                    row = table.getRows().getByIndex(0)
+                    row.BackColor = 16777215  # White
+                
+                    # Format header cells
+                    for col_idx in range(table.getColumns().getCount()):
+                        cell = table.getCellByPosition(col_idx, 0)
+                        cursor = cell.getText().createTextCursor()
+                        cursor.gotoStart(False)
+                        cursor.gotoEnd(True)
+                        cursor.CharWeight = 100  # Normal
             except Exception as header_error:
                 raise HelperError(f"Error formatting header row: {header_error}")
         

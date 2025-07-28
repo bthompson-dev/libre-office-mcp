@@ -603,9 +603,8 @@ async def format_table(file_path: str, table_index: int = 0, border_width: Optio
         
         if background_color:
             format_options["background_color"] = background_color
-        
-        if header_row:
-            format_options["header_row"] = True
+
+        format_options["header_row"] = header_row
         
         # Send command to helper
         response = call_libreoffice_helper({

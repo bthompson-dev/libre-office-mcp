@@ -14,6 +14,33 @@ logging.basicConfig(
     format="%(asctime)s %(levelname)s %(message)s"
 )
 
+# Extensions
+writer_extensions = (
+            ".odt",
+            ".docx",
+            ".dotx",
+            ".xml",
+            ".doc",
+            ".dot",
+            ".rtf",
+            ".wpd",
+        )
+
+impress_extensions = (
+            ".odp",
+            ".pptx",
+            ".ppsx",
+            ".ppmx",
+            ".potx",
+            ".pomx",
+            ".ppt",
+            ".pps",
+            ".ppm",
+            ".pot",
+            ".pom",
+        )
+
+
 # Helper function for directory management
 def ensure_directory_exists(file_path: str) -> None:
     """Ensure the directory for a file exists, creating it if necessary."""
@@ -127,17 +154,7 @@ async def create_blank_document(
     """
     try:
         # Check for supported file extensions
-        supported_extensions = (
-            ".odt",
-            ".docx",
-            ".dotx",
-            ".xml",
-            ".doc",
-            ".dot",
-            ".rtf",
-            ".wpd",
-        )
-        if not filename.lower().endswith(supported_extensions):
+        if not filename.lower().endswith(writer_extensions):
             filename += ".odt"
 
         # If filename doesn't include a path, add default path
@@ -762,6 +779,132 @@ async def apply_document_style(file_path: str, font_name: Optional[str] = None,
     except Exception as e:
         print(f"Error in apply_document_style: {str(e)}")
         return f"Failed to apply document style: {str(e)}"
+
+# Impress Presentation functions
+@mcp.tool()
+async def create_blank_presentation(
+    filename: str,
+    title: str = "",
+    author: str = "",
+    subject: str = "",
+    keywords: str = "",
+) -> str:
+    """
+    Create a new LibreOffice Impress presentation.
+
+    Args:
+        filename: Name of the presentation
+        title: Presentation title metadata
+        author: Presentation author metadata
+        subject: Presentation subject metadata
+        keywords: Presentation keywords metadata (comma-separated)
+    """
+    try:
+        # Check for supported file extensions
+        if not filename.lower().endswith(impress_extensions):
+            filename += ".odp"
+
+        # If filename doesn't include a path, add default path
+        if os.path.basename(filename) == filename:
+            save_path = get_default_document_path(filename)
+        else:
+            save_path = filename
+
+        # Normalize path
+        save_path = normalize_path(save_path)
+        print(f"Creating document at: {save_path}")
+
+        # Prepare metadata if provided
+        metadata = {}
+        if title:
+            metadata["Title"] = title
+        if author:
+            metadata["Author"] = author
+        if subject:
+            metadata["Subject"] = subject
+        if keywords:
+            # Split by comma and strip whitespace
+            keywords = [k.strip() for k in keywords.split(",")]
+            metadata["Keywords"] = keywords
+
+        logging.info(save_path)
+        logging.info(metadata)
+
+        # Send command to helper
+        response = call_libreoffice_helper(
+            {
+                "action": "create_document",
+                "doc_type": "impress",
+                "file_path": save_path,
+                "metadata": metadata,
+            }
+        )
+
+        logging.info(response["status"])
+        logging.info(response["message"])
+
+        if response["status"] == "success":
+            return response["message"]
+        else:
+            return f"Error: {response['message']}"
+
+    except Exception as e:
+        logging.error(f"Error in create_document: {str(e)}")
+        return f"Failed to create document: {str(e)}"
+
+@mcp.tool()
+async def read_presentation(file_path: str) -> str:
+    """
+    Open and read the text of an Impress presentation.
+    
+    Args:
+        file_path: Path to the presentation
+    """
+    try:
+        # Normalize path
+        file_path = normalize_path(file_path)
+        
+        # Send command to helper
+        response = call_libreoffice_helper({
+            "action": "open_presentation",
+            "file_path": file_path
+        })
+        
+        if response["status"] == "success":
+            return response["message"]
+        else:
+            return f"Error: {response['message']}"
+    except Exception as e:
+        print(f"Error in open_presentation: {str(e)}")
+        return f"Failed to open presentation: {str(e)}"
+
+@mcp.tool()
+async def add_slide(file_path: str, slide_index: Optional[int] = None, title: Optional[str] = None, content: Optional[str] = None, layout = 'TitleContent') -> str:
+    """
+    Add a new slide to an Impress presentation using the built-in layout.
+    Args:
+        file_path: Path to the presentation file.
+        slide_index: Index to insert the slide (None = append at end).
+        title: Optional title text for the slide.
+        content: Optional content text for the slide.
+    """
+
+    if not file_path.endswith(impress_extensions):
+        return "Error: file_path is not a presentation."
+
+    file_path = normalize_path(file_path)
+    response = call_libreoffice_helper({
+        "action": "add_slide",
+        "file_path": file_path,
+        "slide_index": slide_index,
+        "title": title,
+        "content": content,
+        "layout": layout
+    })
+    if response["status"] == "success":
+        return response["message"]
+    else:
+        return f"Error: {response['message']}"
 
 # Resource for document access
 @mcp.resource("libreoffice:{path}")

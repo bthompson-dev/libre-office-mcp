@@ -225,6 +225,50 @@ def extract_text(file_path):
             pass
         raise
 
+def extract_impress_text(file_path):
+    """Extract all text from an Impress presentation (.odp)."""
+    doc, message = open_document(file_path, read_only=True)
+    if not doc:
+        raise HelperError("Presentation not opened successfully")
+    
+    try:
+        # Get all slides (DrawPages)
+        if not hasattr(doc, "getDrawPages"):
+            doc.close(True)
+            raise HelperError("Document does not support slides/pages")
+        
+        draw_pages = doc.getDrawPages()
+        slide_count = draw_pages.getCount()
+        all_text = []
+        
+        for i in range(slide_count):
+            slide = draw_pages.getByIndex(i)
+            slide_texts = []
+            # Iterate over all shapes on the slide
+            for shape_idx in range(slide.getCount()):
+                shape = slide.getByIndex(shape_idx)
+                # Some shapes have getString(), some have getText()
+                if hasattr(shape, "getString"):
+                    text = shape.getString()
+                    if text:
+                        slide_texts.append(text)
+                elif hasattr(shape, "getText"):
+                    text_obj = shape.getText()
+                    if hasattr(text_obj, "getString"):
+                        text = text_obj.getString()
+                        if text:
+                            slide_texts.append(text)
+            all_text.append(f"Slide {i+1}:\n" + "\n".join(slide_texts))
+        
+        doc.close(True)
+        return "\n\n".join(all_text) if all_text else "No text found in presentation."
+    except Exception as e:
+        try:
+            doc.close(True)
+        except:
+            pass
+        raise
+
 def get_document_properties(file_path):
     """Extract document properties and statistics."""
     doc, message = open_document(file_path, read_only=True)
@@ -1045,6 +1089,210 @@ def apply_document_style(file_path, style):
             pass
         raise
 
+def add_slide(file_path, slide_index=None, title=None, content=None):
+    """
+    Add a new slide to an Impress presentation using a built-in layout.
+    Args:
+        file_path: Path to the presentation file.
+        slide_index: Index to insert the slide (None = append at end).
+        title: Optional title text for the slide.
+        content: Optional content text for the slide.
+    """
+    logging.info(f"add_slide called with: file_path={file_path}, slide_index={slide_index}, title={title}, content={content}")
+    
+    try:
+        doc, message = open_document(file_path)
+        if not doc:
+            error_msg = f"Failed to open document: {message}"
+            logging.error(error_msg)
+            raise HelperError(error_msg)
+
+        logging.info("Document opened successfully")
+
+        if not hasattr(doc, "getDrawPages"):
+            doc.close(True)
+            error_msg = "Document does not support slides/pages"
+            logging.error(error_msg)
+            raise HelperError(error_msg)
+
+        draw_pages = doc.getDrawPages()
+        num_slides = draw_pages.getCount()
+        logging.info(f"Current number of slides: {num_slides}")
+        
+        # Determine where to insert the slide
+        insert_index = num_slides if slide_index is None else max(0, min(slide_index, num_slides))
+        logging.info(f"Inserting slide at index: {insert_index}")
+        
+        # Insert new slide
+        draw_pages.insertNewByIndex(insert_index)
+        new_slide = draw_pages.getByIndex(insert_index)
+        logging.info("New slide created")
+        
+        # Apply slide layout first
+        layout_applied = False
+        try:
+            layout_type = 1  # TitleContent layout
+            logging.info(f"Applying layout type: {layout_type}")
+            
+            # Apply the layout using different methods
+            if hasattr(new_slide, "setLayout"):
+                new_slide.setLayout(layout_type)
+                layout_applied = True
+                logging.info("Layout applied using setLayout")
+            elif hasattr(new_slide, "Layout"):
+                new_slide.Layout = layout_type
+                layout_applied = True
+                logging.info("Layout applied using Layout property")
+            else:
+                logging.warning("No layout method found")
+                
+        except Exception as layout_error:
+            logging.warning(f"Could not apply layout: {layout_error}")
+
+        # Give LibreOffice time to create the placeholder shapes
+        if layout_applied:
+            time.sleep(0.5)
+        
+        # Now look for the actual placeholder shapes that were created by the layout
+        title_shape = None
+        content_shape = None
+        
+        logging.info(f"Number of shapes on slide: {new_slide.getCount()}")
+        
+        # Examine all shapes on the slide
+        for i in range(new_slide.getCount()):
+            shape = new_slide.getByIndex(i)
+            shape_type = shape.getShapeType()
+            logging.info(f"Shape {i}: {shape_type}")
+            
+            # Check if this shape has text capabilities
+            if hasattr(shape, "getText"):
+                try:
+                    # Check for LibreOffice presentation shapes by type
+                    if shape_type == "com.sun.star.presentation.TitleTextShape":
+                        title_shape = shape
+                        logging.info(f"  Found title shape at index {i}")
+                    elif shape_type == "com.sun.star.presentation.OutlinerShape":
+                        # This is a content placeholder - use the first one we find
+                        if not content_shape:
+                            content_shape = shape
+                            logging.info(f"  Found content shape at index {i}")
+                        else:
+                            logging.info(f"  Found additional content shape at index {i} (ignoring)")
+                    
+                    # Fallback: Try to get presentation object type
+                    elif hasattr(shape, "PresentationObject"):
+                        pres_obj = shape.PresentationObject
+                        logging.info(f"  PresentationObject: {pres_obj}")
+                        
+                        # Check for title placeholder
+                        if pres_obj in [0, 1] and not title_shape:  # Title placeholders
+                            title_shape = shape
+                            logging.info(f"  Found title placeholder at shape {i}")
+                        # Check for content placeholder
+                        elif pres_obj in [2, 3, 4, 5] and not content_shape:  # Content placeholders
+                            content_shape = shape
+                            logging.info(f"  Found content placeholder at shape {i}")
+                    
+                    # Additional fallback: check shape name or position
+                    else:
+                        if hasattr(shape, "Name"):
+                            shape_name = shape.Name.lower()
+                            logging.info(f"  Shape name: '{shape_name}'")
+                            if "title" in shape_name and not title_shape:
+                                title_shape = shape
+                                logging.info(f"  Found title shape by name at shape {i}")
+                            elif any(keyword in shape_name for keyword in ["content", "text", "outline"]) and not content_shape:
+                                content_shape = shape
+                                logging.info(f"  Found content shape by name at shape {i}")
+                        
+                        # Position-based fallback (title usually at top)
+                        if hasattr(shape, "Position") and not title_shape and not content_shape:
+                            y_pos = shape.Position.Y
+                            if y_pos < 5000:  # Top area - likely title
+                                title_shape = shape
+                                logging.info(f"  Assuming title shape by position at shape {i} (Y: {y_pos})")
+                            elif y_pos > 5000 and not content_shape:  # Lower area - likely content
+                                content_shape = shape
+                                logging.info(f"  Assuming content shape by position at shape {i} (Y: {y_pos})")
+                                
+                except Exception as shape_error:
+                    logging.warning(f"  Error examining shape {i}: {shape_error}")
+
+        # If we still don't have placeholders and text was requested, create manual shapes
+        if title and not title_shape:
+            logging.info("Creating manual title shape")
+            title_shape = doc.createInstance("com.sun.star.drawing.TextShape")
+            title_shape.setSize(Size(24000, 3000))
+            title_shape.setPosition(uno.createUnoStruct("com.sun.star.awt.Point"))
+            title_shape.Position.X = 2000
+            title_shape.Position.Y = 2000
+            new_slide.add(title_shape)
+
+        if content and not content_shape:
+            logging.info("Creating manual content shape")
+            content_shape = doc.createInstance("com.sun.star.drawing.TextShape")
+            content_shape.setSize(Size(24000, 14000))
+            content_shape.setPosition(uno.createUnoStruct("com.sun.star.awt.Point"))
+            content_shape.Position.X = 2000
+            content_shape.Position.Y = 6000
+            new_slide.add(content_shape)
+
+        # Set title text
+        if title and title_shape:
+            logging.info(f"Setting title text: {title}")
+            try:
+                title_text = title_shape.getText()
+                title_text.setString(title)
+                
+                # Format title
+                title_cursor = title_text.createTextCursor()
+                title_cursor.gotoStart(False)
+                title_cursor.gotoEnd(True)
+                title_cursor.CharHeight = 28
+                title_cursor.CharWeight = 150
+                title_cursor.ParaAdjust = CENTER
+                logging.info("Title text set and formatted")
+            except Exception as title_error:
+                logging.error(f"Error setting title: {title_error}")
+
+        # Set content text
+        if content and content_shape:
+            logging.info(f"Setting content text: {content}")
+            try:
+                content_text = content_shape.getText()
+                content_text.setString(content)
+                
+                # Format content
+                content_cursor = content_text.createTextCursor()
+                content_cursor.gotoStart(False)
+                content_cursor.gotoEnd(True)
+                content_cursor.CharHeight = 18
+                content_cursor.ParaAdjust = LEFT
+                logging.info("Content text set and formatted")
+            except Exception as content_error:
+                logging.error(f"Error setting content: {content_error}")
+
+        # Save and close
+        logging.info("Saving document...")
+        doc.store()
+        doc.close(True)
+        
+        success_msg = f"Slide added at index {insert_index} with TitleContent layout in {file_path}"
+        logging.info(success_msg)
+        return success_msg
+        
+    except Exception as e:
+        error_msg = f"Error in add_slide: {str(e)}"
+        logging.error(error_msg)
+        logging.error(traceback.format_exc())
+        try:
+            if 'doc' in locals():
+                doc.close(True)
+        except:
+            pass
+        raise HelperError(error_msg)
+        
 # Main command handler
 def handle_command(command):
     """Process commands from the MCP server."""
@@ -1076,6 +1324,19 @@ def handle_command(command):
                 command.get("target_path", "")
             )
         
+        # Impress presentation creation and management
+
+        elif action == "open_presentation":
+            return extract_impress_text(command.get("file_path", ""))
+
+        elif action == "add_slide":
+            return add_slide(
+                command.get("file_path", ""),
+                command.get("slide_index", None),
+                command.get("title", None),
+                command.get("content", None),
+            )
+
         # Content creation
         elif action == "add_text":
             return add_text(

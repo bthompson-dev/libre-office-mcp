@@ -906,6 +906,38 @@ async def add_slide(file_path: str, slide_index: Optional[int] = None, title: Op
     else:
         return f"Error: {response['message']}"
 
+@mcp.tool()
+async def apply_presentation_template(file_path: str, template_name: str) -> str:
+    """
+    Apply a built-in LibreOffice presentation template/master slide to a presentation.
+    
+    Args:
+        file_path: Path to the presentation file
+        template_name: Name of the built-in template to apply (can be exact name, partial match, or numeric index)
+    """
+    try:
+        # Validate file extension
+        if not file_path.lower().endswith(impress_extensions):
+            return "Error: file_path is not a presentation file."
+        
+        # Normalize path
+        file_path = normalize_path(file_path)
+        
+        # Send command to helper
+        response = call_libreoffice_helper({
+            "action": "apply_presentation_template",
+            "file_path": file_path,
+            "template_name": template_name
+        })
+        
+        if response["status"] == "success":
+            return response["message"]
+        else:
+            return f"Error: {response['message']}"
+    except Exception as e:
+        print(f"Error in apply_presentation_template: {str(e)}")
+        return f"Failed to apply presentation template: {str(e)}"
+
 # Resource for document access
 @mcp.resource("libreoffice:{path}")
 async def document_resource(path: str) -> str:

@@ -56,6 +56,7 @@ class HelperError(Exception):
     pass
 
 # Helper functions
+
 def ensure_directory_exists(file_path):
     """Ensure the directory for a file exists, creating it if necessary."""
     directory = os.path.dirname(file_path)
@@ -73,6 +74,10 @@ def normalize_path(file_path):
     if not file_path:
         return None
     
+    # If file path is already complete, return it
+    if file_path.startswith(('file://', 'http://', 'https://', 'ftp://')):
+        return file_path
+
     # Expand user directory if path starts with ~
     if file_path.startswith('~'):
         file_path = os.path.expanduser(file_path)
@@ -111,6 +116,48 @@ def create_property_value(name, value):
     prop.Name = name
     prop.Value = value
     return prop
+
+def open_document(file_path, read_only=False):
+    """Open a LibreOffice document and return it."""
+    print(f"Opening document: {file_path} (read_only: {read_only})")
+    
+    # Normalize path
+    normalized_path = normalize_path(file_path)
+    
+    # For URLs, don't check file existence with os.path.exists
+    if not normalized_path.startswith(('file://', 'http://', 'https://', 'ftp://')):
+        # It's a local path, check if it exists
+        if not os.path.exists(normalized_path):
+            raise HelperError(f"Document not found: {normalized_path}")
+        # Convert local path to file URL
+        file_url = uno.systemPathToFileUrl(normalized_path)
+    else:
+        # It's already a URL
+        file_url = normalized_path
+
+    # Get desktop
+    desktop = get_uno_desktop()
+    if not desktop:
+        raise HelperError("Failed to connect to LibreOffice desktop")
+    
+    try:
+        # Open document
+        props = [
+            create_property_value("Hidden", True),
+            create_property_value("ReadOnly", read_only)
+        ]
+        
+        doc = desktop.loadComponentFromURL(file_url, "_blank", 0, tuple(props))
+        if not doc:
+            raise HelperError(f"Failed to load document: {file_path}")
+            
+        return doc, "Success"
+    except Exception as e:
+        print(f"Error opening document: {str(e)}")
+        print(traceback.format_exc())
+        raise
+
+# General functions
 
 def create_document(doc_type, file_path, metadata=None):
     """Create a new LibreOffice document with optional metadata."""
@@ -169,152 +216,6 @@ def create_document(doc_type, file_path, metadata=None):
     except Exception as e:
         logging.error(f"Error creating document: {str(e)}")
         logging.error(traceback.format_exc())
-        raise
-
-def open_document(file_path, read_only=False):
-    """Open a LibreOffice document and return it."""
-    print(f"Opening document: {file_path} (read_only: {read_only})")
-    
-    # Normalize path
-    file_path = normalize_path(file_path)
-    if not os.path.exists(file_path):
-        raise HelperError(f"Document not found: {file_path}")
-    
-    # Get desktop
-    desktop = get_uno_desktop()
-    if not desktop:
-        raise HelperError("Failed to connect to LibreOffice desktop")
-    
-    try:
-        # Open document
-        file_url = uno.systemPathToFileUrl(file_path)
-        
-        props = [
-            create_property_value("Hidden", True),
-            create_property_value("ReadOnly", read_only)
-        ]
-        
-        doc = desktop.loadComponentFromURL(file_url, "_blank", 0, tuple(props))
-        if not doc:
-            raise HelperError(f"Failed to load document: {file_path}")
-            
-        return doc, "Success"
-    except Exception as e:
-        print(f"Error opening document: {str(e)}")
-        print(traceback.format_exc())
-        raise
-
-def extract_text(file_path):
-    """Extract text from a document."""
-    doc, message = open_document(file_path, read_only=True)
-    if not doc:
-        raise HelperError("Document not opened successfully")
-    
-    try:
-        if hasattr(doc, "getText"):
-            text_content = doc.getText().getString()
-            doc.close(True)
-            return text_content
-        else:
-            doc.close(True)
-            raise HelperError("Document does not support text extraction")
-    except Exception as e:
-        try:
-            doc.close(True)
-        except:
-            pass
-        raise
-
-def extract_impress_text(file_path):
-    """Extract all text from an Impress presentation (.odp)."""
-    doc, message = open_document(file_path, read_only=True)
-    if not doc:
-        raise HelperError("Presentation not opened successfully")
-    
-    try:
-        # Get all slides (DrawPages)
-        if not hasattr(doc, "getDrawPages"):
-            doc.close(True)
-            raise HelperError("Document does not support slides/pages")
-        
-        draw_pages = doc.getDrawPages()
-        slide_count = draw_pages.getCount()
-        all_text = []
-        
-        for i in range(slide_count):
-            slide = draw_pages.getByIndex(i)
-            slide_texts = []
-            # Iterate over all shapes on the slide
-            for shape_idx in range(slide.getCount()):
-                shape = slide.getByIndex(shape_idx)
-                # Some shapes have getString(), some have getText()
-                if hasattr(shape, "getString"):
-                    text = shape.getString()
-                    if text:
-                        slide_texts.append(text)
-                elif hasattr(shape, "getText"):
-                    text_obj = shape.getText()
-                    if hasattr(text_obj, "getString"):
-                        text = text_obj.getString()
-                        if text:
-                            slide_texts.append(text)
-            all_text.append(f"Slide {i+1}:\n" + "\n".join(slide_texts))
-        
-        doc.close(True)
-        return "\n\n".join(all_text) if all_text else "No text found in presentation."
-    except Exception as e:
-        try:
-            doc.close(True)
-        except:
-            pass
-        raise
-
-def get_document_properties(file_path):
-    """Extract document properties and statistics."""
-    doc, message = open_document(file_path, read_only=True)
-    if not doc:
-        raise HelperError(message)
-    
-    try:
-        props = {}
-        
-        # Get basic document properties
-        if hasattr(doc, "DocumentProperties"):
-            doc_props = doc.DocumentProperties
-            for prop in ["Title", "Subject", "Author", "Description", "Keywords", "ModifiedBy"]:
-                if hasattr(doc_props, prop):
-                    props[prop] = getattr(doc_props, prop)
-            
-            # Get dates
-            for date_prop in ["CreationDate", "ModificationDate"]:
-                if hasattr(doc_props, date_prop):
-                    date_val = getattr(doc_props, date_prop)
-                    if date_val:
-                        props[date_prop] = date_val.isoformat() if hasattr(date_val, 'isoformat') else str(date_val)
-        
-        # Get document statistics
-        if hasattr(doc, "WordCount") and hasattr(doc.WordCount, "getWordCount"):
-            props["WordCount"] = doc.WordCount.getWordCount()
-        
-        if hasattr(doc, "getText"):
-            text = doc.getText()
-            props["CharacterCount"] = len(text.getString())
-            
-            # Count paragraphs
-            paragraph_count = 0
-            enum = text.createEnumeration()
-            while enum.hasMoreElements():
-                paragraph_count += 1
-                enum.nextElement()
-            props["ParagraphCount"] = paragraph_count
-        
-        doc.close(True)
-        return json.dumps(props, indent=2)
-    except Exception as e:
-        try:
-            doc.close(True)
-        except:
-            pass
         raise
 
 def list_documents(directory):
@@ -426,7 +327,77 @@ def copy_document(source_path, target_path):
         import shutil
         shutil.copy2(source_path, target_path)
         return f"Successfully copied document to: {target_path} (using fallback method)"
+    
+def get_document_properties(file_path):
+    """Extract document properties and statistics."""
+    doc, message = open_document(file_path, read_only=True)
+    if not doc:
+        raise HelperError(message)
+    
+    try:
+        props = {}
+        
+        # Get basic document properties
+        if hasattr(doc, "DocumentProperties"):
+            doc_props = doc.DocumentProperties
+            for prop in ["Title", "Subject", "Author", "Description", "Keywords", "ModifiedBy"]:
+                if hasattr(doc_props, prop):
+                    props[prop] = getattr(doc_props, prop)
             
+            # Get dates
+            for date_prop in ["CreationDate", "ModificationDate"]:
+                if hasattr(doc_props, date_prop):
+                    date_val = getattr(doc_props, date_prop)
+                    if date_val:
+                        props[date_prop] = date_val.isoformat() if hasattr(date_val, 'isoformat') else str(date_val)
+        
+        # Get document statistics
+        if hasattr(doc, "WordCount") and hasattr(doc.WordCount, "getWordCount"):
+            props["WordCount"] = doc.WordCount.getWordCount()
+        
+        if hasattr(doc, "getText"):
+            text = doc.getText()
+            props["CharacterCount"] = len(text.getString())
+            
+            # Count paragraphs
+            paragraph_count = 0
+            enum = text.createEnumeration()
+            while enum.hasMoreElements():
+                paragraph_count += 1
+                enum.nextElement()
+            props["ParagraphCount"] = paragraph_count
+        
+        doc.close(True)
+        return json.dumps(props, indent=2)
+    except Exception as e:
+        try:
+            doc.close(True)
+        except:
+            pass
+        raise
+ 
+# Writer functions           
+
+def extract_text(file_path):
+    """Extract text from a document."""
+    doc, message = open_document(file_path, read_only=True)
+    if not doc:
+        raise HelperError("Document not opened successfully")
+    
+    try:
+        if hasattr(doc, "getText"):
+            text_content = doc.getText().getString()
+            doc.close(True)
+            return text_content
+        else:
+            doc.close(True)
+            raise HelperError("Document does not support text extraction")
+    except Exception as e:
+        try:
+            doc.close(True)
+        except:
+            pass
+        raise
 
 def add_text(file_path, text, position="end"):
     """Add text to a document."""
@@ -1089,6 +1060,52 @@ def apply_document_style(file_path, style):
             pass
         raise
 
+# Impress functions
+
+def extract_impress_text(file_path):
+    """Extract all text from an Impress presentation (.odp)."""
+    doc, message = open_document(file_path, read_only=True)
+    if not doc:
+        raise HelperError("Presentation not opened successfully")
+    
+    try:
+        # Get all slides (DrawPages)
+        if not hasattr(doc, "getDrawPages"):
+            doc.close(True)
+            raise HelperError("Document does not support slides/pages")
+        
+        draw_pages = doc.getDrawPages()
+        slide_count = draw_pages.getCount()
+        all_text = []
+        
+        for i in range(slide_count):
+            slide = draw_pages.getByIndex(i)
+            slide_texts = []
+            # Iterate over all shapes on the slide
+            for shape_idx in range(slide.getCount()):
+                shape = slide.getByIndex(shape_idx)
+                # Some shapes have getString(), some have getText()
+                if hasattr(shape, "getString"):
+                    text = shape.getString()
+                    if text:
+                        slide_texts.append(text)
+                elif hasattr(shape, "getText"):
+                    text_obj = shape.getText()
+                    if hasattr(text_obj, "getString"):
+                        text = text_obj.getString()
+                        if text:
+                            slide_texts.append(text)
+            all_text.append(f"Slide {i+1}:\n" + "\n".join(slide_texts))
+        
+        doc.close(True)
+        return "\n\n".join(all_text) if all_text else "No text found in presentation."
+    except Exception as e:
+        try:
+            doc.close(True)
+        except:
+            pass
+        raise
+
 def add_slide(file_path, slide_index=None, title=None, content=None):
     """
     Add a new slide to an Impress presentation using a built-in layout.
@@ -1292,7 +1309,434 @@ def add_slide(file_path, slide_index=None, title=None, content=None):
         except:
             pass
         raise HelperError(error_msg)
+
+def apply_presentation_template(file_path, template_name):
+    """Apply a presentation template to an existing presentation."""
+    logging.info(f"Attempting to apply template: {template_name} to {file_path}")
+    
+    try:
+        # Try different template paths
+        template_paths = [
+            f"file:///C:/Program Files/LibreOffice/share/template/common/presnt/{template_name}.otp",
+        ]
+                
+        template_doc = None
+        for template_path in template_paths:
+            try:
+                logging.info(f"Trying template path: {template_path}")
+                template_doc, template_message = open_document(template_path, read_only=True)
+                if template_doc:
+                    logging.info(f"Successfully loaded template from: {template_path}")
+                    break
+            except Exception as path_error:
+                logging.info(f"Failed to load from {template_path}: {path_error}")
+                continue
+
+        if not template_doc:
+            raise HelperError(f"Could not find template '{template_name}' in any of the standard locations")
+
+        # Load target presentation
+        target_doc, target_message = open_document(file_path)
+        if not target_doc:
+            template_doc.close(True)
+            raise HelperError(f"Failed to open target presentation: {target_message}")
+
+        success = False
+        new_doc = None
+
+        # Create new presentation from template and copy content
+        try:
+            logging.info("Creating new presentation from template...")
+                
+            # Get desktop
+            desktop = get_uno_desktop()
+            if not desktop:
+                raise HelperError("Failed to get UNO desktop")
+                
+            # Create new presentation from template
+            template_path = None
+            for path in template_paths:
+                if path.startswith("file:///"):
+                    local_path = path[8:].replace("/", "\\")
+                    if os.path.exists(local_path):
+                        template_path = path
+                        break
+                
+            if not template_path:
+                raise HelperError("No valid template path found")
+                
+            # Create new document from template
+            props = [
+                create_property_value("AsTemplate", True),
+                create_property_value("Hidden", True)
+            ]
+                
+            new_doc = desktop.loadComponentFromURL(template_path, "_blank", 0, tuple(props))
+            if not new_doc:
+                raise HelperError("Failed to create new document from template")
+                
+            logging.info("Created new document from template")
+                
+            # Get slides from target and new document
+            target_slides = target_doc.getDrawPages()
+            new_slides = new_doc.getDrawPages()
+            
+            logging.info(f"Target has {target_slides.getCount()} slides")
+            logging.info(f"New document has {new_slides.getCount()} slides")
+                
+            target_slide_count = target_slides.getCount()
+            new_slide_count = new_slides.getCount()
+            
+            # Validation: Ensure we have slides to work with
+            if target_slide_count == 0:
+                raise HelperError("Target presentation has no slides")
+            
+            # Analyze what layouts to use based on target slides
+            target_slide_layouts = []
+            for i in range(target_slide_count):
+                target_slide = target_slides.getByIndex(i)
+                has_title = False
+                has_content = False
+                
+                for j in range(target_slide.getCount()):
+                    shape = target_slide.getByIndex(j)
+                    shape_type = shape.getShapeType()
+                    
+                    if shape_type == "com.sun.star.presentation.TitleTextShape":
+                        text = shape.getText().getString() if hasattr(shape, "getText") else ""
+                        if text.strip():
+                            has_title = True
+                    elif shape_type == "com.sun.star.presentation.OutlinerShape":
+                        text = shape.getText().getString() if hasattr(shape, "getText") else ""
+                        if text.strip():
+                            has_content = True
+                
+                # Determine what layout is needed
+                if has_title and has_content:
+                    needed_layout = 1  # TitleContent layout
+                    logging.info(f"Target slide {i} needs TitleContent layout (has both title and content)")
+                elif has_title:
+                    needed_layout = 0  # Title only layout
+                    logging.info(f"Target slide {i} needs Title layout (has title only)")
+                else:
+                    needed_layout = 1  # Default to TitleContent for safety
+                    logging.info(f"Target slide {i} needs default TitleContent layout")
+                
+                target_slide_layouts.append(needed_layout)
+            
+            # Determine the template's default layout
+            template_layout = None
+            if new_slide_count > 0:
+                try:
+                    first_template_slide = new_slides.getByIndex(0)
+                    if hasattr(first_template_slide, "Layout"):
+                        template_layout = first_template_slide.Layout
+                        logging.info(f"Template default layout detected: {template_layout}")
+                    else:
+                        template_layout = 1  # Default to TitleContent
+                        logging.info("Could not detect template layout, defaulting to TitleContent")
+                except Exception as layout_detect_error:
+                    logging.warning(f"Could not detect template layout: {layout_detect_error}")
+                    template_layout = 1  # Default to TitleContent layout
+            
+            # Add more slides to new document if needed, with appropriate layouts
+            while new_slide_count < target_slide_count:
+                try:
+                    new_slides.insertNewByIndex(new_slide_count)
+                    added_slide = new_slides.getByIndex(new_slide_count)
+                    
+                    # Use the layout needed for this specific slide
+                    needed_layout = target_slide_layouts[new_slide_count]
+                    
+                    try:
+                        if hasattr(added_slide, "setLayout"):
+                            added_slide.setLayout(needed_layout)
+                            logging.info(f"Applied layout {needed_layout} to added slide {new_slide_count}")
+                        elif hasattr(added_slide, "Layout"):
+                            added_slide.Layout = needed_layout
+                            logging.info(f"Set layout {needed_layout} on added slide {new_slide_count}")
+                        
+                        # Give LibreOffice time to create the placeholder shapes
+                        time.sleep(0.3)
+                        
+                    except Exception as layout_error:
+                        logging.warning(f"Could not apply layout {needed_layout} to slide {new_slide_count}: {layout_error}")
+                    
+                    new_slide_count += 1
+                    logging.info(f"Added slide {new_slide_count} with layout {needed_layout}")
+                    
+                except Exception as slide_add_error:
+                    raise HelperError(f"Failed to add slide {new_slide_count}: {slide_add_error}")
+            
+            # Track copying success for validation
+            copy_errors = []
+            slides_processed = 0
+            
+            # Copy content from target slides to new slides
+            for i in range(target_slide_count):
+                try:
+                    logging.info(f"Processing slide {i + 1} of {target_slide_count}")
+                    
+                    target_slide = target_slides.getByIndex(i)
+                    new_slide = new_slides.getByIndex(i)
+                    
+                    # Find and categorize shapes on both slides
+                    target_title_shape = None
+                    target_content_shape = None
+                    target_other_shapes = []
+                    
+                    new_title_shape = None
+                    new_content_shape = None
+                    
+                    # Analyze target slide shapes
+                    target_shape_count = target_slide.getCount()
+                    logging.info(f"Target slide {i} has {target_shape_count} shapes")
+                    
+                    for j in range(target_shape_count):
+                        try:
+                            shape = target_slide.getByIndex(j)
+                            shape_type = shape.getShapeType()
+                            
+                            if shape_type == "com.sun.star.presentation.TitleTextShape":
+                                target_title_shape = shape
+                                logging.info(f"Found target title shape on slide {i}")
+                            elif shape_type == "com.sun.star.presentation.OutlinerShape":
+                                if not target_content_shape:
+                                    target_content_shape = shape
+                                    logging.info(f"Found target content shape on slide {i}")
+                            else:
+                                target_other_shapes.append(shape)
+                                logging.info(f"Found target other shape: {shape_type}")
+                        except Exception as shape_error:
+                            error_msg = f"Failed to analyze target shape {j} on slide {i}: {shape_error}"
+                            logging.error(error_msg)
+                            copy_errors.append(error_msg)
+                    
+                    # Analyze new slide shapes
+                    new_shape_count = new_slide.getCount()
+                    logging.info(f"New slide {i} has {new_shape_count} shapes")
+                    
+                    for j in range(new_shape_count):
+                        try:
+                            shape = new_slide.getByIndex(j)
+                            shape_type = shape.getShapeType()
+                            
+                            if shape_type == "com.sun.star.presentation.TitleTextShape":
+                                new_title_shape = shape
+                                logging.info(f"Found new slide title shape on slide {i}")
+                            elif shape_type == "com.sun.star.presentation.OutlinerShape":
+                                if not new_content_shape:
+                                    new_content_shape = shape
+                                    logging.info(f"Found new slide content shape on slide {i}")
+                        except Exception as shape_error:
+                            error_msg = f"Failed to analyze new slide shape {j} on slide {i}: {shape_error}"
+                            logging.error(error_msg)
+                            copy_errors.append(error_msg)
+                    
+                    # Copy title text (critical operation)
+                    if target_title_shape:
+                        target_title_text = target_title_shape.getText().getString() if hasattr(target_title_shape, "getText") else ""
+                        if target_title_text.strip():  # Only if there's actual text to copy
+                            if not new_title_shape:
+                                error_msg = f"Target slide {i} has title text but new slide has no title placeholder"
+                                logging.error(error_msg)
+                                copy_errors.append(error_msg)
+                            else:
+                                try:
+                                    new_title_shape.getText().setString(target_title_text)
+                                    logging.info(f"Copied title text: '{target_title_text[:50]}...'")
+                                    
+                                    # Verify the text was actually set
+                                    verification_text = new_title_shape.getText().getString()
+                                    if verification_text != target_title_text:
+                                        error_msg = f"Title text verification failed on slide {i}: expected '{target_title_text}', got '{verification_text}'"
+                                        logging.error(error_msg)
+                                        copy_errors.append(error_msg)
+                                except Exception as title_error:
+                                    error_msg = f"Failed to copy title text on slide {i}: {title_error}"
+                                    logging.error(error_msg)
+                                    copy_errors.append(error_msg)
+                        else:
+                            logging.info(f"No title text to copy on slide {i}")
+                    
+                    # Copy content text (critical operation)
+                    if target_content_shape:
+                        target_content_text = target_content_shape.getText().getString() if hasattr(target_content_shape, "getText") else ""
+                        if target_content_text.strip():  # Only if there's actual text to copy
+                            if not new_content_shape:
+                                error_msg = f"Target slide {i} has content text but new slide has no content placeholder"
+                                logging.error(error_msg)
+                                copy_errors.append(error_msg)
+                            else:
+                                try:
+                                    new_content_shape.getText().setString(target_content_text)
+                                    logging.info(f"Copied content text: '{target_content_text[:50]}...'")
+                                    
+                                    # Verify the text was actually set
+                                    verification_text = new_content_shape.getText().getString()
+                                    if verification_text != target_content_text:
+                                        error_msg = f"Content text verification failed on slide {i}: expected '{target_content_text}', got '{verification_text}'"
+                                        logging.error(error_msg)
+                                        copy_errors.append(error_msg)
+                                except Exception as content_error:
+                                    error_msg = f"Failed to copy content text on slide {i}: {content_error}"
+                                    logging.error(error_msg)
+                                    copy_errors.append(error_msg)
+                        else:
+                            logging.info(f"No content text to copy on slide {i}")
+                    
+                    # Copy other shapes (non-critical, but track errors)
+                    other_shapes_copied = 0
+                    for k, source_shape in enumerate(target_other_shapes):
+                        try:
+                            # Create a new shape of the same type
+                            shape_type = source_shape.getShapeType()
+                            cloned_shape = new_doc.createInstance(shape_type)
+                            
+                            # Copy basic properties
+                            if hasattr(source_shape, "Position"):
+                                cloned_shape.Position = source_shape.Position
+                            if hasattr(source_shape, "Size"):
+                                cloned_shape.Size = source_shape.Size
+                            
+                            # Copy style properties
+                            style_properties = [
+                                "FillColor", "FillStyle", "LineColor", "LineStyle", "LineWidth"
+                            ]
+                            for prop in style_properties:
+                                if hasattr(source_shape, prop) and hasattr(cloned_shape, prop):
+                                    try:
+                                        setattr(cloned_shape, prop, getattr(source_shape, prop))
+                                    except:
+                                        pass  # Non-critical property copy failure
+                            
+                            # Copy text content if it's a text shape
+                            if hasattr(source_shape, "getText") and hasattr(cloned_shape, "getText"):
+                                source_text = source_shape.getText().getString()
+                                if source_text:
+                                    cloned_shape.getText().setString(source_text)
+                                    logging.info(f"Copied text to other shape: '{source_text[:30]}...'")
+                            
+                            # Add the cloned shape to the new slide
+                            new_slide.add(cloned_shape)
+                            other_shapes_copied += 1
+                            logging.info(f"Successfully copied other shape {k}: {shape_type}")
+                            
+                        except Exception as clone_error:
+                            error_msg = f"Failed to copy other shape {k} on slide {i}: {clone_error}"
+                            logging.warning(error_msg)
+                            copy_errors.append(error_msg)
+                    
+                    logging.info(f"Copied {other_shapes_copied} of {len(target_other_shapes)} other shapes on slide {i}")
+                    slides_processed += 1
+                    
+                except Exception as slide_error:
+                    error_msg = f"Critical error processing slide {i}: {slide_error}"
+                    logging.error(error_msg)
+                    copy_errors.append(error_msg)
+            
+            # Remove any extra slides from new document
+            extra_slides_removed = 0
+            while new_slides.getCount() > target_slide_count:
+                try:
+                    last_slide = new_slides.getByIndex(new_slides.getCount() - 1)
+                    new_slides.remove(last_slide)
+                    extra_slides_removed += 1
+                    logging.info(f"Removed extra slide")
+                except Exception as remove_slide_error:
+                    error_msg = f"Failed to remove extra slide: {remove_slide_error}"
+                    logging.error(error_msg)
+                    copy_errors.append(error_msg)
+                    break
+            
+            # CRITICAL VALIDATION: Check if all operations succeeded
+            if copy_errors:
+                error_summary = f"Content copying failed with {len(copy_errors)} errors. No changes will be applied to preserve data integrity."
+                logging.error(error_summary)
+                for error in copy_errors:
+                    logging.error(f"  - {error}")
+                raise HelperError(f"{error_summary} First error: {copy_errors[0]}")
+            
+            if slides_processed != target_slide_count:
+                raise HelperError(f"Only processed {slides_processed} of {target_slide_count} slides. Aborting to prevent data loss.")
+            
+            # Verify final slide count matches
+            if new_slides.getCount() != target_slide_count:
+                raise HelperError(f"Final slide count mismatch: expected {target_slide_count}, got {new_slides.getCount()}")
+            
+            logging.info("All content copied successfully. Proceeding with file replacement.")
+            
+            # Only now that everything is verified, save new document over the target
+            file_url = uno.systemPathToFileUrl(normalize_path(file_path))
+            save_props = [create_property_value("Overwrite", True)]
+            
+            try:
+                new_doc.storeToURL(file_url, tuple(save_props))
+                logging.info("Successfully saved new document over target file")
+            except Exception as save_error:
+                raise HelperError(f"Failed to save templated document: {save_error}")
+            
+            success = True
+            logging.info("Template applied successfully with all content preserved")
+                    
+        except Exception as process_error:
+            logging.error(f"Template application failed: {process_error}")
+            logging.error(traceback.format_exc())
+            # Don't set success = True, so no changes are applied
+            raise process_error
+
+        finally:
+            # Clean up documents
+            try:
+                if new_doc:
+                    new_doc.close(True)
+                    logging.info("Closed new document")
+            except:
+                pass
+            
+            try:
+                target_doc.close(True)
+                logging.info("Closed target document")
+            except:
+                pass
+                
+            try:
+                template_doc.close(True)
+                logging.info("Closed template document")
+            except:
+                pass
         
+        if success:
+            logging.info(f"Successfully applied template '{template_name}' to {file_path}")
+            return f"Successfully applied template '{template_name}' to presentation with all content preserved"
+        else:
+            logging.warning("Template application failed - original file unchanged")
+            return f"Failed to apply template '{template_name}' to presentation - original file preserved"
+        
+    except Exception as e:
+        error_msg = f"Error applying presentation template: {str(e)}"
+        logging.error(error_msg)
+        logging.error(traceback.format_exc())
+        
+        # Clean up any open documents in case of error
+        try:
+            if 'template_doc' in locals() and template_doc:
+                template_doc.close(True)
+        except:
+            pass
+        try:
+            if 'target_doc' in locals() and target_doc:
+                target_doc.close(True)
+        except:
+            pass
+        try:
+            if 'new_doc' in locals() and new_doc:
+                new_doc.close(True)
+        except:
+            pass
+        
+        raise HelperError(error_msg)
+
 # Main command handler
 def handle_command(command):
     """Process commands from the MCP server."""
@@ -1337,7 +1781,13 @@ def handle_command(command):
                 command.get("content", None),
             )
 
-        # Content creation
+        elif action == "apply_presentation_template":
+            return apply_presentation_template(
+                command.get("file_path", ""),
+                command.get("template_name", "")
+            )
+
+        # Writer content creation
         elif action == "add_text":
             return add_text(
                 command.get("file_path", ""), 

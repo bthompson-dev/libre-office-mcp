@@ -1060,19 +1060,36 @@ def apply_document_style(file_path, style):
             pass
         raise
 
+# Impress helper functions
+
+def open_presentation(file_path, read_only=False):
+    try:
+        doc, message = open_document(file_path, read_only)
+        if not doc:
+            error_msg = f"Failed to open document: {message}"
+            logging.error(error_msg)
+            raise HelperError(error_msg)
+
+        logging.info("Document opened successfully")
+
+        if not hasattr(doc, "getDrawPages"):
+            doc.close(True)
+            error_msg = "Document does not support slides/pages"
+            logging.error(error_msg)
+            raise HelperError(error_msg)
+
+        return doc
+
+    except Exception as e:
+        logging.error("Error opening presentation.")
+        raise
+
 # Impress functions
 
 def extract_impress_text(file_path):
     """Extract all text from an Impress presentation (.odp)."""
-    doc, message = open_document(file_path, read_only=True)
-    if not doc:
-        raise HelperError("Presentation not opened successfully")
-    
     try:
-        # Get all slides (DrawPages)
-        if not hasattr(doc, "getDrawPages"):
-            doc.close(True)
-            raise HelperError("Document does not support slides/pages")
+        doc = open_presentation(file_path, read_only=True)
         
         draw_pages = doc.getDrawPages()
         slide_count = draw_pages.getCount()
@@ -1118,19 +1135,7 @@ def add_slide(file_path, slide_index=None, title=None, content=None):
     logging.info(f"add_slide called with: file_path={file_path}, slide_index={slide_index}, title={title}, content={content}")
     
     try:
-        doc, message = open_document(file_path)
-        if not doc:
-            error_msg = f"Failed to open document: {message}"
-            logging.error(error_msg)
-            raise HelperError(error_msg)
-
-        logging.info("Document opened successfully")
-
-        if not hasattr(doc, "getDrawPages"):
-            doc.close(True)
-            error_msg = "Document does not support slides/pages"
-            logging.error(error_msg)
-            raise HelperError(error_msg)
+        doc = open_presentation(file_path)
 
         draw_pages = doc.getDrawPages()
         num_slides = draw_pages.getCount()
@@ -1310,6 +1315,186 @@ def add_slide(file_path, slide_index=None, title=None, content=None):
             pass
         raise HelperError(error_msg)
 
+def edit_slide_content(file_path, slide_index, new_content):
+    """
+    Edit the main text content of a specific slide in an Impress presentation.
+    
+    Args:
+        file_path: Path to the presentation file.
+        slide_index: Index of the slide to edit (0-based).
+        new_content: New text content to set in the main content area.
+    """
+    logging.info(f"edit_slide_content called with: file_path={file_path}, slide_index={slide_index}")
+    
+    try:
+        doc = open_presentation(file_path)
+
+        draw_pages = doc.getDrawPages()
+        num_slides = draw_pages.getCount()
+        logging.info(f"Current number of slides: {num_slides}")
+        
+        # Validate slide index
+        if slide_index < 0 or slide_index >= num_slides:
+            doc.close(True)
+            error_msg = f"Slide index {slide_index} is out of range (presentation has {num_slides} slides, valid range: 0-{num_slides-1})"
+            logging.error(error_msg)
+            raise HelperError(error_msg)
+        
+        # Get the target slide
+        target_slide = draw_pages.getByIndex(slide_index)
+        logging.info(f"Editing slide at index: {slide_index}")
+        
+        # Find the main content shape on the slide (excluding title)
+        main_content_shape = None
+        
+        logging.info(f"Number of shapes on slide: {target_slide.getCount()}")
+        
+        # Search for main content shape, prioritizing OutlinerShape
+        for i in range(target_slide.getCount()):
+            try:
+                shape = target_slide.getByIndex(i)
+                shape_type = shape.getShapeType()
+                logging.info(f"Shape {i}: {shape_type}")
+                
+                # Check if this shape has text capabilities
+                if hasattr(shape, "getText"):
+                    # Priority 1: Look for OutlinerShape (main content in presentations)
+                    if shape_type == "com.sun.star.presentation.OutlinerShape":
+                        main_content_shape = shape
+                        logging.info(f"  Found OutlinerShape (main content) at index {i}")
+                        break  # Use the first OutlinerShape found
+                    
+                    # Priority 2: Check presentation object type for content placeholders
+                    elif hasattr(shape, "PresentationObject"):
+                        try:
+                            pres_obj = shape.PresentationObject
+                            logging.info(f"  PresentationObject: {pres_obj}")
+                            
+                            # Content placeholders (exclude title placeholders 0,1)
+                            if pres_obj in [2, 3, 4, 5] and not main_content_shape:
+                                main_content_shape = shape
+                                logging.info(f"  Found content placeholder at shape {i}")
+                                break
+                        except Exception as pres_obj_error:
+                            logging.warning(f"  Error checking PresentationObject: {pres_obj_error}")
+                            
+            except Exception as shape_error:
+                logging.warning(f"  Error examining shape {i}: {shape_error}")
+
+        # If no standard content shape found, look for text shapes that are not titles
+        if not main_content_shape:
+            logging.warning("No standard content shape found, searching for suitable text shape")
+            for i in range(target_slide.getCount()):
+                try:
+                    shape = target_slide.getByIndex(i)
+                    shape_type = shape.getShapeType()
+                    
+                    # Skip title shapes explicitly
+                    if shape_type == "com.sun.star.presentation.TitleTextShape":
+                        logging.info(f"  Skipping title shape at index {i}")
+                        continue
+                    
+                    if hasattr(shape, "getText"):
+                        text_obj = shape.getText()
+                        if hasattr(text_obj, "getString"):
+                            # Check if this shape has existing text content
+                            existing_text = text_obj.getString()
+                            
+                            # Use position and content heuristics to identify main content
+                            if hasattr(shape, "Position"):
+                                y_pos = shape.Position.Y
+                                # Main content is usually below title area (Y > 3000) and has substantial content
+                                if y_pos > 3000:
+                                    # Check shape name for content indicators
+                                    if hasattr(shape, "Name"):
+                                        shape_name = shape.Name.lower()
+                                        logging.info(f"  Checking text shape '{shape_name}' at Y:{y_pos}")
+                                        
+                                        # Skip if name suggests it's a title
+                                        if "title" in shape_name:
+                                            logging.info(f"  Skipping shape with 'title' in name")
+                                            continue
+                                        
+                                        # Prefer shapes with content-related names
+                                        if any(keyword in shape_name for keyword in ["content", "text", "outline", "body"]):
+                                            main_content_shape = shape
+                                            logging.info(f"  Found main content shape by name at shape {i}")
+                                            break
+                                    
+                                    # If no explicit name match, use the first substantial text shape in content area
+                                    if not main_content_shape and (existing_text.strip() or y_pos > 5000):
+                                        main_content_shape = shape
+                                        logging.info(f"  Using text shape by position at shape {i} (Y: {y_pos})")
+                                        break
+                                        
+                except Exception as fallback_error:
+                    logging.warning(f"Error checking fallback shape {i}: {fallback_error}")
+            
+        if not main_content_shape:
+            doc.close(True)
+            raise HelperError(f"No main content shape found on slide {slide_index}. The slide may only contain a title or no text content.")
+
+        # Edit the main content shape
+        try:
+            # Get current text for logging
+            current_text = main_content_shape.getText().getString() if hasattr(main_content_shape, "getText") else ""
+            logging.info(f"Editing main content - current text: '{current_text[:50]}...'")
+            
+            # Set new content
+            text_obj = main_content_shape.getText()
+            text_obj.setString(new_content)
+            
+            # Verify the text was set correctly
+            verification_text = text_obj.getString()
+            if verification_text == new_content:
+                logging.info("Main content text updated successfully")
+                edit_result = "Main content updated successfully"
+            else:
+                error_msg = f"Main content text verification failed: expected '{new_content}', got '{verification_text}'"
+                logging.error(error_msg)
+                edit_result = "Main content update failed - verification error"
+            
+            # Apply basic formatting for readability
+            try:
+                text_cursor = text_obj.createTextCursor()
+                text_cursor.gotoStart(False)
+                text_cursor.gotoEnd(True)
+                
+                # Apply content formatting (not title formatting)
+                text_cursor.CharHeight = 18
+                text_cursor.ParaAdjust = LEFT
+                        
+                logging.info("Applied formatting to main content text")
+            except Exception as format_error:
+                logging.warning(f"Could not apply formatting to main content: {format_error}")
+                    
+        except Exception as edit_error:
+            error_msg = f"Failed to edit main content shape: {edit_error}"
+            logging.error(error_msg)
+            doc.close(True)
+            raise HelperError(error_msg)
+
+        # Save and close
+        logging.info("Saving document...")
+        doc.store()
+        doc.close(True)
+        
+        success_msg = f"Successfully edited main content of slide {slide_index} in {file_path}. {edit_result}"
+        logging.info(success_msg)
+        return success_msg
+        
+    except Exception as e:
+        error_msg = f"Error in edit_slide_content: {str(e)}"
+        logging.error(error_msg)
+        logging.error(traceback.format_exc())
+        try:
+            if 'doc' in locals():
+                doc.close(True)
+        except:
+            pass
+        raise HelperError(error_msg)
+
+
 def delete_slide(file_path, slide_index):
     """
     Delete a slide from an Impress presentation.
@@ -1320,19 +1505,7 @@ def delete_slide(file_path, slide_index):
     logging.info(f"delete_slide called with: file_path={file_path}, slide_index={slide_index}")
     
     try:
-        doc, message = open_document(file_path)
-        if not doc:
-            error_msg = f"Failed to open document: {message}"
-            logging.error(error_msg)
-            raise HelperError(error_msg)
-
-        logging.info("Document opened successfully")
-
-        if not hasattr(doc, "getDrawPages"):
-            doc.close(True)
-            error_msg = "Document does not support slides/pages"
-            logging.error(error_msg)
-            raise HelperError(error_msg)
+        doc = open_presentation(file_path)
 
         draw_pages = doc.getDrawPages()
         num_slides = draw_pages.getCount()
@@ -1495,11 +1668,8 @@ def apply_presentation_template(file_path, template_name):
             error_msg += f"Template files searched for: {template_name}.otp, {template_name}.ott, etc."
             raise HelperError(error_msg)
 
-        # Load target presentation
-        target_doc, target_message = open_document(file_path)
-        if not target_doc:
-            template_doc.close(True)
-            raise HelperError(f"Failed to open target presentation: {target_message}")
+        # Load target presentation using the helper
+        target_doc = open_presentation(file_path)
 
         success = False
         new_doc = None
@@ -1917,9 +2087,6 @@ def handle_command(command):
             )
         
         # Impress presentation creation and management
-
-        elif action == "open_presentation":
-            return extract_impress_text(command.get("file_path", ""))
 
         elif action == "add_slide":
             return add_slide(

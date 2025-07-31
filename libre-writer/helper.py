@@ -1084,6 +1084,23 @@ def open_presentation(file_path, read_only=False):
         logging.error("Error opening presentation.")
         raise
 
+def get_validated_slide(draw_pages, slide_index, delete=False):
+    num_slides = draw_pages.getCount()
+
+    # Validate slide index
+    if slide_index < 0 or slide_index >= num_slides:
+        error_msg = f"Slide index {slide_index} is out of range"
+        raise HelperError(error_msg)
+
+    # Prevent deletion of the last slide
+    if delete and num_slides == 1:
+        error_msg = "Cannot delete the only slide in the presentation"
+        logging.error(error_msg)
+        raise HelperError(error_msg)
+
+    target_slide = draw_pages.getByIndex(slide_index)
+    return target_slide
+
 def find_template_files(base_directory, template_name):
     """Recursively search for presentation template files in a directory."""
     found_templates = []
@@ -1456,15 +1473,10 @@ def edit_slide_content(file_path, slide_index, new_content):
     try:
         doc = open_presentation(file_path)
         draw_pages = doc.getDrawPages()
-        num_slides = draw_pages.getCount()
+        num_slides = draw_pages.getCount()     
         
-        # Validate slide index
-        if slide_index < 0 or slide_index >= num_slides:
-            doc.close(True)
-            error_msg = f"Slide index {slide_index} is out of range"
-            raise HelperError(error_msg)
+        target_slide = get_validated_slide(draw_pages, slide_index)
         
-        target_slide = draw_pages.getByIndex(slide_index)
         logging.info(f"Editing slide at index: {slide_index}")
         
         # Enhanced shape detection logic
@@ -1663,15 +1675,8 @@ def edit_slide_title(file_path, slide_index, new_title):
     try:
         doc = open_presentation(file_path)
         draw_pages = doc.getDrawPages()
-        num_slides = draw_pages.getCount()
         
-        # Validate slide index
-        if slide_index < 0 or slide_index >= num_slides:
-            doc.close(True)
-            error_msg = f"Slide index {slide_index} is out of range"
-            raise HelperError(error_msg)
-        
-        target_slide = draw_pages.getByIndex(slide_index)
+        target_slide = get_validated_slide(draw_pages, slide_index)
         logging.info(f"Editing title of slide at index: {slide_index}")
         
         # Enhanced shape detection logic specifically for title shapes
@@ -1903,27 +1908,11 @@ def delete_slide(file_path, slide_index):
     
     try:
         doc = open_presentation(file_path)
-
         draw_pages = doc.getDrawPages()
         num_slides = draw_pages.getCount()
-        logging.info(f"Current number of slides: {num_slides}")
-        
-        # Validate slide index
-        if slide_index < 0 or slide_index >= num_slides:
-            doc.close(True)
-            error_msg = f"Slide index {slide_index} is out of range (presentation has {num_slides} slides, valid range: 0-{num_slides-1})"
-            logging.error(error_msg)
-            raise HelperError(error_msg)
-        
-        # Prevent deletion of the last slide
-        if num_slides == 1:
-            doc.close(True)
-            error_msg = "Cannot delete the only slide in the presentation"
-            logging.error(error_msg)
-            raise HelperError(error_msg)
-        
+
         # Get the slide to delete
-        slide_to_delete = draw_pages.getByIndex(slide_index)
+        slide_to_delete = get_validated_slide(draw_pages, slide_index, delete=True)
         logging.info(f"Deleting slide at index: {slide_index}")
         
         # Remove the slide
@@ -2423,15 +2412,8 @@ def format_slide_content(file_path, slide_index, format_options):
     try:
         doc = open_presentation(file_path)
         draw_pages = doc.getDrawPages()
-        num_slides = draw_pages.getCount()
-        
-        # Validate slide index
-        if slide_index < 0 or slide_index >= num_slides:
-            doc.close(True)
-            error_msg = f"Slide index {slide_index} is out of range"
-            raise HelperError(error_msg)
-        
-        target_slide = draw_pages.getByIndex(slide_index)
+
+        target_slide = get_validated_slide(draw_pages, slide_index)
         logging.info(f"Formatting content of slide at index: {slide_index}")
         
         # Find the main content shape using similar logic as edit_slide_content
@@ -2661,15 +2643,8 @@ def format_slide_title(file_path, slide_index, format_options):
     try:
         doc = open_presentation(file_path)
         draw_pages = doc.getDrawPages()
-        num_slides = draw_pages.getCount()
         
-        # Validate slide index
-        if slide_index < 0 or slide_index >= num_slides:
-            doc.close(True)
-            error_msg = f"Slide index {slide_index} is out of range"
-            raise HelperError(error_msg)
-        
-        target_slide = draw_pages.getByIndex(slide_index)
+        target_slide = get_validated_slide(draw_pages, slide_index)
         logging.info(f"Formatting title of slide at index: {slide_index}")
         
         # Find the main title shape using similar logic as edit_slide_title
@@ -2897,13 +2872,6 @@ def insert_slide_image(file_path, slide_index, image_path, max_width=None, max_h
     try:
         doc = open_presentation(file_path)
         draw_pages = doc.getDrawPages()
-        num_slides = draw_pages.getCount()
-        
-        # Validate slide index
-        if slide_index < 0 or slide_index >= num_slides:
-            doc.close(True)
-            error_msg = f"Slide index {slide_index} is out of range (presentation has {num_slides} slides)"
-            raise HelperError(error_msg)
         
         # Normalize and validate image path
         image_path = normalize_path(image_path)
@@ -2911,7 +2879,7 @@ def insert_slide_image(file_path, slide_index, image_path, max_width=None, max_h
             doc.close(True)
             raise HelperError(f"Image not found: {image_path}")
         
-        target_slide = draw_pages.getByIndex(slide_index)
+        target_slide = get_validated_slide(draw_pages, slide_index)
         logging.info(f"Inserting image into slide at index: {slide_index}")
         
         # Get slide dimensions (LibreOffice uses 1/100mm units internally)

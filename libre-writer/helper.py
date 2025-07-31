@@ -1310,30 +1310,190 @@ def add_slide(file_path, slide_index=None, title=None, content=None):
             pass
         raise HelperError(error_msg)
 
+def delete_slide(file_path, slide_index):
+    """
+    Delete a slide from an Impress presentation.
+    Args:
+        file_path: Path to the presentation file.
+        slide_index: Index of the slide to delete (0-based).
+    """
+    logging.info(f"delete_slide called with: file_path={file_path}, slide_index={slide_index}")
+    
+    try:
+        doc, message = open_document(file_path)
+        if not doc:
+            error_msg = f"Failed to open document: {message}"
+            logging.error(error_msg)
+            raise HelperError(error_msg)
+
+        logging.info("Document opened successfully")
+
+        if not hasattr(doc, "getDrawPages"):
+            doc.close(True)
+            error_msg = "Document does not support slides/pages"
+            logging.error(error_msg)
+            raise HelperError(error_msg)
+
+        draw_pages = doc.getDrawPages()
+        num_slides = draw_pages.getCount()
+        logging.info(f"Current number of slides: {num_slides}")
+        
+        # Validate slide index
+        if slide_index < 0 or slide_index >= num_slides:
+            doc.close(True)
+            error_msg = f"Slide index {slide_index} is out of range (presentation has {num_slides} slides, valid range: 0-{num_slides-1})"
+            logging.error(error_msg)
+            raise HelperError(error_msg)
+        
+        # Prevent deletion of the last slide
+        if num_slides == 1:
+            doc.close(True)
+            error_msg = "Cannot delete the only slide in the presentation"
+            logging.error(error_msg)
+            raise HelperError(error_msg)
+        
+        # Get the slide to delete
+        slide_to_delete = draw_pages.getByIndex(slide_index)
+        logging.info(f"Deleting slide at index: {slide_index}")
+        
+        # Remove the slide
+        draw_pages.remove(slide_to_delete)
+        logging.info("Slide removed successfully")
+        
+        # Verify the slide was deleted
+        new_slide_count = draw_pages.getCount()
+        if new_slide_count != num_slides - 1:
+            doc.close(True)
+            error_msg = f"Slide deletion verification failed: expected {num_slides - 1} slides, got {new_slide_count}"
+            logging.error(error_msg)
+            raise HelperError(error_msg)
+        
+        # Save and close
+        logging.info("Saving document...")
+        doc.store()
+        doc.close(True)
+        
+        success_msg = f"Successfully deleted slide at index {slide_index} from {file_path}. Presentation now has {new_slide_count} slides."
+        logging.info(success_msg)
+        return success_msg
+        
+    except Exception as e:
+        error_msg = f"Error in delete_slide: {str(e)}"
+        logging.error(error_msg)
+        logging.error(traceback.format_exc())
+        try:
+            if 'doc' in locals():
+                doc.close(True)
+        except:
+            pass
+        raise HelperError(error_msg)
+
+def find_template_files(base_directory, template_name):
+    """Recursively search for presentation template files in a directory."""
+    found_templates = []
+
+    if not os.path.exists(base_directory) or not os.path.isdir(base_directory):
+        logging.info(f"Directory does not exist: {base_directory}")
+        return found_templates
+
+    template_extensions = ['.otp'] # Only support .otp initially
+
+    try:
+        # Walk through all subdirectories recursively
+        for root, dirs, files in os.walk(base_directory):
+            logging.info(f"Searching in directory: {root}")
+
+            for file in files:
+                file_lower = file.lower()
+                template_name_lower = template_name.lower()
+
+                # Check if file matches template name and has a valid extension
+                for ext in template_extensions:
+                    # Check for exact match with extension
+                    if file_lower == f"{template_name_lower}{ext}":
+                        full_path = os.path.join(root, file)
+                        found_templates.append(full_path)
+                        logging.info(f"Found exact match: {full_path}")
+                    # Check for partial match (template name contained in filename)
+                    elif template_name_lower in file_lower and file_lower.endswith(ext):
+                        full_path = os.path.join(root, file)
+                        found_templates.append(full_path)
+                        logging.info(f"Found partial match: {full_path}")
+        
+        # Sort by preference: exact matches first, then by file extension preference
+        def sort_key(template_path):
+            filename = os.path.basename(template_path).lower()
+            template_name_lower = template_name.lower()
+            
+            # Exact match gets highest priority
+            if filename.startswith(f"{template_name_lower}."):
+                return (0, template_path)
+            # Partial matches get lower priority
+            else:
+                return (1, template_path)
+        
+        found_templates.sort(key=sort_key)
+
+    except Exception as e:
+        logging.error(f"Error searching for templates in {base_directory}: {e}")
+        logging.error(traceback.format_exc())
+    
+    return found_templates
+
 def apply_presentation_template(file_path, template_name):
     """Apply a presentation template to an existing presentation."""
     logging.info(f"Attempting to apply template: {template_name} to {file_path}")
     
     try:
-        # Try different template paths
-        template_paths = [
-            f"file:///C:/Program Files/LibreOffice/share/template/common/presnt/{template_name}.otp",
+        home_dir = os.path.expanduser("~")
+        
+        # Define search directories for templates
+        template_search_dirs = [
+            "C:/Program Files/LibreOffice/share/template/common/presnt",
+            f"{home_dir}/AppData/Roaming/LibreOffice/4/user/template",
         ]
-                
+        
         template_doc = None
-        for template_path in template_paths:
+        found_template_path = None
+        
+        # Search recursively in user directories
+        all_found_templates = []
+        for search_dir in template_search_dirs:
+            logging.info(f"Recursively searching directory: {search_dir}")
+            found_templates = find_template_files(search_dir, template_name)
+            all_found_templates.extend(found_templates)
+            
+        # Try to load each found template until one works
+        for template_path in all_found_templates:
             try:
-                logging.info(f"Trying template path: {template_path}")
-                template_doc, template_message = open_document(template_path, read_only=True)
+                logging.info(f"Trying user template: {template_path}")
+                # Convert to file URL if it's a local path
+                if not template_path.startswith(('file://', 'http://', 'https://')):
+                    template_url = uno.systemPathToFileUrl(template_path)
+                else:
+                    template_url = template_path
+                    
+                template_doc, template_message = open_document(template_url, read_only=True)
                 if template_doc:
-                    logging.info(f"Successfully loaded template from: {template_path}")
+                    found_template_path = template_url
+                    logging.info(f"Successfully loaded user template from: {template_path}")
                     break
-            except Exception as path_error:
-                logging.info(f"Failed to load from {template_path}: {path_error}")
+            except Exception as template_error:
+                logging.info(f"Failed to load template from {template_path}: {template_error}")
                 continue
-
+        
         if not template_doc:
-            raise HelperError(f"Could not find template '{template_name}' in any of the standard locations")
+            # Create a detailed error message with search information
+            search_summary = f"Searched in the following locations:\n"
+            for search_dir in template_search_dirs:
+                if os.path.exists(search_dir):
+                    search_summary += f"  - {search_dir} (exists)\n"
+                else:
+                    search_summary += f"  - {search_dir} (not found)\n"
+            
+            error_msg = f"Could not find template '{template_name}' in any location.\n{search_summary}"
+            error_msg += f"Template files searched for: {template_name}.otp, {template_name}.ott, etc."
+            raise HelperError(error_msg)
 
         # Load target presentation
         target_doc, target_message = open_document(file_path)
@@ -1353,25 +1513,13 @@ def apply_presentation_template(file_path, template_name):
             if not desktop:
                 raise HelperError("Failed to get UNO desktop")
                 
-            # Create new presentation from template
-            template_path = None
-            for path in template_paths:
-                if path.startswith("file:///"):
-                    local_path = path[8:].replace("/", "\\")
-                    if os.path.exists(local_path):
-                        template_path = path
-                        break
-                
-            if not template_path:
-                raise HelperError("No valid template path found")
-                
             # Create new document from template
             props = [
                 create_property_value("AsTemplate", True),
                 create_property_value("Hidden", True)
             ]
                 
-            new_doc = desktop.loadComponentFromURL(template_path, "_blank", 0, tuple(props))
+            new_doc = desktop.loadComponentFromURL(found_template_path, "_blank", 0, tuple(props))
             if not new_doc:
                 raise HelperError("Failed to create new document from template")
                 
@@ -1779,6 +1927,12 @@ def handle_command(command):
                 command.get("slide_index", None),
                 command.get("title", None),
                 command.get("content", None),
+            )
+
+        elif action == "delete_slide":
+            return delete_slide(
+                command.get("file_path", ""),
+                command.get("slide_index", 0)
             )
 
         elif action == "apply_presentation_template":

@@ -907,6 +907,38 @@ async def add_slide(file_path: str, slide_index: Optional[int] = None, title: Op
         return f"Error: {response['message']}"
 
 @mcp.tool()
+async def delete_slide(file_path: str, slide_index: int) -> str:
+    """
+    Delete a slide from an Impress presentation.
+    
+    Args:
+        file_path: Path to the presentation file
+        slide_index: Index of the slide to delete (0-based, where 0 is the first slide)
+    """
+    try:
+        # Validate file extension
+        if not file_path.lower().endswith(impress_extensions):
+            return "Error: file_path is not a presentation file."
+        
+        # Normalize path
+        file_path = normalize_path(file_path)
+        
+        # Send command to helper
+        response = call_libreoffice_helper({
+            "action": "delete_slide",
+            "file_path": file_path,
+            "slide_index": slide_index
+        })
+        
+        if response["status"] == "success":
+            return response["message"]
+        else:
+            return f"Error: {response['message']}"
+    except Exception as e:
+        print(f"Error in delete_slide: {str(e)}")
+        return f"Failed to delete slide: {str(e)}"
+
+@mcp.tool()
 async def apply_presentation_template(file_path: str, template_name: str) -> str:
     """
     Apply a built-in LibreOffice presentation template/master slide to a presentation.

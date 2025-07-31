@@ -1084,6 +1084,138 @@ def open_presentation(file_path, read_only=False):
         logging.error("Error opening presentation.")
         raise
 
+def find_template_files(base_directory, template_name):
+    """Recursively search for presentation template files in a directory."""
+    found_templates = []
+
+    if not os.path.exists(base_directory) or not os.path.isdir(base_directory):
+        logging.info(f"Directory does not exist: {base_directory}")
+        return found_templates
+
+    template_extensions = ['.otp'] # Only support .otp initially
+
+    try:
+        # Walk through all subdirectories recursively
+        for root, dirs, files in os.walk(base_directory):
+            logging.info(f"Searching in directory: {root}")
+
+            for file in files:
+                file_lower = file.lower()
+                template_name_lower = template_name.lower()
+
+                # Check if file matches template name and has a valid extension
+                for ext in template_extensions:
+                    # Check for exact match with extension
+                    if file_lower == f"{template_name_lower}{ext}":
+                        full_path = os.path.join(root, file)
+                        found_templates.append(full_path)
+                        logging.info(f"Found exact match: {full_path}")
+                    # Check for partial match (template name contained in filename)
+                    elif template_name_lower in file_lower and file_lower.endswith(ext):
+                        full_path = os.path.join(root, file)
+                        found_templates.append(full_path)
+                        logging.info(f"Found partial match: {full_path}")
+        
+        # Sort by preference: exact matches first, then by file extension preference
+        def sort_key(template_path):
+            filename = os.path.basename(template_path).lower()
+            template_name_lower = template_name.lower()
+            
+            # Exact match gets highest priority
+            if filename.startswith(f"{template_name_lower}."):
+                return (0, template_path)
+            # Partial matches get lower priority
+            else:
+                return (1, template_path)
+        
+        found_templates.sort(key=sort_key)
+
+    except Exception as e:
+        logging.error(f"Error searching for templates in {base_directory}: {e}")
+        logging.error(traceback.format_exc())
+    
+    return found_templates
+
+def add_main_textbox(doc, target_slide):
+    """Add a main content textbox to a slide."""
+    try:        
+        # Create a new main content textbox since none exists
+        logging.info("Creating new main content textbox")
+        
+        try:
+            # Try to create an OutlinerShape first (preferred for presentations)
+            content_shape = None
+            try:
+                content_shape = doc.createInstance("com.sun.star.presentation.OutlinerShape")
+                logging.info("Created OutlinerShape")
+            except Exception as outliner_error:
+                logging.warning(f"Could not create OutlinerShape: {outliner_error}")
+                # Fallback to regular TextShape
+                content_shape = doc.createInstance("com.sun.star.drawing.TextShape")
+                logging.info("Created fallback TextShape")
+            
+            if not content_shape:
+                doc.close(True)
+                raise HelperError("Failed to create content textbox shape")
+            
+            # Set size and position for main content area
+            # Standard content area positioning (below title area)
+            content_shape.setSize(Size(24000, 14000))  # Width: 24cm, Height: 14cm
+            content_shape.setPosition(uno.createUnoStruct("com.sun.star.awt.Point"))
+            content_shape.Position.X = 2000   # 2cm from left
+            content_shape.Position.Y = 6000   # 6cm from top (below title area)
+            
+            # Set presentation object type for content if possible
+            try:
+                if hasattr(content_shape, "PresentationObject"):
+                    content_shape.PresentationObject = 2  # Content placeholder type
+                    logging.info("Set PresentationObject type to content")
+            except Exception as pres_obj_set_error:
+                logging.warning(f"Could not set PresentationObject: {pres_obj_set_error}")
+            
+            # Add the shape to the slide
+            target_slide.add(content_shape)
+            logging.info("Added content textbox to slide")
+            
+            # Set default placeholder text
+            try:
+                placeholder_text = "Click to add content"
+                content_text = content_shape.getText()
+                content_text.setString(placeholder_text)
+                
+                # Apply basic formatting
+                content_cursor = content_text.createTextCursor()
+                content_cursor.gotoStart(False)
+                content_cursor.gotoEnd(True)
+                content_cursor.CharHeight = 18
+                content_cursor.ParaAdjust = LEFT
+                content_cursor.CharColor = 8421504  # Gray color for placeholder
+                
+                logging.info("Set placeholder text and formatting")
+            except Exception as text_error:
+                logging.warning(f"Could not set placeholder text: {text_error}")
+            
+        except Exception as create_error:
+            error_msg = f"Failed to create main content textbox: {create_error}"
+            logging.error(error_msg)
+            doc.close(True)
+            raise HelperError(error_msg)
+        
+        success_msg = f"Successfully added main content textbox"
+        logging.info(success_msg)
+        return content_shape
+        
+    except Exception as e:
+        error_msg = f"Error in add_main_textbox: {str(e)}"
+        logging.error(error_msg)
+        logging.error(traceback.format_exc())
+        try:
+            if 'doc' in locals():
+                doc.close(True)
+        except:
+            pass
+        raise HelperError(error_msg)
+
 # Impress functions
 
 def extract_impress_text(file_path):
@@ -1318,38 +1450,30 @@ def add_slide(file_path, slide_index=None, title=None, content=None):
 def edit_slide_content(file_path, slide_index, new_content):
     """
     Edit the main text content of a specific slide in an Impress presentation.
-    
-    Args:
-        file_path: Path to the presentation file.
-        slide_index: Index of the slide to edit (0-based).
-        new_content: New text content to set in the main content area.
     """
     logging.info(f"edit_slide_content called with: file_path={file_path}, slide_index={slide_index}")
     
     try:
         doc = open_presentation(file_path)
-
         draw_pages = doc.getDrawPages()
         num_slides = draw_pages.getCount()
-        logging.info(f"Current number of slides: {num_slides}")
         
         # Validate slide index
         if slide_index < 0 or slide_index >= num_slides:
             doc.close(True)
-            error_msg = f"Slide index {slide_index} is out of range (presentation has {num_slides} slides, valid range: 0-{num_slides-1})"
-            logging.error(error_msg)
+            error_msg = f"Slide index {slide_index} is out of range"
             raise HelperError(error_msg)
         
-        # Get the target slide
         target_slide = draw_pages.getByIndex(slide_index)
         logging.info(f"Editing slide at index: {slide_index}")
         
-        # Find the main content shape on the slide (excluding title)
+        # Enhanced shape detection logic
         main_content_shape = None
+        all_text_shapes = []  # Store all potential text shapes for fallback
         
         logging.info(f"Number of shapes on slide: {target_slide.getCount()}")
         
-        # Search for main content shape, prioritizing OutlinerShape
+        # First pass: Collect all text-capable shapes and categorize them
         for i in range(target_slide.getCount()):
             try:
                 shape = target_slide.getByIndex(i)
@@ -1358,87 +1482,126 @@ def edit_slide_content(file_path, slide_index, new_content):
                 
                 # Check if this shape has text capabilities
                 if hasattr(shape, "getText"):
-                    # Priority 1: Look for OutlinerShape (main content in presentations)
-                    if shape_type == "com.sun.star.presentation.OutlinerShape":
-                        main_content_shape = shape
-                        logging.info(f"  Found OutlinerShape (main content) at index {i}")
-                        break  # Use the first OutlinerShape found
+                    shape_info = {
+                        'shape': shape,
+                        'index': i,
+                        'type': shape_type,
+                        'priority': 99,  # Default low priority
+                        'reason': 'unknown'
+                    }
                     
-                    # Priority 2: Check presentation object type for content placeholders
-                    elif hasattr(shape, "PresentationObject"):
-                        try:
-                            pres_obj = shape.PresentationObject
-                            logging.info(f"  PresentationObject: {pres_obj}")
-                            
-                            # Content placeholders (exclude title placeholders 0,1)
-                            if pres_obj in [2, 3, 4, 5] and not main_content_shape:
-                                main_content_shape = shape
-                                logging.info(f"  Found content placeholder at shape {i}")
-                                break
-                        except Exception as pres_obj_error:
-                            logging.warning(f"  Error checking PresentationObject: {pres_obj_error}")
-                            
-            except Exception as shape_error:
-                logging.warning(f"  Error examining shape {i}: {shape_error}")
-
-        # If no standard content shape found, look for text shapes that are not titles
-        if not main_content_shape:
-            logging.warning("No standard content shape found, searching for suitable text shape")
-            for i in range(target_slide.getCount()):
-                try:
-                    shape = target_slide.getByIndex(i)
-                    shape_type = shape.getShapeType()
+                    # Priority 1: Standard presentation OutlinerShape (highest priority)
+                    if shape_type == "com.sun.star.presentation.OutlinerShape":
+                        shape_info['priority'] = 1
+                        shape_info['reason'] = 'OutlinerShape'
+                        all_text_shapes.append(shape_info)
+                        logging.info(f"  Found OutlinerShape at index {i} (priority 1)")
+                        continue
                     
                     # Skip title shapes explicitly
                     if shape_type == "com.sun.star.presentation.TitleTextShape":
                         logging.info(f"  Skipping title shape at index {i}")
                         continue
                     
-                    if hasattr(shape, "getText"):
-                        text_obj = shape.getText()
-                        if hasattr(text_obj, "getString"):
-                            # Check if this shape has existing text content
-                            existing_text = text_obj.getString()
+                    # Priority 2: Check PresentationObject for content placeholders
+                    try:
+                        if hasattr(shape, "PresentationObject"):
+                            pres_obj = shape.PresentationObject
+                            logging.info(f"  PresentationObject: {pres_obj}")
                             
-                            # Use position and content heuristics to identify main content
-                            if hasattr(shape, "Position"):
-                                y_pos = shape.Position.Y
-                                # Main content is usually below title area (Y > 3000) and has substantial content
-                                if y_pos > 3000:
-                                    # Check shape name for content indicators
-                                    if hasattr(shape, "Name"):
-                                        shape_name = shape.Name.lower()
-                                        logging.info(f"  Checking text shape '{shape_name}' at Y:{y_pos}")
-                                        
-                                        # Skip if name suggests it's a title
-                                        if "title" in shape_name:
-                                            logging.info(f"  Skipping shape with 'title' in name")
-                                            continue
-                                        
-                                        # Prefer shapes with content-related names
-                                        if any(keyword in shape_name for keyword in ["content", "text", "outline", "body"]):
-                                            main_content_shape = shape
-                                            logging.info(f"  Found main content shape by name at shape {i}")
-                                            break
-                                    
-                                    # If no explicit name match, use the first substantial text shape in content area
-                                    if not main_content_shape and (existing_text.strip() or y_pos > 5000):
-                                        main_content_shape = shape
-                                        logging.info(f"  Using text shape by position at shape {i} (Y: {y_pos})")
-                                        break
-                                        
-                except Exception as fallback_error:
-                    logging.warning(f"Error checking fallback shape {i}: {fallback_error}")
+                            # Content placeholders (exclude title placeholders 0,1)
+                            if pres_obj in [2, 3, 4, 5]:
+                                shape_info['priority'] = 2
+                                shape_info['reason'] = f'PresentationObject-{pres_obj}'
+                                all_text_shapes.append(shape_info)
+                                logging.info(f"  Found content placeholder at index {i} (priority 2)")
+                                continue
+                    except Exception as pres_obj_error:
+                        logging.warning(f"  Error checking PresentationObject: {pres_obj_error}")
+                    
+                    # Priority 3: Regular TextShape (common for manual text boxes)
+                    if shape_type == "com.sun.star.drawing.TextShape":
+                        shape_info['priority'] = 3
+                        shape_info['reason'] = 'TextShape'
+                        all_text_shapes.append(shape_info)
+                        logging.info(f"  Found TextShape at index {i} (priority 3)")
+                        continue
+                    
+                    # Priority 4: Check shape name for content indicators
+                    if hasattr(shape, "Name"):
+                        shape_name = shape.Name.lower()
+                        logging.info(f"  Shape name: '{shape_name}'")
+                        
+                        # Skip if name suggests it's a title
+                        if "title" in shape_name:
+                            logging.info(f"  Skipping shape with 'title' in name")
+                            continue
+                        
+                        # Prefer shapes with content-related names
+                        if any(keyword in shape_name for keyword in ["content", "text", "outline", "body"]):
+                            shape_info['priority'] = 4
+                            shape_info['reason'] = f'name-{shape_name}'
+                            all_text_shapes.append(shape_info)
+                            logging.info(f"  Found content shape by name at index {i} (priority 4)")
+                            continue
+                    
+                    # Priority 5: Position and content-based detection
+                    if hasattr(shape, "Position"):
+                        y_pos = shape.Position.Y
+                        
+                        # Get existing text content
+                        try:
+                            text_obj = shape.getText()
+                            existing_text = text_obj.getString() if hasattr(text_obj, "getString") else ""
+                        except:
+                            existing_text = ""
+                        
+                        # Content area detection (below title area)
+                        if y_pos > 3000:  # Likely content area
+                            priority = 5
+                            # Boost priority if shape has existing content
+                            if existing_text.strip():
+                                priority = 4
+                                shape_info['reason'] = f'position-with-content-Y{y_pos}'
+                            else:
+                                shape_info['reason'] = f'position-Y{y_pos}'
+                            
+                            shape_info['priority'] = priority
+                            all_text_shapes.append(shape_info)
+                            logging.info(f"  Found text shape by position at index {i} (priority {priority})")
+                    
+                    # Priority 6: Any other text-capable shape as final fallback
+                    if not any(info['shape'] == shape for info in all_text_shapes):
+                        shape_info['priority'] = 6
+                        shape_info['reason'] = 'fallback-text-capable'
+                        all_text_shapes.append(shape_info)
+                        logging.info(f"  Added fallback text shape at index {i} (priority 6)")
+                        
+            except Exception as shape_error:
+                logging.warning(f"  Error examining shape {i}: {shape_error}")
+        
+        # Sort by priority (lower number = higher priority) and select the best match
+        if all_text_shapes:
+            all_text_shapes.sort(key=lambda x: (x['priority'], x['index']))
+            best_match = all_text_shapes[0]
+            main_content_shape = best_match['shape']
+            logging.info(f"Selected shape at index {best_match['index']} with priority {best_match['priority']} (reason: {best_match['reason']})")
             
+            # Log all candidates for debugging
+            logging.info("All text shape candidates:")
+            for info in all_text_shapes:
+                logging.info(f"  Index {info['index']}: Priority {info['priority']}, Reason: {info['reason']}, Type: {info['type']}")
+        
+        # If still no content shape found, create one
         if not main_content_shape:
-            doc.close(True)
-            raise HelperError(f"No main content shape found on slide {slide_index}. The slide may only contain a title or no text content.")
+            logging.warning("No suitable text shape found, creating new content textbox")
+            main_content_shape = add_main_textbox(doc, target_slide)
 
-        # Edit the main content shape
+        # Edit the selected content shape
         try:
             # Get current text for logging
             current_text = main_content_shape.getText().getString() if hasattr(main_content_shape, "getText") else ""
-            logging.info(f"Editing main content - current text: '{current_text[:50]}...'")
+            logging.info(f"Editing content shape - current text: '{current_text[:50]}...'")
             
             # Set new content
             text_obj = main_content_shape.getText()
@@ -1447,29 +1610,26 @@ def edit_slide_content(file_path, slide_index, new_content):
             # Verify the text was set correctly
             verification_text = text_obj.getString()
             if verification_text == new_content:
-                logging.info("Main content text updated successfully")
-                edit_result = "Main content updated successfully"
+                logging.info("Content text updated successfully")
+                edit_result = "Content updated successfully"
             else:
-                error_msg = f"Main content text verification failed: expected '{new_content}', got '{verification_text}'"
+                error_msg = f"Text verification failed: expected '{new_content}', got '{verification_text}'"
                 logging.error(error_msg)
-                edit_result = "Main content update failed - verification error"
+                edit_result = "Content update failed - verification error"
             
             # Apply basic formatting for readability
             try:
                 text_cursor = text_obj.createTextCursor()
                 text_cursor.gotoStart(False)
                 text_cursor.gotoEnd(True)
-                
-                # Apply content formatting (not title formatting)
                 text_cursor.CharHeight = 18
                 text_cursor.ParaAdjust = LEFT
-                        
-                logging.info("Applied formatting to main content text")
+                logging.info("Applied formatting to content text")
             except Exception as format_error:
-                logging.warning(f"Could not apply formatting to main content: {format_error}")
+                logging.warning(f"Could not apply formatting: {format_error}")
                     
         except Exception as edit_error:
-            error_msg = f"Failed to edit main content shape: {edit_error}"
+            error_msg = f"Failed to edit content shape: {edit_error}"
             logging.error(error_msg)
             doc.close(True)
             raise HelperError(error_msg)
@@ -1479,7 +1639,7 @@ def edit_slide_content(file_path, slide_index, new_content):
         doc.store()
         doc.close(True)
         
-        success_msg = f"Successfully edited main content of slide {slide_index} in {file_path}. {edit_result}"
+        success_msg = f"Successfully edited content of slide {slide_index} in {file_path}. {edit_result}"
         logging.info(success_msg)
         return success_msg
         
@@ -1494,6 +1654,243 @@ def edit_slide_content(file_path, slide_index, new_content):
             pass
         raise HelperError(error_msg)
 
+def edit_slide_title(file_path, slide_index, new_title):
+    """
+    Edit the title of a specific slide in an Impress presentation.
+    """
+    logging.info(f"edit_slide_title called with: file_path={file_path}, slide_index={slide_index}")
+    
+    try:
+        doc = open_presentation(file_path)
+        draw_pages = doc.getDrawPages()
+        num_slides = draw_pages.getCount()
+        
+        # Validate slide index
+        if slide_index < 0 or slide_index >= num_slides:
+            doc.close(True)
+            error_msg = f"Slide index {slide_index} is out of range"
+            raise HelperError(error_msg)
+        
+        target_slide = draw_pages.getByIndex(slide_index)
+        logging.info(f"Editing title of slide at index: {slide_index}")
+        
+        # Enhanced shape detection logic specifically for title shapes
+        main_title_shape = None
+        all_title_shapes = []  # Store all potential title shapes for fallback
+        
+        logging.info(f"Number of shapes on slide: {target_slide.getCount()}")
+        
+        # First pass: Collect all text-capable shapes and categorize them for title detection
+        for i in range(target_slide.getCount()):
+            try:
+                shape = target_slide.getByIndex(i)
+                shape_type = shape.getShapeType()
+                logging.info(f"Shape {i}: {shape_type}")
+                
+                # Check if this shape has text capabilities
+                if hasattr(shape, "getText"):
+                    shape_info = {
+                        'shape': shape,
+                        'index': i,
+                        'type': shape_type,
+                        'priority': 99,  # Default low priority
+                        'reason': 'unknown'
+                    }
+                    
+                    # Priority 1: Standard presentation TitleTextShape (highest priority)
+                    if shape_type == "com.sun.star.presentation.TitleTextShape":
+                        shape_info['priority'] = 1
+                        shape_info['reason'] = 'TitleTextShape'
+                        all_title_shapes.append(shape_info)
+                        logging.info(f"  Found TitleTextShape at index {i} (priority 1)")
+                        continue
+                    
+                    # Skip content shapes explicitly
+                    if shape_type == "com.sun.star.presentation.OutlinerShape":
+                        logging.info(f"  Skipping content shape at index {i}")
+                        continue
+                    
+                    # Priority 2: Check PresentationObject for title placeholders
+                    try:
+                        if hasattr(shape, "PresentationObject"):
+                            pres_obj = shape.PresentationObject
+                            logging.info(f"  PresentationObject: {pres_obj}")
+                            
+                            # Title placeholders (0 = title, 1 = subtitle)
+                            if pres_obj in [0, 1]:
+                                shape_info['priority'] = 2
+                                shape_info['reason'] = f'PresentationObject-{pres_obj}'
+                                all_title_shapes.append(shape_info)
+                                logging.info(f"  Found title placeholder at index {i} (priority 2)")
+                                continue
+                    except Exception as pres_obj_error:
+                        logging.warning(f"  Error checking PresentationObject: {pres_obj_error}")
+                    
+                    # Priority 3: Regular TextShape that might be a title
+                    if shape_type == "com.sun.star.drawing.TextShape":
+                        # Check position - titles are usually at the top
+                        if hasattr(shape, "Position"):
+                            y_pos = shape.Position.Y
+                            if y_pos < 3000:  # Top area - likely title
+                                shape_info['priority'] = 3
+                                shape_info['reason'] = f'TextShape-top-Y{y_pos}'
+                                all_title_shapes.append(shape_info)
+                                logging.info(f"  Found TextShape at top at index {i} (priority 3)")
+                                continue
+                    
+                    # Priority 4: Check shape name for title indicators
+                    if hasattr(shape, "Name"):
+                        shape_name = shape.Name.lower()
+                        logging.info(f"  Shape name: '{shape_name}'")
+                        
+                        # Skip if name suggests it's content
+                        if any(keyword in shape_name for keyword in ["content", "body", "outline"]):
+                            logging.info(f"  Skipping shape with content-related name")
+                            continue
+                        
+                        # Prefer shapes with title-related names
+                        if any(keyword in shape_name for keyword in ["title", "heading", "header"]):
+                            shape_info['priority'] = 4
+                            shape_info['reason'] = f'name-{shape_name}'
+                            all_title_shapes.append(shape_info)
+                            logging.info(f"  Found title shape by name at index {i} (priority 4)")
+                            continue
+                    
+                    # Priority 5: Position-based detection for top area shapes
+                    if hasattr(shape, "Position"):
+                        y_pos = shape.Position.Y
+                        
+                        # Get existing text content
+                        try:
+                            text_obj = shape.getText()
+                            existing_text = text_obj.getString() if hasattr(text_obj, "getString") else ""
+                        except:
+                            existing_text = ""
+                        
+                        # Title area detection (top area of slide)
+                        if y_pos < 3000:  # Likely title area
+                            priority = 5
+                            # Boost priority if shape has existing text that looks like a title
+                            if existing_text.strip() and len(existing_text.strip()) < 100:  # Short text, likely title
+                                priority = 4
+                                shape_info['reason'] = f'position-with-title-text-Y{y_pos}'
+                            else:
+                                shape_info['reason'] = f'position-top-Y{y_pos}'
+                            
+                            shape_info['priority'] = priority
+                            all_title_shapes.append(shape_info)
+                            logging.info(f"  Found title shape by position at index {i} (priority {priority})")
+                    
+                    # Priority 6: Any other text-capable shape as final fallback (but only if in top half)
+                    if hasattr(shape, "Position") and shape.Position.Y < 10000:  # Top half of slide
+                        if not any(info['shape'] == shape for info in all_title_shapes):
+                            shape_info['priority'] = 6
+                            shape_info['reason'] = 'fallback-text-capable-top-half'
+                            all_title_shapes.append(shape_info)
+                            logging.info(f"  Added fallback title shape at index {i} (priority 6)")
+                        
+            except Exception as shape_error:
+                logging.warning(f"  Error examining shape {i}: {shape_error}")
+        
+        # Sort by priority (lower number = higher priority) and select the best match
+        if all_title_shapes:
+            all_title_shapes.sort(key=lambda x: (x['priority'], x['index']))
+            best_match = all_title_shapes[0]
+            main_title_shape = best_match['shape']
+            logging.info(f"Selected title shape at index {best_match['index']} with priority {best_match['priority']} (reason: {best_match['reason']})")
+            
+            # Log all candidates for debugging
+            logging.info("All title shape candidates:")
+            for info in all_title_shapes:
+                logging.info(f"  Index {info['index']}: Priority {info['priority']}, Reason: {info['reason']}, Type: {info['type']}")
+        
+        # If still no title shape found, create one
+        if not main_title_shape:
+            logging.warning("No suitable title shape found, creating new title textbox")
+            try:
+                # Create a new title textbox
+                title_shape = doc.createInstance("com.sun.star.drawing.TextShape")
+                title_shape.setSize(Size(24000, 3000))  # Width: 24cm, Height: 3cm
+                title_shape.setPosition(uno.createUnoStruct("com.sun.star.awt.Point"))
+                title_shape.Position.X = 2000   # 2cm from left
+                title_shape.Position.Y = 2000   # 2cm from top
+                
+                # Set presentation object type for title if possible
+                try:
+                    if hasattr(title_shape, "PresentationObject"):
+                        title_shape.PresentationObject = 0  # Title placeholder type
+                        logging.info("Set PresentationObject type to title")
+                except Exception as pres_obj_set_error:
+                    logging.warning(f"Could not set PresentationObject: {pres_obj_set_error}")
+                
+                # Add the shape to the slide
+                target_slide.add(title_shape)
+                main_title_shape = title_shape
+                logging.info("Created and added new title textbox to slide")
+                
+            except Exception as create_error:
+                error_msg = f"Failed to create title textbox: {create_error}"
+                logging.error(error_msg)
+                doc.close(True)
+                raise HelperError(error_msg)
+
+        # Edit the selected title shape
+        try:
+            # Get current text for logging
+            current_text = main_title_shape.getText().getString() if hasattr(main_title_shape, "getText") else ""
+            logging.info(f"Editing title shape - current text: '{current_text[:50]}...'")
+            
+            # Set new title
+            text_obj = main_title_shape.getText()
+            text_obj.setString(new_title)
+            
+            # Verify the text was set correctly
+            verification_text = text_obj.getString()
+            if verification_text == new_title:
+                logging.info("Title text updated successfully")
+                edit_result = "Title updated successfully"
+            else:
+                error_msg = f"Text verification failed: expected '{new_title}', got '{verification_text}'"
+                logging.error(error_msg)
+                edit_result = "Title update failed - verification error"
+            
+            # Apply basic formatting for title readability
+            try:
+                text_cursor = text_obj.createTextCursor()
+                text_cursor.gotoStart(False)
+                text_cursor.gotoEnd(True)
+                text_cursor.CharHeight = 28  # Larger font for title
+                text_cursor.CharWeight = 150  # Bold
+                text_cursor.ParaAdjust = CENTER  # Center alignment for title
+                logging.info("Applied formatting to title text")
+            except Exception as format_error:
+                logging.warning(f"Could not apply formatting: {format_error}")
+                    
+        except Exception as edit_error:
+            error_msg = f"Failed to edit title shape: {edit_error}"
+            logging.error(error_msg)
+            doc.close(True)
+            raise HelperError(error_msg)
+
+        # Save and close
+        logging.info("Saving document...")
+        doc.store()
+        doc.close(True)
+        
+        success_msg = f"Successfully edited title of slide {slide_index} in {file_path}. {edit_result}"
+        logging.info(success_msg)
+        return success_msg
+        
+    except Exception as e:
+        error_msg = f"Error in edit_slide_title: {str(e)}"
+        logging.error(error_msg)
+        logging.error(traceback.format_exc())
+        try:
+            if 'doc' in locals():
+                doc.close(True)
+        except:
+            pass
+        raise HelperError(error_msg)
 
 def delete_slide(file_path, slide_index):
     """
@@ -1560,58 +1957,6 @@ def delete_slide(file_path, slide_index):
         except:
             pass
         raise HelperError(error_msg)
-
-def find_template_files(base_directory, template_name):
-    """Recursively search for presentation template files in a directory."""
-    found_templates = []
-
-    if not os.path.exists(base_directory) or not os.path.isdir(base_directory):
-        logging.info(f"Directory does not exist: {base_directory}")
-        return found_templates
-
-    template_extensions = ['.otp'] # Only support .otp initially
-
-    try:
-        # Walk through all subdirectories recursively
-        for root, dirs, files in os.walk(base_directory):
-            logging.info(f"Searching in directory: {root}")
-
-            for file in files:
-                file_lower = file.lower()
-                template_name_lower = template_name.lower()
-
-                # Check if file matches template name and has a valid extension
-                for ext in template_extensions:
-                    # Check for exact match with extension
-                    if file_lower == f"{template_name_lower}{ext}":
-                        full_path = os.path.join(root, file)
-                        found_templates.append(full_path)
-                        logging.info(f"Found exact match: {full_path}")
-                    # Check for partial match (template name contained in filename)
-                    elif template_name_lower in file_lower and file_lower.endswith(ext):
-                        full_path = os.path.join(root, file)
-                        found_templates.append(full_path)
-                        logging.info(f"Found partial match: {full_path}")
-        
-        # Sort by preference: exact matches first, then by file extension preference
-        def sort_key(template_path):
-            filename = os.path.basename(template_path).lower()
-            template_name_lower = template_name.lower()
-            
-            # Exact match gets highest priority
-            if filename.startswith(f"{template_name_lower}."):
-                return (0, template_path)
-            # Partial matches get lower priority
-            else:
-                return (1, template_path)
-        
-        found_templates.sort(key=sort_key)
-
-    except Exception as e:
-        logging.error(f"Error searching for templates in {base_directory}: {e}")
-        logging.error(traceback.format_exc())
-    
-    return found_templates
 
 def apply_presentation_template(file_path, template_name):
     """Apply a presentation template to an existing presentation."""
@@ -2055,161 +2400,856 @@ def apply_presentation_template(file_path, template_name):
         
         raise HelperError(error_msg)
 
-# Main command handler
+def format_slide_content(file_path, slide_index, format_options):
+    """
+    Format the content text of a specific slide in an Impress presentation.
+    
+    Args:
+        file_path: Path to the presentation file.
+        slide_index: Index of the slide to format (0-based).
+        format_options: Dictionary containing formatting options:
+            - font_name: Font family name (e.g., "Arial", "Times New Roman")
+            - font_size: Font size in points (e.g., 18, 24)
+            - bold: Boolean to apply bold formatting
+            - italic: Boolean to apply italic formatting
+            - underline: Boolean to apply underline formatting
+            - color: Text color as hex string (e.g., "#FF0000") or RGB integer
+            - alignment: Text alignment ("left", "center", "right", "justify")
+            - line_spacing: Line spacing multiplier (e.g., 1.5, 2.0)
+            - background_color: Background color as hex string or RGB integer
+    """
+    logging.info(f"format_slide_content called with: file_path={file_path}, slide_index={slide_index}")
+    
+    try:
+        doc = open_presentation(file_path)
+        draw_pages = doc.getDrawPages()
+        num_slides = draw_pages.getCount()
+        
+        # Validate slide index
+        if slide_index < 0 or slide_index >= num_slides:
+            doc.close(True)
+            error_msg = f"Slide index {slide_index} is out of range"
+            raise HelperError(error_msg)
+        
+        target_slide = draw_pages.getByIndex(slide_index)
+        logging.info(f"Formatting content of slide at index: {slide_index}")
+        
+        # Find the main content shape using similar logic as edit_slide_content
+        main_content_shape = None
+        all_text_shapes = []
+        
+        logging.info(f"Number of shapes on slide: {target_slide.getCount()}")
+        
+        # Collect all text-capable shapes and categorize them
+        for i in range(target_slide.getCount()):
+            try:
+                shape = target_slide.getByIndex(i)
+                shape_type = shape.getShapeType()
+                logging.info(f"Shape {i}: {shape_type}")
+                
+                if hasattr(shape, "getText"):
+                    shape_info = {
+                        'shape': shape,
+                        'index': i,
+                        'type': shape_type,
+                        'priority': 99,
+                        'reason': 'unknown'
+                    }
+                    
+                    # Priority 1: Standard presentation OutlinerShape (highest priority)
+                    if shape_type == "com.sun.star.presentation.OutlinerShape":
+                        shape_info['priority'] = 1
+                        shape_info['reason'] = 'OutlinerShape'
+                        all_text_shapes.append(shape_info)
+                        logging.info(f"  Found OutlinerShape at index {i} (priority 1)")
+                        continue
+                    
+                    # Skip title shapes explicitly
+                    if shape_type == "com.sun.star.presentation.TitleTextShape":
+                        logging.info(f"  Skipping title shape at index {i}")
+                        continue
+                    
+                    # Priority 2: Check PresentationObject for content placeholders
+                    try:
+                        if hasattr(shape, "PresentationObject"):
+                            pres_obj = shape.PresentationObject
+                            if pres_obj in [2, 3, 4, 5]:  # Content placeholders
+                                shape_info['priority'] = 2
+                                shape_info['reason'] = f'PresentationObject-{pres_obj}'
+                                all_text_shapes.append(shape_info)
+                                logging.info(f"  Found content placeholder at index {i} (priority 2)")
+                                continue
+                    except Exception as pres_obj_error:
+                        logging.warning(f"  Error checking PresentationObject: {pres_obj_error}")
+                    
+                    # Priority 3: Regular TextShape
+                    if shape_type == "com.sun.star.drawing.TextShape":
+                        shape_info['priority'] = 3
+                        shape_info['reason'] = 'TextShape'
+                        all_text_shapes.append(shape_info)
+                        logging.info(f"  Found TextShape at index {i} (priority 3)")
+                        continue
+                    
+                    # Priority 4: Check shape name for content indicators
+                    if hasattr(shape, "Name"):
+                        shape_name = shape.Name.lower()
+                        if "title" not in shape_name and any(keyword in shape_name for keyword in ["content", "text", "outline", "body"]):
+                            shape_info['priority'] = 4
+                            shape_info['reason'] = f'name-{shape_name}'
+                            all_text_shapes.append(shape_info)
+                            logging.info(f"  Found content shape by name at index {i} (priority 4)")
+                            continue
+                    
+                    # Priority 5: Position-based detection (below title area)
+                    if hasattr(shape, "Position") and shape.Position.Y > 3000:
+                        shape_info['priority'] = 5
+                        shape_info['reason'] = f'position-Y{shape.Position.Y}'
+                        all_text_shapes.append(shape_info)
+                        logging.info(f"  Found text shape by position at index {i} (priority 5)")
+                        
+            except Exception as shape_error:
+                logging.warning(f"  Error examining shape {i}: {shape_error}")
+        
+        # Select the best content shape
+        if all_text_shapes:
+            all_text_shapes.sort(key=lambda x: (x['priority'], x['index']))
+            best_match = all_text_shapes[0]
+            main_content_shape = best_match['shape']
+            logging.info(f"Selected content shape at index {best_match['index']} with priority {best_match['priority']}")
+        
+        if not main_content_shape:
+            doc.close(True)
+            error_msg = f"No content shape found on slide {slide_index}"
+            raise HelperError(error_msg)
+
+        # Apply formatting to the content shape
+        try:
+            text_obj = main_content_shape.getText()
+            
+            # Check if there's text to format
+            if not text_obj.getString().strip():
+                logging.warning("No text content found to format")
+            
+            # Create text cursor to apply formatting
+            text_cursor = text_obj.createTextCursor()
+            text_cursor.gotoStart(False)
+            text_cursor.gotoEnd(True)  # Select all text
+            
+            # Apply font formatting
+            if format_options.get("font_name"):
+                text_cursor.CharFontName = format_options["font_name"]
+                logging.info(f"Applied font: {format_options['font_name']}")
+            
+            if format_options.get("font_size"):
+                text_cursor.CharHeight = float(format_options["font_size"])
+                logging.info(f"Applied font size: {format_options['font_size']}")
+            
+            if format_options.get("bold") is not None:
+                text_cursor.CharWeight = 150 if format_options["bold"] else 100
+                logging.info(f"Applied bold: {format_options['bold']}")
+            
+            if format_options.get("italic") is not None:
+                text_cursor.CharPosture = 2 if format_options["italic"] else 0
+                logging.info(f"Applied italic: {format_options['italic']}")
+            
+            if format_options.get("underline") is not None:
+                text_cursor.CharUnderline = 1 if format_options["underline"] else 0
+                logging.info(f"Applied underline: {format_options['underline']}")
+            
+            # Apply color formatting
+            if format_options.get("color"):
+                try:
+                    color = format_options["color"]
+                    if isinstance(color, str) and color.startswith("#"):
+                        color = int(color[1:], 16)
+                    text_cursor.CharColor = color
+                    logging.info(f"Applied text color: {format_options['color']}")
+                except Exception as color_error:
+                    logging.error(f"Error applying text color: {color_error}")
+            
+            # Apply paragraph formatting
+            if format_options.get("alignment"):
+                alignment_map = {
+                    "left": LEFT,
+                    "center": CENTER,
+                    "right": RIGHT,
+                    "justify": BLOCK
+                }
+                alignment = format_options["alignment"].lower()
+                if alignment in alignment_map:
+                    text_cursor.ParaAdjust = alignment_map[alignment]
+                    logging.info(f"Applied alignment: {alignment}")
+            
+            # Apply line spacing
+            if format_options.get("line_spacing"):
+                try:
+                    line_spacing = float(format_options["line_spacing"])
+                    # Set line spacing mode and value
+                    text_cursor.ParaLineSpacing = uno.createUnoStruct("com.sun.star.style.LineSpacing")
+                    text_cursor.ParaLineSpacing.Mode = 1  # PROP mode (proportional)
+                    text_cursor.ParaLineSpacing.Height = int(line_spacing * 100)  # Convert to percentage
+                    logging.info(f"Applied line spacing: {line_spacing}")
+                except Exception as spacing_error:
+                    logging.error(f"Error applying line spacing: {spacing_error}")
+            
+            # Apply background color to the shape if specified
+            if format_options.get("background_color"):
+                try:
+                    bg_color = format_options["background_color"]
+                    if isinstance(bg_color, str) and bg_color.startswith("#"):
+                        bg_color = int(bg_color[1:], 16)
+                    
+                    # Set fill style and color for the shape
+                    main_content_shape.FillStyle = 1  # SOLID fill
+                    main_content_shape.FillColor = bg_color
+                    logging.info(f"Applied background color: {format_options['background_color']}")
+                except Exception as bg_error:
+                    logging.error(f"Error applying background color: {bg_error}")
+                    
+        except Exception as format_error:
+            error_msg = f"Failed to apply formatting to content shape: {format_error}"
+            logging.error(error_msg)
+            doc.close(True)
+            raise HelperError(error_msg)
+
+        # Save and close
+        logging.info("Saving document...")
+        doc.store()
+        doc.close(True)
+        
+        # Build success message with applied formatting details
+        applied_formats = []
+        for key, value in format_options.items():
+            if value is not None:
+                applied_formats.append(f"{key}: {value}")
+        
+        success_msg = f"Successfully formatted content of slide {slide_index} in {file_path}. Applied: {', '.join(applied_formats)}"
+        logging.info(success_msg)
+        return success_msg
+        
+    except Exception as e:
+        error_msg = f"Error in format_slide_content: {str(e)}"
+        logging.error(error_msg)
+        logging.error(traceback.format_exc())
+        try:
+            if 'doc' in locals():
+                doc.close(True)
+        except:
+            pass
+        raise HelperError(error_msg)
+
+def format_slide_title(file_path, slide_index, format_options):
+    """
+    Format the title text of a specific slide in an Impress presentation.
+    
+    Args:
+        file_path: Path to the presentation file.
+        slide_index: Index of the slide to format (0-based).
+        format_options: Dictionary containing formatting options:
+            - font_name: Font family name (e.g., "Arial", "Times New Roman")
+            - font_size: Font size in points (e.g., 28, 36)
+            - bold: Boolean to apply bold formatting
+            - italic: Boolean to apply italic formatting
+            - underline: Boolean to apply underline formatting
+            - color: Text color as hex string (e.g., "#FF0000") or RGB integer
+            - alignment: Text alignment ("left", "center", "right", "justify")
+            - line_spacing: Line spacing multiplier (e.g., 1.5, 2.0)
+            - background_color: Background color as hex string or RGB integer
+    """
+    logging.info(f"format_slide_title called with: file_path={file_path}, slide_index={slide_index}")
+    
+    try:
+        doc = open_presentation(file_path)
+        draw_pages = doc.getDrawPages()
+        num_slides = draw_pages.getCount()
+        
+        # Validate slide index
+        if slide_index < 0 or slide_index >= num_slides:
+            doc.close(True)
+            error_msg = f"Slide index {slide_index} is out of range"
+            raise HelperError(error_msg)
+        
+        target_slide = draw_pages.getByIndex(slide_index)
+        logging.info(f"Formatting title of slide at index: {slide_index}")
+        
+        # Find the main title shape using similar logic as edit_slide_title
+        main_title_shape = None
+        all_title_shapes = []
+        
+        logging.info(f"Number of shapes on slide: {target_slide.getCount()}")
+        
+        # Collect all text-capable shapes and categorize them for title detection
+        for i in range(target_slide.getCount()):
+            try:
+                shape = target_slide.getByIndex(i)
+                shape_type = shape.getShapeType()
+                logging.info(f"Shape {i}: {shape_type}")
+                
+                if hasattr(shape, "getText"):
+                    shape_info = {
+                        'shape': shape,
+                        'index': i,
+                        'type': shape_type,
+                        'priority': 99,
+                        'reason': 'unknown'
+                    }
+                    
+                    # Priority 1: Standard presentation TitleTextShape (highest priority)
+                    if shape_type == "com.sun.star.presentation.TitleTextShape":
+                        shape_info['priority'] = 1
+                        shape_info['reason'] = 'TitleTextShape'
+                        all_title_shapes.append(shape_info)
+                        logging.info(f"  Found TitleTextShape at index {i} (priority 1)")
+                        continue
+                    
+                    # Skip content shapes explicitly
+                    if shape_type == "com.sun.star.presentation.OutlinerShape":
+                        logging.info(f"  Skipping content shape at index {i}")
+                        continue
+                    
+                    # Priority 2: Check PresentationObject for title placeholders
+                    try:
+                        if hasattr(shape, "PresentationObject"):
+                            pres_obj = shape.PresentationObject
+                            if pres_obj in [0, 1]:  # Title placeholders
+                                shape_info['priority'] = 2
+                                shape_info['reason'] = f'PresentationObject-{pres_obj}'
+                                all_title_shapes.append(shape_info)
+                                logging.info(f"  Found title placeholder at index {i} (priority 2)")
+                                continue
+                    except Exception as pres_obj_error:
+                        logging.warning(f"  Error checking PresentationObject: {pres_obj_error}")
+                    
+                    # Priority 3: Regular TextShape in top area
+                    if shape_type == "com.sun.star.drawing.TextShape":
+                        if hasattr(shape, "Position") and shape.Position.Y < 3000:  # Top area
+                            shape_info['priority'] = 3
+                            shape_info['reason'] = f'TextShape-top-Y{shape.Position.Y}'
+                            all_title_shapes.append(shape_info)
+                            logging.info(f"  Found TextShape at top at index {i} (priority 3)")
+                            continue
+                    
+                    # Priority 4: Check shape name for title indicators
+                    if hasattr(shape, "Name"):
+                        shape_name = shape.Name.lower()
+                        if any(keyword in shape_name for keyword in ["title", "heading", "header"]):
+                            shape_info['priority'] = 4
+                            shape_info['reason'] = f'name-{shape_name}'
+                            all_title_shapes.append(shape_info)
+                            logging.info(f"  Found title shape by name at index {i} (priority 4)")
+                            continue
+                    
+                    # Priority 5: Position-based detection for top area shapes
+                    if hasattr(shape, "Position") and shape.Position.Y < 3000:
+                        shape_info['priority'] = 5
+                        shape_info['reason'] = f'position-top-Y{shape.Position.Y}'
+                        all_title_shapes.append(shape_info)
+                        logging.info(f"  Found title shape by position at index {i} (priority 5)")
+                        
+            except Exception as shape_error:
+                logging.warning(f"  Error examining shape {i}: {shape_error}")
+        
+        # Select the best title shape
+        if all_title_shapes:
+            all_title_shapes.sort(key=lambda x: (x['priority'], x['index']))
+            best_match = all_title_shapes[0]
+            main_title_shape = best_match['shape']
+            logging.info(f"Selected title shape at index {best_match['index']} with priority {best_match['priority']}")
+        
+        if not main_title_shape:
+            doc.close(True)
+            error_msg = f"No title shape found on slide {slide_index}"
+            raise HelperError(error_msg)
+
+        # Apply formatting to the title shape
+        try:
+            text_obj = main_title_shape.getText()
+            
+            # Check if there's text to format
+            if not text_obj.getString().strip():
+                logging.warning("No title text found to format")
+            
+            # Create text cursor to apply formatting
+            text_cursor = text_obj.createTextCursor()
+            text_cursor.gotoStart(False)
+            text_cursor.gotoEnd(True)  # Select all text
+            
+            # Apply font formatting
+            if format_options.get("font_name"):
+                text_cursor.CharFontName = format_options["font_name"]
+                logging.info(f"Applied font: {format_options['font_name']}")
+            
+            if format_options.get("font_size"):
+                text_cursor.CharHeight = float(format_options["font_size"])
+                logging.info(f"Applied font size: {format_options['font_size']}")
+            
+            if format_options.get("bold") is not None:
+                text_cursor.CharWeight = 150 if format_options["bold"] else 100
+                logging.info(f"Applied bold: {format_options['bold']}")
+            
+            if format_options.get("italic") is not None:
+                text_cursor.CharPosture = 2 if format_options["italic"] else 0
+                logging.info(f"Applied italic: {format_options['italic']}")
+            
+            if format_options.get("underline") is not None:
+                text_cursor.CharUnderline = 1 if format_options["underline"] else 0
+                logging.info(f"Applied underline: {format_options['underline']}")
+            
+            # Apply color formatting
+            if format_options.get("color"):
+                try:
+                    color = format_options["color"]
+                    if isinstance(color, str) and color.startswith("#"):
+                        color = int(color[1:], 16)
+                    text_cursor.CharColor = color
+                    logging.info(f"Applied text color: {format_options['color']}")
+                except Exception as color_error:
+                    logging.error(f"Error applying text color: {color_error}")
+            
+            # Apply paragraph formatting
+            if format_options.get("alignment"):
+                alignment_map = {
+                    "left": LEFT,
+                    "center": CENTER,
+                    "right": RIGHT,
+                    "justify": BLOCK
+                }
+                alignment = format_options["alignment"].lower()
+                if alignment in alignment_map:
+                    text_cursor.ParaAdjust = alignment_map[alignment]
+                    logging.info(f"Applied alignment: {alignment}")
+            
+            # Apply line spacing
+            if format_options.get("line_spacing"):
+                try:
+                    line_spacing = float(format_options["line_spacing"])
+                    # Set line spacing mode and value
+                    text_cursor.ParaLineSpacing = uno.createUnoStruct("com.sun.star.style.LineSpacing")
+                    text_cursor.ParaLineSpacing.Mode = 1  # PROP mode (proportional)
+                    text_cursor.ParaLineSpacing.Height = int(line_spacing * 100)  # Convert to percentage
+                    logging.info(f"Applied line spacing: {line_spacing}")
+                except Exception as spacing_error:
+                    logging.error(f"Error applying line spacing: {spacing_error}")
+            
+            # Apply background color to the shape if specified
+            if format_options.get("background_color"):
+                try:
+                    bg_color = format_options["background_color"]
+                    if isinstance(bg_color, str) and bg_color.startswith("#"):
+                        bg_color = int(bg_color[1:], 16)
+                    
+                    # Set fill style and color for the shape
+                    main_title_shape.FillStyle = 1  # SOLID fill
+                    main_title_shape.FillColor = bg_color
+                    logging.info(f"Applied background color: {format_options['background_color']}")
+                except Exception as bg_error:
+                    logging.error(f"Error applying background color: {bg_error}")
+                    
+        except Exception as format_error:
+            error_msg = f"Failed to apply formatting to title shape: {format_error}"
+            logging.error(error_msg)
+            doc.close(True)
+            raise HelperError(error_msg)
+
+        # Save and close
+        logging.info("Saving document...")
+        doc.store()
+        doc.close(True)
+        
+        # Build success message with applied formatting details
+        applied_formats = []
+        for key, value in format_options.items():
+            if value is not None:
+                applied_formats.append(f"{key}: {value}")
+        
+        success_msg = f"Successfully formatted title of slide {slide_index} in {file_path}. Applied: {', '.join(applied_formats)}"
+        logging.info(success_msg)
+        return success_msg
+        
+    except Exception as e:
+        error_msg = f"Error in format_slide_title: {str(e)}"
+        logging.error(error_msg)
+        logging.error(traceback.format_exc())
+        try:
+            if 'doc' in locals():
+                doc.close(True)
+        except:
+            pass
+        raise HelperError(error_msg)
+
+def insert_slide_image(file_path, slide_index, image_path, max_width=None, max_height=None, img_width_px=None, img_height_px=None, dpi=96):
+    """
+    Insert an image into a specific slide of an Impress presentation.
+    The image will be centered on the slide using proper positioning.
+    
+    Args:
+        file_path: Path to the presentation file.
+        slide_index: Index of the slide to insert the image into (0-based).
+        image_path: Path to the image file to insert.
+        max_width: Maximum width in 1/100mm (defaults to slide width minus margins).
+        max_height: Maximum height in 1/100mm (defaults to slide height minus margins).
+        img_width_px: Image width in pixels (for proper scaling calculation).
+        img_height_px: Image height in pixels (for proper scaling calculation).
+        dpi: Image DPI (for proper scaling calculation).
+    """
+    logging.info(f"insert_slide_image called with: file_path={file_path}, slide_index={slide_index}, image_path={image_path}")
+    
+    try:
+        doc = open_presentation(file_path)
+        draw_pages = doc.getDrawPages()
+        num_slides = draw_pages.getCount()
+        
+        # Validate slide index
+        if slide_index < 0 or slide_index >= num_slides:
+            doc.close(True)
+            error_msg = f"Slide index {slide_index} is out of range (presentation has {num_slides} slides)"
+            raise HelperError(error_msg)
+        
+        # Normalize and validate image path
+        image_path = normalize_path(image_path)
+        if not os.path.exists(image_path):
+            doc.close(True)
+            raise HelperError(f"Image not found: {image_path}")
+        
+        target_slide = draw_pages.getByIndex(slide_index)
+        logging.info(f"Inserting image into slide at index: {slide_index}")
+        
+        # Get slide dimensions (LibreOffice uses 1/100mm units internally)
+        slide_width = 25400  # Standard slide width in 1/100mm (254mm = 10 inches)
+        slide_height = 19050  # Standard slide height in 1/100mm (190.5mm = 7.5 inches)
+        
+        # Try to get actual slide dimensions from the slide master or page setup
+        try:
+            # Method 1: Try to get slide dimensions from the master page
+            if hasattr(target_slide, "getMasterPage"):
+                master_page = target_slide.getMasterPage()
+                if hasattr(master_page, "Width") and hasattr(master_page, "Height"):
+                    slide_width = master_page.Width
+                    slide_height = master_page.Height
+                    logging.info(f"Got slide dimensions from master page: {slide_width}x{slide_height} (1/100mm)")
+            
+            # Method 2: Try to get from the document's draw page size
+            elif hasattr(doc, "getDrawPageSize"):
+                page_size = doc.getDrawPageSize()
+                slide_width = page_size.Width
+                slide_height = page_size.Height
+                logging.info(f"Got slide dimensions from draw page size: {slide_width}x{slide_height} (1/100mm)")
+                
+        except Exception as size_error:
+            logging.warning(f"Could not get slide dimensions, using defaults: {size_error}")
+        
+        # Log the parameters we received
+        logging.info(f"Input parameters: max_width={max_width}, max_height={max_height}")
+        
+        # Set maximum dimensions with reasonable defaults (75% of slide for good visual balance)
+        if max_width is None:
+            max_width = int(slide_width * 0.75)
+        else:
+            # Ensure provided max_width doesn't exceed slide
+            max_width = min(max_width, int(slide_width * 0.9))
+            
+        if max_height is None:
+            max_height = int(slide_height * 0.75)
+        else:
+            # Ensure provided max_height doesn't exceed slide
+            max_height = min(max_height, int(slide_height * 0.9))
+        
+        logging.info(f"Slide dimensions: {slide_width}x{slide_height} (1/100mm)")
+        logging.info(f"Maximum image dimensions: {max_width}x{max_height} (1/100mm)")
+        
+        if img_width_px and img_height_px and dpi:
+            # Convert pixels to LibreOffice units (1/100mm)
+            mm_per_inch = 25.4
+            conversion_factor = (mm_per_inch * 100) / dpi  # 1/100mm per pixel
+            
+            original_width = int(img_width_px * conversion_factor)
+            original_height = int(img_height_px * conversion_factor)
+            
+            logging.info(f"Calculated image size: {original_width}x{original_height} (1/100mm) from {img_width_px}x{img_height_px} pixels at {dpi} DPI")
+        else:
+            # Fallback: use reasonable default size
+            logging.warning("Could not get image size/DPI, using fallback dimensions")
+            original_width = max_width // 2
+            original_height = max_height // 2
+            logging.info(f"Using fallback size: {original_width}x{original_height} (1/100mm)")
+        
+        try:
+            # Create a graphics shape to hold the image
+            image_shape = doc.createInstance("com.sun.star.drawing.GraphicObjectShape")
+            if not image_shape:
+                raise HelperError("Failed to create graphics shape")
+            
+            # Convert image path to file URL
+            image_url = uno.systemPathToFileUrl(image_path)
+            logging.info(f"Image URL: {image_url}")
+            
+            # Set the image URL
+            image_shape.GraphicURL = image_url
+            
+            # Calculate scaling to fit within maximum dimensions while preserving aspect ratio
+            width_scale = max_width / original_width
+            height_scale = max_height / original_height
+            scale_factor = min(width_scale, height_scale, 1.0)  # Don't scale up, only down
+            
+            new_width = int(original_width * scale_factor)
+            new_height = int(original_height * scale_factor)
+            
+            # Ensure minimum size (at least 10mm x 10mm)
+            min_size = 1000  # 10mm in 1/100mm
+            if new_width < min_size:
+                new_width = min_size
+            if new_height < min_size:
+                new_height = min_size
+            
+            logging.info(f"Width scale: {width_scale:.3f}, Height scale: {height_scale:.3f}")
+            logging.info(f"Final scale factor: {scale_factor:.3f}")
+            logging.info(f"Final image size: {new_width}x{new_height} (1/100mm)")
+            
+            # Set the size
+            new_size = Size(new_width, new_height)
+            image_shape.setSize(new_size)
+            
+            # PROPER CENTERING FOR DRAWING SHAPES
+            # Calculate center position relative to slide
+            slide_center_x = slide_width // 2
+            slide_center_y = slide_height // 2
+            
+            # Calculate top-left position to center the image
+            pos_x = slide_center_x - (new_width // 2)
+            pos_y = slide_center_y - (new_height // 2)
+            
+            logging.info(f"Slide center: ({slide_center_x}, {slide_center_y})")
+            logging.info(f"Image half-size: ({new_width // 2}, {new_height // 2})")
+            logging.info(f"Calculated centered position: ({pos_x}, {pos_y})")
+            
+            # Set the position using the Point structure
+            image_position = uno.createUnoStruct("com.sun.star.awt.Point")
+            image_position.X = pos_x
+            image_position.Y = pos_y
+            image_shape.setPosition(image_position)
+            
+            # Verify positioning
+            actual_position = image_shape.getPosition()
+            logging.info(f"Actual position after setting: ({actual_position.X}, {actual_position.Y})")
+            
+            # Add the shape to the slide
+            target_slide.add(image_shape)
+            
+            # Set additional properties for better image handling
+            try:
+                if hasattr(image_shape, "KeepAspectRatio"):
+                    image_shape.KeepAspectRatio = True
+                    logging.info("Set KeepAspectRatio property")
+                    
+                # For drawing shapes, we can also try to set transformation matrix for perfect centering
+                if hasattr(image_shape, "Transformation"):
+                    # The transformation matrix can be used for more precise positioning
+                    # This is an advanced feature but might help with centering
+                    logging.info("Shape has Transformation property available")
+                    
+            except Exception as prop_error:
+                logging.warning(f"Could not set additional image properties: {prop_error}")
+            
+            # Final verification of image bounds
+            final_position = image_shape.getPosition()
+            final_size = image_shape.getSize()
+            image_right = final_position.X + final_size.Width
+            image_bottom = final_position.Y + final_size.Height
+            
+            logging.info(f"Final verification:")
+            logging.info(f"Image position: ({final_position.X}, {final_position.Y})")
+            logging.info(f"Image size: {final_size.Width}x{final_size.Height}")
+            logging.info(f"Image bounds: X({final_position.X} to {image_right}), Y({final_position.Y} to {image_bottom})")
+            logging.info(f"Slide bounds: X(0 to {slide_width}), Y(0 to {slide_height})")
+            
+            # Check if image is properly contained within slide
+            if (final_position.X >= 0 and final_position.Y >= 0 and 
+                image_right <= slide_width and image_bottom <= slide_height):
+                logging.info("Image is properly contained within slide boundaries")
+            else:
+                logging.warning("Image may extend beyond slide boundaries")
+            
+        except Exception as image_error:
+            error_msg = f"Failed to create and configure image shape: {image_error}"
+            logging.error(error_msg)
+            doc.close(True)
+            raise HelperError(error_msg)
+        
+        # Save and close
+        logging.info("Saving document...")
+        doc.store()
+        doc.close(True)
+        
+        success_msg = f"Successfully inserted image '{os.path.basename(image_path)}' into slide {slide_index} of {file_path}"
+        success_msg += f" (resized to {new_width//100}x{new_height//100}mm, centered on slide)"
+        logging.info(success_msg)
+        return success_msg
+        
+    except Exception as e:
+        error_msg = f"Error in insert_slide_image: {str(e)}"
+        logging.error(error_msg)
+        logging.error(traceback.format_exc())
+        try:
+            if 'doc' in locals():
+                doc.close(True)
+        except:
+            pass
+        raise HelperError(error_msg)
+
+# Command handler mapping 
+COMMAND_HANDLERS = {
+    # Document creation and management
+    "create_document": lambda cmd: create_document(
+        cmd.get("doc_type", "text"), 
+        cmd.get("file_path", ""),
+        cmd.get("metadata", None)
+    ),
+    "open_text_document": lambda cmd: extract_text(cmd.get("file_path", "")),
+    "get_document_properties": lambda cmd: get_document_properties(cmd.get("file_path", "")),
+    "list_documents": lambda cmd: list_documents(cmd.get("directory", "")),
+    "copy_document": lambda cmd: copy_document(
+        cmd.get("source_path", ""),
+        cmd.get("target_path", "")
+    ),
+    
+    # Impress presentation creation and management
+    "add_slide": lambda cmd: add_slide(
+        cmd.get("file_path", ""),
+        cmd.get("slide_index", None),
+        cmd.get("title", None),
+        cmd.get("content", None)
+    ),
+    "edit_slide_content": lambda cmd: edit_slide_content(
+        cmd.get("file_path", ""),
+        cmd.get("slide_index", 0),
+        cmd.get("new_content", "")
+    ),
+    "edit_slide_title": lambda cmd: edit_slide_title(
+        cmd.get("file_path", ""),
+        cmd.get("slide_index", 0),
+        cmd.get("new_title", "")
+    ),
+    "delete_slide": lambda cmd: delete_slide(
+        cmd.get("file_path", ""),
+        cmd.get("slide_index", 0)
+    ),
+    "extract_impress_text": lambda cmd: extract_impress_text(cmd.get("file_path", "")),
+    "apply_presentation_template": lambda cmd: apply_presentation_template(
+        cmd.get("file_path", ""),
+        cmd.get("template_name", "")
+    ),
+    "format_slide_content": lambda cmd: format_slide_content(
+        cmd.get("file_path", ""),
+        cmd.get("slide_index", 0),
+        cmd.get("format_options", {})
+    ),
+    "format_slide_title": lambda cmd: format_slide_title(
+        cmd.get("file_path", ""),
+        cmd.get("slide_index", 0),
+        cmd.get("format_options", {})
+    ),
+    "insert_slide_image": lambda cmd: insert_slide_image(
+    cmd.get("file_path", ""),
+    cmd.get("slide_index", 0),
+    cmd.get("image_path", ""),
+    cmd.get("max_width", None),
+    cmd.get("max_height", None),
+    cmd.get("img_width_px", None),
+    cmd.get("img_height_px", None),
+    cmd.get("dpi", 96)
+    ),
+    # Writer content creation
+    "add_text": lambda cmd: add_text(
+        cmd.get("file_path", ""), 
+        cmd.get("text", ""), 
+        cmd.get("position", "end")
+    ),
+    "add_heading": lambda cmd: add_heading(
+        cmd.get("file_path", ""),
+        cmd.get("text", ""),
+        cmd.get("level", 1)
+    ),
+    "add_paragraph": lambda cmd: add_paragraph(
+        cmd.get("file_path", ""),
+        cmd.get("text", ""),
+        cmd.get("style", None),
+        cmd.get("alignment", None)
+    ),
+    "add_table": lambda cmd: add_table(
+        cmd.get("file_path", ""),
+        cmd.get("rows", 2),
+        cmd.get("columns", 2),
+        cmd.get("data", None),
+        cmd.get("header_row", False)
+    ),
+    "insert_image": lambda cmd: insert_image(
+        cmd.get("file_path", ""),
+        cmd.get("image_path", ""),
+        cmd.get("width", None),
+        cmd.get("height", None)
+    ),
+    "insert_page_break": lambda cmd: insert_page_break(cmd.get("file_path", "")),
+    
+    # Text formatting
+    "format_text": lambda cmd: format_text(
+        cmd.get("file_path", ""),
+        cmd.get("text_to_find", ""),
+        {
+            "bold": cmd.get("bold", False),
+            "italic": cmd.get("italic", False),
+            "underline": cmd.get("underline", False),
+            "color": cmd.get("color", None),
+            "font": cmd.get("font", None),
+            "size": cmd.get("size", None)
+        }
+    ),
+    "search_replace_text": lambda cmd: search_replace_text(
+        cmd.get("file_path", ""),
+        cmd.get("search_text", ""),
+        cmd.get("replace_text", "")
+    ),
+    "delete_text": lambda cmd: delete_text(
+        cmd.get("file_path", ""),
+        cmd.get("text_to_delete", "")
+    ),
+    
+    # Table formatting
+    "format_table": lambda cmd: format_table(
+        cmd.get("file_path", ""),
+        cmd.get("table_index", 0),
+        cmd.get("format_options", {})
+    ),
+    
+    # Advanced document manipulation
+    "create_custom_style": lambda cmd: create_custom_style(
+        cmd.get("file_path", ""),
+        cmd.get("style_name", "CustomStyle"),
+        cmd.get("style_properties", {})
+    ),
+    "delete_paragraph": lambda cmd: delete_paragraph(
+        cmd.get("file_path", ""),
+        cmd.get("paragraph_index", 0)
+    ),
+    "apply_document_style": lambda cmd: apply_document_style(
+        cmd.get("file_path", ""),
+        cmd.get("style", {})
+    ),
+    
+    # System commands
+    "ping": lambda cmd: "LibreOffice helper is running"
+}
+
 def handle_command(command):
-    """Process commands from the MCP server."""
+    """Process commands from the MCP server using dictionary dispatch."""
     try:
         logging.info("handle_command called")
         action = command.get("action", "")
         logging.info(f"action: {action}")
         
-        # Document creation and management
-        if action == "create_document":
-            return create_document(
-                command.get("doc_type", "text"), 
-                command.get("file_path", ""),
-                command.get("metadata", None)
-            )
-        
-        elif action == "open_text_document":
-            return extract_text(command.get("file_path", ""))
-        
-        elif action == "get_document_properties":
-            return get_document_properties(command.get("file_path", ""))
-        
-        elif action == "list_documents":
-            return list_documents(command.get("directory", ""))
-        
-        elif action == "copy_document":
-            return copy_document(
-                command.get("source_path", ""),
-                command.get("target_path", "")
-            )
-        
-        # Impress presentation creation and management
-
-        elif action == "add_slide":
-            return add_slide(
-                command.get("file_path", ""),
-                command.get("slide_index", None),
-                command.get("title", None),
-                command.get("content", None),
-            )
-
-        elif action == "delete_slide":
-            return delete_slide(
-                command.get("file_path", ""),
-                command.get("slide_index", 0)
-            )
-
-        elif action == "apply_presentation_template":
-            return apply_presentation_template(
-                command.get("file_path", ""),
-                command.get("template_name", "")
-            )
-
-        # Writer content creation
-        elif action == "add_text":
-            return add_text(
-                command.get("file_path", ""), 
-                command.get("text", ""), 
-                command.get("position", "end")
-            )
-        
-        elif action == "add_heading":
-            return add_heading(
-                command.get("file_path", ""),
-                command.get("text", ""),
-                command.get("level", 1)
-            )
-        
-        elif action == "add_paragraph":
-            return add_paragraph(
-                command.get("file_path", ""),
-                command.get("text", ""),
-                command.get("style", None),
-                command.get("alignment", None)
-            )
-        
-        elif action == "add_table":
-            return add_table(
-                command.get("file_path", ""),
-                command.get("rows", 2),
-                command.get("columns", 2),
-                command.get("data", None),
-                command.get("header_row", False)
-            )
-        
-        elif action == "insert_image":
-            return insert_image(
-                command.get("file_path", ""),
-                command.get("image_path", ""),
-                command.get("width", None),
-                command.get("height", None)
-            )
-        
-        elif action == "insert_page_break":
-            return insert_page_break(command.get("file_path", ""))
-        
-        # Text formatting
-        elif action == "format_text":
-            return format_text(
-                command.get("file_path", ""),  # Use file_path consistently (not filepath)
-                command.get("text_to_find", ""),
-                {  # Single format_options dictionary
-                    "bold": command.get("bold", False),
-                    "italic": command.get("italic", False),
-                    "underline": command.get("underline", False),
-                    "color": command.get("color", None),
-                    "font": command.get("font", None),
-                    "size": command.get("size", None)
-                }
-            )
-        
-        elif action == "search_replace_text":
-            return search_replace_text(
-                command.get("file_path", ""),
-                command.get("search_text", ""),
-                command.get("replace_text", "")
-            )
-        
-        elif action == "delete_text":
-            return delete_text(
-                command.get("file_path", ""),
-                command.get("text_to_delete", "")
-            )
-        
-        # Table formatting
-        elif action == "format_table":
-            return format_table(
-                command.get("file_path", ""),
-                command.get("table_index", 0),
-                command.get("format_options", {})
-            )
-        
-        # Advanced document manipulation
-        elif action == "create_custom_style":
-            return create_custom_style(
-                command.get("file_path", ""),
-                command.get("style_name", "CustomStyle"),
-                command.get("style_properties", {})
-            )
-        
-        elif action == "delete_paragraph":
-            return delete_paragraph(
-                command.get("file_path", ""),
-                command.get("paragraph_index", 0)
-            )
-        
-        elif action == "apply_document_style":
-            return apply_document_style(
-                command.get("file_path", ""),
-                command.get("style", {})
-            )
-        
-        elif action == "ping":
-            return "LibreOffice helper is running"
-            
+        # Look up the handler function
+        handler = COMMAND_HANDLERS.get(action)
+        if handler:
+            return handler(command)
         else:
             return f"Unknown action: {action}"
             
@@ -2217,7 +3257,6 @@ def handle_command(command):
         print(f"Error handling command: {str(e)}")
         print(traceback.format_exc())
         raise
-
 
 # Main server loop
 print("Starting command processing loop...")

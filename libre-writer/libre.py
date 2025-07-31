@@ -40,6 +40,38 @@ impress_extensions = (
             ".pom",
         )
 
+def get_image_size(image_path):
+    """Get image size and DPI using PIL/Pillow."""
+    try:
+        from PIL import Image
+        with Image.open(image_path) as img:
+            width, height = img.size
+            
+            # Get DPI information
+            dpi = 96  # Default DPI
+            try:
+                if hasattr(img, 'info') and 'dpi' in img.info:
+                    dpi_info = img.info['dpi']
+                    if isinstance(dpi_info, tuple):
+                        dpi = dpi_info[0]  # Use horizontal DPI
+                    else:
+                        dpi = dpi_info
+                    logging.info(f"Found image DPI: {dpi}")
+                else:
+                    logging.info(f"No DPI info found in image, using default: {dpi}")
+            except Exception as dpi_error:
+                logging.warning(f"Could not extract DPI info: {dpi_error}")
+                dpi = 96  # Fallback to default
+            
+            return width, height, dpi  # Returns (width_px, height_px, dpi)
+            
+    except ImportError:
+        logging.warning("PIL/Pillow not available")
+        return None, None, None
+    except Exception as e:
+        logging.warning(f"Could not get image size using PIL: {e}")
+        return None, None, None
+
 
 # Helper function for directory management
 def ensure_directory_exists(file_path: str) -> None:
@@ -907,6 +939,74 @@ async def add_slide(file_path: str, slide_index: Optional[int] = None, title: Op
         return f"Error: {response['message']}"
 
 @mcp.tool()
+async def edit_slide_content(file_path: str, slide_index: int, new_content: str) -> str:
+    """
+    Edit the main text content of a specific slide in an Impress presentation.
+    
+    Args:
+        file_path: Path to the presentation file
+        slide_index: Index of the slide to edit (0-based, where 0 is the first slide)
+        new_content: New text content to set in the main content area
+    """
+    try:
+        # Validate file extension
+        if not file_path.lower().endswith(impress_extensions):
+            return "Error: file_path is not a presentation file."
+        
+        # Normalize path
+        file_path = normalize_path(file_path)
+        
+        # Send command to helper
+        response = call_libreoffice_helper({
+            "action": "edit_slide_content",
+            "file_path": file_path,
+            "slide_index": slide_index,
+            "new_content": new_content
+        })
+        
+        if response["status"] == "success":
+            return response["message"]
+        else:
+            return f"Error: {response['message']}"
+    except Exception as e:
+        print(f"Error in edit_slide_content: {str(e)}")
+        return f"Failed to edit slide content: {str(e)}"
+
+@mcp.tool()
+async def edit_slide_title(file_path: str, slide_index: int, new_title: str) -> str:
+    """
+    Edit the title of a specific slide in an Impress presentation.
+    
+    Args:
+        file_path: Path to the presentation file
+        slide_index: Index of the slide to edit (0-based, where 0 is the first slide)
+        new_title: New title text to set in the title area
+    """
+    try:
+        # Validate file extension
+        if not file_path.lower().endswith(impress_extensions):
+            return "Error: file_path is not a presentation file."
+        
+        # Normalize path
+        file_path = normalize_path(file_path)
+        
+        # Send command to helper
+        response = call_libreoffice_helper({
+            "action": "edit_slide_title",
+            "file_path": file_path,
+            "slide_index": slide_index,
+            "new_title": new_title
+        })
+        
+        if response["status"] == "success":
+            return response["message"]
+        else:
+            return f"Error: {response['message']}"
+    except Exception as e:
+        print(f"Error in edit_slide_title: {str(e)}")
+        return f"Failed to edit slide title: {str(e)}"
+
+@mcp.tool()
 async def delete_slide(file_path: str, slide_index: int) -> str:
     """
     Delete a slide from an Impress presentation.
@@ -970,6 +1070,211 @@ async def apply_presentation_template(file_path: str, template_name: str) -> str
         print(f"Error in apply_presentation_template: {str(e)}")
         return f"Failed to apply presentation template: {str(e)}"
 
+@mcp.tool()
+async def format_slide_content(
+    file_path: str,
+    slide_index: int,
+    font_name: Optional[str] = None,
+    font_size: Optional[float] = None,
+    bold: Optional[bool] = None,
+    italic: Optional[bool] = None,
+    underline: Optional[bool] = None,
+    color: Optional[str] = None,
+    alignment: Optional[str] = None,
+    line_spacing: Optional[float] = None,
+    background_color: Optional[str] = None
+) -> str:
+    """
+    Format the content text of a specific slide in an Impress presentation.
+    
+    Args:
+        file_path: Path to the presentation file
+        slide_index: Index of the slide to format (0-based, where 0 is the first slide)
+        font_name: Font family name (e.g., "Arial", "Times New Roman")
+        font_size: Font size in points (e.g., 18, 24)
+        bold: Apply bold formatting (True/False)
+        italic: Apply italic formatting (True/False)
+        underline: Apply underline formatting (True/False)
+        color: Text color as hex string (e.g., "#FF0000") or RGB integer
+        alignment: Text alignment ("left", "center", "right", "justify")
+        line_spacing: Line spacing multiplier (e.g., 1.5, 2.0)
+        background_color: Background color as hex string (e.g., "#F0F0F0") or RGB integer
+    """
+    try:
+        # Validate file extension
+        if not file_path.lower().endswith(impress_extensions):
+            return "Error: file_path is not a presentation file."
+        
+        # Normalize path
+        file_path = normalize_path(file_path)
+        
+        # Prepare format options
+        format_options = {}
+        
+        if font_name is not None:
+            format_options["font_name"] = font_name
+        if font_size is not None:
+            format_options["font_size"] = font_size
+        if bold is not None:
+            format_options["bold"] = bold
+        if italic is not None:
+            format_options["italic"] = italic
+        if underline is not None:
+            format_options["underline"] = underline
+        if color is not None:
+            format_options["color"] = color
+        if alignment is not None:
+            format_options["alignment"] = alignment
+        if line_spacing is not None:
+            format_options["line_spacing"] = line_spacing
+        if background_color is not None:
+            format_options["background_color"] = background_color
+        
+        # Send command to helper
+        response = call_libreoffice_helper({
+            "action": "format_slide_content",
+            "file_path": file_path,
+            "slide_index": slide_index,
+            "format_options": format_options
+        })
+        
+        if response["status"] == "success":
+            return response["message"]
+        else:
+            return f"Error: {response['message']}"
+    except Exception as e:
+        print(f"Error in format_slide_content: {str(e)}")
+        return f"Failed to format slide content: {str(e)}"
+
+@mcp.tool()
+async def format_slide_title(
+    file_path: str,
+    slide_index: int,
+    font_name: Optional[str] = None,
+    font_size: Optional[float] = None,
+    bold: Optional[bool] = None,
+    italic: Optional[bool] = None,
+    underline: Optional[bool] = None,
+    color: Optional[str] = None,
+    alignment: Optional[str] = None,
+    line_spacing: Optional[float] = None,
+    background_color: Optional[str] = None
+) -> str:
+    """
+    Format the title text of a specific slide in an Impress presentation.
+    
+    Args:
+        file_path: Path to the presentation file
+        slide_index: Index of the slide to format (0-based, where 0 is the first slide)
+        font_name: Font family name (e.g., "Arial", "Times New Roman")
+        font_size: Font size in points (e.g., 28, 36)
+        bold: Apply bold formatting (True/False)
+        italic: Apply italic formatting (True/False)
+        underline: Apply underline formatting (True/False)
+        color: Text color as hex string (e.g., "#FF0000") or RGB integer
+        alignment: Text alignment ("left", "center", "right", "justify")
+        line_spacing: Line spacing multiplier (e.g., 1.5, 2.0)
+        background_color: Background color as hex string (e.g., "#F0F0F0") or RGB integer
+    """
+    try:
+        # Validate file extension
+        if not file_path.lower().endswith(impress_extensions):
+            return "Error: file_path is not a presentation file."
+        
+        # Normalize path
+        file_path = normalize_path(file_path)
+        
+        # Prepare format options
+        format_options = {}
+        
+        if font_name is not None:
+            format_options["font_name"] = font_name
+        if font_size is not None:
+            format_options["font_size"] = font_size
+        if bold is not None:
+            format_options["bold"] = bold
+        if italic is not None:
+            format_options["italic"] = italic
+        if underline is not None:
+            format_options["underline"] = underline
+        if color is not None:
+            format_options["color"] = color
+        if alignment is not None:
+            format_options["alignment"] = alignment
+        if line_spacing is not None:
+            format_options["line_spacing"] = line_spacing
+        if background_color is not None:
+            format_options["background_color"] = background_color
+        
+        # Send command to helper
+        response = call_libreoffice_helper({
+            "action": "format_slide_title",
+            "file_path": file_path,
+            "slide_index": slide_index,
+            "format_options": format_options
+        })
+        
+        if response["status"] == "success":
+            return response["message"]
+        else:
+            return f"Error: {response['message']}"
+    except Exception as e:
+        print(f"Error in format_slide_title: {str(e)}")
+        return f"Failed to format slide title: {str(e)}"
+
+@mcp.tool()
+async def insert_slide_image(
+    file_path: str, 
+    slide_index: int, 
+    image_path: str, 
+    max_width: Optional[int] = None, 
+    max_height: Optional[int] = None
+) -> str:
+    """
+    Insert an image into a specific slide of an Impress presentation.
+    The image will be centered on the slide and resized if necessary to fit.
+    
+    Args:
+        file_path: Path to the presentation file
+        slide_index: Index of the slide to insert the image into (0-based, where 0 is the first slide)
+        image_path: Path to the image file to insert
+        max_width: Maximum width in 1/100mm units (defaults to slide width minus margins)
+        max_height: Maximum height in 1/100mm units (defaults to slide height minus margins)
+    """
+    try:
+        
+        # Validate file extension
+        if not file_path.lower().endswith(impress_extensions):
+            return "Error: file_path is not a presentation file."
+        
+        # Get image dimensions and DPI
+        img_width_px, img_height_px, dpi = get_image_size(image_path)
+
+        # Normalize paths
+        file_path = normalize_path(file_path)
+        image_path = normalize_path(image_path)
+        
+        # Send command to helper
+        response = call_libreoffice_helper({
+            "action": "insert_slide_image",
+            "file_path": file_path,
+            "slide_index": slide_index,
+            "image_path": image_path,
+            "max_width": max_width,
+            "max_height": max_height,
+            "img_width_px": img_width_px,
+            "img_height_px": img_height_px,
+            "dpi": dpi
+        })
+        
+        if response["status"] == "success":
+            return response["message"]
+        else:
+            return f"Error: {response['message']}"
+    except Exception as e:
+        print(f"Error in insert_slide_image: {str(e)}")
+        return f"Failed to insert slide image: {str(e)}"
+    
 # Resource for document access
 @mcp.resource("libreoffice:{path}")
 async def document_resource(path: str) -> str:

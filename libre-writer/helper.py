@@ -472,56 +472,35 @@ def format_text(file_path, text_to_find, format_options):
     with managed_document(file_path) as doc:
         if hasattr(doc, "getText"):
             text = doc.getText()
-            document_text = text.getString()
-            
-            # Check if text exists in document
-            if text_to_find not in document_text:
-                return f"Text '{text_to_find}' not found in document"
-            
-            # Manual cursor approach - more reliable
-            cursor = text.createTextCursor()
-            cursor.gotoStart(False)
-            
+            search = doc.createSearchDescriptor()
+            search.SearchString = text_to_find
+            search.SearchCaseSensitive = False
+
+            found = doc.findFirst(search)
             found_count = 0
-            search_pos = document_text.find(text_to_find)
-            
-            while search_pos >= 0:
+
+            while found:
                 found_count += 1
-                
-                # Navigate to the position
-                cursor.gotoStart(False)
-                cursor.goRight(search_pos, False)
-                cursor.goRight(len(text_to_find), True)  # Select the text
-                
                 # Apply formatting
                 if format_options.get("bold"):
-                    cursor.CharWeight = 150
-                
+                    found.CharWeight = 150
                 if format_options.get("italic"):
-                    cursor.CharPosture = 2
-                
+                    found.CharPosture = 2
                 if format_options.get("underline"):
-                    cursor.CharUnderline = 1
-                
+                    found.CharUnderline = 1
                 if format_options.get("color"):
-                    try:
-                        color = format_options["color"]
-                        if isinstance(color, str) and color.startswith("#"):
-                            color = int(color[1:], 16)
-                        cursor.CharColor = color
-                    except Exception as e:
-                        raise HelperError(f"Color error: {e}")
-                
+                    color = format_options["color"]
+                    if isinstance(color, str) and color.startswith("#"):
+                        color = int(color[1:], 16)
+                    found.CharColor = color
                 if format_options.get("font"):
-                    cursor.CharFontName = format_options["font"]
-                
+                    found.CharFontName = format_options["font"]
                 if format_options.get("size"):
-                    cursor.CharHeight = float(format_options["size"])
-                
+                    found.CharHeight = float(format_options["size"])
+
                 # Find next occurrence
-                search_pos = document_text.find(text_to_find, search_pos + len(text_to_find))
-            
-            # Save document
+                found = doc.findNext(found.End, search)
+
             doc.store()
             return f"Formatted {found_count} occurrences of '{text_to_find}' in {file_path}"
         else:
@@ -2735,6 +2714,11 @@ def safe_execute(operation_name, handler_func, command):
         result = handler_func(command)
         logging.info(f"Successfully completed {operation_name}")
         return result
+    except HelperError as e:
+        # Pass through HelperError messages directly
+        logging.error(str(e))
+        logging.error(traceback.format_exc())
+        raise
     except Exception as e:
         error_msg = f"Error in {operation_name}: {str(e)}"
         logging.error(error_msg)
@@ -2966,14 +2950,19 @@ try:
             except:
                 pass
         except Exception as e:
-            print(f"Error handling client: {str(e)}")
-            logging.error(f"Error handling client: {str(e)}")
-            print(traceback.format_exc())
-            logging.error(traceback.format_exc())
+            error_message = str(e)
+            try:
+                print(f"Error handling client: {error_message}")
+                logging.error(f"Error handling client: {error_message}")
+                print(traceback.format_exc())
+                logging.error(traceback.format_exc())
+            except Exception as print_exc:
+                # If printing/logging fails, still keep the original error_message
+                pass
             try:
                 response = {
                     "status": "error",
-                    "message": f"Server error: {str(e)}"
+                    "message": error_message
                 }
                 client_socket.send(json.dumps(response).encode('utf-8'))
             except:

@@ -541,7 +541,19 @@ async def insert_page_break(file_path: str) -> str:
 async def format_text(file_path: str, text_to_find: str, bold: bool = False, italic: bool = False,
                      underline: bool = False, color: Optional[str] = None,
                      font: Optional[str] = None, size: Optional[float] = None) -> str:
-    """Format specific text in a document."""
+    """
+    Format specific text in a document.
+
+    Args:
+        file_path: Path to the document to modify.
+        text_to_find: The exact text string to search for and format.
+        bold: If True, apply bold formatting to the found text.
+        italic: If True, apply italic formatting to the found text.
+        underline: If True, apply underline formatting to the found text.
+        color: Optional text color in hex format (e.g., "#FF0000" for red).
+        font: Optional font family name to apply (e.g., "Arial").
+        size: Optional font size in points (e.g., 12.0).
+    """
     try:
         # Normalize path
         file_path = normalize_path(file_path)
@@ -631,7 +643,7 @@ async def delete_text(file_path: str, text_to_delete: str) -> str:
 async def format_table(file_path: str, table_index: int = 0, border_width: Optional[int] = None, 
                       background_color: Optional[str] = None, header_row: bool = False) -> str:
     """
-    Format a table with borders, shading, etc.
+    Format a table with borders, background color, and a header row
     
     Args:
         file_path: Path to the document
@@ -739,7 +751,8 @@ async def create_custom_style(file_path: str, style_name: str, font_name: Option
 @mcp.tool()
 async def delete_paragraph(file_path: str, paragraph_index: int) -> str:
     """
-    Delete a paragraph at the given index.
+    Delete a paragraph at the given index. 
+    If the user has not specified an index, you may need to call the read_text_document function first to find the correct index.
     
     Args:
         file_path: Path to the document

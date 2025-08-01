@@ -685,68 +685,69 @@ async def format_table(file_path: str, table_index: int = 0, border_width: Optio
 
 # Advanced Document Manipulation Tools
 
-@mcp.tool()
-async def create_custom_style(file_path: str, style_name: str, font_name: Optional[str] = None, 
-                             font_size: Optional[float] = None, bold: bool = False, italic: bool = False,
-                             underline: bool = False, color: Optional[str] = None, 
-                             alignment: Optional[str] = None) -> str:
-    """
-    Create a custom paragraph style.
+# DISABLED - not currently functional
+# @mcp.tool()
+# async def create_custom_style(file_path: str, style_name: str, font_name: Optional[str] = None, 
+#                              font_size: Optional[float] = None, bold: bool = False, italic: bool = False,
+#                              underline: bool = False, color: Optional[str] = None, 
+#                              alignment: Optional[str] = None) -> str:
+#     """
+#     Create a custom paragraph style.
     
-    Args:
-        file_path: Path to the document
-        style_name: Name for the style
-        font_name: Font name
-        font_size: Font size in points
-        bold: Apply bold formatting
-        italic: Apply italic formatting
-        underline: Apply underline formatting
-        color: Text color (hex format, e.g., "#000000")
-        alignment: Paragraph alignment (left, center, right, justify)
-    """
-    try:
-        # Normalize path
-        file_path = normalize_path(file_path)
+#     Args:
+#         file_path: Path to the document
+#         style_name: Name for the style
+#         font_name: Font name
+#         font_size: Font size in points
+#         bold: Apply bold formatting
+#         italic: Apply italic formatting
+#         underline: Apply underline formatting
+#         color: Text color (hex format, e.g., "#000000")
+#         alignment: Paragraph alignment (left, center, right, justify)
+#     """
+#     try:
+#         # Normalize path
+#         file_path = normalize_path(file_path)
         
-        # Prepare style properties
-        style_properties = {}
+#         # Prepare style properties
+#         style_properties = {}
         
-        if font_name:
-            style_properties["font_name"] = font_name
+#         if font_name:
+#             style_properties["font_name"] = font_name
         
-        if font_size is not None:
-            style_properties["font_size"] = font_size
+#         if font_size is not None:
+#             style_properties["font_size"] = font_size
         
-        if bold:
-            style_properties["bold"] = True
+#         if bold:
+#             style_properties["bold"] = True
         
-        if italic:
-            style_properties["italic"] = True
+#         if italic:
+#             style_properties["italic"] = True
         
-        if underline:
-            style_properties["underline"] = True
+#         if underline:
+#             style_properties["underline"] = True
         
-        if color:
-            style_properties["color"] = color
+#         if color:
+#             style_properties["color"] = color
         
-        if alignment:
-            style_properties["alignment"] = alignment
+#         if alignment:
+#             style_properties["alignment"] = alignment
         
-        # Send command to helper
-        response = call_libreoffice_helper({
-            "action": "create_custom_style",
-            "file_path": file_path,
-            "style_name": style_name,
-            "style_properties": style_properties
-        })
+#         # Send command to helper
+#         response = call_libreoffice_helper({
+#             "action": "create_custom_style",
+#             "file_path": file_path,
+#             "style_name": style_name,
+#             "style_properties": style_properties
+#         })
         
-        if response["status"] == "success":
-            return response["message"]
-        else:
-            return f"Error: {response['message']}"
-    except Exception as e:
-        print(f"Error in create_custom_style: {str(e)}")
-        return f"Failed to create custom style: {str(e)}"
+#         if response["status"] == "success":
+#             return response["message"]
+#         else:
+#             return f"Error: {response['message']}"
+#     except Exception as e:
+#         print(f"Error in create_custom_style: {str(e)}")
+#         return f"Failed to create custom style: {str(e)}"
 
 @mcp.tool()
 async def delete_paragraph(file_path: str, paragraph_index: int) -> str:
@@ -924,32 +925,46 @@ async def read_presentation(file_path: str) -> str:
         return f"Failed to open presentation: {str(e)}"
 
 @mcp.tool()
-async def add_slide(file_path: str, slide_index: Optional[int] = None, title: Optional[str] = None, content: Optional[str] = None, layout = 'TitleContent') -> str:
+async def add_slide(
+    file_path: str,
+    slide_index: Optional[int] = None,
+    title: Optional[str] = None,
+    content: Optional[str] = None,
+) -> str:
     """
     Add a new slide to an Impress presentation using the built-in layout.
+
     Args:
         file_path: Path to the presentation file.
-        slide_index: Index to insert the slide (None = append at end).
-        title: Optional title text for the slide.
-        content: Optional content text for the slide.
+        slide_index: Index at which to insert the new slide (0-based). If None, the slide is appended at the end.
+        title: Optional title text for the new slide.
+        content: Optional content text for the new slide.
     """
+    try:
+        if not file_path.endswith(impress_extensions):
+            return "Error: file_path is not a presentation."
 
-    if not file_path.endswith(impress_extensions):
-        return "Error: file_path is not a presentation."
+        file_path = normalize_path(file_path)
 
-    file_path = normalize_path(file_path)
-    response = call_libreoffice_helper({
-        "action": "add_slide",
-        "file_path": file_path,
-        "slide_index": slide_index,
-        "title": title,
-        "content": content,
-        "layout": layout
-    })
-    if response["status"] == "success":
-        return response["message"]
-    else:
-        return f"Error: {response['message']}"
+        response = call_libreoffice_helper({
+            "action": "add_slide",
+            "file_path": file_path,
+            "slide_index": slide_index,
+            "title": title,
+            "content": content
+        })
+
+        print(f"add_slide: response={response}")
+
+        if not response:
+            return "Error: No response from helper."
+        if response.get("status") == "success":
+            return response.get("message", "")
+        else:
+            return f"Error: {response.get('message', 'Unknown error')}"
+    except Exception as e:
+        print(f"Error in add_slide: {str(e)}")
+        return f"Failed to add slide: {str(e)}"
 
 @mcp.tool()
 async def edit_slide_content(file_path: str, slide_index: int, new_content: str) -> str:

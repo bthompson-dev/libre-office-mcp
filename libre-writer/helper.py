@@ -131,45 +131,36 @@ def create_property_value(name, value):
     prop.Value = value
     return prop
 
-def open_document(file_path, read_only=False):
-    """Open a LibreOffice document and return it."""
+def open_document(file_path, read_only=False, retries=3, delay=0.5):
     print(f"Opening document: {file_path} (read_only: {read_only})")
-    
-    # Normalize path
     normalized_path = normalize_path(file_path)
-    
-    # For URLs, don't check file existence with os.path.exists
     if not normalized_path.startswith(('file://', 'http://', 'https://', 'ftp://')):
-        # It's a local path, check if it exists
         if not os.path.exists(normalized_path):
             raise HelperError(f"Document not found: {normalized_path}")
-        # Convert local path to file URL
         file_url = uno.systemPathToFileUrl(normalized_path)
     else:
-        # It's already a URL
         file_url = normalized_path
 
-    # Get desktop
     desktop = get_uno_desktop()
     if not desktop:
         raise HelperError("Failed to connect to LibreOffice desktop")
-    
-    try:
-        # Open document
-        props = [
-            create_property_value("Hidden", True),
-            create_property_value("ReadOnly", read_only)
-        ]
-        
-        doc = desktop.loadComponentFromURL(file_url, "_blank", 0, tuple(props))
-        if not doc:
-            raise HelperError(f"Failed to load document: {file_path}")
-            
-        return doc, "Success"
-    except Exception as e:
-        print(f"Error opening document: {str(e)}")
-        print(traceback.format_exc())
-        raise
+
+    last_exception = None
+    for attempt in range(retries):
+        try:
+            props = [
+                create_property_value("Hidden", True),
+                create_property_value("ReadOnly", read_only)
+            ]
+            doc = desktop.loadComponentFromURL(file_url, "_blank", 0, tuple(props))
+            if not doc:
+                raise HelperError(f"Failed to load document: {file_path}")
+            return doc, "Success"
+        except Exception as e:
+            last_exception = e
+            print(f"Attempt {attempt+1} failed: {e}")
+            time.sleep(delay)
+    raise last_exception
 
 # General functions
 
@@ -739,53 +730,54 @@ def insert_page_break(file_path):
             doc.store()
             return f"Page break inserted in {file_path}"
 
-def create_custom_style(file_path, style_name, style_properties):
-    """Create a custom paragraph style."""
-    with managed_document(file_path) as doc:
-        # Check if document supports styles
-        if not hasattr(doc, "StyleFamilies"):
-            raise HelperError("Document does not support custom styles")
+# DISABLED - not currently functioning
+# def create_custom_style(file_path, style_name, style_properties):
+#     """Create a custom paragraph style."""
+#     with managed_document(file_path) as doc:
+#         # Check if document supports styles
+#         if not hasattr(doc, "StyleFamilies"):
+#             raise HelperError("Document does not support custom styles")
         
-        # Get paragraph styles
-        para_styles = doc.StyleFamilies.getByName("ParagraphStyles")
+#         # Get paragraph styles
+#         para_styles = doc.StyleFamilies.getByName("ParagraphStyles")
         
-        # Create new style or modify existing style
-        style = None
-        if para_styles.hasByName(style_name):
-            style = para_styles.getByName(style_name)
-        else:
-            style = doc.createInstance("com.sun.star.style.ParagraphStyle")
-            para_styles.insertByName(style_name, style)
+#         # Create new style or modify existing style
+#         style = None
+#         if para_styles.hasByName(style_name):
+#             style = para_styles.getByName(style_name)
+#         else:
+#             style = doc.createInstance("com.sun.star.style.ParagraphStyle")
+#             para_styles.insertByName(style_name, style)
         
-        # Apply style properties
-        for prop, value in style_properties.items():
-            if prop == "font_name":
-                style.CharFontName = value
-            elif prop == "font_size":
-                style.CharHeight = float(value)
-            elif prop == "bold":
-                style.CharWeight = 150 if value else 100
-            elif prop == "italic":
-                style.CharPosture = uno.getConstantByName("com.sun.star.awt.FontSlant.ITALIC") if value else uno.getConstantByName("com.sun.star.awt.FontSlant.NONE")
-            elif prop == "underline":
-                style.CharUnderline = 1 if value else 0
-            elif prop == "color":
-                if isinstance(value, str) and value.startswith("#"):
-                    value = int(value[1:], 16)
-                style.CharColor = value
-            elif prop == "alignment":
-                alignment_map = {
-                    "left": LEFT,
-                    "center": CENTER,
-                    "right": RIGHT,
-                    "justify": BLOCK
-                }
-                if value.lower() in alignment_map:
-                    style.ParaAdjust = alignment_map[value.lower()]
+#         # Apply style properties
+#         for prop, value in style_properties.items():
+#             if prop == "font_name":
+#                 style.CharFontName = value
+#             elif prop == "font_size":
+#                 style.CharHeight = float(value)
+#             elif prop == "bold":
+#                 style.CharWeight = 150 if value else 100
+#             elif prop == "italic":
+#                 style.CharPosture = uno.getConstantByName("com.sun.star.awt.FontSlant.ITALIC") if value else uno.getConstantByName("com.sun.star.awt.FontSlant.NONE")
+#             elif prop == "underline":
+#                 style.CharUnderline = 1 if value else 0
+#             elif prop == "color":
+#                 if isinstance(value, str) and value.startswith("#"):
+#                     value = int(value[1:], 16)
+#                 style.CharColor = value
+#             elif prop == "alignment":
+#                 alignment_map = {
+#                     "left": LEFT,
+#                     "center": CENTER,
+#                     "right": RIGHT,
+#                     "justify": BLOCK
+#                 }
+#                 if value.lower() in alignment_map:
+#                     style.ParaAdjust = alignment_map[value.lower()]
         
-        # Save document
-        doc.store()
-        return f"Custom style '{style_name}' created/updated in {file_path}"
+#         # Save document
+#         doc.store()
+#         return f"Custom style '{style_name}' created/updated in {file_path}"
 
 def delete_paragraph(file_path, paragraph_index):
     """Delete a paragraph at the given index."""
@@ -2850,11 +2842,11 @@ COMMAND_HANDLERS = {
     ),
     
     # Advanced document manipulation
-    "create_custom_style": lambda cmd: create_custom_style(
-        cmd.get("file_path", ""),
-        cmd.get("style_name", "CustomStyle"),
-        cmd.get("style_properties", {})
-    ),
+    # "create_custom_style": lambda cmd: create_custom_style(
+    #     cmd.get("file_path", ""),
+    #     cmd.get("style_name", "CustomStyle"),
+    #     cmd.get("style_properties", {})
+    # ),
     "delete_paragraph": lambda cmd: delete_paragraph(
         cmd.get("file_path", ""),
         cmd.get("paragraph_index", 0)

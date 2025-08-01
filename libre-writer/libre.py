@@ -251,7 +251,7 @@ async def read_text_document(file_path: str) -> str:
         
         # Send command to helper
         response = call_libreoffice_helper({
-            "action": "open_text_document",
+            "action": "read_text_document",
             "file_path": file_path
         })
         
@@ -898,7 +898,7 @@ async def read_presentation(file_path: str) -> str:
         
         # Send command to helper
         response = call_libreoffice_helper({
-            "action": "open_presentation",
+            "action": "read_presentation",
             "file_path": file_path
         })
         

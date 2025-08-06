@@ -1,6 +1,0 @@
-2025-08-06 13:47:08,466 INFO Importing UNO...
-2025-08-06 13:47:08,574 INFO UNO imported successfully!
-2025-08-06 13:47:08,578 INFO LibreOffice helper listening on port 8765
-2025-08-06 13:47:08,578 INFO Socket bound to localhost:8765
-2025-08-06 13:47:08,578 INFO Waiting for connection...
-2025-08-06 13:47:08,578 INFO <socket.socket fd=344, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 8765)>

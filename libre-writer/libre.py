@@ -222,8 +222,8 @@ async def create_blank_document(
             metadata["Subject"] = subject
         if keywords:
             # Split by comma and strip whitespace
-            keywords = ", ".join([k.strip() for k in keywords.split(",")])
-            metadata["Keywords"] = keywords
+            keywords_list = [k.strip() for k in keywords.split(",")]
+            metadata["Keywords"] = keywords_list
 
         logging.info(save_path)
         logging.info(metadata)
@@ -954,8 +954,8 @@ async def create_blank_presentation(
             metadata["Subject"] = subject
         if keywords:
             # Split by comma and strip whitespace
-            keywords = ", ".join([k.strip() for k in keywords.split(",")])
-            metadata["Keywords"] = keywords
+            keywords_list = [k.strip() for k in keywords.split(",")]
+            metadata["Keywords"] = keywords_list
 
         logging.info(save_path)
         logging.info(metadata)
@@ -1462,6 +1462,7 @@ def main():
 
     # Run the server using stdio transport
     mcp.run(transport="stdio")
+    logging.info("MCP server exited")
 
 
 if __name__ == "__main__":

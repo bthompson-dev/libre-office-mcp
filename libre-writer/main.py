@@ -88,7 +88,8 @@ def start_helper():
     """Start the Office helper script"""
     if not is_port_in_use(8765):
         print("Starting Office helper...", file=sys.stderr)
-        helper_script = os.path.join(os.path.dirname(__file__), "helper.py")
+        exe_dir = os.path.dirname(sys.argv[0])
+        helper_script = os.path.join(exe_dir, "helper.py")
         python_path = get_python_path()
         subprocess.Popen([python_path, helper_script])
         time.sleep(3)
@@ -99,13 +100,9 @@ def start_helper():
 def start_mcp_server():
     """Start the MCP server"""
     print("Starting Office MCP server...", file=sys.stderr)
-    server_script = os.path.join(os.path.dirname(__file__), "libre.py")
-    subprocess.run(
-        [
-            sys.executable,  # Use the same Python interpreter
-            server_script,
-        ]
-    )
+    exe_dir = os.path.dirname(sys.argv[0])
+    server_exe = os.path.join(exe_dir, "libre.exe")
+    subprocess.run([server_exe])
 
 
 def main():

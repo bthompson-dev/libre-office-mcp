@@ -100,9 +100,14 @@ def start_helper():
 def start_mcp_server():
     """Start the MCP server"""
     print("Starting Office MCP server...", file=sys.stderr)
-    exe_dir = os.path.dirname(sys.argv[0])
-    server_exe = os.path.join(exe_dir, "libre.exe")
-    subprocess.run([server_exe])
+    server_script = os.path.join(os.path.dirname(__file__), "libre.py")
+
+    subprocess.run(
+        [
+            sys.executable,  # Use the same Python interpreter
+            server_script,
+        ]
+    )
 
 
 def main():

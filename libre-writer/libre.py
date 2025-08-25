@@ -5,6 +5,11 @@ from typing import Optional, List
 import socket
 import json
 import logging
+import asyncio
+import threading
+from concurrent.futures import ThreadPoolExecutor
+from queue import Queue, Empty
+import time
 
 log_path = os.path.join(os.path.dirname(__file__), "libre.log")
 logging.basicConfig(
@@ -38,6 +43,78 @@ impress_extensions = (
     ".pot",
     ".pom",
 )
+
+# Global Queue and Thread Pool
+request_queue = Queue()
+response_dict = {}
+response_lock = threading.Lock()
+thread_pool = ThreadPoolExecutor(max_workers=1)
+
+
+def queue_worker():
+    """Worker function that processes requests from the queue sequentially"""
+    while True:
+        try:
+            request_id, command = request_queue.get(timeout=1)
+
+            # Process the request
+            try:
+                client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                client_socket.settimeout(30)  # 30 second timeout
+                client_socket.connect(("localhost", 8765))
+
+                logging.info(client_socket)
+
+                # Send command
+                request_data = json.dumps(command).encode("utf-8")
+                client_socket.send(request_data)
+
+                logging.info(request_data)
+
+                # Receive response
+                response_data = client_socket.recv(16384).decode("utf-8")
+                client_socket.close()
+
+                logging.info(response_data)
+
+                if not response_data:
+                    response = {
+                        "status": "error",
+                        "message": "Empty response from helper",
+                    }
+                else:
+                    response = json.loads(response_data)
+
+            except socket.timeout:
+                response = {
+                    "status": "error",
+                    "message": "Connection to helper timed out",
+                }
+            except ConnectionRefusedError:
+                response = {
+                    "status": "error",
+                    "message": "Connection refused. Is the helper script running?",
+                }
+            except Exception as e:
+                response = {
+                    "status": "error",
+                    "message": f"Error communicating with helper: {str(e)}",
+                }
+
+            # Store the response
+            with response_lock:
+                response_dict[request_id] = response
+
+            request_queue.task_done()
+        except Empty:
+            continue
+        except Exception as e:
+            logging.error(f"Queue worker error: {e}")
+
+
+# Start the queue worker thread
+queue_worker_thread = threading.Thread(target=queue_worker, daemon=True)
+queue_worker_thread.start()
 
 
 def get_image_size(image_path):
@@ -106,7 +183,7 @@ def normalize_path(file_path: str) -> str:
 
 
 # Function to communicate with the LibreOffice helper
-def call_libreoffice_helper(command: dict) -> dict:
+async def call_libreoffice_helper(command: dict) -> dict:
     """
     Send a command to the LibreOffice helper process.
 
@@ -119,39 +196,34 @@ def call_libreoffice_helper(command: dict) -> dict:
     try:
         logging.info("call_libreoffice_helper function called")
 
-        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        client_socket.settimeout(30)  # 30 second timeout
-        client_socket.connect(("localhost", 8765))
+        # Generate unique request ID
+        request_id = f"{time.time()}_{threading.get_ident()}"
 
-        logging.info(client_socket)
+        # Add request to queue
+        request_queue.put((request_id, command))
 
-        # Send command
-        request_data = json.dumps(command).encode("utf-8")
-        client_socket.send(request_data)
+        # Wait for response with timeout
+        max_wait_time = 60
+        wait_interval = 0.1
+        waited_time = 0
 
-        logging.info(request_data)
+        while waited_time < max_wait_time:
+            with response_lock:
+                if request_id in response_dict:
+                    response = response_dict.pop(request_id)
+                    logging.info(f"Got response for request {request_id}: {response}")
+                    return response
 
-        # Receive response
-        response_data = client_socket.recv(16384).decode("utf-8")
-        client_socket.close()
+            await asyncio.sleep(wait_interval)
+            waited_time += wait_interval
 
-        logging.info(response_data)
+        # Timeout occurred
+        return {"status": "error", "message": "Request timed out in queue"}
 
-        if not response_data:
-            return {"status": "error", "message": "Empty response from helper"}
-
-        return json.loads(response_data)
-    except socket.timeout:
-        return {"status": "error", "message": "Connection to helper timed out"}
-    except ConnectionRefusedError:
-        return {
-            "status": "error",
-            "message": "Connection refused. Is the helper script running?",
-        }
     except Exception as e:
         return {
             "status": "error",
-            "message": f"Error communicating with helper: {str(e)}",
+            "message": f"Error queuing request: {str(e)}",
         }
 
 
@@ -273,7 +345,7 @@ async def create_blank_document(
         logging.info(metadata)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "create_document",
                 "doc_type": "text",
@@ -308,7 +380,7 @@ async def read_text_document(file_path: str) -> str:
         file_path = normalize_path(file_path)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {"action": "read_text_document", "file_path": file_path}
         )
 
@@ -334,7 +406,7 @@ async def get_document_properties(file_path: str) -> str:
         file_path = normalize_path(file_path)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {"action": "get_document_properties", "file_path": file_path}
         )
 
@@ -360,7 +432,7 @@ async def list_documents(directory: str) -> str:
         directory = normalize_path(directory)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {"action": "list_documents", "directory": directory}
         )
 
@@ -388,7 +460,7 @@ async def copy_document(source_path: str, target_path: str) -> str:
         target_path = normalize_path(target_path)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "copy_document",
                 "source_path": source_path,
@@ -423,7 +495,7 @@ async def add_text(file_path: str, text: str, position: Optional[str] = "end") -
         file_path = normalize_path(file_path)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "add_text",
                 "file_path": file_path,
@@ -460,7 +532,7 @@ async def add_heading(file_path: str, text: str, level: int = 1) -> str:
             return f"Invalid heading level: {level}. Choose a level between 1 and 6."
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "add_heading",
                 "file_path": file_path,
@@ -499,7 +571,7 @@ async def add_paragraph(
         file_path = normalize_path(file_path)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "add_paragraph",
                 "file_path": file_path,
@@ -541,7 +613,7 @@ async def add_table(
         file_path = normalize_path(file_path)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "add_table",
                 "file_path": file_path,
@@ -583,7 +655,7 @@ async def insert_image(
         image_path = normalize_path(image_path)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "insert_image",
                 "file_path": file_path,
@@ -615,7 +687,7 @@ async def insert_page_break(file_path: str) -> str:
         file_path = normalize_path(file_path)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {"action": "insert_page_break", "file_path": file_path}
         )
 
@@ -660,7 +732,7 @@ async def format_text(
         file_path = normalize_path(file_path)
 
         # Send command to helper with all parameters using the correct names
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "format_text",
                 "file_path": file_path,  # Note: using file_path, not filepath
@@ -700,7 +772,7 @@ async def search_replace_text(
         file_path = normalize_path(file_path)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "search_replace_text",
                 "file_path": file_path,
@@ -732,7 +804,7 @@ async def delete_text(file_path: str, text_to_delete: str) -> str:
         file_path = normalize_path(file_path)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "delete_text",
                 "file_path": file_path,
@@ -786,7 +858,7 @@ async def format_table(
         format_options["header_row"] = header_row
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "format_table",
                 "file_path": file_path,
@@ -855,7 +927,7 @@ async def format_table(
 #             style_properties["alignment"] = alignment
 
 #         # Send command to helper
-#         response = call_libreoffice_helper({
+#         response = await call_libreoffice_helper({
 #             "action": "create_custom_style",
 #             "file_path": file_path,
 #             "style_name": style_name,
@@ -886,7 +958,7 @@ async def delete_paragraph(file_path: str, paragraph_index: int) -> str:
         file_path = normalize_path(file_path)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "delete_paragraph",
                 "file_path": file_path,
@@ -941,7 +1013,7 @@ async def apply_document_style(
             style["alignment"] = alignment
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {"action": "apply_document_style", "file_path": file_path, "style": style}
         )
 
@@ -1005,7 +1077,7 @@ async def create_blank_presentation(
         logging.info(metadata)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "create_document",
                 "doc_type": "impress",
@@ -1040,7 +1112,7 @@ async def read_presentation(file_path: str) -> str:
         file_path = normalize_path(file_path)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {"action": "read_presentation", "file_path": file_path}
         )
 
@@ -1075,7 +1147,7 @@ async def add_slide(
 
         file_path = normalize_path(file_path)
 
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "add_slide",
                 "file_path": file_path,
@@ -1117,7 +1189,7 @@ async def edit_slide_content(file_path: str, slide_index: int, new_content: str)
         file_path = normalize_path(file_path)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "edit_slide_content",
                 "file_path": file_path,
@@ -1154,7 +1226,7 @@ async def edit_slide_title(file_path: str, slide_index: int, new_title: str) -> 
         file_path = normalize_path(file_path)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "edit_slide_title",
                 "file_path": file_path,
@@ -1190,7 +1262,7 @@ async def delete_slide(file_path: str, slide_index: int) -> str:
         file_path = normalize_path(file_path)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "delete_slide",
                 "file_path": file_path,
@@ -1225,7 +1297,7 @@ async def apply_presentation_template(file_path: str, template_name: str) -> str
         file_path = normalize_path(file_path)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "apply_presentation_template",
                 "file_path": file_path,
@@ -1303,7 +1375,7 @@ async def format_slide_content(
             format_options["background_color"] = background_color
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "format_slide_content",
                 "file_path": file_path,
@@ -1382,7 +1454,7 @@ async def format_slide_title(
             format_options["background_color"] = background_color
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "format_slide_title",
                 "file_path": file_path,
@@ -1432,7 +1504,7 @@ async def insert_slide_image(
         image_path = normalize_path(image_path)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {
                 "action": "insert_slide_image",
                 "file_path": file_path,
@@ -1471,7 +1543,7 @@ async def document_resource(path: str) -> str:
         normalized_path = normalize_path(path)
 
         # Send command to helper
-        response = call_libreoffice_helper(
+        response = await call_libreoffice_helper(
             {"action": "open_text_document", "file_path": normalized_path}
         )
 
@@ -1484,7 +1556,7 @@ async def document_resource(path: str) -> str:
         return f"Failed to access document resource: {str(e)}"
 
 
-def main():
+async def main():
     """
     Main entry point for the LibreOffice MCP server.
     """
@@ -1492,7 +1564,7 @@ def main():
 
     # Check if helper is running
     try:
-        response = call_libreoffice_helper({"action": "ping"})
+        response = await call_libreoffice_helper({"action": "ping"})
         if (
             response["status"] == "error"
             and "Connection refused" in response["message"]
@@ -1505,9 +1577,9 @@ def main():
         print("Failed to check helper status")
 
     # Run the server using stdio transport
-    mcp.run(transport="stdio")
+    await mcp.run_stdio_async()
     logging.info("MCP server exited")
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())

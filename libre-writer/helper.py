@@ -1,13 +1,21 @@
-#!/usr/bin/env python
-import os
-import sys
 import json
-import time
-import socket
-import traceback
-from datetime import datetime
 import logging
-from contextlib import contextmanager
+import time
+import sys
+import os
+import traceback
+import socket
+
+from helper_utils import (
+    managed_document,
+    normalize_path,
+    ensure_directory_exists,
+    get_uno_desktop,
+    create_property_value,
+    HelperError,
+)
+
+from helper_test_functions import get_text_formatting, get_table_info, has_image, get_page_break_info
 
 log_path = os.path.join(os.path.dirname(__file__), "helper.log")
 logging.basicConfig(
@@ -52,132 +60,8 @@ server_socket.listen(1)
 print("LibreOffice helper listening on port 8765")
 logging.info("LibreOffice helper listening on port 8765")
 
-print(f"Socket bound to localhost:8765")
+print("Socket bound to localhost:8765")
 logging.info("Socket bound to localhost:8765")
-
-
-class HelperError(Exception):
-    pass
-
-
-@contextmanager
-def managed_document(file_path, read_only=False):
-    doc, message = open_document(file_path, read_only)
-    if not doc:
-        raise HelperError(message)
-    try:
-        yield doc
-    finally:
-        try:
-            doc.close(True)
-        except Exception:
-            pass
-
-
-# Helper functions
-
-
-def ensure_directory_exists(file_path):
-    """Ensure the directory for a file exists, creating it if necessary."""
-    directory = os.path.dirname(file_path)
-    if directory and not os.path.exists(directory):
-        try:
-            os.makedirs(directory, exist_ok=True)
-            print(f"Created directory: {directory}")
-        except Exception as e:
-            print(f"Failed to create directory {directory}: {str(e)}")
-            return False
-    return True
-
-
-def normalize_path(file_path):
-    """Convert a relative path to an absolute path."""
-    if not file_path:
-        return None
-
-    # If file path is already complete, return it
-    if file_path.startswith(("file://", "http://", "https://", "ftp://")):
-        return file_path
-
-    # Expand user directory if path starts with ~
-    if file_path.startswith("~"):
-        file_path = os.path.expanduser(file_path)
-
-    # Make absolute if relative
-    if not os.path.isabs(file_path):
-        file_path = os.path.abspath(file_path)
-
-    print(f"Normalized path: {file_path}")
-    return file_path
-
-
-def get_uno_desktop():
-    """Get LibreOffice desktop object."""
-    try:
-        local_context = uno.getComponentContext()
-        resolver = local_context.ServiceManager.createInstanceWithContext(
-            "com.sun.star.bridge.UnoUrlResolver", local_context
-        )
-
-        # Try both localhost and 127.0.0.1
-        try:
-            context = resolver.resolve(
-                "uno:socket,host=localhost,port=2002;urp;StarOffice.ComponentContext"
-            )
-        except NoConnectException:
-            context = resolver.resolve(
-                "uno:socket,host=127.0.0.1,port=2002;urp;StarOffice.ComponentContext"
-            )
-
-        desktop = context.ServiceManager.createInstanceWithContext(
-            "com.sun.star.frame.Desktop", context
-        )
-        return desktop
-    except Exception as e:
-        print(f"Failed to get UNO desktop: {str(e)}")
-        print(traceback.format_exc())
-        return None
-
-
-def create_property_value(name, value):
-    """Create a PropertyValue with given name and value."""
-    prop = PropertyValue()
-    prop.Name = name
-    prop.Value = value
-    return prop
-
-
-def open_document(file_path, read_only=False, retries=3, delay=0.5):
-    print(f"Opening document: {file_path} (read_only: {read_only})")
-    normalized_path = normalize_path(file_path)
-    if not normalized_path.startswith(("file://", "http://", "https://", "ftp://")):
-        if not os.path.exists(normalized_path):
-            raise HelperError(f"Document not found: {normalized_path}")
-        file_url = uno.systemPathToFileUrl(normalized_path)
-    else:
-        file_url = normalized_path
-
-    desktop = get_uno_desktop()
-    if not desktop:
-        raise HelperError("Failed to connect to LibreOffice desktop")
-
-    last_exception = None
-    for attempt in range(retries):
-        try:
-            props = [
-                create_property_value("Hidden", True),
-                create_property_value("ReadOnly", read_only),
-            ]
-            doc = desktop.loadComponentFromURL(file_url, "_blank", 0, tuple(props))
-            if not doc:
-                raise HelperError(f"Failed to load document: {file_path}")
-            return doc, "Success"
-        except Exception as e:
-            last_exception = e
-            print(f"Attempt {attempt + 1} failed: {e}")
-            time.sleep(delay)
-    raise last_exception
-
 
 # General functions
 
@@ -522,7 +406,6 @@ def format_text(file_path, text_to_find, format_options):
     """Format specific text in a document."""
     with managed_document(file_path) as doc:
         if hasattr(doc, "getText"):
-            text = doc.getText()
             search = doc.createSearchDescriptor()
             search.SearchString = text_to_find
             search.SearchCaseSensitive = False
@@ -727,6 +610,9 @@ def insert_image(file_path, image_path, width=None, height=None):
     with managed_document(file_path) as doc:
         # Normalize image path
         image_path = normalize_path(image_path)
+        if not image_path:
+            raise HelperError("Invalid image path provided")
+
         if not os.path.exists(image_path):
             raise HelperError(f"Image not found: {image_path}")
 
@@ -764,7 +650,11 @@ def insert_image(file_path, image_path, width=None, height=None):
         if width is not None or height is not None:
             # Try to get the inserted image as the current selection
             current_selection = doc.getCurrentController().getSelection()
-            if current_selection and current_selection.getCount() > 0:
+            if (
+                current_selection
+                and hasattr(current_selection, "getCount")
+                and current_selection.getCount() > 0
+            ):
                 shape = current_selection.getByIndex(0)
 
                 # Calculate new size preserving aspect ratio
@@ -782,6 +672,32 @@ def insert_image(file_path, image_path, width=None, height=None):
                     ratio = shape.Size.Width / shape.Size.Height
                     new_width = int(height * ratio)
                     shape.setSize(Size(new_width, height))
+            elif current_selection:
+                # Try alternative approach for Writer documents
+                try:
+                    # For Writer, the selection might be a TextGraphicObject
+                    if hasattr(current_selection, "getImplementationName"):
+                        impl_name = current_selection.getImplementationName()
+                        if (
+                            "TextGraphicObject" in impl_name
+                            or "GraphicObject" in impl_name
+                        ):
+                            shape = current_selection
+
+                            # Calculate new size preserving aspect ratio
+                            if width is not None and height is not None:
+                                size = Size(width, height)
+                                shape.setSize(size)
+                            elif width is not None:
+                                ratio = shape.Size.Height / shape.Size.Width
+                                new_height = int(width * ratio)
+                                shape.setSize(Size(width, new_height))
+                            elif height is not None:
+                                ratio = shape.Size.Width / shape.Size.Height
+                                new_width = int(height * ratio)
+                                shape.setSize(Size(new_width, height))
+                except Exception as resize_error:
+                    logging.warning(f"Could not resize image: {resize_error}")
 
         # Save document
         doc.store()
@@ -3113,7 +3029,7 @@ def insert_slide_image(
                 image_right = final_position.X + final_size.Width
                 image_bottom = final_position.Y + final_size.Height
 
-                logging.info(f"Final verification:")
+                logging.info("Final verification:")
                 logging.info(
                     f"Image position: ({final_position.X}, {final_position.Y})"
                 )
@@ -3290,6 +3206,15 @@ COMMAND_HANDLERS = {
     "apply_document_style": lambda cmd: apply_document_style(
         cmd.get("file_path", ""), cmd.get("style", {})
     ),
+    # Testing functions
+    "get_text_formatting": lambda cmd: get_text_formatting(
+        cmd.get("file_path", ""), cmd.get("text_to_find", "")
+    ),
+    "get_table_info": lambda cmd: get_table_info(
+        cmd.get("file_path", ""), cmd.get("table_index", 0)
+    ),
+    "has_image": lambda cmd: has_image(cmd.get("file_path", "")),
+    "get_page_break_info": lambda cmd: get_page_break_info(cmd.get("file_path", "")),
     # System commands
     "ping": lambda cmd: "LibreOffice helper is running",
 }
@@ -3307,7 +3232,7 @@ def handle_command(command):
         if handler:
             return safe_execute(action, handler, command)
         else:
-            return f"Unknown action: {action}"
+            raise HelperError(f"Unknown action: {action}")
 
     except Exception as e:
         print(f"Error handling command: {str(e)}")

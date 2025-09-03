@@ -63,9 +63,9 @@ def is_port_in_use(port):
         return s.connect_ex(("localhost", port)) == 0
 
 
-def start_office():
+def start_office(port=2002):
     """Start Collabora Office in headless mode with socket"""
-    if not is_port_in_use(2002):
+    if not is_port_in_use(port):
         print("Starting Collabora Office with socket...", file=sys.stderr)
         soffice_path = get_office_path()
         subprocess.Popen(
@@ -73,7 +73,7 @@ def start_office():
                 soffice_path,
                 "-env:UserInstallation=file:///C:/Temp/LibreOfficeHeadlessProfile",
                 "--headless",
-                "--accept=socket,host=localhost,port=2002;urp;",
+                f"--accept=socket,host=localhost,port={port};urp;",
                 "--norestore",
                 "--nodefault",
                 "--nologo",
@@ -81,7 +81,7 @@ def start_office():
         )
         time.sleep(3)  # Give it time to start
     else:
-        print("Office socket already running on port 2002", file=sys.stderr)
+        print("Office socket already running on port {port}", file=sys.stderr)
 
 
 def start_helper():

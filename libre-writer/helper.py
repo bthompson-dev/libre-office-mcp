@@ -1,5 +1,4 @@
 import json
-import logging
 import time
 import sys
 import os
@@ -15,16 +14,20 @@ from helper_utils import (
     HelperError,
 )
 
-from helper_test_functions import get_text_formatting, get_table_info, has_image, get_page_break_info
-
-log_path = os.path.join(os.path.dirname(__file__), "helper.log")
-logging.basicConfig(
-    filename=log_path,
-    level=logging.INFO,
-    format="%(asctime)s %(levelname)s %(message)s",
+from helper_test_functions import (
+    get_text_formatting,
+    get_table_info,
+    has_image,
+    get_page_break_info,
+    get_presentation_template_info,
+    get_presentation_text_formatting,
+    get_slide_image_info
 )
 
+import logging
+
 print("Starting LibreOffice Helper Script...")
+logging.info("Starting LibreOffice Helper Script...")
 
 try:
     print("Importing UNO...")
@@ -34,6 +37,7 @@ try:
     from com.sun.star.text import ControlCharacter
     from com.sun.star.text.TextContentAnchorType import AS_CHARACTER
     from com.sun.star.awt import Size
+    from com.sun.star.awt.FontSlant import ITALIC
     from com.sun.star.lang import Locale
     from com.sun.star.style.ParagraphAdjust import CENTER, LEFT, RIGHT, BLOCK
     from com.sun.star.style.BreakType import PAGE_BEFORE
@@ -419,7 +423,21 @@ def format_text(file_path, text_to_find, format_options):
                 if format_options.get("bold"):
                     found.CharWeight = 150
                 if format_options.get("italic"):
-                    found.CharPosture = 2
+                    # Try to use the proper UNO constant first
+                    try:
+                        found.CharPosture = ITALIC
+                        logging.info(f"Set CharPosture to ITALIC constant: {ITALIC}")
+                    except ImportError:
+                        # Fallback to numeric value
+                        found.CharPosture = 2
+                        logging.info("Set CharPosture to numeric value 2")
+
+                    # Log what was actually set
+                    actual_posture = getattr(found, "CharPosture", "unknown")
+                    logging.info(
+                        f"Actual CharPosture value after setting: {actual_posture} (type: {type(actual_posture)})"
+                    )
+
                 if format_options.get("underline"):
                     found.CharUnderline = 1
                 if format_options.get("color"):
@@ -1847,7 +1865,7 @@ def apply_presentation_template(file_path, template_name):
 
     if not template_doc:
         # Create a detailed error message with search information
-        search_summary = f"Searched in the following locations:\n"
+        search_summary = "Searched in the following locations:\n"
         for search_dir in template_search_dirs:
             if os.path.exists(search_dir):
                 search_summary += f"  - {search_dir} (exists)\n"
@@ -3215,6 +3233,17 @@ COMMAND_HANDLERS = {
     ),
     "has_image": lambda cmd: has_image(cmd.get("file_path", "")),
     "get_page_break_info": lambda cmd: get_page_break_info(cmd.get("file_path", "")),
+    "get_presentation_template_info": lambda cmd: get_presentation_template_info(
+        cmd.get("file_path", "")
+    ),
+    "get_presentation_text_formatting": lambda cmd: get_presentation_text_formatting(
+        cmd.get("file_path", ""),
+        cmd.get("text_to_find", ""),
+        cmd.get("slide_index", None),
+    ),
+    "get_slide_image_info": lambda cmd: get_slide_image_info(
+        cmd.get("file_path", ""), cmd.get("slide_index", 0)
+    ),
     # System commands
     "ping": lambda cmd: "LibreOffice helper is running",
 }

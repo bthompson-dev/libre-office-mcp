@@ -73,7 +73,7 @@ def test_document(libreoffice_server, temp_dir):
                 "add_text",
                 {
                     "file_path": filename,
-                    "text": "This is a test document with sample content.",
+                    "text": "This is a test document with sample content. This is some formatted text.",
                 },
             )
             return filename
@@ -285,10 +285,10 @@ async def test_add_heading(libreoffice_server, test_document):
         )
 
         if formatting_result["status"] == "success":
-            table_data = json.loads(formatting_result["message"])
+            formatting_data = json.loads(formatting_result["message"])
 
-            assert table_data["occurrences_found"] >= 1
-            assert table_data["paragraph_style"] == "Heading 1"
+            assert formatting_data["occurrences_found"] >= 1
+            assert formatting_data["paragraph_style"] == "Heading 1"
         else:
             assert False, "Failed to get formatting data"
 
@@ -448,7 +448,7 @@ async def test_format_text(libreoffice_server, test_document):
             "format_text",
             {
                 "file_path": test_document,
-                "text_to_find": "test",
+                "text_to_find": "This is some formatted text.",
                 "bold": True,
                 "italic": True,
                 "color": "#FF0000",
@@ -457,10 +457,27 @@ async def test_format_text(libreoffice_server, test_document):
 
         result_content = result.content[0]
         assert isinstance(result_content, TextContent)
-        assert (
-            "format" in result_content.text.lower()
-            or "success" in result_content.text.lower()
+        assert "format" in result_content.text.lower()
+
+        # Check the content has been formatted
+        formatting_result = send_command_to_helper(
+            {
+                "action": "get_text_formatting",
+                "file_path": test_document,
+                "text_to_find": "This is some formatted text.",
+            }
         )
+
+        if formatting_result["status"] == "success":
+            formatting_data = json.loads(formatting_result["message"])
+
+            print(formatting_data)
+            assert formatting_data["occurrences_found"] >= 1
+            assert formatting_data["color"] == "#FF0000"
+            assert formatting_data["bold"]
+            assert formatting_data["italic"]
+        else:
+            assert False, "Failed to get formatting data"
 
 
 @pytest.mark.asyncio
@@ -478,10 +495,15 @@ async def test_search_replace_text(libreoffice_server, test_document):
 
         result_content = result.content[0]
         assert isinstance(result_content, TextContent)
-        assert (
-            "replace" in result_content.text.lower()
-            or "success" in result_content.text.lower()
+        assert "replace" in result_content.text.lower()
+
+        result = await client.call_tool(
+            "read_text_document", {"file_path": test_document}
         )
+
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "modified" in result_content.text
 
 
 @pytest.mark.asyncio
@@ -495,10 +517,15 @@ async def test_delete_text(libreoffice_server, test_document):
 
         result_content = result.content[0]
         assert isinstance(result_content, TextContent)
-        assert (
-            "delete" in result_content.text.lower()
-            or "success" in result_content.text.lower()
+        assert "replaced" in result_content.text.lower()
+
+        read_result = await client.call_tool(
+            "read_text_document", {"file_path": test_document}
         )
+
+        read_result_content = read_result.content[0]
+        assert isinstance(read_result_content, TextContent)
+        assert "sample content" not in read_result_content.text
 
 
 # Table Formatting Tests
@@ -513,12 +540,14 @@ async def test_format_table(libreoffice_server, test_document):
             "add_table", {"file_path": test_document, "rows": 2, "columns": 2}
         )
 
+        border_width = 5
+
         result = await client.call_tool(
             "format_table",
             {
                 "file_path": test_document,
                 "table_index": 0,
-                "border_width": 2,
+                "border_width": border_width,
                 "background_color": "#F0F0F0",
                 "header_row": True,
             },
@@ -526,10 +555,24 @@ async def test_format_table(libreoffice_server, test_document):
 
         result_content = result.content[0]
         assert isinstance(result_content, TextContent)
-        assert (
-            "table" in result_content.text.lower()
-            or "success" in result_content.text.lower()
+        assert "formatted" in result_content.text.lower()
+
+        # Check the table has been added
+        table_result = send_command_to_helper(
+            {
+                "action": "get_table_info",
+                "file_path": test_document,
+            }
         )
+
+        if table_result["status"] == "success":
+            table_data = json.loads(table_result["message"])
+            avg_border_width = sum(table_data["border_widths"].values()) / 40
+            print(table_data)
+            assert table_data["background_color"] == "#F0F0F0"
+            assert abs(avg_border_width - border_width) <= border_width * 0.1
+        else:
+            assert False, "Failed to get table data"
 
 
 # Advanced Document Manipulation Tests
@@ -537,7 +580,7 @@ async def test_format_table(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_delete_paragraph(libreoffice_server, test_document):
-    """Test deleting a paragraph by index using the test_document fixture"""
+    """Test deleting a paragraph by index"""
     async with Client(libreoffice_server) as client:
         # Add some paragraphs first
         await client.call_tool(
@@ -554,10 +597,15 @@ async def test_delete_paragraph(libreoffice_server, test_document):
 
         result_content = result.content[0]
         assert isinstance(result_content, TextContent)
-        assert (
-            "paragraph" in result_content.text.lower()
-            or "success" in result_content.text.lower()
+        assert "delete" in result_content.text.lower()
+
+        read_result = await client.call_tool(
+            "read_text_document", {"file_path": test_document}
         )
+
+        read_result_content = read_result.content[0]
+        assert isinstance(read_result_content, TextContent)
+        assert "Second paragraph" not in read_result_content.text
 
 
 @pytest.mark.asyncio
@@ -577,10 +625,26 @@ async def test_apply_document_style(libreoffice_server, test_document):
 
         result_content = result.content[0]
         assert isinstance(result_content, TextContent)
-        assert (
-            "style" in result_content.text.lower()
-            or "success" in result_content.text.lower()
+        assert "style" in result_content.text.lower()
+
+        # Check the content has been formatted
+        formatting_result = send_command_to_helper(
+            {
+                "action": "get_text_formatting",
+                "file_path": test_document,
+                "text_to_find": "This is a test document",
+            }
         )
+
+        if formatting_result["status"] == "success":
+            formatting_data = json.loads(formatting_result["message"])
+
+            assert formatting_data["occurrences_found"] >= 1
+            assert formatting_data["color"] == "#000080"
+            assert formatting_data["font_name"] == "Arial"
+            assert formatting_data["alignment"] == "block"
+        else:
+            assert False, "Failed to get formatting data"
 
 
 # Presentation Tests
@@ -598,10 +662,7 @@ async def test_create_blank_presentation(libreoffice_server, temp_dir):
 
         result_content = result.content[0]
         assert isinstance(result_content, TextContent)
-        assert (
-            "presentation" in result_content.text.lower()
-            or "success" in result_content.text.lower()
-        )
+        assert "presentation" in result_content.text.lower()
         assert os.path.exists(filename)
 
 
@@ -615,10 +676,7 @@ async def test_read_presentation(libreoffice_server, test_presentation):
 
         result_content = result.content[0]
         assert isinstance(result_content, TextContent)
-        assert (
-            "slide" in result_content.text.lower()
-            or "presentation" in result_content.text.lower()
-        )
+        assert "This is test slide content." in result_content.text
 
 
 @pytest.mark.asyncio
@@ -630,16 +688,21 @@ async def test_add_slide(libreoffice_server, test_presentation):
             {
                 "file_path": test_presentation,
                 "title": "New Slide",
-                "content": "This is slide content",
+                "content": "This is added slide content.",
             },
         )
 
         result_content = result.content[0]
         assert isinstance(result_content, TextContent)
-        assert (
-            "slide" in result_content.text.lower()
-            or "success" in result_content.text.lower()
+        assert "slide added" in result_content.text.lower()
+
+        read_result = await client.call_tool(
+            "read_presentation", {"file_path": test_presentation}
         )
+
+        read_result_content = read_result.content[0]
+        assert isinstance(read_result_content, TextContent)
+        assert "This is added slide content." in read_result_content.text
 
 
 @pytest.mark.asyncio
@@ -657,10 +720,15 @@ async def test_edit_slide_content(libreoffice_server, test_presentation):
 
         result_content = result.content[0]
         assert isinstance(result_content, TextContent)
-        assert (
-            "content" in result_content.text.lower()
-            or "success" in result_content.text.lower()
+        assert "edited" in result_content.text.lower()
+
+        read_result = await client.call_tool(
+            "read_presentation", {"file_path": test_presentation}
         )
+
+        read_result_content = read_result.content[0]
+        assert isinstance(read_result_content, TextContent)
+        assert "Updated slide content" in read_result_content.text
 
 
 @pytest.mark.asyncio
@@ -678,10 +746,15 @@ async def test_edit_slide_title(libreoffice_server, test_presentation):
 
         result_content = result.content[0]
         assert isinstance(result_content, TextContent)
-        assert (
-            "title" in result_content.text.lower()
-            or "success" in result_content.text.lower()
+        assert "edited" in result_content.text.lower()
+
+        read_result = await client.call_tool(
+            "read_presentation", {"file_path": test_presentation}
         )
+
+        read_result_content = read_result.content[0]
+        assert isinstance(read_result_content, TextContent)
+        assert "Updated Title" in read_result_content.text
 
 
 @pytest.mark.asyncio
@@ -689,18 +762,30 @@ async def test_delete_slide(libreoffice_server, test_presentation):
     """Test deleting a slide using the test_presentation fixture"""
     async with Client(libreoffice_server) as client:
         # Add another slide first
-        await client.call_tool("add_slide", {"file_path": test_presentation})
+        await client.call_tool(
+            "add_slide",
+            {
+                "file_path": test_presentation,
+                "title": "Slide to delete",
+                "content": "Deleted content",
+            },
+        )
 
         result = await client.call_tool(
-            "delete_slide", {"file_path": test_presentation, "slide_index": 1}
+            "delete_slide", {"file_path": test_presentation, "slide_index": 2}
         )
 
         result_content = result.content[0]
         assert isinstance(result_content, TextContent)
-        assert (
-            "delete" in result_content.text.lower()
-            or "success" in result_content.text.lower()
+        assert "deleted" in result_content.text.lower()
+
+        read_result = await client.call_tool(
+            "read_presentation", {"file_path": test_presentation}
         )
+
+        read_result_content = read_result.content[0]
+        assert isinstance(read_result_content, TextContent)
+        assert "Deleted content" not in read_result_content.text
 
 
 @pytest.mark.asyncio
@@ -709,24 +794,39 @@ async def test_apply_presentation_template(libreoffice_server, test_presentation
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "apply_presentation_template",
-            {"file_path": test_presentation, "template_name": "Blue"},
+            {"file_path": test_presentation, "template_name": "Beehive"},
         )
 
         result_content = result.content[0]
         assert isinstance(result_content, TextContent)
-        # Template application might not always succeed, so check for both success and error messages
-        assert "template" in result_content.text.lower()
+        assert "applied template" in result_content.text.lower()
+
+        template_result = send_command_to_helper(
+            {
+                "action": "get_presentation_template_info",
+                "file_path": test_presentation,
+            }
+        )
+
+        if template_result["status"] == "success":
+            template = template_result["message"]
+
+            assert "Beehive" in template
+        else:
+            assert False, "Failed to get template data"
 
 
 @pytest.mark.asyncio
 async def test_format_slide_content(libreoffice_server, test_presentation):
     """Test formatting slide content using the test_presentation fixture"""
     async with Client(libreoffice_server) as client:
+        slide_index = 1
+
         result = await client.call_tool(
             "format_slide_content",
             {
                 "file_path": test_presentation,
-                "slide_index": 0,
+                "slide_index": slide_index,
                 "font_name": "Arial",
                 "font_size": 18,
                 "bold": True,
@@ -736,21 +836,39 @@ async def test_format_slide_content(libreoffice_server, test_presentation):
 
         result_content = result.content[0]
         assert isinstance(result_content, TextContent)
-        assert (
-            "format" in result_content.text.lower()
-            or "success" in result_content.text.lower()
+        assert "formatted" in result_content.text.lower()
+
+        formatting_result = send_command_to_helper(
+            {
+                "action": "get_presentation_text_formatting",
+                "file_path": test_presentation,
+                "text_to_find": "This is test slide content.",
+            }
         )
+
+        if formatting_result["status"] == "success":
+            formatting_data = json.loads(formatting_result["message"])
+
+            print(formatting_data)
+            assert formatting_data["found_on_slide"] == slide_index
+            assert formatting_data["color"] == "#FF0000"
+            assert formatting_data["bold"]
+            assert formatting_data["font_size"] == 18
+        else:
+            assert False, "Failed to get template data"
 
 
 @pytest.mark.asyncio
 async def test_format_slide_title(libreoffice_server, test_presentation):
     """Test formatting slide title using the test_presentation fixture"""
     async with Client(libreoffice_server) as client:
+        slide_index = 1
+
         result = await client.call_tool(
             "format_slide_title",
             {
                 "file_path": test_presentation,
-                "slide_index": 0,
+                "slide_index": slide_index,
                 "font_name": "Times New Roman",
                 "font_size": 24,
                 "underline": True,
@@ -760,10 +878,26 @@ async def test_format_slide_title(libreoffice_server, test_presentation):
 
         result_content = result.content[0]
         assert isinstance(result_content, TextContent)
-        assert (
-            "format" in result_content.text.lower()
-            or "title" in result_content.text.lower()
+        assert "formatted" in result_content.text.lower()
+
+        formatting_result = send_command_to_helper(
+            {
+                "action": "get_presentation_text_formatting",
+                "file_path": test_presentation,
+                "text_to_find": "Test Slide",
+            }
         )
+
+        if formatting_result["status"] == "success":
+            formatting_data = json.loads(formatting_result["message"])
+
+            assert formatting_data["alignment"] == "center"
+            assert formatting_data["found_on_slide"] == slide_index
+            assert formatting_data["font_name"] == "Times New Roman"
+            assert formatting_data["underline"]
+            assert formatting_data["font_size"] == 24
+        else:
+            assert False, "Failed to get template data"
 
 
 @pytest.mark.asyncio
@@ -783,10 +917,26 @@ async def test_insert_slide_image(libreoffice_server, test_presentation, test_im
 
         result_content = result.content[0]
         assert isinstance(result_content, TextContent)
-        assert (
-            "image" in result_content.text.lower()
-            or "success" in result_content.text.lower()
+        assert "inserted image" in result_content.text.lower()
+
+        image_result = send_command_to_helper(
+            {
+                "action": "get_slide_image_info",
+                "file_path": test_presentation,
+                "slide_index": 0,
+            }
         )
+
+        if image_result["status"] == "success":
+            image_data = json.loads(image_result["message"])
+            image = image_data["images"][0]
+
+            assert image_data["has_images"]
+            assert image["is_centered_horizontally"]
+            assert image["is_centered_vertically"]
+            
+        else:
+            assert False, "Failed to get image data"
 
 
 # Error Handling Tests

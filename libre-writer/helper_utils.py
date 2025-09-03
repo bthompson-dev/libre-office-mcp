@@ -6,12 +6,49 @@ import logging
 import sys
 from contextlib import contextmanager
 
+# Set up logging immediately when this module is imported
+def _setup_module_logging():
+    """Internal function to set up logging for this module."""
+    try:
+        # Get the directory of this file
+        module_dir = os.path.dirname(__file__)
+        log_path = os.path.join(module_dir, "helper.log")
+        
+        # Clear existing handlers
+        for handler in logging.root.handlers[:]:
+            logging.root.removeHandler(handler)
+        
+        # Configure logging
+        logging.basicConfig(
+            filename=log_path,
+            level=logging.INFO,
+            format="%(asctime)s %(levelname)s %(message)s",
+            force=True,
+            filemode='a'
+        )
+        
+        # Test logging
+        logging.info("="*50)
+        logging.info(f"helper_utils module loaded - logging to: {log_path}")
+        
+    except Exception as e:
+        print(f"Failed to set up logging in helper_utils: {e}")
+        logging.basicConfig(
+            level=logging.INFO,
+            format="%(asctime)s %(levelname)s %(message)s",
+            stream=sys.stdout
+        )
+
+# Call the setup function
+_setup_module_logging()
+
 try:
     print("Importing UNO...")
     logging.info("Importing UNO...")
     import uno
     from com.sun.star.beans import PropertyValue
     from com.sun.star.connection import NoConnectException
+
     print("UNO imported successfully!")
     logging.info("UNO imported successfully!")
 except ImportError as e:

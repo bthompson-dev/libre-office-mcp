@@ -10,7 +10,6 @@ import shutil
 import asyncio
 from fastmcp import Client
 from mcp.types import TextContent
-from fastmcp.exceptions import ToolError
 from main import start_office, is_port_in_use, get_python_path
 from test_helper import check_helper_status
 from libre import mcp

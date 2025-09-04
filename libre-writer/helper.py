@@ -21,7 +21,7 @@ from helper_test_functions import (
     get_page_break_info,
     get_presentation_template_info,
     get_presentation_text_formatting,
-    get_slide_image_info
+    get_slide_image_info,
 )
 
 import logging
@@ -560,23 +560,29 @@ def format_table(file_path, table_index, format_options):
         if "border_width" in format_options:
             try:
                 width = int(format_options["border_width"])
+                width_in_hundredths_mm = int(width * 35.28)
+
+                logging.info(
+                    f"Setting border width: {width} points = {width_in_hundredths_mm} 1/100mm"
+                )
+
                 # Create border line
                 border_line = BorderLine2()
-                border_line.LineWidth = width
+                border_line.LineWidth = width_in_hundredths_mm
                 border_line.LineStyle = SOLID
+                border_line.Color = 0  # Black color
 
-                # Create table border
-                table_border = TableBorder2()
-                table_border.TopLine = border_line
-                table_border.BottomLine = border_line
-                table_border.LeftLine = border_line
-                table_border.RightLine = border_line
-                table_border.HorizontalLine = border_line
-                table_border.VerticalLine = border_line
+                table_border_2 = table.getPropertyValue("TableBorder2")
+                table_border_2.TopLine = border_line
+                table_border_2.BottomLine = border_line
+                table_border_2.LeftLine = border_line
+                table_border_2.RightLine = border_line
+                table_border_2.HorizontalLine = border_line
+                table_border_2.VerticalLine = border_line
+                table.setPropertyValue("TableBorder2", table_border_2)
 
-                # Apply border to table
-                table.TableBorder2 = table_border
             except Exception as border_error:
+                logging.error(f"Border formatting error: {border_error}")
                 raise HelperError(f"Error applying table borders: {border_error}")
 
         if "background_color" in format_options:
@@ -3275,76 +3281,106 @@ try:
     while True:
         print("Waiting for connection...")
         logging.info("Waiting for connection...")
-        logging.info(server_socket)
 
         client_socket, address = server_socket.accept()
         print(f"Connection from {address}")
         logging.info(f"Connection from {address}")
 
         try:
-            # Receive data with timeout
+            # Set timeout for client operations
             client_socket.settimeout(30)
-            data = client_socket.recv(16384).decode("utf-8")
 
+            # Receive data
+            data = client_socket.recv(16384).decode("utf-8")
             if not data:
                 print("Empty data received, closing connection")
-                client_socket.close()
                 continue
 
             print(f"Received data: {data[:100]}...")
             logging.info(f"Received data: {data[:100]}...")
 
+            # Parse and execute command
             try:
                 command = json.loads(data)
                 result = handle_command(command)
 
+                # Success response
                 response = {"status": "success", "message": result}
-            except json.JSONDecodeError:
-                response = {"status": "error", "message": "Invalid JSON received"}
-            except Exception as e:
-                print(f"Error processing command: {str(e)}")
+
+            except json.JSONDecodeError as json_error:
+                # JSON parsing error
+                error_msg = f"Invalid JSON received: {str(json_error)}"
+                print(error_msg)
+                logging.error(error_msg)
+                response = {"status": "error", "message": error_msg}
+
+            except HelperError as helper_error:
+                # Expected application errors
+                error_msg = str(helper_error)
+                print(f"Helper error: {error_msg}")
+                logging.error(f"Helper error: {error_msg}")
+                response = {"status": "error", "message": error_msg}
+
+            except Exception as unexpected_error:
+                # Unexpected errors
+                error_msg = f"Unexpected error: {str(unexpected_error)}"
+                print(error_msg)
                 print(traceback.format_exc())
-                response = {"status": "error", "message": f"Error: {str(e)}"}
+                logging.error(error_msg)
+                logging.error(traceback.format_exc())
+                response = {"status": "error", "message": error_msg}
 
             # Send response
-            client_socket.send(json.dumps(response).encode("utf-8"))
-            print("Response sent")
-            logging.info("Response sent")
+            try:
+                response_json = json.dumps(response)
+                client_socket.send(response_json.encode("utf-8"))
+                print("Response sent")
+                logging.info("Response sent")
+            except Exception as send_error:
+                print(f"Failed to send response: {send_error}")
+                logging.error(f"Failed to send response: {send_error}")
 
         except socket.timeout:
-            print("Connection timed out")
-            logging.error("Connection timed out")
-            response = {"status": "error", "message": "Connection timed out"}
+            # Client timeout
+            print("Client connection timed out")
+            logging.warning("Client connection timed out")
             try:
-                client_socket.send(json.dumps(response).encode("utf-8"))
+                timeout_response = {"status": "error", "message": "Request timed out"}
+                client_socket.send(json.dumps(timeout_response).encode("utf-8"))
             except:
-                pass
-        except Exception as e:
-            error_message = str(e)
+                pass  # Client may have disconnected
+
+        except Exception as client_error:
+            # Other client connection errors
+            error_msg = f"Client connection error: {str(client_error)}"
+            print(error_msg)
+            logging.error(error_msg)
             try:
-                print(f"Error handling client: {error_message}")
-                logging.error(f"Error handling client: {error_message}")
-                print(traceback.format_exc())
-                logging.error(traceback.format_exc())
-            except Exception as print_exc:
-                # If printing/logging fails, still keep the original error_message
-                pass
-            try:
-                response = {"status": "error", "message": error_message}
-                client_socket.send(json.dumps(response).encode("utf-8"))
+                error_response = {"status": "error", "message": error_msg}
+                client_socket.send(json.dumps(error_response).encode("utf-8"))
             except:
-                pass
+                pass  # Client may have disconnected
+
         finally:
-            client_socket.close()
-            print("Connection closed")
+            # Always close the client socket
+            try:
+                client_socket.close()
+                print("Client connection closed")
+            except:
+                pass
 
 except KeyboardInterrupt:
     print("Helper server shutting down...")
+    logging.info("Helper server shutting down...")
 except Exception as e:
-    print(f"Fatal error: {str(e)}")
-    logging.fatal(f"Fatal error: {str(e)}")
+    print(f"Fatal server error: {str(e)}")
+    logging.fatal(f"Fatal server error: {str(e)}")
     print(traceback.format_exc())
     logging.fatal(traceback.format_exc())
 finally:
-    server_socket.close()
-    print("Server socket closed")
+    try:
+        server_socket.close()
+        print("Server socket closed")
+        logging.info("Server socket closed")
+    except:
+        pass

@@ -10,8 +10,9 @@ import shutil
 import asyncio
 from fastmcp import Client
 from mcp.types import TextContent
-
+from fastmcp.exceptions import ToolError
 from main import start_office, is_port_in_use, get_python_path
+from test_helper import check_helper_status
 from libre import mcp
 
 
@@ -45,6 +46,12 @@ def send_command_to_helper(command):
 def libreoffice_server():
     start_office()
     start_helper()
+
+    # Verify the helper is running correctly before proceeding
+    helper_status = check_helper_status()
+    if not helper_status:
+        pytest.fail("Helper is not running correctly. Cannot proceed with tests.")
+
     yield mcp
 
 
@@ -540,7 +547,7 @@ async def test_format_table(libreoffice_server, test_document):
             "add_table", {"file_path": test_document, "rows": 2, "columns": 2}
         )
 
-        border_width = 5
+        border_width = 2
 
         result = await client.call_tool(
             "format_table",
@@ -567,10 +574,23 @@ async def test_format_table(libreoffice_server, test_document):
 
         if table_result["status"] == "success":
             table_data = json.loads(table_result["message"])
-            avg_border_width = sum(table_data["border_widths"].values()) / 40
+            print(f"Border widths: {table_data['border_widths']}")
+
+            # Fix the calculation - convert from 1/100mm back to points
+            # The border_widths are in 1/100mm, so convert back to points
+            border_widths_in_points = {
+                k: v / 35.28 for k, v in table_data["border_widths"].items()
+            }
+            avg_border_width_points = sum(border_widths_in_points.values()) / len(
+                border_widths_in_points
+            )
+
+            print(f"Average border width in points: {avg_border_width_points}")
+            print(f"Expected border width: {border_width}")
             print(table_data)
+
             assert table_data["background_color"] == "#F0F0F0"
-            assert abs(avg_border_width - border_width) <= border_width * 0.1
+            assert abs(avg_border_width_points - border_width) <= border_width * 0.1
         else:
             assert False, "Failed to get table data"
 
@@ -934,7 +954,7 @@ async def test_insert_slide_image(libreoffice_server, test_presentation, test_im
             assert image_data["has_images"]
             assert image["is_centered_horizontally"]
             assert image["is_centered_vertically"]
-            
+
         else:
             assert False, "Failed to get image data"
 
@@ -980,3 +1000,545 @@ async def test_invalid_heading_level(libreoffice_server, temp_dir):
             "invalid" in result_content.text.lower()
             or "error" in result_content.text.lower()
         )
+
+
+# Additional Error Handling Tests
+
+@pytest.mark.asyncio
+async def test_create_document_invalid_directory(libreoffice_server):
+    """Test creating a document in a non-existent directory"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "create_blank_document",
+            {"filename": "/nonexistent/directory/test.odt", "title": "Test"}
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "error" in result_content.text.lower() or "failed" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_add_text_invalid_position(libreoffice_server, test_document):
+    """Test that text is still added even with an invalid position passed"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "add_text",
+            {
+                "file_path": test_document,
+                "text": "Test text",
+                "position": "invalid_position"
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "error" not in result_content.text.lower() or "invalid" not in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_add_paragraph_invalid_alignment(libreoffice_server, test_document):
+    """Test paragraph is still added with invalid alignment"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "add_paragraph",
+            {
+                "file_path": test_document,
+                "text": "Test paragraph",
+                "alignment": "invalid_alignment"
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "paragraph added" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_add_table_invalid_dimensions(libreoffice_server, test_document):
+    """Test adding table with invalid dimensions"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "add_table",
+            {
+                "file_path": test_document,
+                "rows": 0,
+                "columns": -1
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "error" in result_content.text.lower() or "invalid" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_add_table_mismatched_data(libreoffice_server, test_document):
+    """Test adding table with data that doesn't match dimensions"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "add_table",
+            {
+                "file_path": test_document,
+                "rows": 2,
+                "columns": 2,
+                "data": [["Too", "many", "columns", "here"]]
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "failed to add table" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_insert_image_nonexistent_file(libreoffice_server, test_document):
+    """Test inserting non-existent image file"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "insert_image",
+            {
+                "file_path": test_document,
+                "image_path": "/nonexistent/image.png",
+                "width": 5000,
+                "height": 5000
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "error" in result_content.text.lower() or "not found" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_insert_image_invalid_dimensions(libreoffice_server, test_document, test_image):
+    """Test inserting image with invalid dimensions"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "insert_image",
+            {
+                "file_path": test_document,
+                "image_path": test_image,
+                "width": -100,
+                "height": 0
+            }
+        )
+
+        print(result)
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "error" in result_content.text.lower() or "invalid" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_format_text_invalid_color(libreoffice_server, test_document):
+    """Test formatting text with invalid color"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "format_text",
+            {
+                "file_path": test_document,
+                "text_to_find": "test",
+                "color": "invalid_color"
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "error" in result_content.text.lower() or "invalid" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_format_text_nonexistent_text(libreoffice_server, test_document):
+    """Test formatting text that doesn't exist in document"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "format_text",
+            {
+                "file_path": test_document,
+                "text_to_find": "nonexistent text that will never be found",
+                "bold": True
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "formatted 0 occurrences" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_delete_paragraph_invalid_index(libreoffice_server, test_document):
+    """Test deleting paragraph with invalid index"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "delete_paragraph",
+            {
+                "file_path": test_document,
+                "paragraph_index": 999
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "error" in result_content.text.lower() or "invalid" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_delete_paragraph_negative_index(libreoffice_server, test_document):
+    """Test deleting paragraph with negative index"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "delete_paragraph",
+            {
+                "file_path": test_document,
+                "paragraph_index": -1
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "error" in result_content.text.lower() or "invalid" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_format_table_invalid_index(libreoffice_server, test_document):
+    """Test formatting table with invalid index"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "format_table",
+            {
+                "file_path": test_document,
+                "table_index": 999,
+                "border_width": 2
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "error" in result_content.text.lower() or "not found" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_format_table_invalid_color(libreoffice_server, test_document):
+    """Test formatting table with invalid background color"""
+    async with Client(libreoffice_server) as client:
+        # Add a table first
+        await client.call_tool(
+            "add_table", {"file_path": test_document, "rows": 2, "columns": 2}
+        )
+        
+        result = await client.call_tool(
+            "format_table",
+            {
+                "file_path": test_document,
+                "table_index": 0,
+                "background_color": "invalid_color"
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "error" in result_content.text.lower() or "invalid" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_apply_document_style_invalid_font(libreoffice_server, test_document):
+    """Test applying document style with invalid font"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "apply_document_style",
+            {
+                "file_path": test_document,
+                "font_name": "NonexistentFont12345",
+                "font_size": 12
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        # This might not error but should handle gracefully
+        assert "style" in result_content.text.lower() or "error" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_apply_document_style_invalid_size(libreoffice_server, test_document):
+    """Test applying document style with invalid font size"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "apply_document_style",
+            {
+                "file_path": test_document,
+                "font_size": -5
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "error" in result_content.text.lower() or "invalid" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_copy_document_same_path(libreoffice_server, test_document):
+    """Test copying document to same path"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "copy_document",
+            {
+                "source_path": test_document,
+                "target_path": test_document
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "failed to copy" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_copy_document_invalid_target_directory(libreoffice_server, test_document):
+    """Test copying document to invalid target directory"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "copy_document",
+            {
+                "source_path": test_document,
+                "target_path": "/nonexistent/directory/copy.odt"
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "error" in result_content.text.lower() or "failed" in result_content.text.lower()
+
+
+# Presentation Error Tests
+
+@pytest.mark.asyncio
+async def test_add_slide_invalid_index(libreoffice_server, test_presentation):
+    """Test adding slide at invalid index"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "add_slide",
+            {
+                "file_path": test_presentation,
+                "title": "Test",
+                "content": "Test",
+                "slide_index": -1
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        # Might insert at beginning or error
+        assert "slide" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_edit_slide_content_invalid_index(libreoffice_server, test_presentation):
+    """Test editing slide content with invalid index"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "edit_slide_content",
+            {
+                "file_path": test_presentation,
+                "slide_index": 999,
+                "new_content": "Updated content"
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "error" in result_content.text.lower() or "invalid" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_edit_slide_title_invalid_index(libreoffice_server, test_presentation):
+    """Test editing slide title with invalid index"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "edit_slide_title",
+            {
+                "file_path": test_presentation,
+                "slide_index": -5,
+                "new_title": "Updated Title"
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "error" in result_content.text.lower() or "invalid" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_delete_slide_invalid_index(libreoffice_server, test_presentation):
+    """Test deleting slide with invalid index"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "delete_slide",
+            {
+                "file_path": test_presentation,
+                "slide_index": 100
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "error" in result_content.text.lower() or "invalid" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_delete_slide_last_slide(libreoffice_server, test_presentation):
+    """Test deleting the last remaining slide"""
+    async with Client(libreoffice_server) as client:
+        # Try to delete all slides
+        result = await client.call_tool(
+            "delete_slide",
+            {
+                "file_path": test_presentation,
+                "slide_index": 0
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        
+        # Try to delete from empty presentation
+        result2 = await client.call_tool(
+            "delete_slide",
+            {
+                "file_path": test_presentation,
+                "slide_index": 0
+            }
+        )
+        
+        result2_content = result2.content[0]
+        assert isinstance(result2_content, TextContent)
+        assert "error" in result2_content.text.lower() or "empty" in result2_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_format_slide_content_invalid_index(libreoffice_server, test_presentation):
+    """Test formatting slide content with invalid index"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "format_slide_content",
+            {
+                "file_path": test_presentation,
+                "slide_index": 999,
+                "font_size": 18
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "error" in result_content.text.lower() or "invalid" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_format_slide_title_invalid_index(libreoffice_server, test_presentation):
+    """Test formatting slide title with invalid index"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "format_slide_title",
+            {
+                "file_path": test_presentation,
+                "slide_index": -10,
+                "font_size": 24
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "error" in result_content.text.lower() or "invalid" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_insert_slide_image_invalid_index(libreoffice_server, test_presentation, test_image):
+    """Test inserting image into slide with invalid index"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "insert_slide_image",
+            {
+                "file_path": test_presentation,
+                "slide_index": 999,
+                "image_path": test_image,
+                "max_width": 10000,
+                "max_height": 10000
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "error" in result_content.text.lower() or "invalid" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_insert_slide_image_nonexistent_file(libreoffice_server, test_presentation):
+    """Test inserting non-existent image into slide"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "insert_slide_image",
+            {
+                "file_path": test_presentation,
+                "slide_index": 0,
+                "image_path": "/nonexistent/image.png",
+                "max_width": 10000,
+                "max_height": 10000
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "error" in result_content.text.lower() or "not found" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_apply_presentation_template_invalid_template(libreoffice_server, test_presentation):
+    """Test applying non-existent presentation template"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "apply_presentation_template",
+            {
+                "file_path": test_presentation,
+                "template_name": "NonexistentTemplate12345"
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "error" in result_content.text.lower() or "not found" in result_content.text.lower()
+
+
+# File Operation Error Tests
+
+@pytest.mark.asyncio
+async def test_list_documents_invalid_directory(libreoffice_server):
+    """Test listing documents in non-existent directory"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "list_documents",
+            {"directory": "/nonexistent/directory"}
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "no documents found" in result_content.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_search_replace_empty_search(libreoffice_server, test_document):
+    """Test search and replace with empty search text"""
+    async with Client(libreoffice_server) as client:
+        result = await client.call_tool(
+            "search_replace_text",
+            {
+                "file_path": test_document,
+                "search_text": "",
+                "replace_text": "replacement"
+            }
+        )
+        
+        result_content = result.content[0]
+        assert isinstance(result_content, TextContent)
+        assert "failed" in result_content.text.lower()

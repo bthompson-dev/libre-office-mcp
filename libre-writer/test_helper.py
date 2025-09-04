@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 import socket
 import json
-import time
 
-def test_helper():
+def check_helper_status():
     """Test connection to the helper script"""
     try:
         print("Testing connection to helper on localhost:8765...")

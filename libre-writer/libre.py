@@ -459,6 +459,9 @@ async def copy_document(source_path: str, target_path: str) -> str:
         source_path = normalize_path(source_path)
         target_path = normalize_path(target_path)
 
+        if source_path is target_path:
+            raise Exception("Cannot copy a document to itself")
+
         # Send command to helper
         response = await call_libreoffice_helper(
             {
@@ -612,6 +615,15 @@ async def add_table(
         # Normalize path
         file_path = normalize_path(file_path)
 
+        # Check dimensions of table match data
+        if data:
+            if len(data) != rows:
+                raise Exception("Data does not match dimensions provided")
+            else:
+                for row in data:
+                    if len(row) != columns:
+                        raise Exception("Data does not match dimensions provided")
+
         # Send command to helper
         response = await call_libreoffice_helper(
             {
@@ -653,6 +665,11 @@ async def insert_image(
         # Normalize paths
         file_path = normalize_path(file_path)
         image_path = normalize_path(image_path)
+
+        if width and width <= 0:
+            raise Exception("Invalid dimensions")
+        if height and height <= 0:
+            raise Exception("Invalid dimensions")
 
         # Send command to helper
         response = await call_libreoffice_helper(
@@ -770,6 +787,9 @@ async def search_replace_text(
     try:
         # Normalize path
         file_path = normalize_path(file_path)
+
+        if not search_text:
+            raise Exception("No search text provided")
 
         # Send command to helper
         response = await call_libreoffice_helper(

@@ -210,46 +210,86 @@ def get_table_info(file_path, table_index=0):
             "total_tables": table_count,
         }
 
-        # Get table border information
+        # Get table border information with enhanced debugging
         try:
+            # Check both TableBorder2 and TableBorder properties for comparison
+            border_info = None
+            border_source = "none"
+
             if hasattr(table, "TableBorder2"):
                 border_info = table.TableBorder2
+                border_source = "TableBorder2"
+                logging.info("Reading borders from TableBorder2 property")
+            elif hasattr(table, "TableBorder"):
+                border_info = table.TableBorder
+                border_source = "TableBorder"
+                logging.info("Reading borders from TableBorder property")
 
-                # Extract border line widths
+            table_info["border_source"] = border_source
+
+            if border_info:
+                # Extract border line widths with detailed logging
                 border_widths = {}
-                border_widths["top"] = (
-                    border_info.TopLine.LineWidth
-                    if hasattr(border_info, "TopLine") and border_info.TopLine
-                    else 0
-                )
-                border_widths["bottom"] = (
-                    border_info.BottomLine.LineWidth
-                    if hasattr(border_info, "BottomLine") and border_info.BottomLine
-                    else 0
-                )
-                border_widths["left"] = (
-                    border_info.LeftLine.LineWidth
-                    if hasattr(border_info, "LeftLine") and border_info.LeftLine
-                    else 0
-                )
-                border_widths["right"] = (
-                    border_info.RightLine.LineWidth
-                    if hasattr(border_info, "RightLine") and border_info.RightLine
-                    else 0
-                )
-                border_widths["horizontal"] = (
-                    border_info.HorizontalLine.LineWidth
-                    if hasattr(border_info, "HorizontalLine")
+
+                # Log the border_info object for debugging
+                logging.info(f"Border info object: {border_info}")
+
+                # Check each border line with detailed logging
+                if hasattr(border_info, "TopLine") and border_info.TopLine:
+                    top_width = border_info.TopLine.LineWidth
+                    logging.info(f"TopLine.LineWidth: {top_width}")
+                    border_widths["top"] = top_width
+                else:
+                    logging.info("TopLine is None or missing")
+                    border_widths["top"] = 0
+
+                if hasattr(border_info, "BottomLine") and border_info.BottomLine:
+                    bottom_width = border_info.BottomLine.LineWidth
+                    logging.info(f"BottomLine.LineWidth: {bottom_width}")
+                    border_widths["bottom"] = bottom_width
+                else:
+                    logging.info("BottomLine is None or missing")
+                    border_widths["bottom"] = 0
+
+                if hasattr(border_info, "LeftLine") and border_info.LeftLine:
+                    left_width = border_info.LeftLine.LineWidth
+                    logging.info(f"LeftLine.LineWidth: {left_width}")
+                    border_widths["left"] = left_width
+                else:
+                    logging.info("LeftLine is None or missing")
+                    border_widths["left"] = 0
+
+                if hasattr(border_info, "RightLine") and border_info.RightLine:
+                    right_width = border_info.RightLine.LineWidth
+                    logging.info(f"RightLine.LineWidth: {right_width}")
+                    border_widths["right"] = right_width
+                else:
+                    logging.info("RightLine is None or missing")
+                    border_widths["right"] = 0
+
+                if (
+                    hasattr(border_info, "HorizontalLine")
                     and border_info.HorizontalLine
-                    else 0
-                )
-                border_widths["vertical"] = (
-                    border_info.VerticalLine.LineWidth
-                    if hasattr(border_info, "VerticalLine") and border_info.VerticalLine
-                    else 0
-                )
+                ):
+                    horizontal_width = border_info.HorizontalLine.LineWidth
+                    logging.info(f"HorizontalLine.LineWidth: {horizontal_width}")
+                    border_widths["horizontal"] = horizontal_width
+                else:
+                    logging.info("HorizontalLine is None or missing")
+                    border_widths["horizontal"] = 0
+
+                if hasattr(border_info, "VerticalLine") and border_info.VerticalLine:
+                    vertical_width = border_info.VerticalLine.LineWidth
+                    logging.info(f"VerticalLine.LineWidth: {vertical_width}")
+                    border_widths["vertical"] = vertical_width
+                else:
+                    logging.info("VerticalLine is None or missing")
+                    border_widths["vertical"] = 0
 
                 table_info["border_widths"] = border_widths
+
+                # Log the final border_widths for debugging
+                logging.info(f"Final border_widths: {border_widths}")
 
                 # Check if table has any borders
                 has_borders = any(width > 0 for width in border_widths.values())

@@ -3279,50 +3279,92 @@ def handle_command(command):
 print("Starting command processing loop...")
 try:
     while True:
-        print("Waiting for connection...")
-        logging.info("Waiting for connection...")
-
-        client_socket, address = server_socket.accept()
-        print(f"Connection from {address}")
-        logging.info(f"Connection from {address}")
-
+        client_socket = None
         try:
+            print("Waiting for connection...")
+            logging.info("Waiting for connection...")
+
+            # This can raise OSError if server socket is invalid
+            client_socket, address = server_socket.accept()
+            print(f"Connection from {address}")
+            logging.info(f"Connection from {address}")
+
             # Set timeout for client operations
             client_socket.settimeout(30)
 
-            # Receive data
-            data = client_socket.recv(16384).decode("utf-8")
-            if not data:
-                print("Empty data received, closing connection")
+            # Receive data in chunks to handle large messages
+            received_data = b""
+            while True:
+                try:
+                    chunk = client_socket.recv(4096)  # Smaller chunk size
+                    if not chunk:
+                        break
+                    received_data += chunk
+
+                    # Check if we have a complete JSON message
+                    try:
+                        data_str = received_data.decode("utf-8")
+                        json.loads(
+                            data_str
+                        )  # Try to parse - if successful, we have complete message
+                        break
+                    except (json.JSONDecodeError, UnicodeDecodeError):
+                        # Not complete yet, continue receiving
+                        if len(received_data) > 65536:  # Prevent memory issues
+                            raise Exception("Message too large")
+                        continue
+
+                except socket.timeout:
+                    print("Timeout while receiving data")
+                    logging.warning("Timeout while receiving data")
+                    break
+                except ConnectionResetError:
+                    print("Client disconnected during receive")
+                    logging.info("Client disconnected during receive")
+                    break
+                except Exception as recv_error:
+                    print(f"Error receiving data: {recv_error}")
+                    logging.error(f"Error receiving data: {recv_error}")
+                    break
+
+            if not received_data:
+                print("No data received, closing connection")
                 continue
 
-            print(f"Received data: {data[:100]}...")
-            logging.info(f"Received data: {data[:100]}...")
+            try:
+                data_str = received_data.decode("utf-8")
+                print(f"Received data: {data_str[:100]}...")
+                logging.info(f"Received data: {data_str[:100]}...")
+            except UnicodeDecodeError as decode_error:
+                error_msg = f"Failed to decode received data: {decode_error}"
+                print(error_msg)
+                logging.error(error_msg)
+                response = {"status": "error", "message": error_msg}
+                try:
+                    client_socket.send(json.dumps(response).encode("utf-8"))
+                except:
+                    pass
+                continue
 
             # Parse and execute command
             try:
-                command = json.loads(data)
+                command = json.loads(data_str)
                 result = handle_command(command)
-
-                # Success response
                 response = {"status": "success", "message": result}
 
             except json.JSONDecodeError as json_error:
-                # JSON parsing error
                 error_msg = f"Invalid JSON received: {str(json_error)}"
                 print(error_msg)
                 logging.error(error_msg)
                 response = {"status": "error", "message": error_msg}
 
             except HelperError as helper_error:
-                # Expected application errors
                 error_msg = str(helper_error)
                 print(f"Helper error: {error_msg}")
                 logging.error(f"Helper error: {error_msg}")
                 response = {"status": "error", "message": error_msg}
 
             except Exception as unexpected_error:
-                # Unexpected errors
                 error_msg = f"Unexpected error: {str(unexpected_error)}"
                 print(error_msg)
                 print(traceback.format_exc())
@@ -3333,48 +3375,81 @@ try:
             # Send response
             try:
                 response_json = json.dumps(response)
-                client_socket.send(response_json.encode("utf-8"))
+                response_bytes = response_json.encode("utf-8")
+
+                # Send response length first, then data
+                length_header = len(response_bytes).to_bytes(4, byteorder="big")
+                client_socket.send(length_header + response_bytes)
                 print("Response sent")
                 logging.info("Response sent")
+
+            except ConnectionResetError:
+                print("Client disconnected before response could be sent")
+                logging.warning("Client disconnected before response could be sent")
+            except BrokenPipeError:
+                print("Broken pipe - client disconnected")
+                logging.warning("Broken pipe - client disconnected")
             except Exception as send_error:
                 print(f"Failed to send response: {send_error}")
                 logging.error(f"Failed to send response: {send_error}")
 
         except socket.timeout:
-            # Client timeout
-            print("Client connection timed out")
-            logging.warning("Client connection timed out")
-            try:
-                timeout_response = {"status": "error", "message": "Request timed out"}
-                client_socket.send(json.dumps(timeout_response).encode("utf-8"))
-            except:
-                pass  # Client may have disconnected
+            print("Server socket timeout")
+            logging.warning("Server socket timeout")
+
+        except ConnectionAbortedError:
+            print("Connection aborted by client")
+            logging.info("Connection aborted by client")
+
+        except OSError as os_error:
+            # Handle socket-related OS errors
+            if os_error.errno == 22:  # Invalid argument
+                print(f"Socket error (Invalid argument): {os_error}")
+                logging.error(f"Socket error: {os_error}")
+                # Try to recreate the server socket
+                try:
+                    server_socket.close()
+                    print("Attempting to recreate server socket...")
+                    logging.info("Attempting to recreate server socket...")
+
+                    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+                    server_socket.bind(("localhost", 8765))
+                    server_socket.listen(1)
+
+                    print("Server socket recreated successfully")
+                    logging.info("Server socket recreated successfully")
+                    continue
+
+                except Exception as recreate_error:
+                    print(f"Failed to recreate server socket: {recreate_error}")
+                    logging.fatal(f"Failed to recreate server socket: {recreate_error}")
+                    break
+            else:
+                print(f"OS error in server loop: {os_error}")
+                logging.error(f"OS error in server loop: {os_error}")
 
         except Exception as client_error:
-            # Other client connection errors
             error_msg = f"Client connection error: {str(client_error)}"
             print(error_msg)
             logging.error(error_msg)
-            try:
-                error_response = {"status": "error", "message": error_msg}
-                client_socket.send(json.dumps(error_response).encode("utf-8"))
-            except:
-                pass  # Client may have disconnected
+            logging.error(traceback.format_exc())
 
         finally:
             # Always close the client socket
-            try:
-                client_socket.close()
-                print("Client connection closed")
-            except:
-                pass
+            if client_socket:
+                try:
+                    client_socket.close()
+                    print("Client connection closed")
+                except Exception as close_error:
+                    print(f"Error closing client socket: {close_error}")
 
 except KeyboardInterrupt:
     print("Helper server shutting down...")
     logging.info("Helper server shutting down...")
-except Exception as e:
-    print(f"Fatal server error: {str(e)}")
-    logging.fatal(f"Fatal server error: {str(e)}")
+except Exception as fatal_error:
+    print(f"Fatal server error: {str(fatal_error)}")
+    logging.fatal(f"Fatal server error: {str(fatal_error)}")
     print(traceback.format_exc())
     logging.fatal(traceback.format_exc())
 finally:
@@ -3382,5 +3457,6 @@ finally:
         server_socket.close()
         print("Server socket closed")
         logging.info("Server socket closed")
-    except:
-        pass
+    except Exception as final_close_error:
+        print(f"Error closing server socket: {final_close_error}")
+        logging.error(f"Error closing server socket: {final_close_error}")

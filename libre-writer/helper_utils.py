@@ -6,6 +6,7 @@ import logging
 import sys
 from contextlib import contextmanager
 
+
 # Set up logging immediately when this module is imported
 def _setup_module_logging():
     """Internal function to set up logging for this module."""
@@ -13,31 +14,32 @@ def _setup_module_logging():
         # Get the directory of this file
         module_dir = os.path.dirname(__file__)
         log_path = os.path.join(module_dir, "helper.log")
-        
+
         # Clear existing handlers
         for handler in logging.root.handlers[:]:
             logging.root.removeHandler(handler)
-        
+
         # Configure logging
         logging.basicConfig(
             filename=log_path,
             level=logging.INFO,
             format="%(asctime)s %(levelname)s %(message)s",
             force=True,
-            filemode='a'
+            filemode="a",
         )
-        
+
         # Test logging
-        logging.info("="*50)
+        logging.info("=" * 50)
         logging.info(f"helper_utils module loaded - logging to: {log_path}")
-        
+
     except Exception as e:
         print(f"Failed to set up logging in helper_utils: {e}")
         logging.basicConfig(
             level=logging.INFO,
             format="%(asctime)s %(levelname)s %(message)s",
-            stream=sys.stdout
+            stream=sys.stdout,
         )
+
 
 # Call the setup function
 _setup_module_logging()
@@ -96,7 +98,10 @@ def ensure_directory_exists(file_path):
 def normalize_path(file_path):
     """Convert a relative path to an absolute path."""
     if not file_path:
-        return None
+        raise HelperError("File path cannot be empty or None")
+
+    if not isinstance(file_path, str):
+        raise HelperError(f"File path must be a string, got {type(file_path).__name__}")
 
     # If file path is already complete, return it
     if file_path.startswith(("file://", "http://", "https://", "ftp://")):
@@ -146,7 +151,13 @@ def create_property_value(name, value):
     """Create a PropertyValue with given name and value."""
     prop = PropertyValue()
     prop.Name = name
-    prop.Value = value
+
+    # Convert Python boolean to UNO boolean if needed
+    if isinstance(value, bool):
+        prop.Value = uno.Bool(value)
+    else:
+        prop.Value = value
+
     return prop
 
 
@@ -179,4 +190,10 @@ def open_document(file_path, read_only=False, retries=3, delay=0.5):
             last_exception = e
             print(f"Attempt {attempt + 1} failed: {e}")
             time.sleep(delay)
-    raise last_exception
+
+    if last_exception:
+        raise last_exception
+    else:
+        raise HelperError(
+            f"Failed to load document after {retries} attempts: {file_path}"
+        )

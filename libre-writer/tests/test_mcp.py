@@ -43,6 +43,7 @@ def send_command_to_helper(command):
 
 @pytest.fixture(scope="session")
 def libreoffice_server():
+    """Fixture that starts LibreOffice and helper services for the entire test session"""
     start_office()
     start_helper()
 
@@ -56,7 +57,7 @@ def libreoffice_server():
 
 @pytest.fixture(scope="function")
 def temp_dir():
-    """Create a temporary directory for test files"""
+    """Fixture that creates a temporary directory for test files and cleans up after each test"""
     temp_dir = tempfile.mkdtemp()
     yield temp_dir
     # Cleanup
@@ -65,7 +66,7 @@ def temp_dir():
 
 @pytest.fixture(scope="function")
 def test_document(libreoffice_server, temp_dir):
-    """Create a basic test document file"""
+    """Fixture that creates a test ODT document with sample content for each test function"""
 
     async def create_document():
         async with Client(libreoffice_server) as client:
@@ -91,7 +92,7 @@ def test_document(libreoffice_server, temp_dir):
 
 @pytest.fixture(scope="function")
 def test_presentation(libreoffice_server, temp_dir):
-    """Create a basic test presentation file"""
+    """Fixture that creates a test ODP presentation with sample content for each test function"""
 
     async def create_presentation():
         async with Client(libreoffice_server) as client:
@@ -123,7 +124,7 @@ def test_presentation(libreoffice_server, temp_dir):
 
 @pytest.fixture(scope="function")
 def test_image(temp_dir):
-    """Create a simple test image file"""
+    """Fixture that creates a simple 100x100 red PNG image for testing image insertion functionality"""
     try:
         from PIL import Image
 
@@ -141,7 +142,7 @@ def test_image(temp_dir):
 
 @pytest.mark.asyncio
 async def test_create_blank_document(libreoffice_server, temp_dir):
-    """Test creating a blank Writer document"""
+    """Test creating a new blank Writer document with metadata (title, author, subject, keywords)"""
     async with Client(libreoffice_server) as client:
         filename = os.path.join(temp_dir, "test_document.odt")
         result = await client.call_tool(
@@ -163,7 +164,7 @@ async def test_create_blank_document(libreoffice_server, temp_dir):
 
 @pytest.mark.asyncio
 async def test_read_text_document(libreoffice_server, test_document):
-    """Test reading a text document"""
+    """Test reading the complete text content from an existing Writer document"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "read_text_document", {"file_path": test_document}
@@ -176,7 +177,7 @@ async def test_read_text_document(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_get_document_properties(libreoffice_server, test_document):
-    """Test getting document properties"""
+    """Test retrieving document metadata properties (title, author, subject, etc.)"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "get_document_properties", {"file_path": test_document}
@@ -192,7 +193,7 @@ async def test_get_document_properties(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_list_documents(libreoffice_server, temp_dir):
-    """Test listing documents in a directory"""
+    """Test listing all LibreOffice documents (.odt, .odp, .ods files) in a specified directory"""
     async with Client(libreoffice_server) as client:
         # Create test documents first
         filename = os.path.join(temp_dir, "list_test.odt")
@@ -213,7 +214,7 @@ async def test_list_documents(libreoffice_server, temp_dir):
 
 @pytest.mark.asyncio
 async def test_copy_document(libreoffice_server, test_document, temp_dir):
-    """Test copying a document"""
+    """Test copying an existing document to a new location while preserving all content and formatting"""
     async with Client(libreoffice_server) as client:
         target_file = os.path.join(temp_dir, "copied_document.odt")
 
@@ -244,7 +245,7 @@ async def test_copy_document(libreoffice_server, test_document, temp_dir):
 
 @pytest.mark.asyncio
 async def test_add_text(libreoffice_server, test_document):
-    """Test adding text to a document using the test_document fixture"""
+    """Test adding plain text to a document at a specified position (beginning, end, or current cursor)"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "add_text",
@@ -271,7 +272,7 @@ async def test_add_text(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_add_heading(libreoffice_server, test_document):
-    """Test adding a heading to a document using the test_document fixture"""
+    """Test adding a formatted heading with specified level (1-6) and verifying the heading style is applied"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "add_heading", {"file_path": test_document, "text": "Chapter 1", "level": 1}
@@ -301,7 +302,7 @@ async def test_add_heading(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_add_paragraph(libreoffice_server, test_document):
-    """Test adding a paragraph to a document using the test_document fixture"""
+    """Test adding a paragraph with specified text alignment (left, center, right, justify)"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "add_paragraph",
@@ -337,7 +338,7 @@ async def test_add_paragraph(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_add_table(libreoffice_server, test_document):
-    """Test adding a table to a document using the test_document fixture"""
+    """Test creating a table with specified dimensions, data content, and header row formatting"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "add_table",
@@ -380,7 +381,7 @@ async def test_add_table(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_insert_image(libreoffice_server, test_document, test_image):
-    """Test inserting an image into a document using the test_document fixture"""
+    """Test inserting an image file into a document with specified width and height dimensions"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "insert_image",
@@ -416,7 +417,7 @@ async def test_insert_image(libreoffice_server, test_document, test_image):
 
 @pytest.mark.asyncio
 async def test_insert_page_break(libreoffice_server, test_document):
-    """Test inserting a page break using the test_document fixture"""
+    """Test inserting a manual page break to force content onto the next page"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "insert_page_break", {"file_path": test_document}
@@ -448,7 +449,7 @@ async def test_insert_page_break(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_format_text(libreoffice_server, test_document):
-    """Test formatting specific text in a document using the test_document fixture"""
+    """Test applying text formatting (bold, italic, color) to specific text found in the document"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "format_text",
@@ -488,7 +489,7 @@ async def test_format_text(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_search_replace_text(libreoffice_server, test_document):
-    """Test search and replace functionality using the test_document fixture"""
+    """Test finding all occurrences of specific text and replacing them with new text throughout the document"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "search_replace_text",
@@ -514,7 +515,7 @@ async def test_search_replace_text(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_delete_text(libreoffice_server, test_document):
-    """Test deleting specific text from a document using the test_document fixture"""
+    """Test removing specific text from the document by replacing it with empty string"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "delete_text",
@@ -539,7 +540,7 @@ async def test_delete_text(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_format_table(libreoffice_server, test_document):
-    """Test formatting a table using the test_document fixture"""
+    """Test applying formatting to an existing table including borders, background color, and header styling"""
     async with Client(libreoffice_server) as client:
         # Add a table first
         await client.call_tool(
@@ -599,7 +600,7 @@ async def test_format_table(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_delete_paragraph(libreoffice_server, test_document):
-    """Test deleting a paragraph by index"""
+    """Test removing a specific paragraph from the document by its index position"""
     async with Client(libreoffice_server) as client:
         # Add some paragraphs first
         await client.call_tool(
@@ -629,7 +630,7 @@ async def test_delete_paragraph(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_apply_document_style(libreoffice_server, test_document):
-    """Test applying document-wide styling using the test_document fixture"""
+    """Test applying document-wide formatting including font family, size, color, and text alignment"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "apply_document_style",
@@ -671,7 +672,7 @@ async def test_apply_document_style(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_create_blank_presentation(libreoffice_server, temp_dir):
-    """Test creating a blank Impress presentation"""
+    """Test creating a new blank Impress presentation file with specified metadata"""
     async with Client(libreoffice_server) as client:
         filename = os.path.join(temp_dir, "test_presentation.odp")
         result = await client.call_tool(
@@ -687,7 +688,7 @@ async def test_create_blank_presentation(libreoffice_server, temp_dir):
 
 @pytest.mark.asyncio
 async def test_read_presentation(libreoffice_server, test_presentation):
-    """Test reading a presentation using the test_presentation fixture"""
+    """Test reading all slide content and structure from an existing presentation file"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "read_presentation", {"file_path": test_presentation}
@@ -700,7 +701,7 @@ async def test_read_presentation(libreoffice_server, test_presentation):
 
 @pytest.mark.asyncio
 async def test_add_slide(libreoffice_server, test_presentation):
-    """Test adding a slide to a presentation using the test_presentation fixture"""
+    """Test adding a new slide with title and content to an existing presentation"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "add_slide",
@@ -726,7 +727,7 @@ async def test_add_slide(libreoffice_server, test_presentation):
 
 @pytest.mark.asyncio
 async def test_edit_slide_content(libreoffice_server, test_presentation):
-    """Test editing slide content using the test_presentation fixture"""
+    """Test modifying the main content text of a specific slide by index"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "edit_slide_content",
@@ -752,7 +753,7 @@ async def test_edit_slide_content(libreoffice_server, test_presentation):
 
 @pytest.mark.asyncio
 async def test_edit_slide_title(libreoffice_server, test_presentation):
-    """Test editing slide title using the test_presentation fixture"""
+    """Test changing the title of a specific slide by index"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "edit_slide_title",
@@ -778,7 +779,7 @@ async def test_edit_slide_title(libreoffice_server, test_presentation):
 
 @pytest.mark.asyncio
 async def test_delete_slide(libreoffice_server, test_presentation):
-    """Test deleting a slide using the test_presentation fixture"""
+    """Test removing a specific slide from the presentation by index"""
     async with Client(libreoffice_server) as client:
         # Add another slide first
         await client.call_tool(
@@ -809,7 +810,7 @@ async def test_delete_slide(libreoffice_server, test_presentation):
 
 @pytest.mark.asyncio
 async def test_apply_presentation_template(libreoffice_server, test_presentation):
-    """Test applying a presentation template using the test_presentation fixture"""
+    """Test applying a predefined presentation template to change the visual design and layout"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "apply_presentation_template",
@@ -837,7 +838,7 @@ async def test_apply_presentation_template(libreoffice_server, test_presentation
 
 @pytest.mark.asyncio
 async def test_format_slide_content(libreoffice_server, test_presentation):
-    """Test formatting slide content using the test_presentation fixture"""
+    """Test applying text formatting (font, size, color, bold) to the main content of a specific slide"""
     async with Client(libreoffice_server) as client:
         slide_index = 1
 
@@ -879,7 +880,7 @@ async def test_format_slide_content(libreoffice_server, test_presentation):
 
 @pytest.mark.asyncio
 async def test_format_slide_title(libreoffice_server, test_presentation):
-    """Test formatting slide title using the test_presentation fixture"""
+    """Test applying text formatting (font, size, underline, alignment) to the title of a specific slide"""
     async with Client(libreoffice_server) as client:
         slide_index = 1
 
@@ -921,7 +922,7 @@ async def test_format_slide_title(libreoffice_server, test_presentation):
 
 @pytest.mark.asyncio
 async def test_insert_slide_image(libreoffice_server, test_presentation, test_image):
-    """Test inserting an image into a slide using the test_presentation fixture"""
+    """Test inserting an image file into a specific slide with size constraints and automatic centering"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "insert_slide_image",
@@ -963,7 +964,7 @@ async def test_insert_slide_image(libreoffice_server, test_presentation, test_im
 
 @pytest.mark.asyncio
 async def test_invalid_file_path(libreoffice_server):
-    """Test handling of invalid file paths"""
+    """Test that operations gracefully handle non-existent file paths with appropriate error messages"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "read_text_document", {"file_path": "/nonexistent/path/file.odt"}
@@ -979,7 +980,7 @@ async def test_invalid_file_path(libreoffice_server):
 
 @pytest.mark.asyncio
 async def test_invalid_heading_level(libreoffice_server, temp_dir):
-    """Test handling of invalid heading levels"""
+    """Test that invalid heading levels (outside 1-6 range) are properly rejected with error messages"""
     async with Client(libreoffice_server) as client:
         filename = os.path.join(temp_dir, "invalid_heading.odt")
         await client.call_tool("create_blank_document", {"filename": filename})
@@ -1005,7 +1006,7 @@ async def test_invalid_heading_level(libreoffice_server, temp_dir):
 
 @pytest.mark.asyncio
 async def test_create_document_invalid_directory(libreoffice_server):
-    """Test creating a document in a non-existent directory"""
+    """Test that document creation fails gracefully when target directory doesn't exist"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "create_blank_document",
@@ -1019,7 +1020,7 @@ async def test_create_document_invalid_directory(libreoffice_server):
 
 @pytest.mark.asyncio
 async def test_add_text_invalid_position(libreoffice_server, test_document):
-    """Test that text is still added even with an invalid position passed"""
+    """Test that text addition still works even when an invalid position parameter is provided"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "add_text",
@@ -1037,7 +1038,7 @@ async def test_add_text_invalid_position(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_add_paragraph_invalid_alignment(libreoffice_server, test_document):
-    """Test paragraph is still added with invalid alignment"""
+    """Test that paragraph addition succeeds even with invalid alignment, using default alignment"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "add_paragraph",
@@ -1055,7 +1056,7 @@ async def test_add_paragraph_invalid_alignment(libreoffice_server, test_document
 
 @pytest.mark.asyncio
 async def test_add_table_invalid_dimensions(libreoffice_server, test_document):
-    """Test adding table with invalid dimensions"""
+    """Test that table creation fails properly when given invalid row/column dimensions (zero or negative)"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "add_table",
@@ -1073,7 +1074,7 @@ async def test_add_table_invalid_dimensions(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_add_table_mismatched_data(libreoffice_server, test_document):
-    """Test adding table with data that doesn't match dimensions"""
+    """Test that table creation fails when provided data array doesn't match specified table dimensions"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "add_table",
@@ -1092,7 +1093,7 @@ async def test_add_table_mismatched_data(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_insert_image_nonexistent_file(libreoffice_server, test_document):
-    """Test inserting non-existent image file"""
+    """Test that image insertion fails gracefully when the specified image file doesn't exist"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "insert_image",
@@ -1111,7 +1112,7 @@ async def test_insert_image_nonexistent_file(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_insert_image_invalid_dimensions(libreoffice_server, test_document, test_image):
-    """Test inserting image with invalid dimensions"""
+    """Test that image insertion fails when given invalid dimensions (negative or zero values)"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "insert_image",
@@ -1132,7 +1133,7 @@ async def test_insert_image_invalid_dimensions(libreoffice_server, test_document
 
 @pytest.mark.asyncio
 async def test_format_text_invalid_color(libreoffice_server, test_document):
-    """Test formatting text with invalid color"""
+    """Test that text formatting fails properly when given an invalid color format"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "format_text",
@@ -1150,7 +1151,7 @@ async def test_format_text_invalid_color(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_format_text_nonexistent_text(libreoffice_server, test_document):
-    """Test formatting text that doesn't exist in document"""
+    """Test that text formatting reports zero occurrences when trying to format text that doesn't exist"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "format_text",
@@ -1168,7 +1169,7 @@ async def test_format_text_nonexistent_text(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_delete_paragraph_invalid_index(libreoffice_server, test_document):
-    """Test deleting paragraph with invalid index"""
+    """Test that paragraph deletion fails gracefully when given an index that exceeds document length"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "delete_paragraph",
@@ -1185,7 +1186,7 @@ async def test_delete_paragraph_invalid_index(libreoffice_server, test_document)
 
 @pytest.mark.asyncio
 async def test_delete_paragraph_negative_index(libreoffice_server, test_document):
-    """Test deleting paragraph with negative index"""
+    """Test that paragraph deletion properly rejects negative index values with error message"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "delete_paragraph",
@@ -1202,7 +1203,7 @@ async def test_delete_paragraph_negative_index(libreoffice_server, test_document
 
 @pytest.mark.asyncio
 async def test_format_table_invalid_index(libreoffice_server, test_document):
-    """Test formatting table with invalid index"""
+    """Test that table formatting fails when trying to format a table that doesn't exist at the given index"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "format_table",
@@ -1220,7 +1221,7 @@ async def test_format_table_invalid_index(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_format_table_invalid_color(libreoffice_server, test_document):
-    """Test formatting table with invalid background color"""
+    """Test that table formatting fails when given an invalid background color format"""
     async with Client(libreoffice_server) as client:
         # Add a table first
         await client.call_tool(
@@ -1243,7 +1244,7 @@ async def test_format_table_invalid_color(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_apply_document_style_invalid_font(libreoffice_server, test_document):
-    """Test applying document style with invalid font"""
+    """Test that document styling handles non-existent font names gracefully without failing completely"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "apply_document_style",
@@ -1262,7 +1263,7 @@ async def test_apply_document_style_invalid_font(libreoffice_server, test_docume
 
 @pytest.mark.asyncio
 async def test_apply_document_style_invalid_size(libreoffice_server, test_document):
-    """Test applying document style with invalid font size"""
+    """Test that document styling fails when given invalid font size (negative values)"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "apply_document_style",
@@ -1279,7 +1280,7 @@ async def test_apply_document_style_invalid_size(libreoffice_server, test_docume
 
 @pytest.mark.asyncio
 async def test_copy_document_same_path(libreoffice_server, test_document):
-    """Test copying document to same path"""
+    """Test that document copying fails when source and target paths are identical"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "copy_document",
@@ -1296,7 +1297,7 @@ async def test_copy_document_same_path(libreoffice_server, test_document):
 
 @pytest.mark.asyncio
 async def test_copy_document_invalid_target_directory(libreoffice_server, test_document):
-    """Test copying document to invalid target directory"""
+    """Test that document copying fails when target directory doesn't exist"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "copy_document",
@@ -1315,7 +1316,7 @@ async def test_copy_document_invalid_target_directory(libreoffice_server, test_d
 
 @pytest.mark.asyncio
 async def test_add_slide_invalid_index(libreoffice_server, test_presentation):
-    """Test adding slide at invalid index"""
+    """Test that slide addition handles negative index values by inserting at appropriate position"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "add_slide",
@@ -1335,7 +1336,7 @@ async def test_add_slide_invalid_index(libreoffice_server, test_presentation):
 
 @pytest.mark.asyncio
 async def test_edit_slide_content_invalid_index(libreoffice_server, test_presentation):
-    """Test editing slide content with invalid index"""
+    """Test that slide content editing fails when given a slide index that doesn't exist"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "edit_slide_content",
@@ -1353,7 +1354,7 @@ async def test_edit_slide_content_invalid_index(libreoffice_server, test_present
 
 @pytest.mark.asyncio
 async def test_edit_slide_title_invalid_index(libreoffice_server, test_presentation):
-    """Test editing slide title with invalid index"""
+    """Test that slide title editing fails when given a negative or invalid slide index"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "edit_slide_title",
@@ -1371,7 +1372,7 @@ async def test_edit_slide_title_invalid_index(libreoffice_server, test_presentat
 
 @pytest.mark.asyncio
 async def test_delete_slide_invalid_index(libreoffice_server, test_presentation):
-    """Test deleting slide with invalid index"""
+    """Test that slide deletion fails when trying to delete a slide that doesn't exist"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "delete_slide",
@@ -1388,7 +1389,7 @@ async def test_delete_slide_invalid_index(libreoffice_server, test_presentation)
 
 @pytest.mark.asyncio
 async def test_delete_slide_last_slide(libreoffice_server, test_presentation):
-    """Test deleting the last remaining slide"""
+    """Test that slide deletion handles the case of trying to delete from an empty presentation"""
     async with Client(libreoffice_server) as client:
         # Try to delete all slides
         result = await client.call_tool(
@@ -1418,7 +1419,7 @@ async def test_delete_slide_last_slide(libreoffice_server, test_presentation):
 
 @pytest.mark.asyncio
 async def test_format_slide_content_invalid_index(libreoffice_server, test_presentation):
-    """Test formatting slide content with invalid index"""
+    """Test that slide content formatting fails when given an invalid slide index"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "format_slide_content",
@@ -1436,7 +1437,7 @@ async def test_format_slide_content_invalid_index(libreoffice_server, test_prese
 
 @pytest.mark.asyncio
 async def test_format_slide_title_invalid_index(libreoffice_server, test_presentation):
-    """Test formatting slide title with invalid index"""
+    """Test that slide title formatting fails when given a negative slide index"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "format_slide_title",
@@ -1454,7 +1455,7 @@ async def test_format_slide_title_invalid_index(libreoffice_server, test_present
 
 @pytest.mark.asyncio
 async def test_insert_slide_image_invalid_index(libreoffice_server, test_presentation, test_image):
-    """Test inserting image into slide with invalid index"""
+    """Test that slide image insertion fails when given an invalid slide index"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "insert_slide_image",
@@ -1474,7 +1475,7 @@ async def test_insert_slide_image_invalid_index(libreoffice_server, test_present
 
 @pytest.mark.asyncio
 async def test_insert_slide_image_nonexistent_file(libreoffice_server, test_presentation):
-    """Test inserting non-existent image into slide"""
+    """Test that slide image insertion fails when the specified image file doesn't exist"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "insert_slide_image",
@@ -1494,7 +1495,7 @@ async def test_insert_slide_image_nonexistent_file(libreoffice_server, test_pres
 
 @pytest.mark.asyncio
 async def test_apply_presentation_template_invalid_template(libreoffice_server, test_presentation):
-    """Test applying non-existent presentation template"""
+    """Test that presentation template application fails when given a non-existent template name"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "apply_presentation_template",
@@ -1513,7 +1514,7 @@ async def test_apply_presentation_template_invalid_template(libreoffice_server, 
 
 @pytest.mark.asyncio
 async def test_list_documents_invalid_directory(libreoffice_server):
-    """Test listing documents in non-existent directory"""
+    """Test that document listing handles non-existent directories by returning appropriate message"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "list_documents",
@@ -1527,7 +1528,7 @@ async def test_list_documents_invalid_directory(libreoffice_server):
 
 @pytest.mark.asyncio
 async def test_search_replace_empty_search(libreoffice_server, test_document):
-    """Test search and replace with empty search text"""
+    """Test that search and replace fails when given empty search text to prevent unintended replacements"""
     async with Client(libreoffice_server) as client:
         result = await client.call_tool(
             "search_replace_text",
